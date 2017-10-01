@@ -1,0 +1,141 @@
+Wissensbasis:
+
+signature
+	Value={yes,no}
+	
+	burglary(Value)
+	earthquake(Value)
+	alarm(Value)
+	johncalls(Value)
+	marycalls(Value)
+
+conditionals
+	kb{( burglary(X) | burglary(Y) ) [0] <X!=Y>
+	( earthquake(X) | earthquake(Y) ) [0] <X!=Y>
+	( alarm(X) | alarm(Y) ) [0] <X!=Y>
+	( johncalls(X) | johncalls(Y) ) [0] <X!=Y>
+	( marycalls(X) | marycalls(Y) ) [0] <X!=Y>
+	
+	( burglary(yes) ) [0.01]
+	( earthquake(yes) ) [0.1]
+	( alarm(yes) | burglary(yes), earthquake(yes) ) [0.95]
+	( alarm(yes) | burglary(yes), earthquake(no) ) [0.8]
+	( alarm(yes) | burglary(no), earthquake(yes) ) [0.3]
+	( alarm(yes) | burglary(no), earthquake(no) ) [0.001]
+	( johncalls(yes) | alarm(yes) ) [0.6]
+	( johncalls(yes) | alarm(no) ) [0.1]
+	( marycalls(yes) | alarm(yes) ) [0.7]
+	( marycalls(yes) | alarm(no) ) [0.05] } 
+
+Grundkonditionale der Wissensbasis: 
+(johncalls(yes)|alarm(no))[0.1]
+(marycalls(yes)|alarm(yes))[0.7]
+(alarm(yes)|burglary(no) * earthquake(yes))[0.3]
+(johncalls(no)|johncalls(yes))[0.0]<no!=yes>
+(alarm(yes)|burglary(yes) * earthquake(yes))[0.95]
+(johncalls(yes)|alarm(yes))[0.6]
+(burglary(yes))[0.01]
+(johncalls(yes)|johncalls(no))[0.0]<yes!=no>
+(alarm(yes)|burglary(yes) * earthquake(no))[0.8]
+(burglary(no)|burglary(yes))[0.0]<no!=yes>
+(earthquake(no)|earthquake(yes))[0.0]<no!=yes>
+(burglary(yes)|burglary(no))[0.0]<yes!=no>
+(earthquake(yes)|earthquake(no))[0.0]<yes!=no>
+(alarm(yes)|alarm(no))[0.0]<yes!=no>
+(alarm(yes)|burglary(no) * earthquake(no))[0.001]
+(earthquake(yes))[0.1]
+(marycalls(yes)|alarm(no))[0.05]
+(marycalls(no)|marycalls(yes))[0.0]<no!=yes>
+(marycalls(yes)|marycalls(no))[0.0]<yes!=no>
+(alarm(no)|alarm(yes))[0.0]<no!=yes>
+
+Anfrage: (burglary(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(burglary(yes))[0.009999819778271649]
+(burglary(no))[0.4621154607475043]
+
+Erwünschte Ausgabe:
+(burglary(yes))[0.01]
+(burglary(no))[0.462]
+
+
+Anfrage: (earthquake(X))
+
+Berechnung der Wahrscheinlichkeiten der Gundkonditionale: 
+(earthquake(no))[0.41578606569586585]
+(earthquake(yes))[0.09999850349968144]
+
+Erwartete Ausgabe:
+(earthquake(no))[0.416]
+(earthquake(yes))[0.1]
+
+
+Anfrage: (alarm(X))
+
+Berechnung der Wahrscheinlichkeiten der Gundkonditionale: 
+(alarm(yes))[0.234690141883444]
+(alarm(no))[0.3087286067886813]
+
+Erwartete Ausgabe:
+(alarm(yes))[0.235]
+(alarm(no))[0.309]
+
+
+Anfrage: (alarm(X)|burglary(Y) * earthquake(Z))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(alarm(yes)|burglary(no) * earthquake(no))[9.99857972749994E-4]
+(alarm(no)|burglary(no) * earthquake(yes))[0.2823782620469313]
+(alarm(no)|burglary(no) * earthquake(no))[0.4030000639718061]
+(alarm(yes)|burglary(yes) * earthquake(yes))[0.9500193896922909]
+(alarm(yes)|burglary(yes) * earthquake(no))[0.8000536507036567]
+(alarm(no)|burglary(yes) * earthquake(no))[0.08065903999824654]
+(alarm(no)|burglary(yes) * earthquake(yes))[0.020162349654862667]
+(alarm(yes)|burglary(no) * earthquake(yes))[0.3000102263272703]
+
+Erwartete Ausgabe:
+(alarm(yes)|burglary(yes) * earthquake(yes))[0.95]
+(alarm(yes)|burglary(yes) * earthquake(no))[0.8]
+(alarm(no)|burglary(no) * earthquake(no))[0.403]
+(alarm(yes)|burglary(no) * earthquake(yes))[0.3]
+(alarm(no)|burglary(no) * earthquake(yes))[0.282]
+(alarm(no)|burglary(yes) * earthquake(no))[0.081]
+(alarm(no)|burglary(yes) * earthquake(yes))[0.02]
+(alarm(yes)|burglary(no) * earthquake(no))[0.001]
+
+
+
+Anfrage: (johncalls(X)|alarm(Y))
+
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(johncalls(yes)|alarm(no))[0.10000080259260603]
+(johncalls(no)|alarm(no))[0.4499995988567254]
+(johncalls(no)|alarm(yes))[0.20000034998506566]
+(johncalls(yes)|alarm(yes))[0.5999993018661969]
+
+Erwartete Ausgabe:
+(johncalls(yes)|alarm(yes))[0.6]
+(johncalls(no)|alarm(no))[0.45]
+(johncalls(no)|alarm(yes))[0.2]
+(johncalls(yes)|alarm(no))[0.1]
+
+
+
+Anfrage: (marycalls(X)|alarm(Y))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(marycalls(no)|alarm(no))[0.47500014822308645]
+(marycalls(yes)|alarm(yes))[0.6999975354408996]
+(marycalls(yes)|alarm(no))[0.04999970370703869]
+(marycalls(no)|alarm(yes))[0.15000123335203894]
+
+Erwartete Ausgabe:
+(marycalls(yes)|alarm(yes))[0.7]
+(marycalls(no)|alarm(no))[0.475]
+(marycalls(no)|alarm(yes))[0.15]
+(marycalls(yes)|alarm(no))[0.05]
+
+
+

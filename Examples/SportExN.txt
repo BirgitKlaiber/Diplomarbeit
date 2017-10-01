@@ -1,0 +1,130 @@
+Wissensbasis:
+
+signature
+    Person = {Anna, Bob, Chris}
+
+    sport(Person)
+    normalWeight(Person)
+    balancedDiet(Person)
+
+conditionals
+	kb{
+	(normalWeight(X) | sport(X))[0.80]
+	(normalWeight(X) | sport(X), balancedDiet(X) )[0.9]
+ 	(sport(Chris) )[0]}
+
+
+Grundkonditionale der Wissensbasis: 
+
+(normalWeight(Bob)|sport(Bob))[0.8]
+(normalWeight(Chris)|sport(Chris) * balancedDiet(Chris))[0.9]
+(normalWeight(Bob)|sport(Bob) * balancedDiet(Bob))[0.9]
+(normalWeight(Chris)|sport(Chris))[0.8]
+(normalWeight(Anna)|sport(Anna))[0.8]
+(sport(Chris))[0.0]
+(normalWeight(Anna)|sport(Anna) * balancedDiet(Anna))[0.9]
+
+
+
+Anfrage: (sport(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(sport(Chris))	[0.00000]
+(sport(Bob))	[0.44433]
+(sport(Anna))	[0.44433]
+
+Angestrebte Ausgabe:
+(sport(X)[0.444]<X != Chris>
+(sport(X))[0.0]<X = Chris>
+
+
+
+Anfrage: (normalWeight(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(normalWeight(Chris))	[0.50000]
+(normalWeight(Anna))	[0.63330]
+(normalWeight(Bob))	[0.63330]
+
+Angestrebte Ausgabe:
+(normalWeight(X))[0.633]<X != Chris>
+(normalWeight(Chris))[0.5]<X = Chris>
+
+
+
+Anfrage: (sport(X)|normalWeight(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(sport(Anna)|normalWeight(Anna))	[0.56129]
+(sport(Bob)|normalWeight(Bob))		[0.56129]
+(sport(Chris)|normalWeight(Chris))	[0.00000]
+
+Angestrebte Ausgabe:
+
+(sport(X)|normalWeight(X))[0.56129]<X != Chris>
+(sport(Chris)|normalWeight(Chris))[0.0]
+
+
+
+Anfrage: (normalWeight(X)|sport(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(normalWeight(Bob)|sport(Bob))		[0.80000]
+(normalWeight(Anna)|sport(Anna))	[0.80000]
+(normalWeight(Chris)|sport(Chris))	[0.87985]
+
+Angestrebte Ausgabe:
+(normalWeight(X)|sport(X))[0.80000]<X != Chris>
+(normalWeight(X)|sport(X))[0.87985]<X = Chris>
+
+
+
+Anfrage: (normalWeight(X)|sport(X) * balancedDiet(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(normalWeight(Bob)|sport(Bob) * balancedDiet(Bob))		[0.90000]
+(normalWeight(Anna)|sport(Anna) * balancedDiet(Anna))		[0.90000]
+(normalWeight(Chris)|sport(Chris) * balancedDiet(Chris))	[0.94214]
+
+Angestrebte Ausgabe:
+(normalWeight(Chris)|sport(Chris) * balancedDiet(Chris))[0.942]
+(normalWeight(X)|sport(X) * balancedDiet(X))[0.9]<X != Chris>
+
+
+
+Anfrage: (normalWeight(X)|balancedDiet(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
+(normalWeight(Chris)|balancedDiet(Chris))	[0.50000]
+(normalWeight(X)|balancedDiet(X))		[0.67233]<X != Chris>
+
+Angestrebte Ausgabe:
+(normalWeight(Anna)|balancedDiet(Anna))[0.672]
+(normalWeight(Bob)|balancedDiet(Bob))[0.672]
+(normalWeight(Chris)|balancedDiet(Chris))[0.5]
+
+
+
+Anfrage: (balancedDiet(X)|sport(X) * normalWeight(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(balancedDiet(Chris)|sport(Chris) * normalWeight(Chris))	[0.53209]
+(balancedDiet(Anna)|sport(Anna) * normalWeight(Anna))		[0.53249]
+(balancedDiet(Bob)|sport(Bob) * normalWeight(Bob))		[0.53249]
+
+Angestrebte Ausgabe:
+(balancedDiet(X)|sport(X) * normalWeight(X))[0.532249]<X != Chris>
+(balancedDiet(Chris)|sport(Chris) * normalWeight(Chris))[0.532209]
+
+
+
+Anfrage: (sport(X)|balancedDiet(X) * normalWeight(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
+(sport(Bob)|balancedDiet(Bob) * normalWeight(Bob))		[0.57672]
+(sport(Chris)|balancedDiet(Chris) * normalWeight(Chris))	[0.00000]
+(sport(Anna)|balancedDiet(Anna) * normalWeight(Anna))		[0.57672]
+
+Angestrebte Ausgabe:
+(sport(X)|balancedDiet(X) * normalWeight(X))[0.577]<X != Chris>
+(sport(Chris)|balancedDiet(Chris) * normalWeight(Chris))[0.0]

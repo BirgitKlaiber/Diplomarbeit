@@ -1,0 +1,94 @@
+Wissensbasis:
+signature
+    Bird = {Tweety, Bully, Kirby, Sylvester}
+
+    flies(Bird)
+    isBird(Bird)
+
+conditionals
+	kb{
+	    (flies(X) | isBird(X))[0.90]<X != Tweety>	    
+	    ( flies(Tweety))[0.001]
+	    ( isBird(Tweety))[1]
+	    }
+
+
+Grundkonditionale der Wissensbasis: 
+(flies(Bully)|isBird(Bully))			[0.9]
+(flies(Tweety))					[0.001]
+(flies(Sylvester)|isBird(Sylvester))		[0.9]
+(isBird(Tweety))				[1.0]
+(flies(Kirby)|isBird(Kirby))			[0.9]
+
+
+
+Anfrage: (!flies(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(!flies(Bully))					[0.33640]
+(!flies(Kirby))					[0.33640]
+(!flies(Tweety))				[0.99900]
+(!flies(Sylvester))				[0.33640]
+
+Angestrebte Ausgabe:
+(!flies(X))[0.999]<X = Tweety>
+(!flies(X))[0.336]<X != Tweety>
+
+
+
+Anfrage: (flies(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(flies(Kirby))					[0.66360]
+(flies(Bully))					[0.66360]
+(flies(Tweety))					[0.00000]
+(flies(Sylvester))				[0.66360]
+
+Angestrebte Ausgabe:
+(flies(X))[0.664]<X != Tweety>
+(flies(X))[0.001]<X = Tweety>
+
+
+
+Anfrage: (!isBird(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(!isBird(Bully))				[0.59099]
+(!isBird(Tweety))				[0.00000]
+(!isBird(Kirby))				[0.59099]
+(!isBird(Sylvester))				[0.59099]
+
+Angestrebte Ausgabe:
+(!isBird(X))[0.591]<X != Tweety>
+(!isBird(Tweety))[0.0]<X = Tweety>
+
+
+
+Anfrage: (!flies(X)|isBird(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(!flies(Bully)|isBird(Bully))			[0.10000]
+(!flies(Kirby)|isBird(Kirby))			[0.10000]
+(!flies(Sylvester)|isBird(Sylvester))		[0.10000]
+(!flies(Tweety)|isBird(Tweety))			[1.00000]
+
+Angestrebte Ausgabe:
+(!flies(X)|isBird(X))[1.0]<X = Tweety>
+(!flies(Bully)|isBird(Bully))[0.1]<X != Tweety>
+
+
+
+Anfrage: (!isBird(X)|flies(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(!isBird(Sylvester)|flies(Sylvester))		[0.44530]
+(!isBird(Bully)|flies(Bully))			[0.44530]
+(!isBird(Tweety)|flies(Tweety))			[0.00000]
+(!isBird(Kirby)|flies(Kirby))			[0.44530]
+
+Angestrebte Ausgabe:
+(!isBird(X)|flies(X))[0.445]<X != Tweety>
+(!isBird(X)|flies(X))[0.0]<X != Tweety>
+
+
+

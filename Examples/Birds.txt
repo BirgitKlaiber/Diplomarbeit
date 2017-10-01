@@ -1,0 +1,82 @@
+Wissensbasis
+
+signature
+    Bird = {Tweety, Bully, Kirby, Sylvester}
+
+    flies(Bird)
+    isBird(Bird)
+
+conditionals
+	kb{
+	    (flies(X) | isBird(X))[0.90]<X != Tweety>	    
+	    ( flies(Tweety))[0]
+	    ( isBird(Tweety))[1]
+	    }
+
+
+Grundkonditionale der Wissensbasis: 
+(flies(Bully)|isBird(Bully))			[0.9]
+(flies(Sylvester)|isBird(Sylvester))		[0.9]
+(isBird(Tweety))				[1.0]
+(flies(Kirby)|isBird(Kirby))			[0.9]
+(flies(Tweety))					[0.0]
+
+
+
+Anfrage: (flies(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(flies(Sylvester))				[0.66360]
+(flies(Bully))					[0.66360]
+(flies(Tweety))					[0.00000]
+(flies(Kirby))					[0.66360]
+
+Angestrebte Ausgabe:
+(flies(X))[0.0]<X = Tweety>
+(flies(X))[0.66360]<X != Tweety>
+
+
+
+Anfrage: (isBird(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(isBird(Bully))					[0.40901]
+(isBird(Tweety))				[1.00000]
+(isBird(Sylvester))				[0.40901]
+(isBird(Kirby))					[0.40901]
+
+Angestrebte Ausgabe:
+(isBird(X))[0.40901]<X != Tweety>
+(isBird(X))[1.0]<X = Tweety>
+
+
+
+Anfrage: (flies(X)|isBird(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(flies(Kirby)|isBird(Kirby))			[0.90000]
+(flies(Tweety)|isBird(Tweety))			[0.00000]
+(flies(Sylvester)|isBird(Sylvester))		[0.90000]
+(flies(Bully)|isBird(Bully))			[0.90000]
+
+
+
+Angestrebte Ausgabe: 
+(flies(X)|isBird(X))[0.00000]<X = Tweety>
+(flies(X)|isBird(X))[0.90000]<X != Tweety>
+
+
+
+Anfrage: (isBird(X)|flies(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(isBird(Tweety)|flies(Tweety))		[1.00000]
+(isBird(Sylvester)|flies(Sylvester))	[0.55471]
+(isBird(Bully)|flies(Bully))		[0.55471]
+(isBird(Kirby)|flies(Kirby))		[0.55471]
+
+
+Angestrebte Ausgabe: 
+(isBird(Tweety)|flies(Tweety))[1.00000]<X = Tweety>
+(isBird(Sylvester)|flies(Sylvester))[0.55471]<X != Tweety>
+

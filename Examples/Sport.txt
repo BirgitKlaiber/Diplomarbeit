@@ -1,0 +1,64 @@
+Wissensbasis:
+
+signature
+    Person = {Anna, Bob, Chris}
+
+    sport(Person)
+    normalWeight(Person)
+
+conditionals
+	kb{
+	    (normalWeight(X) | sport(X))[0.80]}
+
+
+Grundkonditionale der Wissensbasis: 
+(normalWeight(Bob)|sport(Bob))[0.8]
+(normalWeight(Chris)|sport(Chris))[0.8]
+(normalWeight(Anna)|sport(Anna))[0.8]
+
+
+
+Anfrage: (sport(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(sport(Chris))	[0.451962]
+(sport(Bob))	[0.451962]
+(sport(Anna))	[0.451962]
+
+Angestrebte Ausgabe: 
+Hier sind die Wahrscheinlichkeiten des Konditionals alle gleich: 
+(sport(X))[0.452]
+
+
+
+Anfrage: (normalWeight(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(normalWeight(Anna))	[0.63559]
+(normalWeight(Chris))	[0.63559]
+(normalWeight(Bob))	[0.63559]
+
+Angestrebte Ausgabe: 
+(normalWeight(X))[0.636]
+
+Anfrage: (sport(X)|normalWeight(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(sport(Anna)|normalWeight(Anna))	[0.56887]
+(sport(Chris)|normalWeight(Chris))	[0.56887]
+(sport(Bob)|normalWeight(Bob))		[0.56887]
+
+Angestrebte Ausgabe: 
+(sport(X)|normalWeight(X))[0.569] 
+
+
+
+Anfrage: (normalWeight(X)|sport(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(normalWeight(Anna)|sport(Anna))	[0.80000]
+(normalWeight(Chris)|sport(Chris))	[0.80000]
+(normalWeight(Bob)|sport(Bob))		[0.80000]
+
+Angestrebte Ausgabe: 
+(normalWeight(X)|sport(X))[0.8]<X!=Bob> 

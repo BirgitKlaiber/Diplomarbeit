@@ -1,0 +1,86 @@
+Wissensbasis:
+
+signature
+	Group = { a,b,c }
+
+	likes(Group, Group)
+
+conditionals
+	kb{( likes(U, V) | likes(V,U) )[0.9]<U!=V>
+	   ( likes(U, U))[0.0]
+	   ( likes(U, X) | likes (U, V), likes (V, X) )[0.8]<U!=V, X!=V, 
+            X!=U > } 
+
+
+
+Grundkonditionale der Wissensbasis: 
+(likes(c,b)|likes(c,a) * likes(a,b))			[0.8]
+(likes(a,c)|likes(c,a))					[0.9]
+(likes(c,a)|likes(c,b) * likes(b,a))			[0.8]
+(likes(a,c)|likes(a,b) * likes(b,c))			[0.8]
+(likes(b,a)|likes(b,c) * likes(c,a))			[0.8]
+(likes(a,b)|likes(b,a))					[0.9]
+(likes(b,c)|likes(b,a) * likes(a,c))			[0.8]
+(likes(b,c)|likes(c,b))					[0.9]
+(likes(c,a)|likes(a,c))					[0.9]
+(likes(c,b)|likes(b,c))					[0.9]
+(likes(b,a)|likes(a,b))					[0.9]
+(likes(a,b)|likes(a,c) * likes(c,b))			[0.8]
+
+
+
+Anfrage: (likes(U,V))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(likes(b,b))[0.0]
+(likes(c,c))[0.0]
+(likes(a,a))[0.0]
+(likes(b,c))[0.61931]
+(likes(a,c))[0.61931]
+(likes(c,a))[0.61931]
+(likes(a,b))[0.61931]
+(likes(b,a))[0.61931]
+(likes(c,b))[0.61931]
+
+Angestrebte Ausgabe:
+(likes(U,V))[0.0]<U = V>
+(likes(U,V))[0.61931]<U != V>
+
+
+
+Anfrage: (likes(U,V) * likes(V,X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(likes(b,b) * likes(b,a))[0.0]
+(likes(a,a) * likes(a,c))[0.0]
+(likes(c,c) * likes(c,a))[0.0]
+(likes(c,a) * likes(a,a))[0.0]
+(likes(b,b) * likes(b,b))[0.0]
+(likes(a,a) * likes(a,b))[0.0]
+(likes(b,c) * likes(c,c))[0.0]
+(likes(a,c) * likes(c,c))[0.0]
+(likes(c,c) * likes(c,b))[0.0]
+(likes(c,b) * likes(b,b))[0.0]
+(likes(b,a) * likes(a,a))[0.0]
+(likes(a,a) * likes(a,a))[0.0]
+(likes(b,b) * likes(b,c))[0.0]
+(likes(c,c) * likes(c,c))[0.0]
+(likes(a,b) * likes(b,b))[0.0]
+(likes(a,b) * likes(b,c))[0.42531]
+(likes(a,c) * likes(c,b))[0.42531]
+(likes(b,c) * likes(c,a))[0.42531]
+(likes(c,a) * likes(a,b))[0.42531]
+(likes(a,c) * likes(c,a))[0.55738]
+(likes(b,c) * likes(c,b))[0.55738]
+(likes(c,b) * likes(b,c))[0.55738]
+(likes(c,a) * likes(a,c))[0.55738]
+(likes(a,b) * likes(b,a))[0.55738]
+(likes(b,a) * likes(a,b))[0.55738]
+(likes(b,a) * likes(a,c))[0.42531]
+(likes(c,b) * likes(b,a))[0.42531]
+
+Angestrebte Ausgabe:
+(likes(U,V) * likes(V,X))[0.0]<(U = V + V = X)>
+(likes(U,V) * likes(V,X))[0.42531]<U != V * V != X>
+(likes(U,V) * likes(V,X))[0.55738]<U = X>
+

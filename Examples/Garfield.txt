@@ -1,0 +1,95 @@
+Wissensbasis:
+
+signature
+    Cat = {Garfield, Nermal}
+    Dog = {Butcher, Odie}
+
+    isIntelligent(Cat)
+    isStupid(Dog)
+	
+    moreIntelligent(Cat, Dog)
+
+conditionals
+	kb{
+	    (isStupid(Odie))[1.0]
+	    (isStupid(X))[0.60]<X != Odie>	    
+	    (isIntelligent(X))[0.80]
+	    (moreIntelligent(X, Y))[0.75]
+	    (moreIntelligent(X, Y) | isStupid(Y))[0.90]
+	    
+	    }
+
+
+
+
+Grundkonditionale der Wissensbasis: 
+(isStupid(Odie))						[1.0]
+(isIntelligent(Nermal))						[0.8]
+(moreIntelligent(Nermal,Odie)|isStupid(Odie))			[0.75]
+(moreIntelligent(Garfield,Butcher)|isStupid(Butcher))		[0.75]
+(moreIntelligent(Garfield,Butcher)|isIntelligent(Garfield))  	[0.9]
+(isStupid(Butcher))						[0.6]
+(moreIntelligent(Garfield,Odie)|isIntelligent(Garfield))	[0.9]
+(moreIntelligent(Nermal,Odie)|isIntelligent(Nermal))		[0.9]
+(moreIntelligent(Nermal,Butcher)|isStupid(Butcher))		[0.75]
+(moreIntelligent(Garfield,Odie)|isStupid(Odie))			[0.75]
+(moreIntelligent(Nermal,Butcher)|isIntelligent(Nermal))		[0.9]
+(isIntelligent(Garfield))					[0.8]
+
+
+
+Anfrage: (isStupid(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(isStupid(Odie))		[1.00000]
+(isStupid(Butcher))	[0.60000]
+
+Angestrebte Ausgabe:
+(isStupid(Odie))[1.0]
+(isStupid(Butcher))[0.6]
+
+
+
+Anfrage: (moreIntelligent(X,Y))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(moreIntelligent(Nermal,Butcher))		[0.79582]
+(moreIntelligent(Garfield,Butcher))		[0.79582]
+(moreIntelligent(Nermal,Odie))			[0.75000]
+(moreIntelligent(Garfield,Odie))		[0.75000
+
+Angestrebte Ausgabe:
+(moreIntelligent(X, Y))[0.796]<((X = Garfield + X = Nermal)* Y = Butcher)>
+(moreIntelligent(X, Y))[0.750]<((X = Garfield + X = Nermal)* Y = Odie)>
+
+
+
+Anfrage: (isIntelligent(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(isIntelligent(Garfield))	[0.80000]
+(isIntelligent(Nermal))		[0.80000]
+
+Angestrebte Ausgabe:
+(isIntelligent(X))[0.8]
+
+
+
+Anfrage: (isStupid(Y)|moreIntelligent(X,Y))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(isStupid(Odie)|moreIntelligent(Nermal,Odie))		[1.00000]
+(isStupid(Odie)|moreIntelligent(Garfield,Odie))		[1.00000]
+(isStupid(Butcher)|moreIntelligent(Nermal,Butcher))	[0.56545]
+(isStupid(Butcher)|moreIntelligent(Garfield,Butcher))	[0.56545]
+
+Angestrebte Ausgabe:
+(isStupid(Y)|moreIntelligent(X, Y))[1.0]<((X = Garfield + X = Nermal)* Y = Odie)>
+(isStupid(Y)|moreIntelligent(X, Y)[0.565]<((X = Garfield + X = Nermal)* Y = Butcher)>
+
+
+
+
+
+
+

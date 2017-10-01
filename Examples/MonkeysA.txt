@@ -1,0 +1,78 @@
+Wissensbasis:
+
+signature
+    Monkey = {c1, c2, c3}
+
+    feeds(Monkey, Monkey)
+    hungry(Monkey)
+
+conditionals
+	kb{
+	    (feeds(X, Y) | !hungry(X), hungry(Y))[0.80]<X != Y>    
+	    (!feeds(X, Y) | hungry(X))[0.999]<X!=Y> 
+	    (feeds(X, X)[0.0]<X = Y>  
+	   }
+
+
+Grundkonditionale der Wissensbasis: 
+(!feeds(c2,c1)|hungry(c2))				[0.999]
+(!feeds(c3,c1)|hungry(c3))				[0.999]
+(!feeds(c3,c2)|hungry(c3))				[0.999]
+(feeds(c3,c2)|(!hungry(c3) * hungry(c2)))		[0.8]
+(feeds(c3,c1)|(!hungry(c3) * hungry(c1)))		[0.8]
+(feeds(c1,c3)|(!hungry(c1) * hungry(c3)))		[0.8]
+(feeds(c1,c2)|(!hungry(c1) * hungry(c2)))		[0.8]
+(!feeds(c1,c3)|hungry(c1))				[0.999]
+(feeds(c2,c3)|(!hungry(c2) * hungry(c3)))		[0.8]
+(feeds(c2,c1)|(!hungry(c2) * hungry(c1)))		[0.8]
+(!feeds(c1,c2)|hungry(c1))				[0.999]
+(!feeds(c2,c3)|hungry(c2))				[0.999]
+
+
+
+Anfrage: (!feeds(X,Y)|hungry(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(!feeds(c2,c1)|hungry(c2))[1.00000]
+(!feeds(c2,c3)|hungry(c2))[1.00000]
+(!feeds(c1,c1)|hungry(c1))[1.00000]
+(!feeds(c2,c2)|hungry(c2))[1.00000]
+(!feeds(c3,c2)|hungry(c3))[1.00000]
+(!feeds(c3,c1)|hungry(c3))[1.00000]
+(!feeds(c1,c2)|hungry(c1))[1.00000]
+(!feeds(c1,c3)|hungry(c1))[1.00000]
+(!feeds(c3,c3)|hungry(c3))[1.00000]
+
+Angestrebte Ausgabe:
+(!feeds(X,Y)|hungry(X))[1.0]
+
+
+
+Anfrage: (hungry(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(hungry(c2))[0.16617]
+(hungry(c1))[0.16617]
+(hungry(c3))[0.16617]
+
+Angestrebte Ausgabe:
+(hungry(X))[0.166]
+
+
+
+Anfrage: (feeds(X,Y))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(feeds(c1,c2))[0.45608]
+(feeds(c1,c3))[0.45608]
+(feeds(c2,c1))[0.45608]
+(feeds(c2,c3))[0.45608]
+(feeds(c2,c2))[0.00000]
+(feeds(c1,c1))[0.00000]
+(feeds(c3,c3))[0.00000]
+(feeds(c3,c1))[0.45608]
+(feeds(c3,c2))[0.45608]
+
+Angestrebte Ausgabe:
+(feeds(X,Y))0.0]<X = Y>
+(feeds(X,Y))[0.4560836467989637]<X != Y>

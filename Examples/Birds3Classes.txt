@@ -1,0 +1,42 @@
+Wissensbasis:
+
+signature
+    Bird = {Tweety, Bully, Kirby, Sylvester}
+
+    flies(Bird)
+    isBird(Bird)
+
+conditionals
+	kb{
+	    	(flies(X) | isBird(X))[0.90]<X != Tweety * X != Bully>	    
+		( flies(Tweety))[0]
+	   	( isBird(Tweety))[1]
+		( isBird(Bully))[0.70]
+		( flies(Bully))[0.30]
+	    	}
+
+
+Grundkonditionale der Wissensbasis: 
+(isBird(Tweety))[1.0]
+(flies(Tweety))[0.0]
+(flies(Sylvester)|isBird(Sylvester))[0.9]
+(isBird(Bully))[0.7]
+(flies(Bully))[0.3]
+(flies(Kirby)|isBird(Kirby))[0.9]
+
+
+
+Anfrage: (flies(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(flies(Sylvester))			[0.66360]
+(flies(Tweety))				[0.00000]
+(flies(Bully))				[0.30000]
+(flies(Kirby))				[0.66360]
+
+Angestrebte Ausgabe:
+(flies(X))[0.66360]<(X = Sylvester + X = Kirby)>
+(flies(X))[0.30000]<X = Bully>
+(flies(X))[0.00000]<X = Tweety>
+
+

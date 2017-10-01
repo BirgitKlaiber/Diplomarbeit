@@ -1,0 +1,387 @@
+Wissensbasis:
+
+signature
+	Person  = {anna,bob,carl}
+
+	cold(Person)
+	susceptible(Person)
+	contact(Person, Person)
+
+conditionals
+	kb{( cold(X) | contact(X, Y), cold(Y) ) [0.6] <X!=Y>
+	( cold(Z) | contact(X, Y), contact(Y, Z), cold(X) ) [0.3] <X!=Y, Y != Z, X!= Z>
+	( cold(anna))[0.95]
+	( cold(X) | susceptible(X) )[0.1]
+	( cold(X) )[0.05]<X != anna>
+
+	( contact(X,Y) | contact(Y,X) )[1.00] <X!=Y>
+	( contact(X,X) )[0.00]} 
+
+
+Anfrage: (cold(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(cold(carl))	[0.05000]
+(cold(anna))	[0.95000]
+(cold(bob))	[0.05000]
+
+Angestrebte Ausgabe:
+
+(cold(anna))[0.95]
+(cold(X))[0.05]<X != anna>
+
+
+
+Anfrage: (cold(X)|contact(X,Y) * cold(Y))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
+ (cold(bob)|contact(bob,anna) * cold(anna))	[0.6000]
+(cold(carl)|contact(carl,anna) * cold(anna))	[0.6000]
+(cold(bob)|contact(bob,carl) * cold(carl))	[0.6000]
+(cold(anna)|contact(anna,bob) * cold(bob))	[0.6000]
+(cold(carl)|contact(carl,bob) * cold(bob))	[0.6000]
+(cold(carl)|contact(carl,carl) * cold(carl))	[1.0]
+(cold(bob)|contact(bob,bob) * cold(bob))	[1.0]
+(cold(anna)|contact(anna,anna) * cold(anna))	[1.0]
+(cold(anna)|contact(anna,carl) * cold(carl))	[0.6000]
+
+Angestrebte Ausgabe:
+(cold(X)|contact(X,Y) * cold(Y))[0.6000]<X != Y>
+(cold(X)|contact(X,Y) * cold(Y))[1.0]<X = Y>
+
+
+
+Anfrage: (contact(X,Y) * cold(Y))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(contact(bob,bob) * cold(bob))		[0.0000]
+(contact(carl,carl) * cold(carl))	[0.0000]
+(contact(carl,anna) * cold(anna))	[0.0322]
+(contact(bob,carl) * cold(carl))	[0.0171]
+(contact(anna,bob) * cold(bob))		[0.0322]
+(contact(bob,anna) * cold(anna))	[0.0322]
+(contact(anna,carl) * cold(carl))	[0.0322]
+(contact(anna,anna) * cold(anna))	[0.0000]
+(contact(carl,bob) * cold(bob))		[0.0171]
+
+Angestrebte Ausgabe:
+(contact(X,Y) * cold(Y))[0.032]<((X = anna + Y = anna) * X != Y) >
+(contact(X,Y) * cold(Y))[0.017]<((X != anna * Y != anna) * X != Y) >
+(contact(X,Y) * cold(Y))[0.0]< X = Y >
+
+
+
+Anfrage: (contact(X,Y))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(contact(anna,bob))	[0.06498]
+(contact(anna,anna))	[0.00000]
+(contact(bob,bob))	[0.00000]
+(contact(carl,anna))	[0.06498]
+(contact(carl,bob))	[0.47546]
+(contact(carl,carl))	[0.00000]
+(contact(bob,carl))	[0.47546]
+(contact(bob,anna))	[0.06498]
+(contact(anna,carl))	[0.06498]
+
+Angestrebte Ausgabe:
+(contact(X,Y))[0.0]<X = Y>
+(contact(X,Y))[0.47546]<((X = anna + Y = anna) * X != Y) >
+(contact(X,Y))[0.06498]<((X = anna + Y = anna) * X != Y) >
+
+
+
+Anfrage: (cold(X)|susceptible(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(cold(anna)|susceptible(anna))	[0.10000]
+(cold(carl)|susceptible(carl))	[0.10000]
+(cold(bob)|susceptible(bob))	[0.100000]
+
+Angestrebte Ausgabe:
+(cold(X)|susceptible(X))[0.10000]
+
+
+
+Anfrage: (contact(X,X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(contact(bob,bob))	[0.00000]
+(contact(carl,carl))	[0.00000]
+(contact(anna,anna))	[0.00000]
+
+Angestrebte Ausgabe:
+(contact(X,X))[0.0]
+
+
+Anfrage: (contact(X,Y)|contact(Y,X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(contact(bob,bob)|contact(bob,bob))	[1.0]
+(contact(carl,carl)|contact(carl,carl))	[1.0]
+(contact(anna,anna)|contact(anna,anna))	[1.0]
+(contact(carl,anna)|contact(anna,carl))	[1.00000]
+(contact(anna,carl)|contact(carl,anna))	[1.00000]
+(contact(bob,carl)|contact(carl,bob))	[1.00000]
+(contact(carl,bob)|contact(bob,carl))	[1.00000]
+(contact(bob,anna)|contact(anna,bob))	[1.00000]
+(contact(anna,bob)|contact(bob,anna))	[1.00000]
+
+Angestrebte Ausgabe:
+(contact(X,Y)|contact(Y,X))[1.0]
+
+
+
+Anfrage: (susceptible(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(susceptible(bob))	[0.45807]
+(susceptible(anna))	[0.03611]
+(susceptible(carl))	[0.45807]
+
+Angestrebte Ausgabe:
+(susceptible(X))[0.458]<X != anna>
+(susceptible(anna))[0.036]<X = anna>
+
+
+
+Anfrage: (cold(X)|susceptible(Y))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(cold(bob)|susceptible(bob))	[0.1000]
+(cold(carl)|susceptible(bob))	[0.0594]
+(cold(anna)|susceptible(carl))	[0.9380]
+(cold(carl)|susceptible(carl))	[0.1000]
+(cold(bob)|susceptible(carl))	[0.0594]
+(cold(bob)|susceptible(anna))	[0.2546]
+(cold(carl)|susceptible(anna))	[0.2546]
+(cold(anna)|susceptible(anna))	[0.1000]
+(cold(anna)|susceptible(bob))	[0.9380]
+
+Angestrebte Ausgabe:
+(cold(X)|susceptible(Y))[0.9380]<(X = anna * X != Y)>
+(cold(X)|susceptible(Y))[0.2546]<(Y = anna * X != Y) >
+(cold(X)|susceptible(Y))[0.1000]<X = Y>
+(cold(X)|susceptible(Y))[0.0594]<((X != anna * Y != anna) * X != Y) >
+
+
+
+Anfrage: (cold(Z)|contact(X,Y) * cold(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(cold(carl)|contact(anna,anna) * cold(anna))	[0.0380]
+(cold(bob)|contact(anna,anna) * cold(anna))	[0.0380]
+
+(cold(carl)|contact(anna,bob) * cold(anna))	[0.1074]
+(cold(bob)|contact(anna,carl) * cold(anna))	[0.1074]
+
+(cold(carl)|contact(bob,anna) * cold(bob))	[0.1952]
+(cold(bob)|contact(carl,anna) * cold(carl))	[0.1952]
+
+(cold(carl)|contact(bob,bob) * cold(bob))	[0.2277]
+(cold(bob)|contact(carl,carl) * cold(carl))	[0.2277]
+
+(cold(anna)|contact(bob,carl) * cold(bob))	[0.5918]
+(cold(anna)|contact(carl,bob) * cold(carl))	[0.5918]
+
+(cold(bob)|contact(carl,bob) * cold(carl))	[0.6000]
+(cold(carl)|contact(bob,carl) * cold(bob))	[0.6000]
+(cold(carl)|contact(anna,carl) * cold(anna))	[0.6000]
+(cold(anna)|contact(carl,anna) * cold(carl))	[0.6000]
+(cold(anna)|contact(bob,anna) * cold(bob))	[0.6000]
+(cold(bob)|contact(anna,bob) * cold(anna))	[0.6000]
+
+(cold(anna)|contact(carl,carl) * cold(carl))	[0.7213]
+(cold(anna)|contact(bob,bob) * cold(bob))	[0.7213]
+
+(cold(carl)|contact(carl,anna) * cold(carl))	[1.0]
+(cold(bob)|contact(bob,carl) * cold(bob))	[1.0]
+(cold(bob)|contact(bob,anna) * cold(bob))	[1.0]
+(cold(anna)|contact(anna,bob) * cold(anna))	[1.0]
+(cold(carl)|contact(carl,carl) * cold(carl)	)[1.0]
+(cold(carl)|contact(carl,bob) * cold(carl))	[1.0]
+(cold(bob)|contact(bob,bob) * cold(bob))	[1.0]
+(cold(anna)|contact(anna,carl) * cold(anna))	[1.0]
+(cold(anna)|contact(anna,anna) * cold(anna))	[1.0]
+
+Angestrebte Ausgabe:
+(cold(Z)|contact(X,Y) * cold(X))[0.0380]<((X = anna * Y = anna) * Z != anna)>
+(cold(Z)|contact(X,Y) * cold(X))[0.1074]<(Y != Z * Y != anna )* Z != anna) * X = anna)>
+(cold(Z)|contact(X,Y) * cold(X))[0.1952]<(X = Y * X != anna) * Z != anna)* Y = anna)>
+(cold(Z)|contact(X,Y) * cold(X))[0.2277]<((X = Y * X!= anna) * Z != anna)>
+(cold(Z)|contact(X,Y) * cold(X))[0.5918]<((X != Y  * X != anna) * Y != anna) * Z = anna)>
+(cold(Z)|contact(X,Y) * cold(X))[0.6000]<((X != Y * X != Z) * Z = Y)>
+(cold(Z)|contact(X,Y) * cold(X))[0.7213]<((X = Y * X != Z)* Z = anna)>
+(cold(Z)|contact(X,Y) * cold(X))[1.0]<X = Z>
+
+
+
+Anfrage: (cold(X)|contact(Y,Z) * cold(Y))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(cold(carl)|contact(anna,anna) * cold(anna))	[0.0380]
+(cold(bob)|contact(anna,anna) * cold(anna))	[0.0380]
+
+(cold(bob)|contact(anna,carl) * cold(anna))	[0.1074]
+(cold(carl)|contact(anna,bob) * cold(anna))	[0.1074]
+
+(cold(carl)|contact(bob,anna) * cold(bob))	[0.1952]
+(cold(bob)|contact(carl,anna) * cold(carl))	[0.1952]
+
+(cold(bob)|contact(carl,carl) * cold(carl))	[0.2277]
+(cold(carl)|contact(bob,bob) * cold(bob))	[0.2277]
+
+(cold(anna)|contact(carl,bob) * cold(carl))	[0.5917]
+(cold(anna)|contact(carl,bob) * cold(carl))	[0.5917]
+
+(cold(bob)|contact(carl,bob) * cold(carl))	[0.6000]
+(cold(anna)|contact(bob,anna) * cold(bob))	[0.6000]
+(cold(carl)|contact(bob,carl) * cold(bob))	[0.6000]
+(cold(bob)|contact(anna,bob) * cold(anna))	[0.6000]
+(cold(anna)|contact(carl,anna) * cold(carl))	[0.6000]
+(cold(carl)|contact(anna,carl) * cold(anna))	[0.6000]
+(cold(anna)|contact(bob,carl) * cold(bob))	[0.6000]
+
+(cold(anna)|contact(bob,bob) * cold(bob))	[0.7213]
+(cold(anna)|contact(carl,carl) * cold(carl))	[0.7213]
+
+(cold(carl)|contact(carl,anna) * cold(carl))	[1.0]
+(cold(bob)|contact(bob,carl) * cold(bob))	[1.0]
+(cold(bob)|contact(bob,anna) * cold(bob))	[1.0]
+(cold(anna)|contact(anna,bob) * cold(anna))	[1.0]
+(cold(carl)|contact(carl,carl) * cold(carl))	[1.0]
+(cold(carl)|contact(carl,bob) * cold(carl))	[1.0]
+(cold(bob)|contact(bob,bob) * cold(bob))	[1.0]
+(cold(anna)|contact(anna,carl) * cold(anna))	[1.0]
+(cold(anna)|contact(anna,anna) * cold(anna))	[1.0]
+
+Angestrebte Ausgabe:
+(cold(X)|contact(Y,Z) * cold(Y))[0.0380]<((X != Y * Y = Z) * Y = anna)>
+(cold(X)|contact(Y,Z) * cold(Y))[0.1074]<((Y = anna * X != Z) * X != Y)>
+(cold(X)|contact(Y,Z) * cold(Y))[0.1952]<((((X != Y * Z != Y )* X) != Z )* Z = anna)>
+(cold(X)|contact(Y,Z) * cold(Y))[0.2277]<(X != Y * Y = Z)>
+(cold(X)|contact(Y,Z) * cold(Y))[0.5917]<((X = anna * Y != Z) * X != Y)>
+(cold(X)|contact(Y,Z) * cold(Y))[0.6000]<((X = Z * Y != Z) * X != Y)>
+(cold(X)|contact(Y,Z) * cold(Y))[0.7213]<((X = anna * Y = Z) * X != Y)>
+(cold(X)|contact(Y,Z) * cold(Y))[1.0]<X = Y>
+
+
+
+Anfrage: (cold(Z)|((contact(X,Y) * contact(Y,Z) * cold(X)) * cold(Z)))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(cold(carl)|((contact(carl,carl) * contact(carl,carl) * cold(carl)) * cold(carl)))	[1.0]
+(cold(bob)|((contact(carl,carl) * contact(carl,bob) * cold(carl)) * cold(bob)))		[1.0]
+(cold(bob)|((contact(bob,anna) * contact(anna,bob) * cold(bob)) * cold(bob)))		[1.0]
+(cold(anna)|((contact(bob,bob) * contact(bob,anna) * cold(bob)) * cold(anna)))		[1.0]
+(cold(anna)|((contact(carl,anna) * contact(anna,anna) * cold(carl)) * cold(anna)))	[1.0]
+(cold(carl)|((contact(carl,bob) * contact(bob,carl) * cold(carl)) * cold(carl)))	[1.0]
+(cold(bob)|((contact(carl,bob) * contact(bob,bob) * cold(carl)) * cold(bob)))		[1.0]
+(cold(anna)|((contact(carl,bob) * contact(bob,anna) * cold(carl)) * cold(anna)))	[1.0]
+(cold(bob)|((contact(carl,anna) * contact(anna,bob) * cold(carl)) * cold(bob)))		[1.0]
+(cold(anna)|((contact(anna,carl) * contact(carl,anna) * cold(anna)) * cold(anna)))	[1.0]
+(cold(anna)|((contact(bob,anna) * contact(anna,anna) * cold(bob)) * cold(anna)))	[1.0]
+(cold(bob)|((contact(anna,bob) * contact(bob,bob) * cold(anna)) * cold(bob)))		[1.0]
+(cold(anna)|((contact(carl,carl) * contact(carl,anna) * cold(carl)) * cold(anna)))	[1.0]
+(cold(carl)|((contact(anna,anna) * contact(anna,carl) * cold(anna)) * cold(carl)))	[1.0]
+(cold(anna)|((contact(anna,bob) * contact(bob,anna) * cold(anna)) * cold(anna)))	[1.0]
+(cold(bob)|((contact(anna,anna) * contact(anna,bob) * cold(anna)) * cold(bob)))		[1.0]
+(cold(carl)|((contact(carl,anna) * contact(anna,carl) * cold(carl)) * cold(carl)))	[1.0]
+(cold(bob)|((contact(anna,carl) * contact(carl,bob) * cold(anna)) * cold(bob)))		[1.0]
+(cold(anna)|((contact(anna,anna) * contact(anna,anna) * cold(anna)) * cold(anna)))	[1.0]
+(cold(carl)|((contact(anna,bob) * contact(bob,carl) * cold(anna)) * cold(carl)))	[1.0]
+(cold(carl)|((contact(bob,carl) * contact(carl,carl) * cold(bob)) * cold(carl)))	[1.0]
+(cold(carl)|((contact(anna,carl) * contact(carl,carl) * cold(anna)) * cold(carl)))	[1.0]
+(cold(bob)|((contact(bob,carl) * contact(carl,bob) * cold(bob)) * cold(bob)))		[1.0]
+(cold(carl)|((contact(bob,anna) * contact(anna,carl) * cold(bob)) * cold(carl)))	[1.0]
+(cold(carl)|((contact(bob,bob) * contact(bob,carl) * cold(bob)) * cold(carl)))		[1.0]
+(cold(bob)|((contact(bob,bob) * contact(bob,bob) * cold(bob)) * cold(bob)))		[1.0]
+(cold(anna)|((contact(bob,carl) * contact(carl,anna) * cold(bob)) * cold(anna)))	[1.0]
+
+Angestrebte Ausgabe: 
+(cold(Z)|((contact(X,Y) * contact(Y,Z) * cold(X)) * cold(Z)))[1.0]
+
+
+
+Anfrage: (cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Y)))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(cold(anna)|(contact(anna,carl) * contact(carl,bob) * cold(carl)))	[0.3961]
+(cold(anna)|(contact(anna,bob) * contact(bob,carl) * cold(bob)))	[0.3961]
+
+(cold(bob)|(contact(bob,anna) * contact(anna,carl) * cold(anna)))	[0.5031]
+(cold(carl)|(contact(carl,anna) * contact(anna,bob) * cold(anna)))	[0.5031]
+
+(cold(bob)|(contact(bob,carl) * contact(carl,anna) * cold(carl)))	[0.5681]
+(cold(carl)|(contact(carl,bob) * contact(bob,anna) * cold(bob)))	[0.5681]
+
+(cold(anna)|(contact(anna,carl) * contact(carl,carl) * cold(carl)))	[0.6000]
+(cold(bob)|(contact(bob,carl) * contact(carl,bob) * cold(carl)))	[0.6000]
+(cold(bob)|(contact(bob,anna) * contact(anna,bob) * cold(anna)))	[0.6000]
+(cold(bob)|(contact(bob,anna) * contact(anna,anna) * cold(anna)))	[0.6000]
+(cold(anna)|(contact(anna,bob) * contact(bob,bob) * cold(bob)))		[0.6000]
+(cold(bob)|(contact(bob,carl) * contact(carl,carl) * cold(carl)))	[0.6000]
+(cold(carl)|(contact(carl,anna) * contact(anna,anna) * cold(anna)))	[0.6000]
+(cold(anna)|(contact(anna,bob) * contact(bob,anna) * cold(bob)))	[0.6000]
+(cold(carl)|(contact(carl,anna) * contact(anna,carl) * cold(anna)))	[0.6000]
+(cold(carl)|(contact(carl,bob) * contact(bob,bob) * cold(bob)))		[0.6000]
+(cold(anna)|(contact(anna,carl) * contact(carl,anna) * cold(carl)))	[0.6000]
+(cold(carl)|(contact(carl,bob) * contact(bob,carl) * cold(bob)))	[0.6000]
+
+(cold(carl)|(contact(carl,carl) * contact(carl,anna) * cold(carl)))	[1.0]
+(cold(anna)|(contact(anna,anna) * contact(anna,carl) * cold(anna)))	[1.0]
+(cold(carl)|(contact(carl,carl) * contact(carl,carl) * cold(carl)))	[1.0]
+(cold(bob)|(contact(bob,bob) * contact(bob,carl) * cold(bob)))		[1.0]
+(cold(carl)|(contact(carl,carl) * contact(carl,bob) * cold(carl)))	[1.0]
+(cold(bob)|(contact(bob,bob) * contact(bob,anna) * cold(bob)))		[1.0]
+(cold(anna)|(contact(anna,anna) * contact(anna,bob) * cold(anna)))	[1.0]
+(cold(bob)|(contact(bob,bob) * contact(bob,bob) * cold(bob)))		[1.0]
+(cold(anna)|(contact(anna,anna) * contact(anna,anna) * cold(anna)))	[1.0]
+
+Angestrebte Ausgabe:
+(cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Y)))[0.3961]<((X != Y * Y != Z) * X = anna)>
+(cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Y)))[0.5031]<((X != Y * Y != Z )* Y = anna)>
+(cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Y)))[0.5681]<((X != Y * Y != Z )* Z = anna)>
+(cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Y)))[0.6000]<(X != Y * Y = Z)>
+(cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Y)))[1.0]<X = Y>
+
+
+
+Anfrage: (cold(Z)|(contact(X,Y) * contact(Y,Z) * cold(X)))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(cold(anna)|(contact(bob,carl) * contact(carl,anna) * cold(bob)))	[0.3000]
+(cold(anna)|(contact(carl,bob) * contact(bob,anna) * cold(carl)))	[0.3000]
+(cold(carl)|(contact(bob,anna) * contact(anna,carl) * cold(bob)))	[0.3000]
+(cold(carl)|(contact(anna,bob) * contact(bob,carl) * cold(anna)))	[0.3000]
+(cold(bob)|(contact(anna,carl) * contact(carl,bob) * cold(anna)))	[0.3000]
+(cold(bob)|(contact(carl,anna) * contact(anna,bob) * cold(carl)))	[0.3000]
+
+(cold(anna)|(contact(carl,anna) * contact(anna,anna) * cold(carl)))	[0.6000]
+(cold(bob)|(contact(anna,anna) * contact(anna,bob) * cold(anna)))	[0.6000]
+(cold(bob)|(contact(carl,bob) * contact(bob,bob) * cold(carl)))		[0.6000]
+(cold(anna)|(contact(bob,bob) * contact(bob,anna) * cold(bob)))		[0.6000]
+(cold(carl)|(contact(bob,bob) * contact(bob,carl) * cold(bob)))		[0.6000]
+(cold(carl)|(contact(anna,anna) * contact(anna,carl) * cold(anna)))	[0.6000]
+(cold(carl)|(contact(anna,carl) * contact(carl,carl) * cold(anna)))	[0.6000]
+(cold(anna)|(contact(bob,anna) * contact(anna,anna) * cold(bob)))	[0.6000]
+(cold(bob)|(contact(carl,carl) * contact(carl,bob) * cold(carl)))	[0.6000]
+(cold(anna)|(contact(carl,carl) * contact(carl,anna) * cold(carl)))	[0.6000]
+(cold(bob)|(contact(anna,bob) * contact(bob,bob) * cold(anna)))		[0.6000]
+(cold(carl)|(contact(bob,carl) * contact(carl,carl) * cold(bob)))	[0.6000]
+
+(cold(carl)|(contact(carl,anna) * contact(anna,carl) * cold(carl)))	[1.0]
+(cold(bob)|(contact(bob,anna) * contact(anna,bob) * cold(bob)))		[1.0]
+(cold(anna)|(contact(anna,carl) * contact(carl,anna) * cold(anna)))	[1.0]
+(cold(anna)|(contact(anna,bob) * contact(bob,anna) * cold(anna)))	[1.0]
+(cold(carl)|(contact(carl,bob) * contact(bob,carl) * cold(carl)))	[1.0]
+(cold(bob)|(contact(bob,carl) * contact(carl,bob) * cold(bob)))		[1.0]
+(cold(carl)|(contact(carl,carl) * contact(carl,carl) * cold(carl)))	[1.0]
+(cold(bob)|(contact(bob,bob) * contact(bob,bob) * cold(bob)))		[1.0]
+(cold(anna)|(contact(anna,anna) * contact(anna,anna) * cold(anna)))	[1.0]
+
+Angestrebte Ausgabe:
+(cold(Z)|(contact(X,Y) * contact(Y,Z) * cold(X)))[0.3]<((X != Y * X != Z) * Y != Z)>
+(cold(Z)|(contact(X,Y) * contact(Y,Z) * cold(X)))[0.6]<X != Z>
+(cold(Z)|(contact(X,Y) * contact(Y,Z) * cold(X)))[1.0]<((((X != Y) * X = Z) * Y = anna) + ( X = Y * X = Z)) + (X = Z * Z = anna) * X != Y)) + (( X != anna * Y != anna * Z != anna))>
+

@@ -1,0 +1,92 @@
+Wissensbasis:
+
+signature
+    Bird = {Tweety, Bully, Kirby, Sylvester}
+
+    flies(Bird)
+    isBird(Bird)
+
+conditionals
+	kb{
+	(flies(X) | isBird(X))[0.90]<X != Tweety>	    
+	( flies(Tweety))[0]
+	( isBird(Tweety))[1]
+	( isBird(Bully))[0.30]
+	( isBird(Kirby))[0.40]
+	( isBird(Sylvester))[0.60]
+	    	}
+
+Grundkonditionale der Wissensbasis: 
+(flies(Bully)|isBird(Bully))[0.9]
+(flies(Tweety))[0.0]
+(flies(Sylvester)|isBird(Sylvester))[0.9]
+(isBird(Tweety))[1.0]
+(isBird(Bully))[0.3]
+(isBird(Kirby))[0.4]
+(flies(Kirby)|isBird(Kirby))[0.9]
+(isBird(Sylvester))[0.6]
+
+
+
+Anfrage: (flies(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(flies(Sylvester))				[0.74000]
+(flies(Tweety))					[0.00000]
+(flies(Kirby))					[0.66000]
+(flies(Bully))					[0.62000]
+
+Angestrebte Ausgabe:
+(flies(Sylvester))				[0.74000]
+(flies(Kirby))					[0.66000]
+(flies(Bully))					[0.62000]
+(flies(Tweety))					[0.00000]
+
+
+
+Anfrage: (isBird(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(isBird(Kirby))					[0.40000]
+(isBird(Tweety))				[1.00000]
+(isBird(Sylvester))				[0.60000]
+(isBird(Bully))					[0.30000]
+
+Angestrebte Ausgabe:
+(isBird(Tweety))[1.00000]
+(isBird(Sylvester))[0.60000]
+(isBird(X))[0.40000]
+(isBird(X))[0.30000]
+
+
+
+Anfrage: (flies(X)|isBird(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(flies(Sylvester)|isBird(Sylvester))	[0.90000]
+(flies(Bully)|isBird(Bully))		[0.90000]
+(flies(Kirby)|isBird(Kirby))		[0.90000]
+(flies(Tweety)|isBird(Tweety))		[0.00000]
+
+Angestrebte Ausgabe:
+(flies(X)|isBird(X))[0.90000]<X != Tweety>
+(flies(X)|isBird(X))[0.00000]<X = Tweety>
+
+
+
+Anfrage: (isBird(X)|flies(X))
+
+Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(isBird(Sylvester)|flies(Sylvester))	[0.72973]
+(isBird(Kirby)|flies(Kirby))		[0.54546]
+(isBird(Bully)|flies(Bully))		[0.43549]
+(isBird(Tweety)|flies(Tweety))		[1.00000]
+
+Angestrebte Ausgabe:
+(isBird(Tweety)|flies(Tweety))[1.00000]
+(isBird(Sylvester)|flies(Sylvester))[0.72973]
+(isBird(Kirby)|flies(Kirby))[0.54546]
+(isBird(Bully)|flies(Bully))[0.43549]
+
+
+

@@ -26,7 +26,6 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (sport(Anna))	[0.451962]
 
 Angestrebte Ausgabe: 
-Hier sind die Wahrscheinlichkeiten des Konditionals alle gleich: 
 (sport(X))[0.452]
 
 
@@ -61,4 +60,4 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (normalWeight(Bob)|sport(Bob))		[0.80000]
 
 Angestrebte Ausgabe: 
-(normalWeight(X)|sport(X))[0.8]<X!=Bob> 
+(normalWeight(X)|sport(X))[0.8]

@@ -70,14 +70,14 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (feeds(andy,bob))		[0.00100]
 (feeds(charly,charly))		[0.00000]
 (feeds(andy,andy))		[0.00000]
-(feeds(bob,andy))		[0.00000]
+(feeds(bob,andy))		[0.00100]
 (feeds(bob,bob))		[0.00000]
 (feeds(andy,charly))		[0.00100]
 (feeds(charly,bob))		[0.00000]
 (feeds(charly,andy))		[0.00000]
 
 Angestrebte Ausgabe:
-(feeds(X,Y))[0.000]<X = Y>
+(feeds(X,Y))[0.000]<X = Y + X = charly>
 (feeds(X,Y))[0.001]<X != Y * X != charly>
 
 

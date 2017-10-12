@@ -31,7 +31,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (!flies(Sylvester))				[0.33640]
 
 Angestrebte Ausgabe:
-(!flies(X))[0.999]<X = Tweety>
+(!flies(Tweety))[0.999]
 (!flies(X))[0.336]<X != Tweety>
 
 
@@ -46,7 +46,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 
 Angestrebte Ausgabe:
 (flies(X))[0.664]<X != Tweety>
-(flies(X))[0.001]<X = Tweety>
+(flies(Tweety))[0.001]
 
 
 
@@ -60,7 +60,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 
 Angestrebte Ausgabe:
 (!isBird(X))[0.591]<X != Tweety>
-(!isBird(Tweety))[0.0]<X = Tweety>
+(!isBird(Tweety))[0.0]
 
 
 
@@ -73,8 +73,8 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (!flies(Tweety)|isBird(Tweety))			[1.00000]
 
 Angestrebte Ausgabe:
-(!flies(X)|isBird(X))[1.0]<X = Tweety>
-(!flies(Bully)|isBird(Bully))[0.1]<X != Tweety>
+(!flies(Tweety)|isBird(Tweety))[1.0]
+(!flies(X)|isBird(X))[1.0]<X != Tweety>
 
 
 
@@ -88,7 +88,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 
 Angestrebte Ausgabe:
 (!isBird(X)|flies(X))[0.445]<X != Tweety>
-(!isBird(X)|flies(X))[0.0]<X != Tweety>
+(!isBird(Tweety)|flies(Tweety))[0.0]
 
 
 

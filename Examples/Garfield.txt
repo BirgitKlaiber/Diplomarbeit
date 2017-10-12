@@ -41,7 +41,7 @@ Grundkonditionale der Wissensbasis:
 Anfrage: (isStupid(X))
 
 Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
-(isStupid(Odie))		[1.00000]
+(isStupid(Odie))	[1.00000]
 (isStupid(Butcher))	[0.60000]
 
 Angestrebte Ausgabe:

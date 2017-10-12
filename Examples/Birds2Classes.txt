@@ -31,4 +31,4 @@ Berechnung der Wahrscheinlichkeiten der Gundkonditionale:
 
 Angestrebte Ausgabe :
 (flies(X))[0.66360]<X != Tweety>
-(flies(X))[0.00000]<X = Tweety>
+(flies(Tweety))[0.00000]

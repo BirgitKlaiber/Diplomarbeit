@@ -35,7 +35,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 
 Angestrebte Ausgabe:
 (sport(X)[0.444]<X != Chris>
-(sport(X))[0.0]<X = Chris>
+(sport(Chris))[0.0]
 
 
 
@@ -48,7 +48,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 
 Angestrebte Ausgabe:
 (normalWeight(X))[0.633]<X != Chris>
-(normalWeight(Chris))[0.5]<X = Chris>
+(normalWeight(Chris))[0.5]
 
 
 
@@ -75,7 +75,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 
 Angestrebte Ausgabe:
 (normalWeight(X)|sport(X))[0.80000]<X != Chris>
-(normalWeight(X)|sport(X))[0.87985]<X = Chris>
+(normalWeight(Chris)|sport(Chris))[0.87985]
 
 
 

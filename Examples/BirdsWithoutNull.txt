@@ -31,8 +31,8 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (flies(Kirby))		[0.66360
 
 Angestrebte Ausgabe:
-(flies(Tweety))[0.90000]<X = Tweety>
-(flies(Bully))[0.66360]<X != Tweety>
+(flies(Tweety))[0.90000]
+(flies(X))[0.66360]<X != Tweety>
 
 
 
@@ -45,7 +45,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (isBird(Kirby))		[0.40901]
 
 Angestrebte Ausgabe:
-(isBird(X))[1.00000]<X = Tweety>
+(isBird(Tweety))[1.00000]
 (isBird(X))[0.40901]<X != Tweety>
 
 

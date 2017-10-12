@@ -1357,38 +1357,30 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 \setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
 \addtolength{\currentLongTableWidth}{-4\tabcolsep} %subtrahiere -8\cdot textbreite von asdf, 2 Abstände pro Zelle * Anzahl der Spalte
 \begin{footnotesize}
-	\begin{longtable}{| >{\raggedright} p {0.2\currentLongTableWidth} |>{\raggedright} p {0.4\currentLongTableWidth} |>{\raggedright} p {0.4\currentLongTableWidth} | p {0.0\currentLongTableWidth} |}
-		\hline
-		\multicolumn{4}{|c|}{\textbf{Anfrage ist ein Atom}}\\\hline\hline
-		\hline
-			\textbf{Prädikate} 
-			& \textbf{Beispiel} 
-			& \textbf{Anfrage} 
-			&
-		\endhead
-		\hline
-		\endfoot
-		\endlastfoot
-		\hline
-			\textbf{einstellig} 
-			& BirdsEqual \ref{BirdsEqual} \newline Cold \ref{Cold} \newline ColdTrans \ref{ColdTrans} \newline Garfield \ref{Garfield} \newline MonkeysA \ref{MonkeysA} \newline Sport \ref{Sport}
-			& flies(X) \newline cold(X), sucseptible(X) \newline cold(X), sucseptible(X) \newline	isIntellignet(X) \newline hungry(X) \newline sport(X), normalWeight(X)
-			& \\
-			
-		\hline
-			\textbf{zweistellig}
-			& Cold \ref{Cold} \newline ColdSpez \ref{ColdSpez} \newline ColdTrans \ref{ColdTrans} \newline ColdTransSpez \ref{ColdTransSpez} 
-			& contact(X,X) \newline contact(X,X) \newline contact(X,X) \newline contact(X,X) 
-			& \\
-		
-		\hline
-			\caption{Übersicht zur Auswertung der Klassen}
-	\end{longtable}
 \end{footnotesize}
 
 \subsubsection {Eine Äquivalenzklassen und die Anfrage ist eine (nichtatomare, logische) Formel}
 
+\begin{longtable}{ |p {0.2\currentLongTableWidth} |p {0.35\currentLongTableWidth} |p {0.35\currentLongTableWidth}| }
+	\hline
+	\multicolumn{3}{|c|}{\textbf{Anfrage ist ein Atom}}\\
+	\hline\hline
 
+	\textbf{Prädikate} 
+	& \textbf{Beispiel} 
+	& \textbf{Anfrage}
+	\endhead
+	\hline
+	\textbf{einstellig} 
+	& BirdsEqual \ref{BirdsEqual} \newline Cold \ref{Cold} \newline ColdTrans \ref{ColdTrans} \newline Garfield \ref{Garfield} \newline MonkeysA \ref{MonkeysA} \newline Sport \ref{Sport}
+	& flies(X) \newline cold(X), sucseptible(X) \newline cold(X), sucseptible(X) \newline	isIntellignet(X) \newline hungry(X) \newline sport(X), normalWeight(X)\\
+	\hline
+	\textbf{zweistellig}
+	& Cold \ref{Cold} \newline ColdSpez \ref{ColdSpez} \newline ColdTrans \ref{ColdTrans} \newline ColdTransSpez \ref{ColdTransSpez} 
+	& contact(X,X) \newline contact(X,X) \newline contact(X,X) \newline contact(X,X) \\
+	\hline
+	\caption{Übersicht 1 zur Auswertung der Klassen}
+	\end{longtable}
 
 
 
@@ -1411,14 +1403,14 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 \setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
 \addtolength{\currentLongTableWidth}{-4\tabcolsep} %subtrahiere -8\cdot textbreite von asdf, 2 Abstände pro Zelle * Anzahl der Spalte
 \begin{footnotesize}
-	\begin{longtable}{| >{\raggedright} p {0.2\currentLongTableWidth} | p {0.4\currentLongTableWidth} |>{\raggedright} p {0.4\currentLongTableWidth} | >{\raggedright} p {0.0\currentLongTableWidth} |}
+	\begin{longtable}{| p {0.2\currentLongTableWidth} | p {0.4\currentLongTableWidth} | p {0.4\currentLongTableWidth}  |}
 		\hline
-		\multicolumn{4}{|c|}{\textbf{Anfrage ist ein Atom}}\\\hline\hline
+		\multicolumn{3}{|c|}{\textbf{Anfrage ist ein Atom}}\\\hline\hline
 		\hline
 		\textbf{Prädikate} 
 		& \textbf{Beispiel} 
 		& \textbf{Anfrage} 
-		&
+		
 		\endhead
 		\hline
 		\endfoot
@@ -1426,18 +1418,16 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 		\hline
 		\textbf{einstellig} 
 		& Birds \ref{Birds} \newline Bird2Birds \ref{Birds2Birds} \newline BirdsWithoutNull \ref{BirdsWihoutNull} \newline ColdSpez \ref{Cold} \newline ColdTransSpez \ref{ColdTransSpez} \newline Garfield \ref{Garfield} \newline SportEx
-		& flies(X), isBird(X) \newline flies(X), isBird(X) \newline flies(X), isBird(X) \newline cold(X), sucseptible(X)  \newline cold(X), sucseptible(X) \newline isIntelligent(X) \newline sport(X) 
-		&  \\
-		
+		& flies(X), isBird(X) \newline flies(X), isBird(X) \newline flies(X), isBird(X) \newline cold(X), sucseptible(X)  \newline cold(X), sucseptible(X) \newline isIntelligent(X) \newline sport(X)\\
 		\hline
 		\textbf{zweistellig}
 		&  Cold \ref{Cold} \newline ColdTrans \ref{ColdTrans}  \newline Friendship \ref{Friendship} \newline Garfield \ref{Garfield} \newline MonkeysA \ref{MonkeysA} \newline Monkeys2 \ref{Monkeys2} \newline SportEx \ref{SportEx} \newline SportExN \ref{SportExN}
 		& contact(X,Y) \newline contact(X,Y) \newline likes(U,V) \newline moreIntelligent(X,Y) \newline feeds(X,Y) \newline feeds(X,Y) \newline sport(X), normalWeight(X) \newline sport(X), normalWeight(X)
-		& \\
+		\\
 		
 		\hline
 		
-		\caption{Übersicht zur Auswertung der Klassen}
+		\caption{Übersicht 2 zur Auswertung der Klassen}
 	\end{longtable}
 \end{footnotesize}
 

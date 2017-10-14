@@ -36,8 +36,8 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (likes(c,a))[0.05000]
 
 Angestrebte Ausgabe:
-(likes(U,V))[0.05000]<U = a + V = a>
-(likes(U,V))[0.58700]<U != a + V != a>
+(likes(U,V))[0.05000]<((U = a + V = a) * U != V)>
+(likes(U,V))[0.58700]<((U != a * V != a) * U != V)>
 (likes(U,V))[0.0]<U = V>
 
 

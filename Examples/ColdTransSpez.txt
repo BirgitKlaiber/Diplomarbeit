@@ -86,7 +86,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 
 Angestrebte Ausgabe:
 (contact(X,Y))[0.0]<X = Y>
-(contact(X,Y))[0.47546]<((X = anna + Y = anna) * X != Y) >
+(contact(X,Y))[0.47546]<((X = !anna * Y != anna) * X != Y) >
 (contact(X,Y))[0.06498]<((X = anna + Y = anna) * X != Y) >
 
 

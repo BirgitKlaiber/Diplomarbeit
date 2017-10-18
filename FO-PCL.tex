@@ -1052,8 +1052,8 @@ Eine detaillierte Beschreibung der Beispiele in Fo-PCL Syntax, aufbereitet zur V
 					
 			\hline
 				\textbf{zweistellig}
-					& Cold \ref{Cold}, \newline Sport \ref{Sport}, \newline Friendship \ref{Friendship}, \newline MonkeysA \ref{MonkeysA}
-					& Misanthrope \ref{Misanthrope}, \newline SportEx \ref{SportEx}, \newline  Mis\-an\-thr\-ope\-Ir\-re\-flex\-ive \ref{MisanthropeIrreflexive}, \newline Monkeys2 \ref{Monkeys2},\newline SportExN \ref{SportExN}
+					& Cold \ref{Cold}, \newline Sport \ref{Sport}, \newline Friendship \ref{Friendship}, \newline MonkeysA \ref{MonkeysA}-
+					& Misanthrope \ref{Misanthrope}, \newline Mis\-an\-thro\-pe\-3\-Clas\-ses \ref{Misanthrope3Classes}, \newline SportEx \ref{SportEx}, \newline  Mis\-an\-thro\-pe\-Ir\-re\-flex\-ive \ref{MisanthropeIrreflexive}, \newline Monkeys2 \ref{Monkeys2},\newline SportExN \ref{SportExN}
 					& Friendship \ref{Friendship} 
 					& Friend\-ship\-With\-Mis\-an\-thro\-pe \ref{FriendshipWithMisanthrope}
 					& Garfield \ref{Garfield} \\
@@ -1184,12 +1184,16 @@ Hier wurden verschiedene Konstellationen und Anfragen getestet um auswertbares M
 	\item \textsl{Garfield} \label{BGarfield} s. \ref{Garfield}:\\
 	Generische Grundinstanzen haben die gleiche Wahrscheinlichkeit. Spezifische Konstanten führen zu unterschiedlichen Wahrscheinlichkeiten.
 \end{itemize}
+\textcolor{green}{
+\item Zwei spezifische Konstanten 
+\begin{itemize}
+ \item{Misanthrope3Classes}	\label{BMisanthrope3Classes} s. \ref{Misanthrope3Classes}:\\
+ Für jede spezifische Konstante ergeben die spezifischen Grundinstanzen eine eigene Klasse. Die generischen Grundinstanzen haben die gleiche Wahrscheinlichkeit, mit Ausnahme der reflexiven Instanzen.
 \end{itemize}
-
+}
+\end{itemize}
 \section{Ein- und zweistellige Prädikate}
 \begin{itemize}
-	
-
 \item{Ein- und zweistellige Prädikate, eine spezifische Konstante und verschiedene Konditionale mit spezifischem Wissen}
 \begin{itemize}
 	\item \textsl{SportExNFam} \label{BSportExNFam} s. \ref{SportExNFam}:\\
@@ -1357,7 +1361,6 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 \setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
 \addtolength{\currentLongTableWidth}{-4\tabcolsep} %subtrahiere -8\cdot textbreite von asdf, 2 Abstände pro Zelle * Anzahl der Spalte
 \begin{footnotesize}
-\end{footnotesize}
 
 
 
@@ -1373,17 +1376,57 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 	\hline
 	\textbf{einstellig} 
 	& BirdsEqual \ref{BirdsEqual} \newline Cold \ref{Cold} \newline ColdTrans \ref{ColdTrans} \newline Garfield \ref{Garfield} \newline MonkeysA \ref{MonkeysA} \newline Sport \ref{Sport}
-	& flies(X) \newline cold(X), sucseptible(X) \newline cold(X), sucseptible(X) \newline	isIntelligent(X) \newline hungry(X) \newline sport(X), normalWeight(X)\\
+	& $flies(X) \newline cold(X), sucseptible(X) \newline cold(X), sucseptible(X) \newline	isIntelligent(X) \newline hungry(X) \newline sport(X), normalWeight(X)$\\
 	\hline
 	\textbf{zweistellig}
 	& Cold \ref{Cold} \newline ColdSpez \ref{ColdSpez} \newline ColdTrans \ref{ColdTrans} \newline ColdTransSpez \ref{ColdTransSpez} 
-	& contact(X,X) \newline contact(X,X) \newline contact(X,X) \newline contact(X,X) \\
+	& $ contact(X,X) \newline contact(X,X) \newline contact(X,X) \newline contact(X,X)$ \\
 	\hline
 	\caption{Übersicht 1 zur Auswertung der Klassen}
 	\end{longtable}
+\end{footnotesize}
 
-\subsubsection {Eine Äquivalenzklassen und die Anfrage ist eine (nichtatomare, logische) Formel} TODO
 
+\subsubsection {Eine Äquivalenzklassen und die Anfrage ist eine (nichtatomare, logische) Formel} 
+
+\setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
+\addtolength{\currentLongTableWidth}{-4\tabcolsep} %subtrahiere -8\cdot textbreite von asdf, 2 Abstände pro Zelle * Anzahl der Spalte
+\begin{footnotesize}
+	\begin{longtable}{| p {0.2\currentLongTableWidth} | p {0.4\currentLongTableWidth} | p {0.4\currentLongTableWidth}  |}
+		\hline
+		\multicolumn{3}{|c|}{\textbf{Anfrage ist eine (nichtatomare, logische) Formel}}\\\hline\hline
+		\hline
+		\textbf{Prädikate} 
+		& \textbf{Beispiel} 
+		& \textbf{Anfrage} 
+		
+		\endhead
+		\hline
+		\endfoot
+		\endlastfoot
+		\hline
+		\textbf{einstellig} 
+		& BirdsWithoutNull \ref{BirdsWihoutNull} \newline ColdSpez \ref{ColdSpez} \newline ColdTrans \ref{ColdTrans}
+		& $(flies(X) | isBird(X)\newline (cold(X) | susceptible(X) \newline (cold(X) | susceptible(X)$  \\
+		\hline
+		\textbf{zweistellig}
+		&  Cold \ref{Cold} 
+		&   $(contact(X,Y)|contact(Y,X))$ 
+		\\
+		\hline
+		\textbf{ein- und zweistellig}
+		& MonkeysA \ref{MonkeysA} \newline Monkeys2 \ref{Monkeys2}
+		&$(!feeds(X) | hungy(X)) \newline (!feeds(X) | hungy(X))$
+		\\
+		
+		\hline
+		\caption{Übersicht 2 zur Auswertung der Klassen}
+	\end{longtable}
+\end{footnotesize}
+
+\textcolor{green}{
+	Eine Äquivalenzklasse ergibt sich, wenn die Formel sich bereits als solche in der Wissensbasis befindet. Wenn die Wissensbasis bereits eine bedingte Formel enthält und diese angefragt wird.
+}
 
 \subsection{Zwei Äquivalenzklassen}
 
@@ -1418,19 +1461,21 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 		\endlastfoot
 		\hline
 		\textbf{einstellig} 
-		& Birds \ref{Birds} \newline Bird2Birds \ref{Birds2Birds} \newline BirdsWithoutNull \ref{BirdsWihoutNull} \newline ColdSpez \ref{Cold} \newline ColdTransSpez \ref{ColdTransSpez} \newline Garfield \ref{Garfield} \newline SportEx
-		& flies(X), isBird(X) \newline flies(X), isBird(X) \newline flies(X), isBird(X) \newline cold(X), sucseptible(X)  \newline cold(X), sucseptible(X) \newline isIntelligent(X) \newline sport(X)\\
+		& Birds \ref{Birds} \newline Bird2Birds \ref{Birds2Birds} \newline Birds2Classes \ref{Birds2Classes} \newline BirdsNot \ref{BirdsNot} \newline BirdsWithoutNull \ref{BirdsWihoutNull} \newline ColdSpez \ref{Cold} \newline ColdTransSpez \ref{ColdTransSpez} \newline Garfield \ref{Garfield} \newline SportEx
+		&$ flies(X), isBird(X) \newline flies(X), isBird(X) \newline flies(X) \newline !flies(X), flies(X), isBird(X) \newline flies(X), isBird(X) \newline cold(X), sucseptible(X)  \newline cold(X), sucseptible(X) \newline isIntelligent(X) \newline sport(X)$\\
 		\hline
 		\textbf{zweistellig}
-		&  Cold \ref{Cold} \newline ColdTrans \ref{ColdTrans}  \newline Friendship \ref{Friendship} \newline Garfield \ref{Garfield} \newline MonkeysA \ref{MonkeysA} \newline Monkeys2 \ref{Monkeys2} \newline SportEx \ref{SportEx} \newline SportExN \ref{SportExN}
-		& contact(X,Y) \newline contact(X,Y) \newline likes(U,V) \newline moreIntelligent(X,Y) \newline feeds(X,Y) \newline feeds(X,Y) \newline sport(X), normalWeight(X) \newline sport(X), normalWeight(X)
+		&  Cold \ref{Cold} \newline ColdTrans \ref{ColdTrans}  \newline Friendship \ref{Friendship} \newline Garfield \ref{Garfield} \newline Misanthrope \ref{Misanthrope} \newline Misanthrope3Classes \ref{Misanthrope3Classes} \newline MisanthropeIrreflxive \ref{MisanthropeIrreflexive} \newline MonkeysA \ref{MonkeysA} \newline Monkeys2 \ref{Monkeys2} \newline SportEx \ref{SportEx} \newline SportExN \ref{SportExN}
+		& $ contact(X,Y) \newline contact(X,Y) \newline likes(U,V) \newline moreIntelligent(X,Y) \newline likes(a,V) \newline likes(a,V) \newline likes(a,V) \newline feeds(X,Y) \newline feeds(X,Y) \newline sport(X), normalWeight(X) \newline sport(X), normalWeight(X)$
 		\\
 		
 		\hline
 		
-		\caption{Übersicht 2 zur Auswertung der Klassen}
+		\caption{Übersicht 3 zur Auswertung der Klassen}
 	\end{longtable}
 \end{footnotesize}
+
+
 
 \textcolor{blue}{
 \begin{itemize}
@@ -1449,8 +1494,43 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 }
 
 
-
-
+\textcolor{green}{
+\subsubsection{Zwei Äquivalenzklassen und die Anfrage ist eine (nichtatomare, logische) Formel}
+}
+\setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
+\addtolength{\currentLongTableWidth}{-4\tabcolsep} %subtrahiere -8\cdot textbreite von asdf, 2 Abstände pro Zelle * Anzahl der Spalte
+\begin{footnotesize}
+	\begin{longtable}{| p {0.2\currentLongTableWidth} | p {0.4\currentLongTableWidth} | p {0.4\currentLongTableWidth}  |}
+		\hline
+		\multicolumn{3}{|c|}{\textbf{Anfrage ist eine (nichtatomare, logische) Formel}}\\\hline\hline
+		\hline
+		\textbf{Prädikate} 
+		& \textbf{Beispiel} 
+		& \textbf{Anfrage} 
+		
+		\endhead
+		\hline
+		\endfoot
+		\endlastfoot
+		\hline
+		\textbf{einstellig} 
+		& Birds \ref{Birds} \newline \newline Birds2Birds \ref{Birds2Birds} \newline \newline ColdTrans
+		& ($flies(X)|(isBird(X)), \newline (isBird(X)|(flies(X)) \newline (flies(X)|(isBird(X)), \newline (isBird(X)|(flies(X)) $\\
+		\hline
+		\textbf{zweistellig}
+		&  
+		&
+		\\
+		\hline
+		\textbf{ein- und zweistellig}
+		& Cold \ref{Cold} \newline ColdSpez \ref{ColdSpez}
+		& $(contact(X,Y) \land (cold(Y)))$ \newline $ (cold(X)|contact(X,Y) \land cold(Y) $
+		\\
+		
+		\hline
+		\caption{Übersicht 4 zur Auswertung der Klassen}
+	\end{longtable}
+\end{footnotesize}
 
 
 \subsection{Mehr als zwei Äquivalenzklassen}
@@ -1472,15 +1552,15 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 		\endlastfoot
 		\hline
 		\textbf{einstellig} 
-		& BirdsDiffer \ref{BirdsDiffer} 
-		& flies(X), isBird(X) \\
+		& BirdsDiffer \ref{BirdsDiffer} \newline Birds3Classes \ref{Birds3Classes}
+		& $flies(X), isBird(X) \newline flies(X)$ \\
 		\hline
 		\textbf{zweistellig}
-		&  ColdSpez \ref{ColdSpez} \newline ColdTransSpez \ref{ColdTransSpez} \newline  Misanthrope \ref{Misanthrope} \newline MisanthropeIrreflexive \ref{MisanthropeIrreflexive}  
-		& contact(X,Y) \newline contact(X,Y)  \newline likes(U,V) \newline likes(U,V)
+		&  ColdSpez \ref{ColdSpez} \newline ColdTransSpez \ref{ColdTransSpez} \newline  Misanthrope \ref{Misanthrope} \newline Misanthrope3Classes \ref{Misanthrope3Classes} \newline MisanthropeIrreflexive \ref{MisanthropeIrreflexive}  
+		& $contact(X,Y) \newline contact(X,Y)  \newline likes(U,V) \newline likes(U,V)  \newline likes(U,V)$
 		\\
 		\hline
-		\caption{Übersicht 3 zur Auswertung der Klassen}
+		\caption{Übersicht 5 zur Auswertung der Klassen}
 	\end{longtable}
 \end{footnotesize}
 
@@ -1492,11 +1572,10 @@ Dies ist ein einfacher Fall und führt zur Ausgabe aller Grundkonditionale mit j
 \paragraph{ Mehr als zwei Äquivalenzklassen und die Anfrage ist ein Atom}
 \begin{itemize}
 	\item Jede Äquivalenzklasse enthält nur ein Konditional. Die Rückgabemenge besteht also lediglich aus den bedingten Konditionalen jeder Klasse. Das ist der o.g. Randfall.
-	\item Eine Äquivalenzklasse enthält ein Konditional, die anderen mehr als ein Konditional
+	\item Eine Äquivalenzklasse enthält ein Konditional, die anderen ein oder mehr als ein Konditional. 
 	\begin{itemize}
-		\item einstelliges Prädikat: dazu ließ sich kein Beispiel finden. Theoretisch könnte es sich ergeben, wenn mehrere spezifische Konstanten vorhanden sind (für die sich dann auch jeweils eine eigene Klasse ergibt) und eine Klasse mit den generischen Grundinstanzen.\\
-		\item zweistelliges Prädikat:\\
-		Der Fall kann nicht eintreten und muss daher nicht behandelt werden.  
+		\item einstelliges Prädikat: Ein Beispiel findet sich in Birds3Classes, \ref{Birds3Classes}. Die Anzahl der Klassen erhöht sich gegenüber dem Beispiel "{}Birds"{} \ref{Birds} durch die Erhöhung der Anzahl der spezifischen Konstanten.\\
+		\item zweistelliges Prädikat: Hierzu ließ sich kein Beispiel finden. Bei zweistelligen Prädikaten werden sich immer mehr als ein Konditional in der Klasse befinden.
 	\end{itemize}
 	\item Alle Äquivalenzklassen enthalten mehr als ein Konditional
 	\begin{itemize}
@@ -1505,8 +1584,47 @@ Dies ist ein einfacher Fall und führt zur Ausgabe aller Grundkonditionale mit j
 	\end{itemize}
 \end{itemize}
 }
-TODO:
-\subsubsection {Zwei Äquivalenzklassen und die Anfrage ist eine (nichtatomare, logische) Formel}
+
+\textcolor{green}{
+\paragraph{Mehr als zwei Äquivalenzklassen und die Anfrage ist eine (nichtatomare, logische) Formel}
+TODO
+}
+\setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
+\addtolength{\currentLongTableWidth}{-4\tabcolsep} %subtrahiere -8\cdot textbreite von asdf, 2 Abstände pro Zelle * Anzahl der Spalte
+\begin{footnotesize}
+	\begin{longtable}{| p {0.2\currentLongTableWidth} | p {0.4\currentLongTableWidth} | p {0.4\currentLongTableWidth}  |}
+		\hline
+		\multicolumn{3}{|c|}{\textbf{Anfrage ist eine (nichtatomare, logische) Formel}}\\\hline\hline
+		\hline
+		\textbf{Prädikate} 
+		& \textbf{Beispiel} 
+		& \textbf{Anfrage} 
+		
+		\endhead
+		\hline
+		\endfoot
+		\endlastfoot
+		\hline
+		\textbf{einstellig} 
+		& Birds \ref{Birds} \newline \newline Birds2Birds \ref{Birds2Birds}
+		& ($flies(X)|(isBird(X)), \newline (isBird(X)|(flies(X)) \newline (flies(X)|(isBird(X)), \newline (isBird(X)|(flies(X))$\\
+		\hline
+		\textbf{zweistellig}
+		&  
+		&
+		\\
+		\hline
+		\textbf{ein- und zweistellig}
+		& Cold \ref{Cold} \newline ColdSpez \ref{ColdSpez}
+		& $(contact(X,Y) \land (cold(Y)))$ \newline $ (cold(X)|contact(X,Y) \land cold(Y) $
+		\\
+		
+		\hline
+		\caption{Übersicht 6 zur Auswertung der Klassen}
+	\end{longtable}
+\end{footnotesize}
+
+
 
 \chapter{Ideen für Algorithmen}
 \section{Vorüberlegungen}
@@ -1644,7 +1762,16 @@ Das Konditional für die Klasse ist sehr trivial zu erzeugen. Es handelt sich um
 	\item Jede Äquivalenzklasse enthält nur ein Konditional. Die Rückgabemenge besteht also lediglich aus den bedingten Konditionalen jeder Klasse; ein Constraint ist hier nicht notwendig.
 	\item Mindestens eine Äquivalenzklasse enthält ein Konditional, die anderen ein oder mehr als ein Konditional
 	\begin{itemize}
-		\item einstelliges Prädikat: Positive Generalisierung, \ref{PositiveGeneralisierung} für die Klassen mit einem Konditional. Der Fall, dass nur eine Klasse ein Konditional enthält und alle anderen mehr, kommt nicht vor. Bei einstelligen Prädikaten kann sich eine eigene Klasse nur bei spezifischen Grundinstanzen ergeben. Dafür gibt es dann jeweils eine eigene Klasse, die generischen Grundinstanzen befinden sich in der gleichen Klasse. Wenn es zwei oder mehr Klassen mit je einem Konditional gibt, dann hängt die Vorgehensweise davon ab, ob die Anzahl der Elemente in der Klasse größer ist als die Anzahl der anderen Klassen. In diesem Fall ergibt sich das Konditional für die Klasse der generischen Grundinstanzen durch negative Generalisierung \ref{NegativeGeneralisierung} über alle Konstanten der spezifischen Klasse und positive Generalisierung für alle spezifischen Klassen, \ref{PositiveGeneralisierung}. Das ist aber ein Randfall, der nicht weiter illustriert werden soll. \\
+		\item einstelliges Prädikat: Positive Generalisierung, \ref{PositiveGeneralisierung} für die Klassen mit einem Konditional. Der Fall, dass nur eine Klasse ein Konditional enthält und alle anderen mehr, kommt nicht vor. Bei einstelligen Prädikaten kann sich eine eigene Klasse nur bei spezifischen Grundinstanzen ergeben. Dafür gibt es dann jeweils eine eigene Klasse, die generischen Grundinstanzen befinden sich in der gleichen Klasse. Wenn es zwei oder mehr Klassen mit je einem Konditional gibt, dann hängt die Vorgehensweise davon ab, ob die Anzahl der Elemente in der Klasse größer ist als die Anzahl der anderen Klassen. In diesem Fall ergibt sich das Konditional für die Klasse der generischen Grundinstanzen durch negative Generalisierung \ref{NegativeGeneralisierung} über alle Konstanten der spezifischen Klassen, wenn die Summe der Konditionale der generischen Klasse höher ist als die Summe der Konditionale der spezifischen Klassen ansonsten über positive Generalisierung für die Generische Klasse. Für alle spezifischen Klassen erfolgt jeweils die positive Generalisierung . \ref{PositiveGeneralisierung}. Ein Beispiel dafür ist Birds3Classes, \ref{Birds3Classes}.\\
+		\begin{Bsp}[Konditionale Generalisierung am Beispiel "{}Birds3Classes"{}]
+		Für die Anfrage $ flies(X) $ in "{}Birds3Classes"{} ergeben sich folgende Klassen:
+		Klasse 1: $ {flies(Sylvester)[0.664], flies(Kirby)[0.664]}  $\\
+		Klasse 2: $ {flies(Tweety)[0]} $\\
+		Klasse 3: $ {flies(Bully)[0.3]} $\\
+		Das Konditional für Klasse 1: $ flies(X)[0.664]<(X = Sylvester \lor  X = Kirby)>$\\
+		Die Konditional für Klasse 2: $ flies(Tweety)[0] $\\
+		Das Konditional für Klasse 3: $ flies(Bully)[0.3] $
+		\end{Bsp}
 		\item zweistelliges Prädikat:\\ 
 		Dieser Fall soll aus der Betrachtung genommen werden; praktisch könnte er entsprechend dem Fall mit einstelligen Prädikaten behandelt werden. 
 			\end{itemize}
@@ -2431,6 +2558,14 @@ Anschließend wurde die angestrebte Ausgabe \footnotetext{Unter der angestrebten
 \label{Misanthrope}
 \lstinputlisting{Examples/Misanthrope.txt}
 \newpage
+
+\textcolor{green}{
+\section{Misanthrope3Classes} Erläuterungen s. \ref{BMisanthrope3Classes}
+\label{Misanthrope3Classes}
+\lstinputlisting{Examples/Misanthrope3Classes.txt}
+}
+\newpage
+
 
 \section{MisanthropeIrreflexive} Erläuterungen s. \ref{BMisanthropeIrreflexive}
 \label{MisanthropeIrreflexive}

@@ -1187,8 +1187,8 @@ Hier wurden verschiedene Konstellationen und Anfragen getestet um auswertbares M
 \textcolor{green}{
 \item Zwei spezifische Konstanten 
 \begin{itemize}
- \item{Misanthrope3Classes}	\label{BMisanthrope3Classes} s. \ref{Misanthrope3Classes}:\\
- Für jede spezifische Konstante ergeben die spezifischen Grundinstanzen eine eigene Klasse. Die generischen Grundinstanzen haben die gleiche Wahrscheinlichkeit, mit Ausnahme der reflexiven Instanzen.
+ \item{Misanthrope2Spez}	\label{BMisanthrope2Spez} s. \ref{Misanthrope2Spez}:\\
+FEHLER im System
 \end{itemize}
 }
 \end{itemize}
@@ -1226,6 +1226,9 @@ Dieses Beispiel ist die Erweiterung des Beispiels "{}ColdTrans"{} um spezifische
 	\begin{itemize}
 		\item 	Generische Grundinstanzen sind unabhängig von der Wissensbasis und der gestellten Anfrage gleich.
 		\item Die Verwendung spezifischer Konstanten führen in der Regel zu anderen Wahrscheinlichkeiten als die Verwendung nicht spezifischer Konstanten.
+		\textcolor{green}{
+			\item Wenn mehrere spezifische Konstanten verwendet wurden, würde man erwarten, dass es eine Klasse gibt für jede spezifische Konstante, eine Klasse für reflexives Wissen und mehrere Klassen mit Kombinationen aus spezifischen Konstanten. Das ist nicht der Fall, wie man dem Beispiel \ref{Misanthrope2Spez} entnehmen kann.
+		}
 		\item Wenn eine spezifische Konstante in einer Formel verwendet wurde, die in der Konklusion vorkommt, dann führt das zu einer anderen Wahrscheinlichkeit, unabhängig davon, ob auch die anderen Konditionale spezifisches Wissen enthalten. Die anderen Grundinstanzen haben die gleiche Wahrscheinlichkeit s. \ref{BirdsDiffer} für die Anfrage $ (flies(X) \mid isBird(X)$. Das hängt in diesem Fall daran, dass die Annahme der Prämisse einen Fakt enthält ($ flies(Tweety)[0] $) , wo die Wissensbasis im Übrigen nur unsicheres Wissen enthält. (Die Annahme der Anfrage ist, dass die Prämisse $isBird(X)$ ein Fakt ist (also zu $ 100\% $ gelte). In der Wissensbasis wird aber ausgesagt, dass $isBird(X)$ nur möglicherweise gilt.
 		\item Enthält die Prämisse der Anfrage einen Fakt, der auch in der Konklusion vorkommt, so ist auch die Konklusion sicher (vgl. \ref{ColdTrans}:$(cold(carl) \mid ((contact(carl,anna)  \land cold(carl)) $). 
 		\item Unterschiedliche Wahrscheinlichkeiten können sich aus den verschiedensten Gründen ergeben
@@ -1580,7 +1583,7 @@ Dies ist ein einfacher Fall und führt zur Ausgabe aller Grundkonditionale mit j
 	\item Alle Äquivalenzklassen enthalten mehr als ein Konditional
 	\begin{itemize}
 		\item einstelliges Prädikat: Dieser Fall kann nicht eintreten. Denn Unterschiede kommen im einstelligen Fall nur durch spezifische Konstanten zustande. Für diese Grundinstanzen gibt es dann eine jeweilige Klasse\\
-		\item mehrstelliges Prädikat (Beispiele hierfür sind die Anfragen $ contact(X,Y) $ in "{}ColdSpez"{} und "{}ColdTransSpez"{} und $ likes(U,V) $ in "{}Misanthrope"{} und "{}MisanthropeIrreflexive"{}) \\
+		\item mehrstelliges Prädikat (Beispiele hierfür sind die Anfragen $ contact(X,Y) $ in "{}ColdSpez"{} und "{}ColdTransSpez"{} und $ likes(U,V) $ in "{}Misanthrope"{}, "{}Misanthrope3Classes"{} und "{}MisanthropeIrreflexive"{}) \\
 	\end{itemize}
 \end{itemize}
 }
@@ -1729,6 +1732,7 @@ Diese Idee baut auf der positiven und der negativen Generalisierung auf. Es werd
 \end{itemize}
 
 \section{Idee: Konditionale Generalisierung}
+\index{Generalisierung ! konditional}
 \textcolor{blue}{
 \subsection{Vorüberlegungen}
 An dieser Stelle sollen Regeln gefunden werden, wie man die Interaktionen zwischen Fakten, die in der Anfrage verwendet werden für Aussagen, die in der Wissensbasis mit einer bestimmten Wahrscheinlichkeit vorbelegt wurden; wenn es denn solche gibt, die für alle Fälle gelten. Ebenso sollten die anderen Fälle betrachtet werden, die zu unterschiedlichen Wahrscheinlichkeiten führen. Auf den ersten Blick sind solche Regeln nicht erkennbar, da unzählige Interaktionen vorkommen können.\\
@@ -1798,8 +1802,10 @@ Das Konditional für die Klasse ist sehr trivial zu erzeugen. Es handelt sich um
 			Konditional für Klasse 2: $ \{(contact(X,Y))[0.578] <((X \neq anna \land Y \neq anna) \land X \neq Y)>\} $\\
 			Konditional für Klasse 3: $ \{(contact(X,Y))[0.050] <((X = anna \lor Y = anna)\land X \neq Y)>\} $\\
 		\end{Bsp} 
+	\textcolor{green}{
 			\item mehr als eine spezifische Konstante:\\
-			TODO
+			Die 
+			TODO}
 		\end{itemize}
 	\end{itemize}
 \end{itemize}
@@ -1837,7 +1843,7 @@ Zur Bearbeitung der Aufgabe war es notwendig, sich intensiv mit der Aufgabenstel
 	\subitem Maßstab für Gleichheit festsetzen 
 	\subitem Erarbeiten von Tests
 	\subitem Wissensbasen aus Log4KR als Testbasis verwenden
-	\subitem Erarbeitung erster eigener Beispiele\\
+	\subitem Erarbeitung erster eigener Beispiele
 	\subitem Auswertung der Beispiele
 	\subitem Entwicklung von Ideen für Algorithmen
 	TODO
@@ -2560,9 +2566,16 @@ Anschließend wurde die angestrebte Ausgabe \footnotetext{Unter der angestrebten
 \newpage
 
 \textcolor{green}{
-\section{Misanthrope3Classes} Erläuterungen s. \ref{BMisanthrope3Classes}
-\label{Misanthrope3Classes}
-\lstinputlisting{Examples/Misanthrope3Classes.txt}
+\section{Misanthrope2Spez} Erläuterungen s. \ref{BMisanthrope2Spez}
+\label{Misanthrope2Spez}
+\lstinputlisting{Examples/Misanthrope2Spez.txt}
+}
+\newpage
+
+\textcolor{green}{
+	\section{Misanthrope3Spez} Erläuterungen s. \ref{BMisanthrope3Spez}
+	\label{Misanthrope3Spez}
+	\lstinputlisting{Examples/Misanthrope3Spez.txt}
 }
 \newpage
 

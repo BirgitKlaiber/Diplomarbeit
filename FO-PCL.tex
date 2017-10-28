@@ -1,4 +1,5 @@
 
+
  
 
 
@@ -13,6 +14,8 @@
 
 
 \usepackage{geometry}% damit im Beispiel mehr Platz ist
+
+\include{xcolor}
 
 
 \usepackage[citecolor=green,urlcolor=black,linkcolor=red]{hyperref}
@@ -1190,6 +1193,13 @@ Hier wurden verschiedene Konstellationen und Anfragen getestet um auswertbares M
  \item{Misanthrope2Spez}	\label{BMisanthrope2Spez} s. \ref{Misanthrope2Spez}:\\
 FEHLER im System
 \end{itemize}
+}
+\textcolor{green}{
+	\item Drei spezifische Konstanten 
+	\begin{itemize}
+		\item{Misanthrope3Spez}	\label{BMisanthrope3Spez} s. \ref{Misanthrope3Spez}:\\
+		FEHLER im System
+	\end{itemize}
 }
 \end{itemize}
 \section{Ein- und zweistellige Prädikate}
@@ -2565,14 +2575,14 @@ Anschließend wurde die angestrebte Ausgabe \footnotetext{Unter der angestrebten
 \lstinputlisting{Examples/Misanthrope.txt}
 \newpage
 
-\textcolor{green}{
+\color{blue!40!black!40!green}{
 \section{Misanthrope2Spez} Erläuterungen s. \ref{BMisanthrope2Spez}
 \label{Misanthrope2Spez}
 \lstinputlisting{Examples/Misanthrope2Spez.txt}
 }
 \newpage
 
-\textcolor{green}{
+\color{blue!40!black!40!green}{
 	\section{Misanthrope3Spez} Erläuterungen s. \ref{BMisanthrope3Spez}
 	\label{Misanthrope3Spez}
 	\lstinputlisting{Examples/Misanthrope3Spez.txt}

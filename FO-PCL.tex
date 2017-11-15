@@ -112,6 +112,8 @@
 \end{center}
 
 \begin{center}
+	Version 20171115 
+	
 \large{Kleingartach, 2018}
 \end{center}
 
@@ -349,18 +351,17 @@ Es werden funktionsfreie Signaturen verwendet, da sich das unsichere Wissen nur 
 \begin{Def}[(FO-PCL)-Terme]\cite[Kap. 6.2, S. 125 Def. 6.2.2]{Fis10}\\
 	\index{FO-PCL-Term}
 	\noindent
-\textcolor{blue}{
 Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur.  
 Unter $ { V^{(S)}} $ versteht man eine abzählbare Menge von Variablen der Sorte $ s $. \nomenclature{$ { V^{(S)}} $ }{Menge von Variablen der Sorte $ s $}. Diese Menge wird für jede  Sorte $ s \in S $ festgelegt. 
 Die Menge aller Variablen wird definiert als $ {\cal V} := \bigcup_{s \in S} V^{(s)} $. \nomenclature{$ {\cal V} $}{Menge aller Variablen}
 Die Menge $ Term^{(s)}_{\Sigma}$ der Terme der Sorten $ s \in S $ ist definiert als \nomenclature{ $ Term^{(s)}_{\Sigma}$}{Menge der Terme der Sorten}
 $ Term^{(s)}_{\Sigma}$ := $ V^{(s)} \cup D^{(s)} $, und die Menge aller Terme ist definiert als $ Term_\Sigma $ := $ \bigcup_{s \in S }  Term^{(s)}_\Sigma = \cal V  \cup \cal D $ \nomenclature{ $ Term_{\Sigma}$}{Menge aller Terme} \\
-}
+
 \end{Def}
 
-\textcolor{blue}{
+
 FO-PCL verwendet zwei Arten von Formeln: logische Formeln und Constraints\index{Constraint}. Beide nutzen die vordefinierten Prädikatensymbole der Tautologie bzw. der Kontradiktion, unterscheiden sich aber in den für atomare Formeln zulässigen Prädikatensymbolen. Bei atomaren Constraints ist nur das Prädikatensymbol für die Gleichheit von Termen, bzw. Ungleichheit von Termen, d.h die negierte Gleichheit von Termen zulässig, bei atomaren logischen Formeln beliebige andere Prädikatensymbole ohne das Prädikatensymbol für die Gleichheit. Logische Formeln in FO-PCL sind entsprechend den logischen Formeln der Prädikatenlogik erster Stufe definiert, allerdings ohne Quantoren. Dabei ist es wichtig zur Kenntnis zu nehmen, dass Formeln in FO-PCL implizit allquantifiziert sind. Besonderes Wissen über einzelne Objekte muss man in einer eignen Formel formulieren. 
-}
+
 Eine logische Formel oder ein Constraint ohne Variablen wird Grundformel \index{Formeln ! Grundformel} genannt.
 
 
@@ -1005,8 +1006,24 @@ Das Ergebnis  "{}0"{} erhält man unter anderem für reflexives Wissen, da dies 
 	
 	
 \subsubsection{Generalisierung der Klassen}
-In dieser Phase werden die gemäß der gleichen Wahrscheinlichkeit zusammengefassten Konditionale einer Klasse zu einem möglichst allgemeinen Konditional zusammengefasst.\\
+\textcolor{blue}{
+\begin{Def}[Generalisierung]\index{Generalisierung} \label{Generalisierung}
+	Sei $\cal{R}$ eine FO-PCL Wissenbasis, $ \cal{Q} $ eine Anfrage in Form eines unbedingten Konditionals. Unter der Generalisierung versteht man den Prozess, für eine Klasse von Konditionalen ein einziges Konditional zu erzeugen, dass die Klasse repräsentiert und alle Konditionale umfasst. 
+\end{Def}
+}
+In der Phase der Generalisierung werden die gemäß der gleichen Wahrscheinlichkeit zusammengefassten Konditionale einer Klasse zu einem möglichst allgemeinen Konditional zusammengefasst.\\
 Die eigentliche Logik der Komponente liegt hierbei in der Erzeugung des jeweiligen Konditionals.
+
+\textcolor{blue}{
+\subsubsection{(Angestrebte) Ausgabe} \index{angestrebte Ausgabe}
+	\begin{Def}[Angestrebte Ausgabe] \index{angestrebte Ausgabe} \label{angestrebte Ausgabe}
+		Sei $\cal{R}$ eine FO-PCL Wissenbasis,  $ \cal{Q} $ eine Anfrage in Form eines unbedingten Konditionals. Dann ist die angestrebte Ausgabe das allgemeinste Konditional unter allen Konditionalen, die die Klasse repräsentieren ohne an Gültigkeit zu verlieren.
+	\end{Def}
+}
+\textcolor{blue}{
+	Unter der angestrebten Ausgabe im Sinne dieser Arbeit ist das Ergebnis eines subjektiven Prozesses der Betrachtung der Klassen der Generierung eines möglichst allgemeinen Konditionals zu verstehen. Das generierte Konditional sollte dabei intersubjektiv als möglichst allgemein akzeptiert werden.}
+
+
 	
 \chapter{Experimentelle Forschungen}
 Als Ausgangsbasis für die Erstellung eines Algorithmus wurden verschiedene Beispiele betrachtet. Der Großteil der Beispiele ist der Bibliothek Log4KR entnommen. Es wurden verschiedene Anfragen an die Wissensbasis gestellt, um ermitteln zu können, welche Ergebnisse die Anfragen liefern. Das diente dazu Vermutungen zu bestätigen bzw. erste Erkenntnisse zu erhalten.\\
@@ -1187,20 +1204,20 @@ Hier wurden verschiedene Konstellationen und Anfragen getestet um auswertbares M
 	\item \textsl{Garfield} \label{BGarfield} s. \ref{Garfield}:\\
 	Generische Grundinstanzen haben die gleiche Wahrscheinlichkeit. Spezifische Konstanten führen zu unterschiedlichen Wahrscheinlichkeiten.
 \end{itemize}
-\textcolor{green}{
+
 \item Zwei spezifische Konstanten 
 \begin{itemize}
  \item{Misanthrope2Spez}	\label{BMisanthrope2Spez} s. \ref{Misanthrope2Spez}:\\
-FEHLER im System
+Log4KR kann dieses Beispiel nicht berechnen. Weitere Forschungen für die Verwendung von mehr als zwei spezifischen Konstanten können daher nicht unternommen werden.
 \end{itemize}
-}
-\textcolor{green}{
+
+
 	\item Drei spezifische Konstanten 
 	\begin{itemize}
 		\item{Misanthrope3Spez}	\label{BMisanthrope3Spez} s. \ref{Misanthrope3Spez}:\\
-		FEHLER im System
+	Log4KR kann dieses Beispiel nicht berechnen. Weitere Forschungen für die Verwendung von mehr als zwei spezifischen Konstanten können daher nicht unternommen werden.
 	\end{itemize}
-}
+
 \end{itemize}
 \section{Ein- und zweistellige Prädikate}
 \begin{itemize}
@@ -1236,13 +1253,10 @@ Dieses Beispiel ist die Erweiterung des Beispiels "{}ColdTrans"{} um spezifische
 	\begin{itemize}
 		\item 	Generische Grundinstanzen sind unabhängig von der Wissensbasis und der gestellten Anfrage gleich.
 		\item Die Verwendung spezifischer Konstanten führen in der Regel zu anderen Wahrscheinlichkeiten als die Verwendung nicht spezifischer Konstanten.
-		\textcolor{green}{
 			\item Wenn mehrere spezifische Konstanten verwendet wurden, würde man erwarten, dass es eine Klasse gibt für jede spezifische Konstante, eine Klasse für reflexives Wissen und mehrere Klassen mit Kombinationen aus spezifischen Konstanten. Das ist nicht der Fall, wie man dem Beispiel \ref{Misanthrope2Spez} entnehmen kann.
-		}
 		\item Wenn eine spezifische Konstante in einer Formel verwendet wurde, die in der Konklusion vorkommt, dann führt das zu einer anderen Wahrscheinlichkeit, unabhängig davon, ob auch die anderen Konditionale spezifisches Wissen enthalten. Die anderen Grundinstanzen haben die gleiche Wahrscheinlichkeit s. \ref{BirdsDiffer} für die Anfrage $ (flies(X) \mid isBird(X)$. Das hängt in diesem Fall daran, dass die Annahme der Prämisse einen Fakt enthält ($ flies(Tweety)[0] $) , wo die Wissensbasis im Übrigen nur unsicheres Wissen enthält. (Die Annahme der Anfrage ist, dass die Prämisse $isBird(X)$ ein Fakt ist (also zu $ 100\% $ gelte). In der Wissensbasis wird aber ausgesagt, dass $isBird(X)$ nur möglicherweise gilt.
 		\item Enthält die Prämisse der Anfrage einen Fakt, der auch in der Konklusion vorkommt, so ist auch die Konklusion sicher (vgl. \ref{ColdTrans}:$(cold(carl) \mid ((contact(carl,anna)  \land cold(carl)) $). 
 		\item Unterschiedliche Wahrscheinlichkeiten können sich aus den verschiedensten Gründen ergeben
-		\textcolor{blue}{
 		\item Unterschiedliche Wahrscheinlichkeiten ergeben sich bei spezifischem Wissen über (eine) bestimmte Konstante des Universums, vgl. \ref{Birds} beispielsweise für die Anfrage $ flies(X) $, wo sich für die spezifische Instanz des Konditionals eine andere Wahrscheinlichkeit als für die generischen ergibt (die ja die gleiche Wahrscheinlichkeit besitzen): $ flies(Tweety)[0.0] $ und $ flies(X)[0.663]<X \neq Tweety> $
 		\item Unterschiedliche Wahrscheinlichkeiten ergeben sich auch, wenn kein spezifisches Wissen über bestimmte Konstanten in der Wissensbasis, sondern Variablen mit den gleichen Wahrscheinlichkeiten belegt werden, s.  im Beispiel "{}Cold"{} s. \ref{Cold} für die Anfrage $ contact(X,Y) $.
 		\item Spezifisches Wissen und die Belegung unterschiedlicher Variablen mit gleichen Konstanten stehen in Interaktion.
@@ -1250,7 +1264,7 @@ Dieses Beispiel ist die Erweiterung des Beispiels "{}ColdTrans"{} um spezifische
 		\item Interaktionen sind nicht trivial und nicht auf den ersten Blick erkennbar. Deutlich wird das am Beispiel "{}ColdSpez"{}, s. \ref{ColdSpez} bereits bei der trivialen Anfrage $ contact(X,Y) $, wo das spezifische Wissen über eine Konstante (hier: anna) mit dem reflexiven Wissen (also der Belegung unterschiedlicher Variablen mit den gleichen Konstanten des Universums) zu Interaktionen führt. Ähnliches gilt beim Beispiel "{}BirdsWithoutNull"{} für die Anfrage $ (flies(X) | isBird(X) $, wo das spezifische Wissen über Tweety nicht zu einer anderen Wahrscheinlichkeit führt als bei den generischen Instanzen. Das lässt sich allerdings einfach aus der Struktur der Anfrage erklären, da die Wissensbasis mit $ isBird(Tweety)[1.0] $ einen Fakt enthält, der die Prämisse erfüllt. Es wird daran deutlich, dass auch der Inhalt der Wissensbasis die Anzahl der Klassen beeinflussen kann, das aber wiederum in Abhängigkeit der Gestalt der Anfrage. Besonders kompliziert wird beispielsweise die (komplexe) Anfrage $ cold(Z)|contact(X,Y) * cold(X)) $ im Beispiel "{}ColdTransSpez"{}, s. \ref{ColdTransSpez}, bei der die Kombination aus spezifischem und reflexiven Wissen zu vielen Klassen führt.
 		\item Die Anzahl der Sorten scheint auf den ersten Blick keinen Unterschied für die Anzahl der Klassen zu machen; wesentlicher ist das Vorhandensein von spezifischen Konstanten gleich welcher Sorte. Daher wird darauf kein weiterer Fokus gesetzt. Allerdings wird der generierte Constraint komplexer, s. Anfrage $ (isStupid(Y)|moreIntelligent(X,Y)) $ im Beispiel "{}Garfield"{}, \ref{Garfield}
 		\item Die Komplexität der Anfrage hat einen Einfluss darauf, wie viele Klassen gebildet werden bzw. auf die Komplexität des Constraints. 	
-} 
+ 
 	\end{itemize}
 
 
@@ -1354,16 +1368,16 @@ Die Aufgabenstellung verlangt die Bildung eines möglichst allgemeinen Kondition
 Grundsätzlich ist zu unterscheiden, ob es sich bei dem angefragten Konditional um ein Konditional mit Tautologie als Prämisse, vgl. \ref{T als Prämisse} oder einer sonstigen Prämisse, vgl. \ref{Fo-PCL Konditional} handelt.\\
 Bei einer Tautologie ist nur die Konklusion bei der Bildung des Constraints zu betrachten, ansonsten die Prämisse des angefragten Konditionals und die der Konditionale in den Äquivalenzklassen.
 
-\textcolor{blue}{
+
 \section{Betrachtung der Äquivalenzklassen}
 \subsection{Vorüberlegungen}
 An dieser Stelle sollen die einzelnen Äquivalenzklassen betrachtet werden. Die Klassen sollen kategorisiert werden. Es soll herausgefunden werden, wie die einzelnen Äquivalenzklassen in Relation zueinander aussehen und worin sie sich unterscheiden. Dies dient dazu herauszufinden, ob es eine Systematik gibt, die dazu führen können, einen regelbasierten Algorithmus zu entwickeln. 
 \label{Eine Äquivalenzklasse}
 \subsection{Eine Äquivalenzklasse}
 Im einfachsten Fall haben alle Grundkonditionale die gleiche Wahrscheinlichkeit. Dann ist nur das bedingte Konditional auszugeben, d.h. das relationale Konditional mit der berechneten Wahrscheinlichkeit(ohne Constraint)\\
-Das wäre der Fall, wenn die Wissensbasis aus Beispiel \ref{Bsp:Birds} nur das Konditional $ T_3 $ in diesem Fall ohne Constraint enthielte. Das Beispiel dazu findet man unter BirdsEqual, s. \ref{BirdsEqual}. Hierbei sollte die angestrebte Ausgabe in Form des Konditionals der Eingabe ergänzt um die berechnete Wahrscheinlichkeit sein, in diesem Fall $ (flies(X)) [0.66]$ (ein Constraint ist nicht notwendig, da ja alles Konditionale die gleiche Wahrscheinlichkeit haben und daher keine Einschränkung der Klasse notwendig ist).\\
+Das wäre der Fall, wenn die Wissensbasis aus Beispiel \ref{Bsp:Birds} nur das Konditional $ T_3 $ in diesem Fall ohne Constraint enthielte. Das Beispiel dazu findet man unter BirdsEqual, s. \ref{BirdsEqual}. Hierbei sollte die angestrebte Ausgabe \index{angestrebte Ausgabe} in Form des Konditionals der Eingabe ergänzt um die berechnete Wahrscheinlichkeit sein, in diesem Fall $ (flies(X)) [0.66]$ (ein Constraint ist nicht notwendig, da ja alles Konditionale die gleiche Wahrscheinlichkeit haben und daher keine Einschränkung der Klasse notwendig ist).\\
 In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welche Anfragen sich eine Äquivalenzklasse ergibt. 
-}
+
 \subsubsection {Eine Äquivalenzklassen und die Anfrage ist ein Atom} \label{Atom_eineKlasse}
 
 \fontsize{11pt}{13.2pt}\selectfont
@@ -1437,18 +1451,17 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 	\end{longtable}
 \end{footnotesize}
 
-\textcolor{green}{
 	Eine Äquivalenzklasse ergibt sich, wenn die Formel sich bereits als solche in der Wissensbasis befindet. Wenn die Wissensbasis bereits eine bedingte Formel enthält und diese angefragt wird.
-}
+
 
 \subsection{Zwei Äquivalenzklassen}
 
 \subsubsection {Zwei Äquivalenzklassen und die Anfrage ist ein Atom}
-\textcolor{blue}{
+
 	Zwei Äquivalenzklassen ergeben sich bei einstelligen Prädikaten wenn bei der Grundierung Variablen mit spezifischen Konstanten belegt werden. \\
 	Bei zweistelligen Prädikaten kommt es zu zwei Klassen, wenn keine spezifischen Konstanten im Grundkonditional vorkommen, aber beide Variablen mit der gleichen Konstante belegt werden.\\
 	Die unten stehenden Tabellen listen für die jeweiligen Beispiele die Anfragen auf, bei der es zu zwei Äquivalenzklassen kommt.
-}
+
 
 
 
@@ -1490,7 +1503,7 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 
 
 
-\textcolor{blue}{
+
 \begin{itemize}
 	\item Jede Äquivalenzklasse enthält nur ein Konditional. Das ist der trivialste Fall. Zu finden beispielsweise in $ flies(X) $ in "{}Birds2Birds"{} \ref{Birds2Birds}.
 	\item Eine Klasse enthält ein Konditional und die andere mehr als ein Konditional. 
@@ -1504,12 +1517,12 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 		\item mehrstelliges Prädikat  (Exemplarisch: $ moreIntelligent(X) $  in "{}Garfield"{}, \ref{Garfield}).
 	\end{itemize}
 \end{itemize}
-}
 
 
-\textcolor{green}{
+
+
 \subsubsection{Zwei Äquivalenzklassen und die Anfrage ist eine (nichtatomare, logische) Formel}
-}
+
 \setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
 \addtolength{\currentLongTableWidth}{-4\tabcolsep} %subtrahiere -8\cdot textbreite von asdf, 2 Abstände pro Zelle * Anzahl der Spalte
 \begin{footnotesize}
@@ -1578,9 +1591,12 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 \end{footnotesize}
 
 
-\textcolor{blue}{
-Vorbemerkung:\\ 
-Es gibt einen Randfall, für den gilt, dass sich alle von einander in der berechneten Wahrscheinlichkeit unterscheiden:\\
+Vorbemerkung:
+
+\noindent
+Es gibt einen Randfall, für den gilt, dass sich alle von einander in der berechneten Wahrscheinlichkeit unterscheiden:
+
+\noindent
 Dies ist ein einfacher Fall und führt zur Ausgabe aller Grundkonditionale mit jeweils berechneter Wahrscheinlichkeit. Dieses Ergebnis wird erzeugt, wenn die Wissensbasis zu jeder Konstanten eine eigene Information bereit hält, die dazu führt, dass sich die Grundkonditionale voneinander unterscheiden. Ein Beispiel dafür ist "{}BirdsDiffer"{}, \ref{BirdsDiffer}.
 \paragraph{ Mehr als zwei Äquivalenzklassen und die Anfrage ist ein Atom}
 \begin{itemize}
@@ -1596,12 +1612,12 @@ Dies ist ein einfacher Fall und führt zur Ausgabe aller Grundkonditionale mit j
 		\item mehrstelliges Prädikat (Beispiele hierfür sind die Anfragen $ contact(X,Y) $ in "{}ColdSpez"{} und "{}ColdTransSpez"{} und $ likes(U,V) $ in "{}Misanthrope"{}, "{}Misanthrope3Classes"{} und "{}MisanthropeIrreflexive"{}) \\
 	\end{itemize}
 \end{itemize}
-}
 
-\textcolor{green}{
+
+
 \paragraph{Mehr als zwei Äquivalenzklassen und die Anfrage ist eine (nichtatomare, logische) Formel}
 TODO
-}
+
 \setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
 \addtolength{\currentLongTableWidth}{-4\tabcolsep} %subtrahiere -8\cdot textbreite von asdf, 2 Abstände pro Zelle * Anzahl der Spalte
 \begin{footnotesize}
@@ -1648,13 +1664,13 @@ Unabhängig vom Algorithmus müssen die folgenden Schritte ausgeführt werden. D
 
 Der darauf folgende Prozess, die Konditionale mit gleichen Wahrscheinlichkeiten zu einem möglichst allgemeinen Konditional zusammen zu fassen ist abhängig vom gewählten Algorithmus.
 
-\section{Zielbeschreibung}
-Das Ziel des Algorithmus ist die Generierung einer Rückgabemenge von bedingten Konditionalen, die zu dem unbedingten Konditional der Anfrage berechnet wurde. Jedes berechnete Konditional repräsentiert eine Menge von Grundkonditionalen mit gleicher Wahrscheinlichkeit und sollte möglichst allgemein sein. Unter einem allgemeinen Konditional im Sinne dieser Arbeit versteht man ein möglichst kurzes Konditional. Ein Konditional ist möglichst kurz, wenn der logische Constraint eine möglichst einfache Formel ist, also nur so viele atomare Ausdrücke und Junktoren wie unbedingt nötig enthält.
+\section{Zielbeschreibung} \label{Zielbeschreibung}                                                                                                                                                                   
+Das Ziel des Algorithmus ist die Generierung einer Rückgabemenge von bedingten Konditionalen, die n Grundkonditionalen mit gleicher Wahrscheinlichkeit und sollte möglichst allgemein sein. Unter einem allgemeinen Konditional im Sinne dieser Arbeit versteht man ein möglichst kurzes Konditional. Ein Konditional ist möglichst kurz, wenn der logische Constraint eine möglichst einfache Formel ist, also nur so viele atomare Ausdrücke und Junktoren wie unbedingt nötig enthält.
 
-\textcolor{blue}{
-\begin{Bsp}[Erstrebte Ausgabe am Beispiel "{}Birds"{} \ref{Bsp:Birds}, bzw.  \ref{Birds}]
+
+\begin{Bsp}[Angestrebte Ausgabe am Beispiel "{}Birds"{} \ref{Bsp:Birds}, bzw.  \ref{Birds}]\index{angestrebte Ausgabe}
 	\label{Ausgabe_Birds}
-	\footnote{Unter der angestrebten Ausgabe im Sinne dieser Arbeit ist das Ergebnis eines subjektiven Prozesses der Betrachtung der Klassen der Generierung eines möglichst allgemeinen Konditionals zu verstehen. Das generierte Konditional sollte dabei intersubjektiv als möglichst allgemein akzeptiert werden.}
+
 	Beim Beispiel "{}Birds"{} ergeben sich für die Anfrage nach der Wahrscheinlichkeit , mit der X fliegt (flies(X)) zwei Klassen, die folgendermaßen aussehen:\\
 			Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
 			Klasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$\\
@@ -1663,49 +1679,52 @@ Das Ziel des Algorithmus ist die Generierung einer Rückgabemenge von bedingten 
 				Konditional für Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
 				Konditional für Klasse 2: $\{(flies(X))[0.66]\} <X \neq Tweety>$\\
 \end{Bsp}
-}
+
 
 Und um ein Beispiel mit zweistelligen Prädikaten zu betrachten: 
-\textcolor{blue}{
+
 	\label{Ausgabe_Misanthrope}
-	\begin{Bsp}[Erstrebte Ausgabe am Beispiel "{}Misanthrope"{}, vgl. auch \ref{sec:Misanthrop} und \ref{Misanthrope}]
+	\begin{Bsp}[Angestrebte Ausgabe am Beispiel "{}Misanthrope"{}, vgl. auch \ref{sec:Misanthrop} und \ref{Misanthrope}]\index{angestrebte Ausgabe}
 		Beim Beispiel "{}Misanthrope"{} ergeben sich für die Anfrage nach der Wahrscheinlichkeit, mit der U V mag, drei Klassen, die folgendermaßen aussehen:\\
 		\\
 		Klasse 1: $ \{(likes(c,b))[0.578], (likes(b,c))[0.587]\} $\\
 		Klasse 2: $ \{(likes(a,a))[0.0], (likes(b,b))[0.0], (likes(c,c))[0.0]\} $\\
 		Klasse 3: $ \{(likes(a,c))[0.050], (likes(a,b))[0.050], (likes(b,a))[0.050], (likes(c,a))[0.050]\} $\\
 		Die erwünschte Ausgabe würde in diesem Fall so aussehen:\\
-		Konditional für Klasse 1: $ \{(likes(U,V))[0.578] <U \neq a \land V \neq a>\} $\\
+		Konditional für Klasse 1: $ \{(likes(U,V))[0.578] <((U \neq a \land V \neq a) \land U \neq V)>\} $\\
 		Konditional für Klasse 2: $ \{(likes(U,V))[0.0] <U = V>\} $\\
-		Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <U = a \lor V = a>\} $\\
+		Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \lor V = a) \land U \neq V)>\} $\\
 	\end{Bsp}
-}
+
 
 \section{Idee: Positive Generalisierung}
 \label{PositiveGeneralisierung}
 \index{Generalisierung ! positiv}
-\textcolor{blue}{
+
 Ein Möglichkeit, eine Klasse zu generalisieren, also die Konditionale der Klasse zu einem Konditional zusammen zu fassen, ist die positive Generalisierung. Bei der positiven Generalisierung wird zu dem unbedingten Konditional die Wahrscheinlichkeit sowie ein Constraint hinzugefügt, der die je Klasse die Belegungen der Variablen mit Konstanten kanonisch aufzählt. 
 Das würde für die o.g. Beispiele wie folgt aussehen:\\
-\begin{Bsp}[Positive Generalisierung am Beispiel "{}Birds"{}, s. \ref{Ausgabe_Birds} und \ref{Birds}]
+\begin{Bsp}[Positive Generalisierung am Beispiel "{}Birds"{}, s. \ref{Ausgabe_Birds} und \ref{Birds}] \index{Generalisierung ! positiv}
 	Konditional für Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
 	Konditional für Klasse 2: $\{(flies(X))[0.66]\} <((X = Bully \lor X = Sylvester) \lor X = Kirby)>$\\
 \end{Bsp}
 \begin{Bsp}[Positive Generalisierung am Beispiel "{}Misanthrope"{}, s. \ref{Ausgabe_Misanthrope} und \ref{Misanthrope}]
+	\index{Generalisierung ! positiv}
 	Konditional für Klasse 1: $ \{(likes(U,V))[0.578] <((U = c \land V = b) \lor (U = b \land V = c)>\} $\\
 	Konditional für Klasse 2: $ \{(likes(U,V))[0.0] <(((U = a \land V = a) \lor (U = b \land V = b)) \lor (U = c \land V = c)) >\} $\\
-	Konditional für Klasse 3: $ \{(((((likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
+	Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
 \end{Bsp}
 Wie man unschwer erkennen kann, sind die Konditionale der Klasse zu einem einzigen allgemeinen Konditional zusammengefasst, die erzeugten Constraints erschließen sich nicht unbedingt ohne weitere Überlegung. Das ist bereits bei kleinen und einfachen Beispielen der Fall.
-}	
+\\
 
-\textcolor{blue}{Fazit zur positiven Generalisierung:\\
-	Der Vorteil der positiven Generalisierung liegt darin, dass einfach zu realisieren ist und in jedem Fall gilt. Der Nachteil ist, dass sie im Grunde genommen nicht zielführend ist, da das erzeugte allgemeine Konditional in der Regel nicht einfacher oder übersichtlicher und nicht selbsterklärend ist. Das führte zu der Überlegung, ob es nicht sinnvoller, übersichtlicher und zu einem kürzeren Constraint führen würde, wenn man einen Weg finden könnte, nicht über die Elemente der Klasse sondern über die Elemente, die nicht in der Klasse sind, zu operieren,  also über Ausnahmen. Das führte dann zur Idee der negativen Generalisierung }
+
+\textbf{{\Large Fazit zur positiven Generalisierung:}}\index{Generalisierung ! positiv}
+\noindent
+
+Der Vorteil der positiven Generalisierung liegt darin, dass einfach zu realisieren ist und in jedem Fall gilt. Der Nachteil ist, dass sie im Grunde genommen nicht zielführend ist, da das erzeugte allgemeine Konditional in der Regel nicht einfacher oder übersichtlicher und nicht selbsterklärend ist. Das führte zu der Überlegung, ob es nicht sinnvoller, übersichtlicher und zu einem kürzeren Constraint führen würde, wenn man einen Weg finden könnte, nicht über die Elemente der Klasse sondern über die Elemente, die nicht in der Klasse sind, zu operieren,  also über Ausnahmen. Das führte dann zur Idee der negativen Generalisierung 
 
 \section{Idee: Negative Generalisierung}
 \label{NegativeGeneralisierung}
 \index{Generalisierung ! negativ}
-\textcolor{blue}{
 Unter einer negativen Generalisierung soll eine Generalisierung verstanden werden, bei der der Constraint aus Ausnahmen der Klasse generiert wird. Die Klassen sollen der Größe nach, in diesem Fall der Anzahl der Konditionale, verglichen werden. Aus den kleineren Klassen soll, wenn sie in der Summe weniger Elemente enthalten ein Constraint für die größte Klasse gebildet werden. Die anderen Klassen sollen positiv generalisiert werden, s. \ref{PositiveGeneralisierung}.\\
 Zum besseren Verständnis der Vorgehensweise soll diese an Beispielen demonstriert werden:
 \begin{Bsp}[Negative Generalisierung am Beispiel "{}Birds"{}, s. \ref{Ausgabe_Birds}]
@@ -1713,37 +1732,40 @@ Zum besseren Verständnis der Vorgehensweise soll diese an Beispielen demonstrie
 Konditional für Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
 Konditional für Klasse 2: $\{(flies(X))[0.66]\} <X \neq Tweety>$\\
 \end{Bsp}
-} 
-\textcolor{blue}{
+ 
+
 \begin{Bsp}[Negative Generalisierung am Beispiel "{}Misanthrope"{}, s. \ref{Ausgabe_Misanthrope} und \ref{Misanthrope}]
+	\index{Generalisierung ! negativ}
 	Konditional für Klasse 1: $ \{(likes(U,V))[0.578] <((U = c \land V = b) \lor (U = b \land V = c)>\} $\\
 	Konditional für Klasse 2: $ \{(likes(U,V))[0.0] <(((U = a \land V = a) \lor (U = b \land V = b)) \lor (U = c \land V = c)) >\} $\\
-	Konditional für Klasse 3: $ \{(((((likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
+	Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
 	\end{Bsp}
 Wie man unschwer erkennen kann, ergibt sich beim Beispiel "{}Misanthrope"{} für die Anfrage (likes(U,V)) keine Veränderung gegenüber der positiven Generalisierung. Das liegt daran, dass die kleineren Klassen in der Summe mehr Elemente enthalten als die größte Klasse.\\ 
 Anders verhält es sich beim Beispiel "{}cold"{} für die Anfrage contact(X,Y):
 \begin{Bsp}[Negative Generalisierung am Beispiel "{}Cold"{}, s. \ref{Cold} ]:
+	\index{Generalisierung ! negativ}
 	Klasse 1: $ \{(contact(anna,anna))[0.0], (contact(bob,bob))[0.0],(contact(carl, carl))[0.0]\} $\\
 	Klasse 2: $ \{(contact(anna,bob)[0.486], contact(bob,anna)[0.486], contact(carl,bob)[0.486], contact(bob,carl)[0.486], contact(anna,carl)[0.486],contact(carl,anna)[0.486],\} $\\
 	Konditional für Klasse 1: $ \{(contact(X,Y))[0.0]<(((X = anna \land Y = anna) \lor (X = bob \land Y = bob)) \lor (X = carl \land Y = carl))>\} $\\
-	Konditional für Klasse 2: $ \{(contact(X,Y))[0.486]<(((X neq anna \land Y neq anna) \land (X neq bob \land Y neq bob)) \land (X neq carl \land Y neq carl))>\} $\\
+	Konditional für Klasse 2: $ \{(contact(X,Y))[0.486]<(((X \neq anna \land Y \neq anna) \land (X \neq bob \land Y \neq bob)) \land (X \neq carl \land Y \neq carl))>\} $\\
 \end{Bsp}
-}
-\textcolor{blue}{Fazit zur negativen Generalisierung:\\
-	Obwohl die negative Generalisierung für den Fall einstelliger Prädikate zum gewünschten Ergebnis kam und auch wie für die positive Generalisierung gilt, dass sie in jedem Fall zuverlässig und richtig arbeitet, für den Fall zweistelliger Prädikate kommt es zu keinem übersichtlicheren Ergebnis als bei der positiven Generalisierung. Es ist also nach Alternativen zu forschen.
-}
+
+\textbf{{\Large Fazit zur negativen Generalisierung:}}\index{Generalisierung ! negativ}
+
+\noindent
+Obwohl die negative Generalisierung für den Fall einstelliger Prädikate zum gewünschten Ergebnis kam und auch wie für die positive Generalisierung gilt, dass sie in jedem Fall zuverlässig und richtig arbeitet, für den Fall zweistelliger Prädikate kommt es zu keinem übersichtlicheren Ergebnis als bei der positiven Generalisierung. Es ist also nach Alternativen zu forschen.
+
 \section{Idee: Logische Generalisierungsoptimierung}
 Diese Idee baut auf der positiven und der negativen Generalisierung auf. Es werden beide Generalisierungen erzeugt und der generierte Constraint in jeder der beiden Alternativen logisch optimiert. Die beiden Ausdrücke werden im einfachsten Fall über die Länge des Constraints verglichen und der kürzere gewählt
 \begin{itemize}
-	\item Positive Generalisierung
-	\item Negative Generalisierung
+	\item Positive Generalisierung \index{Generalisierung ! positiv}
+	\item Negative Generalisierung \index{Generalisierung ! negativ}
 	\item Logische Optimierung
 	\item Generalisierungsvergleich
 \end{itemize}
 
 \section{Idee: Konditionale Generalisierung}
 \index{Generalisierung ! konditional}
-\textcolor{blue}{
 \subsection{Vorüberlegungen}
 An dieser Stelle sollen Regeln gefunden werden, wie man die Interaktionen zwischen Fakten, die in der Anfrage verwendet werden für Aussagen, die in der Wissensbasis mit einer bestimmten Wahrscheinlichkeit vorbelegt wurden; wenn es denn solche gibt, die für alle Fälle gelten. Ebenso sollten die anderen Fälle betrachtet werden, die zu unterschiedlichen Wahrscheinlichkeiten führen. Auf den ersten Blick sind solche Regeln nicht erkennbar, da unzählige Interaktionen vorkommen können.\\
 In den folgenden Kapiteln werden die Regeln erstellt nach denen die Konditionale für die jeweiligen Klassen in Abhängigkeit der Art der Anfrage gebildet werden können.\\
@@ -1758,7 +1780,7 @@ Das Konditional für die Klasse ist sehr trivial zu erzeugen. Es handelt sich um
 \item Eine Äquivalenzklasse enthält ein Konditional, die andere mehr als ein Konditional
 \begin{itemize}
 	\item einstelliges Prädikat:\\
-	Hier sind die beiden Konditionale über negative Generalisierung \ref{NegativeGeneralisierung} zu generieren. Für die Klasse mit einem Konditional ist es das bedingte Konditional, für die andere Klasse wird ein Constraint der Ungleichheit gebildet (s. \ref{Def:Constraint}), der die (spezifische) Konstante der anderen Klasse enthält, s \ref{Bsp:Neg_Gen_Birds}. 
+	Hier sind die beiden Konditionale über negative Generalisierung \ref{NegativeGeneralisierung} \index{Generalisierung ! negativ} zu generieren. Für die Klasse mit einem Konditional ist es das bedingte Konditional, für die andere Klasse wird ein Constraint der Ungleichheit gebildet (s. \ref{Def:Constraint}), der die (spezifische) Konstante der anderen Klasse enthält, s \ref{Bsp:Neg_Gen_Birds}. 
 	\item zweistelliges Prädikat:\\
 	Zwei Äquivalenzklassen dürften sich bei zweistelligen Prädikaten nur dann ergeben, wenn bereits die Anfrage ein spezifisches Konditional enthält. Das ist ein Randfall, der hier nicht weiter betrachtet werden soll. 
 \end{itemize}
@@ -1776,7 +1798,7 @@ Das Konditional für die Klasse ist sehr trivial zu erzeugen. Es handelt sich um
 	\item Jede Äquivalenzklasse enthält nur ein Konditional. Die Rückgabemenge besteht also lediglich aus den bedingten Konditionalen jeder Klasse; ein Constraint ist hier nicht notwendig.
 	\item Mindestens eine Äquivalenzklasse enthält ein Konditional, die anderen ein oder mehr als ein Konditional
 	\begin{itemize}
-		\item einstelliges Prädikat: Positive Generalisierung, \ref{PositiveGeneralisierung} für die Klassen mit einem Konditional. Der Fall, dass nur eine Klasse ein Konditional enthält und alle anderen mehr, kommt nicht vor. Bei einstelligen Prädikaten kann sich eine eigene Klasse nur bei spezifischen Grundinstanzen ergeben. Dafür gibt es dann jeweils eine eigene Klasse, die generischen Grundinstanzen befinden sich in der gleichen Klasse. Wenn es zwei oder mehr Klassen mit je einem Konditional gibt, dann hängt die Vorgehensweise davon ab, ob die Anzahl der Elemente in der Klasse größer ist als die Anzahl der anderen Klassen. In diesem Fall ergibt sich das Konditional für die Klasse der generischen Grundinstanzen durch negative Generalisierung \ref{NegativeGeneralisierung} über alle Konstanten der spezifischen Klassen, wenn die Summe der Konditionale der generischen Klasse höher ist als die Summe der Konditionale der spezifischen Klassen ansonsten über positive Generalisierung für die Generische Klasse. Für alle spezifischen Klassen erfolgt jeweils die positive Generalisierung . \ref{PositiveGeneralisierung}. Ein Beispiel dafür ist Birds3Classes, \ref{Birds3Classes}.\\
+		\item einstelliges Prädikat: Positive Generalisierung, \ref{PositiveGeneralisierung} \index{Generalisierung ! positiv}für die Klassen mit einem Konditional. Der Fall, dass nur eine Klasse ein Konditional enthält und alle anderen mehr, kommt nicht vor. Bei einstelligen Prädikaten kann sich eine eigene Klasse nur bei spezifischen Grundinstanzen ergeben. Dafür gibt es dann jeweils eine eigene Klasse, die generischen Grundinstanzen befinden sich in der gleichen Klasse. Wenn es zwei oder mehr Klassen mit je einem Konditional gibt, dann hängt die Vorgehensweise davon ab, ob die Anzahl der Elemente in der Klasse größer ist als die Anzahl der anderen Klassen. In diesem Fall ergibt sich das Konditional für die Klasse der generischen Grundinstanzen durch negative Generalisierung \ref{NegativeGeneralisierung} \index{Generalisierung ! negativ} über alle Konstanten der spezifischen Klassen, wenn die Summe der Konditionale der generischen Klasse höher ist als die Summe der Konditionale der spezifischen Klassen ansonsten über positive Generalisierung für die Generische Klasse. Für alle spezifischen Klassen erfolgt jeweils die positive Generalisierung . \ref{PositiveGeneralisierung} \index{Generalisierung ! positiv}. Ein Beispiel dafür ist Birds3Classes, \ref{Birds3Classes}.\\
 		\begin{Bsp}[Konditionale Generalisierung am Beispiel "{}Birds3Classes"{}]
 		Für die Anfrage $ flies(X) $ in "{}Birds3Classes"{} ergeben sich folgende Klassen:
 		Klasse 1: $ {flies(Sylvester)[0.664], flies(Kirby)[0.664]}  $\\
@@ -1796,7 +1818,7 @@ Das Konditional für die Klasse ist sehr trivial zu erzeugen. Es handelt sich um
 		\begin{itemize}
 			\item eine spezifische Konstante:\\
 			Hier lassen sich drei Klassen unterscheiden. Eine Klasse, bei der die beiden Variablen mit der gleichen Konstante substituiert wurden. Das Konditional wird gebildet, indem man unbedingte Konditional mit der Wahrscheinlichkeit der Klasse versieht und einen Constraint der Gleichheit bildet. Eine Klasse, bei der keine der Variablen mit der spezifischen Konstante substituiert wurde. Das Konditional der wird gebildet, indem man das unbedingte Konditional mit der Wahrscheinlichkeit der Klasse versieht und einen Constraint bildet, der eine Konjunktion aus einem Constraint der Ungleichheit und einer Konjunktion von zwei Constraints der Ungleichheit mit der spezifischen Variable ist. Für die dritte Klasse wird das Konditional der Klasse gebildet in dem man das unbedingte Konditional mit der Wahrscheinlichkeit der Klasse versieht und den Constraint als Konjunktion von einem Constraint der Ungleichheit für die beiden Variablen und einer Disjunktion für einen Constraint der Gleichheit mit der spezifischen Variable für jeweils eine Konstante bildet.\\
-			\begin{Bsp}[Konditionale Generalisierung für mehrere Klassen am Beispiel "{}Misanthrope"{}]
+			\begin{Bsp}[Konditionale Generalisierung für mehrere Klassen am Beispiel "{}Misanthrope"{}] \index{Generalisierung ! konditional}
 				Klasse 1: $ { likes(a,a), likes(b,b), likes(c,c)} $
 				Klasse 2: $ {likes(c,b), likes(b,c)} $
 				Klasse 3: $ {likes(a,c), likes(a,b), likes(b,a), likes(c,a)} $
@@ -1804,7 +1826,7 @@ Das Konditional für die Klasse ist sehr trivial zu erzeugen. Es handelt sich um
 				Konditional für Klasse 2: $ \{(likes(U,V))[0.578] <((U \neq a \land V \neq a) \land U \neq V)>\} $\\
 				Konditional für Klasse 3: $ \{(likes(U,V))[0.050] <((U = a \lor V = a)\land U \neq V)>\} $\\
 			\end{Bsp} 
-			\begin{Bsp}[Konditionale Generalisierung für mehrere Klassen am Beispiel "{}ColdSpez"{}]
+			\begin{Bsp}[Konditionale Generalisierung für mehrere Klassen am Beispiel "{}ColdSpez"{}] \index{Generalisierung ! konditional}
 			Klasse 1: $ { contact(a,a), contact(b,b), contact(c,c)} $
 			Klasse 2: $ {contact(c,b), contact(b,c)} $
 			Klasse 3: $ {likes(a,c), likes(a,b), likes(b,a), likes(c,a)} $
@@ -1812,14 +1834,14 @@ Das Konditional für die Klasse ist sehr trivial zu erzeugen. Es handelt sich um
 			Konditional für Klasse 2: $ \{(contact(X,Y))[0.578] <((X \neq anna \land Y \neq anna) \land X \neq Y)>\} $\\
 			Konditional für Klasse 3: $ \{(contact(X,Y))[0.050] <((X = anna \lor Y = anna)\land X \neq Y)>\} $\\
 		\end{Bsp} 
-	\textcolor{green}{
+
 			\item mehr als eine spezifische Konstante:\\
 			Die 
-			TODO}
+			TODO
 		\end{itemize}
 	\end{itemize}
 \end{itemize}
-}
+
 \chapter{Entwicklungsphasen}\label{Dok}
 \section{Vorüberlegungen}
 Zur Bearbeitung der Aufgabe war es notwendig, sich intensiv mit der Aufgabenstellung und der angegebenen Primärliteratur auseinander zu setzen. Dies führte dazu, weitere Quellen kennenzulernen. Daneben war das Studium der Bibliothek Log4KR von grundlegender Bedeutung. 
@@ -2010,10 +2032,10 @@ Sei $ C $ ein Konditional, $ \cal{V} $ eine Menge von Variablen, $ Gr $ ein Grun
 \end{enumerate}
 
 \label{general}
-\section{Funktionsweise der Generalisierung}
-\subsubsection{Positive Generalisierung}
+\section{Funktionsweise der Generalisierung} \index{Generalisierung}
+\subsubsection{Positive Generalisierung} \index{Generalisierung ! positiv}
 Klassen vom Konditionalen werden positiv generalisiert indem zur Erzeugung des Constraints für alle Variablen der Anfrage mit den jeweiligen dazugehörigen Konstanten des Konditionals ein Constraint der Gleichheit erzeugt wird und diese konjunktiv verknüpft werden. Diese so erzeugten Constraints werden wiederum zu einer disjunktiven Constraint Formel der Klasse verknüpft.
-\subsubsection{Negative Generalisierung}
+\subsubsection{Negative Generalisierung} \index{Generalisierung ! negativ}
 Im Falle der negativen Generalisierung verhält sich alles etwas komplizierter.
 \\TODO
 
@@ -2031,17 +2053,17 @@ Aus diesem Modell lassen sich jetzt die Wahrscheinlichkeiten für jedes Grundkon
 Anschließend werden die Konditionale gemäß ihrer Wahrscheinlichkeit so in Äquivalenzklassen zusammengefasst, dass Grundkonditionale mit gleicher Wahrscheinlichkeit in einer gemeinsamen Klasse sind. 
 
 Danach erfolgt der Generalisierungsprozess.
-Bei der positiven Generalisierung erzeugt man für alle Variablen der Anfrage und alle Konstanten des Grundkonditionals erzeugt man einen Constraint. Bei diesem Constraint handelt sich um eine logische Formel: eine Disjunktion von Konjunktionen von Constraints der Gleichheit. Für jedes Grundkonditional wird für jede Variable der Anfrage wird mit der zugehörigen Konstante des Grundkonditionals ein Constraint der Gleichheit generiert. Diese Constraints werden dann für jede Grundinstanz konjunktiv verknüpft und die daraus entstehenden Formeln werden disjunktiv zu einem Constraint der Klasse verknüpft.
+Bei der positiven Generalisierung \index{Generalisierung ! positiv}  erzeugt man für alle Variablen der Anfrage und alle Konstanten des Grundkonditionals erzeugt man einen Constraint. Bei diesem Constraint handelt sich um eine logische Formel: eine Disjunktion von Konjunktionen von Constraints der Gleichheit. Für jedes Grundkonditional wird für jede Variable der Anfrage wird mit der zugehörigen Konstante des Grundkonditionals ein Constraint der Gleichheit generiert. Diese Constraints werden dann für jede Grundinstanz konjunktiv verknüpft und die daraus entstehenden Formeln werden disjunktiv zu einem Constraint der Klasse verknüpft.
 
 Das liefert zwar nicht das in der Aufgabe erwartete Ergebnis, dient aber der Annäherung.\\
-Bei der negativen Generalisierung sortiert man die Klassen der Größe nach, d.h. der Anzahl der enthaltenen Grundkonditionale nach. Wenn die größte Klasse mehr Elemente enthält als die Summe aller kleineren Klassen, wird ein Constraint in Form einer zusammengesetzten Formel als Konjunktion von Constraints der Gleichheit für alle Variablen der Anfrage und alle dazugehörigen Konstanten der kleineren Klassen erzeugt. Für die kleineren Klassen wird dann wiederum eine positive Generalisierung notwendig.
+Bei der negativen Generalisierung \index{Generalisierung ! negativ} sortiert man die Klassen der Größe nach, d.h. der Anzahl der enthaltenen Grundkonditionale nach. Wenn die größte Klasse mehr Elemente enthält als die Summe aller kleineren Klassen, wird ein Constraint in Form einer zusammengesetzten Formel als Konjunktion von Constraints der Gleichheit für alle Variablen der Anfrage und alle dazugehörigen Konstanten der kleineren Klassen erzeugt. Für die kleineren Klassen wird dann wiederum eine positive Generalisierung \index{Generalisierung ! negativ} notwendig.
 
 Im Anschluss sind die Constraints noch logisch zu minimieren bzw. zu optimieren.\\
 Ein darauffolgender Vergleich liefert das bestmöglichste Konditional.
 \\TODO logische Optimierung
 \\TODO Vergleich
 
-Es wird im Zuge der Generaliserung die Anzahl der Klassen betrachtet. Handelt es sich um eine einzige Klasse, d.h. die dazugehörende Wahrscheinlichkeit ist gleich für alle Grundkonditionale, wird das relationale Konditional mit der berechneten Wahrscheinlichkeit ausgegeben.
+Es wird im Zuge der Generalisierung  \index{Generalisierung} die Anzahl der Klassen betrachtet. Handelt es sich um eine einzige Klasse, d.h. die dazugehörende Wahrscheinlichkeit ist gleich für alle Grundkonditionale, wird das relationale Konditional mit der berechneten Wahrscheinlichkeit ausgegeben.
 
 Gibt es zwei Klassen, so ist zu betrachten, wie viele Elemente sich in der jeweiligen Klasse befinden. Enthält jede Klasse nur je ein Grundkonditional wird dieses für die Klasse mit seiner berechneten Wahrscheinlichkeit ausgegeben.
 
@@ -2106,14 +2128,14 @@ Hat die Prämisse die Wahrscheinlichkeit Null, so würde die Berechnung des bedi
 			Klasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$
 		\end{quote}
 		
-		\item Generalisierung der Äquivalenzklassen.
+		\item Generalisierung der Äquivalenzklassen. \index{Generalisierung}
 		\begin{quote}
 			
 			
-			Positive Generalisierung:\\
+			Positive Generalisierung:\\  \index{Generalisierung ! positiv}
 			$ (flies(X)[0.0], X=Tweety) $\\
 			$ (flies(X)[0.664], X=Bully \lor  X=Sylvester \lor X=Kirby)) $\\
-			Negative Generalisierung:\\
+			Negative Generalisierung:\\  \index{Generalisierung ! negativ}
 			$ (flies(X)[0.0], X=Tweety) $\\
 			$ (flies(X)[0.664] X \neq Tweety) $\\
 			Logische Minimierung des Constraints\\
@@ -2181,13 +2203,13 @@ Die Vorgehensweise des Algorithmus wird wie folgt anhand des einfachen Beispiels
 		Klasse 2: $\{(mag(a, c))[0.05], (mag(a, b))[0.05], (mag(c, a))[0.05], (mag(b, a))[0.05]\}$\\
 		Klasse 3: $\{(mag(c, b))[0.59](mag(b, c))[0.59]\}$
 		\end{quote}
-		\item Generalisierung der Äquivalenzklassen.
+		\item Generalisierung der Äquivalenzklassen.  \index{Generalisierung}
 		\begin{quote}
-		Positive Generalisierung:\\
+		Positive Generalisierung:\\  \index{Generalisierung ! positiv}
 		 $ (mag(X, Y))[0.0], (X=a \land Y= a) \lor (X=b \land Y= b) \lor (X=c \land Y=c)) $\\
 		 $(mag(X, Y)[0.05],(((X=a \land Y= c) \lor (X=a \land Y= b)) \lor (X=c \land Y=a))) $\\
 		  $(mag(X, Y)[0.59],((X=c \land Y= b) \lor (X=b \land Y= c) ) $\\
-		Negative Generalisierung:\\
+		Negative Generalisierung:\\  \index{Generalisierung ! negativ}
 	 	 $ (mag(X, Y))[0.0], (X=Y)  $\\
 		 $(mag(X, Y)[0.05],((X=a \land Y \neq a) \lor (X \neq a \land Y= a)) $\\
 		 $(mag(X, Y)[0.59],((X \neq a \land Y \neq a) \land X \neq Y) $\\
@@ -2483,12 +2505,14 @@ Diese wurde ergänzt.\\
 
 \chapter{Beispiele}
 \label{examples}
-\textcolor{blue}{
-\textbf{Vorbemerkung}\\
+
+\textbf{Vorbemerkung}
+
+\noindent
 Die folgenden Beispiele dienten der Gewinnung statistisch relevanten Materials und um die Problematik der Aufgabenstellung näher betrachten und erläutern zu können. Dabei wurden die Wahrscheinlichkeiten unter Verwendung von Log4KR berechnet. Die Eingabe der Wissensbasis erfolgte in der für Log4KR verwendbaren Form der FO-PCL Syntax. Zunächst wurden die Konditionale der Wissensbasis grundiert und deren jeweilige Wahrscheinlichkeit berechnet. Bei größeren Beispielen wurde hier auf die Ausgabe der Grundkonditionale aus Gründen der Übersichtlichkeit verzichtet.
 Es wurden verschiedene Anfragen an die jeweilige Wissensbasis gestellt, die ebenso grundiert und mit der berechneten Wahrscheinlichkeit versehen wurden.
-Anschließend wurde die angestrebte Ausgabe \footnotetext{Unter der angestrebten Ausgabe im Sinne dieser Arbeit ist das Ergebnis eines subjektiven Prozesses der Betrachtung der Klassen der Generierung eines möglichst allgemeinen Konditionals zu verstehen. Das generierte Konditional sollte dabei intersubjektiv als möglichst allgemein akzeptiert werden.} generiert. 
-}
+Anschließend wurde die angestrebte Ausgabe \index{angestrebte Ausgabe} generiert. 
+
 \section{Birds} Erläuterungen s. \ref{BBirds}
 \label{Birds}
 \lstinputlisting{Examples/Birds.txt}
@@ -2575,19 +2599,6 @@ Anschließend wurde die angestrebte Ausgabe \footnotetext{Unter der angestrebten
 \lstinputlisting{Examples/Misanthrope.txt}
 \newpage
 
-\color{blue!40!black!40!green}{
-\section{Misanthrope2Spez} Erläuterungen s. \ref{BMisanthrope2Spez}
-\label{Misanthrope2Spez}
-\lstinputlisting{Examples/Misanthrope2Spez.txt}
-}
-\newpage
-
-\color{blue!40!black!40!green}{
-	\section{Misanthrope3Spez} Erläuterungen s. \ref{BMisanthrope3Spez}
-	\label{Misanthrope3Spez}
-	\lstinputlisting{Examples/Misanthrope3Spez.txt}
-}
-\newpage
 
 
 \section{MisanthropeIrreflexive} Erläuterungen s. \ref{BMisanthropeIrreflexive}
@@ -2629,6 +2640,82 @@ Anschließend wurde die angestrebte Ausgabe \footnotetext{Unter der angestrebten
 \label{SportExNFam}
 \lstinputlisting{Examples/SportExNFam.txt}
 
+
+\newpage
+
+
+\textcolor{blue}{
+\chapter{Verworfene Beispiele}
+\label{examplesdep}
+\textbf{Vorbemerkung}
+}
+\textcolor{blue}{
+\noindent
+Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR keine entsprechenden Berechnungsmöglichkeiten zur Verfügung gestellt hat. Sie mussten daher verworfen werden. Die entsprechenden Fehlermeldungen sind unten stehend aufgeführt.
+}
+\section{Misanthrope2Spez} Erläuterungen s. \ref{BMisanthrope2Spez}
+\label{Misanthrope2Spez}
+\lstinputlisting{Examples/Misanthrope2Spez.txt}
+
+\newpage
+
+
+\section{Misanthrope3Spez} Erläuterungen s. \ref{BMisanthrope3Spez}
+\label{Misanthrope3Spez}
+\lstinputlisting{Examples/Misanthrope3Spez.txt}
+
+\newpage
+
+\newpage
+
+\chapter{Änderungen gegenüber der letzten Version (wie besprochen)}
+
+\setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
+\addtolength{\currentLongTableWidth}{-4\tabcolsep} %subtrahiere -8\cdot textbreite von asdf, 2 Abstände pro Zelle * Anzahl der Spalte
+\begin{footnotesize}
+	\begin{longtable}{ | p {0.5\currentLongTableWidth} | p {0.5\currentLongTableWidth}  |}
+		\hline
+		\multicolumn{2}{|c|}{\textbf{Änderungen in der Version}}\\\hline\hline
+		\hline
+		\textbf{Besprochene Änderung} 
+		& \textbf{Umsetzung} 
+	
+		
+		\endhead
+		\hline
+		\endfoot
+		\endlastfoot
+		\hline
+		der Index sollte alle wichtigen Begriffe enthalten: \newline angestrebte Ausgabe \newline Generalisierung \newline Äquivalenzklassen
+		& sh.  Index \\
+		\hline
+		Begriffe sollten vor der ersten Anwendung definiert sein; dazu gehören: \newline angestrebte Ausgabe \newline Generalisierung \newline Äquivalenzklassen
+		&  sh. \newline \newline \ref{angestrebte Ausgabe} \newline \ref{Generalisierung}\\
+		\hline
+		Versionsnummer (Datum auf Deckblatt)
+		& sh. Deckblatt \\
+		\hline
+		Versionenraumverfahren aufführen, ausführen und auf Verwendbarkeit prüfen
+		& sh\\
+		\hline
+		U ungleich V bei Bspen. 6.2.2ff einfügen
+		& sh.\ref{Zielbeschreibung} \\
+		\hline
+		Fazit optisch kenntlich machen
+		& sh. \\
+		\hline
+		Bei den Beispielen, die Log4KR nicht verarbeiten kann, dies als Feststellung notieren
+		& sh. \ref{examplesdep} \\
+		\hline
+		logische Generalisierung ausbauen
+		& sh. \\
+		\hline
+		Idee: Flussplan fertig machen und ins Dokument einbauen
+		& sh.  \\
+		\hline
+		\caption{Änderungen gegenüber der letzten Version}
+	\end{longtable}
+\end{footnotesize}
 
 \newpage
 

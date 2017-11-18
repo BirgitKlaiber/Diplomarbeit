@@ -76,20 +76,25 @@ Angestrebte Ausgabe:
 Anfrage: (contact(X,Y) * cold(Y))
 
 Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
-(contact(carl,anna) * cold(anna))	[0.03588]
+
 (contact(bob,bob) * cold(bob))		[0.00000]
-(contact(bob,carl) * cold(carl))	[0.02068]
-(contact(anna,carl) * cold(carl))	[0.03588]
 (contact(anna,anna) * cold(anna))	[0.00000]
 (contact(carl,carl) * cold(carl))	[0.00000]
-(contact(anna,bob) * cold(bob))		[0.03588]
-(contact(bob,anna) * cold(anna))	[0.03588]
+
+(contact(bob,carl) * cold(carl))	[0.02068]
 (contact(carl,bob) * cold(bob))		[0.02068]
 
+(contact(carl,anna) * cold(anna))	[0.03588]
+(contact(anna,carl) * cold(carl))	[0.03588]
+(contact(anna,bob) * cold(bob))		[0.03588]
+(contact(bob,anna) * cold(anna))	[0.03588]
+
 Angestrebte Ausgabe:
-(contact(X,Y) * cold(Y))[0.036]<((X = anna + Y = anna) * X != Y)>
-(contact(X,Y) * cold(Y))[0.021]<((X != anna * Y != anna) * X != Y)>
 (contact(X,Y) * cold(Y))[0.0]<X = Y>
+(contact(X,Y) * cold(Y))[0.021]<((X != anna * Y != anna) * X != Y)>
+(contact(X,Y) * cold(Y))[0.036]<((X = anna + Y = anna) * X != Y)>
+
+
 
 
 

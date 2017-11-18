@@ -1447,7 +1447,7 @@ Die Aufgabenstellung verlangt die Bildung eines möglichst allgemeinen Kondition
 
 \textcolor{blue}{
 \subsection{Unausführbare Beispiele} \label{Beispiele unausfuehrbar} 
-Beispiele, die mehr als eine spezifische Konstante \index{Konstante ! spezifisch} enthielten, sh. \ref{Beispiele unausfuehrbar}, konnte Log4KR nicht verarbeiten, daher konnten leider keine Forschungen in diese Richtung unternommen werden, obwohl dies sehr interessant im Hinblick auf Interaktionen gewesen wäre. 
+Beispiele, die mehr als eine spezifische Konstante \index{Konstante ! spezifisch} enthielten, sh. \ref{examplesdep}, konnte Log4KR nicht verarbeiten, daher konnten leider keine Forschungen in diese Richtung unternommen werden, obwohl dies sehr interessant im Hinblick auf Interaktionen gewesen wäre. 
 }
 
 \section{Interaktionen}
@@ -1502,7 +1502,7 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 \end{footnotesize}
 
 
-\subsubsection {Eine Äquivalenzklassen und die Anfrage ist eine (nichtatomare, logische) Formel} 
+\subsubsection {Eine Äquivalenzklassen und die Anfrage ist eine (nichtatomare, logische) Formel} \label{Formel_eineKlasse}
 
 \setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
 \addtolength{\currentLongTableWidth}{-4\tabcolsep} %subtrahiere -8\cdot textbreite von asdf, 2 Abstände pro Zelle * Anzahl der Spalte
@@ -1544,7 +1544,7 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 
 \subsection{Zwei Äquivalenzklassen}
 
-\subsubsection {Zwei Äquivalenzklassen und die Anfrage ist ein Atom}
+\subsubsection {Zwei Äquivalenzklassen und die Anfrage ist ein Atom} \label{Atom_zweiKlassen}
 
 	Zwei Äquivalenzklassen ergeben sich bei einstelligen Prädikaten wenn bei der Grundierung Variablen mit spezifischen Konstanten belegt werden. \\
 	Bei zweistelligen Prädikaten kommt es zu zwei Klassen, wenn keine spezifischen Konstanten im Grundkonditional vorkommen, aber beide Variablen mit der gleichen Konstante belegt werden.\\
@@ -1609,7 +1609,7 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 
 
 
-\subsubsection{Zwei Äquivalenzklassen und die Anfrage ist eine (nichtatomare, logische) Formel}
+\subsubsection{Zwei Äquivalenzklassen und die Anfrage ist eine (nichtatomare, logische) Formel} \label{Formel_zweiKlassen}
 
 \setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
 \addtolength{\currentLongTableWidth}{-4\tabcolsep} %subtrahiere -8\cdot textbreite von asdf, 2 Abstände pro Zelle * Anzahl der Spalte
@@ -1632,8 +1632,8 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 		& $(flies(X)|isBird(X)), \newline (isBird(X)|flies(X)) \newline (flies(X)|isBird(X)), \newline (isBird(X)|flies(X)) \newline (cold(X) | susceptible(Y) $\\
 		\hline
 		\textbf{zweistellig}
-		& Friendship \ref{Friendship} \newline MisanthropeIrreflexive \ref{MisanthropeIrreflexive}
-		& $ (likes(U,V) \land likes[V,X]) \newline  (likes(U,V) \land likes[V,U]) $
+		&  MisanthropeIrreflexive \ref{MisanthropeIrreflexive}
+		& $ (likes(U,V) \land likes[V,U]) $
 		\\
 		\hline
 		\textbf{ein- und zweistellig}
@@ -1656,17 +1656,18 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 	\item Eine Äquivalenzklasse enthält ein Konditional und die andere mehr als ein Konditional. 
 	\begin{itemize}
 		\item einstelliges Prädikat (Exemplarisch: $ flies(X) $ und $ isBird(X) $ in "{}Birds"{}, \ref{Birds}) 
-		\item zweistelliges Prädikat (Exemplarisch: $ (likes(U,V) \land likes(V,U)) $ in "{}MisanthropeIrreflexive"{} \ref{MisanthropeIrreflexive}.  
-		\item  ein- und zweistelliges Prädikat (Exemplarisch $ (contact(X,Y) \land cold(Y) $ in "{}Cold"{}, \ref{Cold} und $  (cold(X) | (contact(X,Y) \land cold(Y)) $ in "{}ColdSpez"{}, \ref{ColdSpez}     
+		\item zweistelliges Prädikat: kein Beispiel gefunden. Es dürfte für diesen Fall auch keine Beispiele geben. Das spezifische Wissen umfasst mindestens zwei Elemente, bei zweistelligen Prädikaten ergeben sich auch mindestens zwei Konditionale.
+		\item  ein- und zweistelliges Prädikat: kein Beispiel gefunden. Es gilt das oben gesagte.   
 	\end{itemize}
-	\item Jede Äquivalenzklasse enthält mehr als ein Konditional (Exemplarisch $ (contact(X,Y) \land cold(Y)) $ in "{}ColdTrans"{}, \ref{ColdTrans})
+	\item Jede Äquivalenzklasse enthält mehr als ein Konditional 
 	\begin{itemize}
-		\item 
+		\item zweistelliges Prädikat (Beispiele: $ (contact(X,Y) \land cold(Y) $ in "{}Cold"{}, \ref{Cold}$ (likes(U,V) \land likes(V,U)) $ in "{}MisanthropeIrreflexive"{} \ref{MisanthropeIrreflexive}.  
+		\item ein- und zweistelliges Prädikat(Exemplarisch $ (contact(X,Y) \land cold(Y)) $ in "{}ColdTrans"{}, \ref{ColdTrans} und  $  (cold(X) | (contact(X,Y) \land cold(Y)) $ in "{}ColdSpez"{}, \ref{ColdSpez} ) 
 	\end{itemize}
 \end{itemize}
 }
 
-\subsection{Mehr als zwei Äquivalenzklassen}
+\subsection{Mehr als zwei Äquivalenzklassen} 
 
 \setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
 \addtolength{\currentLongTableWidth}{-4\tabcolsep} %subtrahiere -8\cdot textbreite von asdf, 2 Abstände pro Zelle * Anzahl der Spalte
@@ -1705,7 +1706,8 @@ Es gibt einen Randfall, für den gilt, dass sich alle von einander in der berech
 
 \noindent
 Dies ist ein einfacher Fall und führt zur Ausgabe aller Grundkonditionale mit jeweils berechneter Wahrscheinlichkeit. Dieses Ergebnis wird erzeugt, wenn die Wissensbasis zu jeder Konstanten eine eigene Information bereit hält, die dazu führt, dass sich die Grundkonditionale voneinander unterscheiden. Ein Beispiel dafür ist "{}BirdsDiffer"{}, \ref{BirdsDiffer}.
-\paragraph{ Mehr als zwei Äquivalenzklassen und die Anfrage ist ein Atom}:\\
+\paragraph{ Mehr als zwei Äquivalenzklassen und die Anfrage ist ein Atom}: \label{Atom_mehrKlassen}\\
+\\
 \textbf{Mögliche Fallunterscheidungen:}
 \begin{itemize}
 	\item Jede Äquivalenzklasse enthält nur ein Konditional. Die Rückgabemenge besteht also lediglich aus den bedingten Konditionalen jeder Klasse. Das ist der o.g. Randfall.
@@ -1723,16 +1725,7 @@ Dies ist ein einfacher Fall und führt zur Ausgabe aller Grundkonditionale mit j
 
 
 
-\paragraph{Mehr als zwei Äquivalenzklassen und die Anfrage ist eine (nichtatomare, logische) Formel}
-
-
-\textcolor{blue}{
-\textbf{Mögliche Fallunterscheidungen:}\label{Fallunterscheidung Formel MehrAequi}
-\begin{itemize}
-	\item TODO
-\end{itemize}
-}
-
+\paragraph{Mehr als zwei Äquivalenzklassen und die Anfrage ist eine (nichtatomare, logische) Formel} \label{Formel_mehrKlassen}
 \setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
 \addtolength{\currentLongTableWidth}{-4\tabcolsep} %subtrahiere -8\cdot textbreite von asdf, 2 Abstände pro Zelle * Anzahl der Spalte
 \begin{footnotesize}
@@ -1750,23 +1743,45 @@ Dies ist ein einfacher Fall und führt zur Ausgabe aller Grundkonditionale mit j
 		\endlastfoot
 		\hline
 		\textbf{einstellig} 
-		& Birds \ref{Birds} \newline \newline Birds2Birds \ref{Birds2Birds}
-		& ($flies(X)|(isBird(X)), \newline (isBird(X)|(flies(X)) \newline (flies(X)|(isBird(X)), \newline (isBird(X)|(flies(X))$\\
+		& kein Beispiel gefunden
+		& 
+		\\
 		\hline
 		\textbf{zweistellig}
 		&  kein Beispiel gefunden
-		&
+		& 
 		\\
 		\hline
 		\textbf{ein- und zweistellig}
-		& Cold \ref{Cold} \newline ColdSpez \ref{ColdSpez} \newline ColdTrans \ref{ColdTrans} \newline ColdTransSpez \ref{ColdTransSpez}
-		& $(contact(X,Y) \land (cold(Y)))$ \newline $ (cold(X)|contact(X,Y) \land cold(Y) $ \newline $ (cold(Z) | contact(X,Y) \land cold(X) $ \newline $ (cold(Z) | ((contact(X,Y) \land contact(Y,Z)) \land cold(X)) \land cold(Z) )$
-		\\
+		& ColdSpez \ref{ColdSpez} \newline ColdTrans \ref{ColdTrans} \newline ColdTransSpez \ref{ColdTransSpez}
+		&  $ (contact(X,Y) \land cold(Y) $ \newline $ (cold(X) | suscesptible(Y)) $ \newline $ (cold(Z) | contact(X,Y) \land cold(X) $ \newline $ (cold(X) | contact(Y,Z) \land cold(Y) )$ \newline $ (cold(X) | ((contact(X,Y) \land contact(Y,Z)) \land cold(Y)) )$ \newline $ (cold(Z) | ((contact(X,Y) \land contact(Y,Z)) \land cold(X)) )$  \\
 		
 		\hline
 		\caption{Übersicht 6 zur Auswertung der Klassen}
 	\end{longtable}
 \end{footnotesize}
+
+
+\textcolor{blue}{
+	\\
+\textbf{Mögliche Fallunterscheidungen:}\label{Fallunterscheidung Formel MehrAequi}
+	\begin{itemize}
+		\item Jede Äquivalenzklasse enthält nur ein Konditional. Das ist ein Randfall. Die Rückgabemenge besteht aus den bedingten Konditionalen jeder Klasse. Beispiel $ (flies(X)) $ in "{}Birds"{}  
+		\item Eine Äquivalenzklasse enthält ein Konditional, mindestens eine andere Klasse mehr als ein Konditional
+		\begin{itemize}
+			\item einstelliges Prädikat: kein Beispiel gefunden.
+			\item zweistelliges Prädikat: kein Beispiel gefunden.
+			\item ein- und zweistelliges Prädikat: 
+		\end{itemize}
+		\item Alle Äquivalenzklassen enthalten mehr als ein Konditional
+			\begin{itemize}
+			\item einstelliges Prädikat: kein Beispiel gefunden.
+				\item zweistelliges Prädikat: kein Beispiel gefunden.
+			\item ein- und zweistelliges Prädikat: Ein exemplarisches Beispiel hierfür findet sich in "{}ColdSpez"{} \ref{ColdSpez} für die Anfrage  $ (contact(X,Y) \land cold(Y) $.
+		\end{itemize}
+	\end{itemize}
+}
+
 
 
 
@@ -1787,6 +1802,8 @@ Das Ziel des Algorithmus ist die Generierung einer Rückgabemenge von bedingten 
 	\label{Ausgabe_Birds}
 
 	Beim Beispiel "{}Birds"{} ergeben sich für die Anfrage nach der Wahrscheinlichkeit , mit der X fliegt (flies(X)) zwei Klassen, die folgendermaßen aussehen:\\
+	
+	\noindent
 			Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
 			Klasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$\\
 			\\
@@ -1805,6 +1822,8 @@ Und um ein Beispiel mit zweistelligen Prädikaten zu betrachten:
 		Klasse 1: $ \{(likes(c,b))[0.578], (likes(b,c))[0.587]\} $\\
 		Klasse 2: $ \{(likes(a,a))[0.0], (likes(b,b))[0.0], (likes(c,c))[0.0]\} $\\
 		Klasse 3: $ \{(likes(a,c))[0.050], (likes(a,b))[0.050], (likes(b,a))[0.050], (likes(c,a))[0.050]\} $\\
+		
+		\noindent
 		Die erwünschte Ausgabe würde in diesem Fall so aussehen:\\
 		Konditional für Klasse 1: $ \{(likes(U,V))[0.578] <((U \neq a \land V \neq a) \land U \neq V)>\} $\\
 		Konditional für Klasse 2: $ \{(likes(U,V))[0.0] <U = V>\} $\\
@@ -1819,11 +1838,25 @@ Und um ein Beispiel mit zweistelligen Prädikaten zu betrachten:
 Ein Möglichkeit, eine Klasse zu generalisieren, also die Konditionale der Klasse zu einem Konditional zusammen zu fassen, ist die positive Generalisierung. Bei der positiven Generalisierung wird zu dem unbedingten Konditional die Wahrscheinlichkeit sowie ein Constraint hinzugefügt, der die je Klasse die Belegungen der Variablen mit Konstanten kanonisch aufzählt. 
 Das würde für die o.g. Beispiele wie folgt aussehen:\\
 \begin{Bsp}[Positive Generalisierung am Beispiel "{}Birds"{}, s. \ref{Ausgabe_Birds} und \ref{Birds}] \index{Generalisierung ! positiv}
+	Es ergibt sich:\\
+	
+	\noindent
+	Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
+	Klasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$\\
+	\\
 	Konditional für Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
 	Konditional für Klasse 2: $\{(flies(X))[0.66]\} <((X = Bully \lor X = Sylvester) \lor X = Kirby)>$\\
 \end{Bsp}
 \begin{Bsp}[Positive Generalisierung am Beispiel "{}Misanthrope"{}, s. \ref{Ausgabe_Misanthrope} und \ref{Misanthrope}]
 	\index{Generalisierung ! positiv}
+	Es ergibt sich:\\
+	
+	\noindent
+	Klasse 1: $ \{(likes(c,b))[0.578], (likes(b,c))[0.587]\} $\\
+	Klasse 2: $ \{(likes(a,a))[0.0], (likes(b,b))[0.0], (likes(c,c))[0.0]\} $\\
+	Klasse 3: $ \{(likes(a,c))[0.050], (likes(a,b))[0.050], (likes(b,a))[0.050], (likes(c,a))[0.050]\} $\\
+
+	\noindent
 	Konditional für Klasse 1: $ \{(likes(U,V))[0.578] <((U = c \land V = b) \lor (U = b \land V = c)>\} $\\
 	Konditional für Klasse 2: $ \{(likes(U,V))[0.0] <(((U = a \land V = a) \lor (U = b \land V = b)) \lor (U = c \land V = c)) >\} $\\
 	Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
@@ -1843,24 +1876,41 @@ Der Vorteil der positiven Generalisierung liegt darin, dass einfach zu realisier
 Unter einer negativen Generalisierung soll eine Generalisierung verstanden werden, bei der der Constraint aus Ausnahmen der Klasse generiert wird. Die Klassen sollen der Größe nach, in diesem Fall der Anzahl der Konditionale, verglichen werden. Aus den kleineren Klassen soll, wenn sie in der Summe weniger Elemente enthalten ein Constraint für die größte Klasse gebildet werden. Die anderen Klassen sollen positiv generalisiert werden, s. \ref{PositiveGeneralisierung}.\\
 Zum besseren Verständnis der Vorgehensweise soll diese an Beispielen demonstriert werden:
 \begin{Bsp}[Negative Generalisierung am Beispiel "{}Birds"{}, s. \ref{Ausgabe_Birds}]
-	\label{Bsp:Neg_Gen_Birds}
+	\label{Bsp:Neg_Gen_Birds} Für die Anfrage $ (flies(X)) $ ergibt sich: \\
+	
+	\noindent
+	Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
+	Klasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$\\
+	\\
 Konditional für Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
 Konditional für Klasse 2: $\{(flies(X))[0.66]\} <X \neq Tweety>$\\
 \end{Bsp}
  
 
 \begin{Bsp}[Negative Generalisierung am Beispiel "{}Misanthrope"{}, s. \ref{Ausgabe_Misanthrope} und \ref{Misanthrope}]
-	\index{Generalisierung ! negativ}
-	Konditional für Klasse 1: $ \{(likes(U,V))[0.578] <((U = c \land V = b) \lor (U = b \land V = c)>\} $\\
-	Konditional für Klasse 2: $ \{(likes(U,V))[0.0] <(((U = a \land V = a) \lor (U = b \land V = b)) \lor (U = c \land V = c)) >\} $\\
+	\index{Generalisierung ! negativ} Negative Generalisierung für die Anfrage  $ (likes(U,V))$ :\\
+	
+	\noindent
+	Klasse 1: $ { likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]} $\\
+	Klasse 2: $ {likes(c,b)[0.578], likes(b,c)[0.578]} $\\
+	Klasse 3: $ {likes(a,c)[0.05], likes(a,b)[0.05], likes(b,a)[0.05], likes(c,a)[0.05]} $\\
+	
+	\noindent
+	Konditional für Klasse 1: $ \{(likes(U,V))[0.0] <(((U = a \land V = a) \lor (U = b \land V = b)) \lor (U = c \land V = c)) >\} $\\
+	Konditional für Klasse 2: $ \{(likes(U,V))[0.578] <((U = c \land V = b) \lor (U = b \land V = c)>\} $\\	
 	Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
 	\end{Bsp}
-Wie man unschwer erkennen kann, ergibt sich beim Beispiel "{}Misanthrope"{} für die Anfrage (likes(U,V)) keine Veränderung gegenüber der positiven Generalisierung. Das liegt daran, dass die kleineren Klassen in der Summe mehr Elemente enthalten als die größte Klasse.\\ 
+Wie man unschwer erkennen kann, ergibt sich beim Beispiel "{}Misanthrope"{} für die Anfrage $ (likes(U,V))$  keine Veränderung gegenüber der positiven Generalisierung. Das liegt daran, dass die kleineren Klassen in der Summe mehr Elemente enthalten als die größte Klasse.\\ 
 Anders verhält es sich beim Beispiel "{}cold"{} für die Anfrage contact(X,Y):
 \begin{Bsp}[Negative Generalisierung am Beispiel "{}Cold"{}, s. \ref{Cold} ]:
 	\index{Generalisierung ! negativ}
+	Für die Anfrage contact(X,Y) ergibt sich:\\
+	
+	\noindent
 	Klasse 1: $ \{(contact(anna,anna))[0.0], (contact(bob,bob))[0.0],(contact(carl, carl))[0.0]\} $\\
 	Klasse 2: $ \{(contact(anna,bob)[0.486], contact(bob,anna)[0.486], contact(carl,bob)[0.486], contact(bob,carl)[0.486], contact(anna,carl)[0.486],contact(carl,anna)[0.486],\} $\\
+	
+	\noindent
 	Konditional für Klasse 1: $ \{(contact(X,Y))[0.0]<(((X = anna \land Y = anna) \lor (X = bob \land Y = bob)) \lor (X = carl \land Y = carl))>\} $\\
 	Konditional für Klasse 2: $ \{(contact(X,Y))[0.486]<(((X \neq anna \land Y \neq anna) \land (X \neq bob \land Y \neq bob)) \land (X \neq carl \land Y \neq carl))>\} $\\
 \end{Bsp}
@@ -1871,18 +1921,17 @@ Anders verhält es sich beim Beispiel "{}cold"{} für die Anfrage contact(X,Y):
 Obwohl die negative Generalisierung für den Fall einstelliger Prädikate zum gewünschten Ergebnis kam und auch wie für die positive Generalisierung gilt, dass sie in jedem Fall zuverlässig und richtig arbeitet, für den Fall zweistelliger Prädikate kommt es zu keinem übersichtlicheren Ergebnis als bei der positiven Generalisierung. Es ist also nach Alternativen zu forschen.
 
 \section{Idee: Logische Generalisierungsoptimierung} \index{Logische Generalisierungsoptimierung} \label{Logische Genopt}
-Diese Idee baut auf der positiven und der negativen Generalisierung auf. Es werden beide Generalisierungen erzeugt und der generierte Constraint in jeder der beiden Alternativen logisch optimiert. Die beiden Ausdrücke werden im einfachsten Fall über die Länge des Constraints verglichen und der kürzere gewählt.
-
 \textcolor{blue}{
 \begin{Def}[Logische Generalisierungsoptimierung]
-	Unter der logischen Generalisierungsoptimierung versteht man den Prozess TODO
+	Unter der logischen Generalisierungsoptimierung versteht man den Prozess der Erzeugung eines logisch minimierten Konditionals. Logisch minimiert ist ein Konditional genau dann, wenn der Constraint logisch minimiert ist.  
 \end{Def}
+Diese Idee baut auf der positiven und der negativen Generalisierung auf. Es werden beide Generalisierungen erzeugt und der generierte Constraint in jeder der beiden Alternativen logisch optimiert. Die beiden Ausdrücke werden im einfachsten Fall über die Länge des Constraints verglichen und der kürzere gewählt.
 }
 
 \begin{itemize}
-	\item Positive Generalisierung \index{Generalisierung ! positiv}
-	\item Negative Generalisierung \index{Generalisierung ! negativ}
-	\item Logische Optimierung
+	\item Positive Generalisierung \index{Generalisierung ! positiv}, \ref{PositiveGeneralisierung}
+	\item Negative Generalisierung \index{Generalisierung ! negativ}, \ref{NegativeGeneralisierung}
+	\item Logische Optimierung TODO
 	\item Generalisierungsvergleich
 \end{itemize}
 
@@ -1894,9 +1943,10 @@ In den folgenden Kapiteln werden die Regeln erstellt nach denen die Konditionale
 \subsection{Erzeugung der Konditionale für die Klassen}
 \subsubsection {Die Anfrage ist ein Atom} 
 \paragraph{ Eine Äquivalenzklasse}
-Die Experimente hierzu findet man unter \ref{Atom_eineKlasse}.\\
+Eine Auflistung der Beispiele hierzu findet man unter \ref{Atom_eineKlasse}.\\
 Das Konditional für die Klasse ist sehr trivial zu erzeugen. Es handelt sich um das unbedingte Konditional mit der dazugehörigen Wahrscheinlichkeit und ohne einen Constraint.
 \paragraph{ Zwei Äquivalenzklassen}
+Eine Auflistung der  Experimente hierzu findet man unter \ref{Atom_zweiKlassen}.
 \begin{itemize}
 \item Jede Äquivalenzklasse enthält nur ein Konditional. Das Konditional für jede Klasse ist trivialerweise das bedingte Konditional, also das Konditional mit Wahrscheinlichkeit, aber ohne Constraint. Im Fall "{}Birds2Birds"{} \ref{Birds2Birds} würden sich für die Anfrage $flies(X)$ die beiden Konditionale $ (flies(Bully)[0.663]) $ und $ (flies(Tweety))[0.0] $ ergeben. Die Rückgabemenge besteht also lediglich aus den bedingten Konditionalen jeder Klasse.
 \item Eine Äquivalenzklasse enthält ein Konditional, die andere mehr als ein Konditional
@@ -1906,63 +1956,164 @@ Das Konditional für die Klasse ist sehr trivial zu erzeugen. Es handelt sich um
 	\item zweistelliges Prädikat:\\
 	Zwei Äquivalenzklassen dürften sich bei zweistelligen Prädikaten nur dann ergeben, wenn bereits die Anfrage ein spezifisches Konditional enthält. Das ist ein Randfall, der hier nicht weiter betrachtet werden soll. 
 \end{itemize}
-\item Beide Äquivalenzlassen enthalten mehr als ein Konditional
+\item Beide Äquivalenzklassen enthalten mehr als ein Konditional
 \begin{itemize}
 	\item {einstelliges Prädikat:}\\
 	Das ist ein Randfall, der keine nähere Betrachtung verdient.
-	\item mehrstelliges Prädikat:\\
+	\item zweistelliges Prädikat:\\
 	Auch das ist ein außergewöhnlicher Fall, der nur in der Kombination von verschiedenen Sorten und spezifischen Konstanten auftritt. Die Konditionale sind im Wege der positiven Generalisierung zu erzeugen, s. \ref{PositiveGeneralisierung}.
 	(ANMERKUNG: hier habe ich absolut keine Idee und da das ein Spezialfall ist, stelle ich diesen Fall erst einmal zurück)
 \end{itemize}
 \end{itemize}
-\paragraph{ Mehr als zwei Äquivalenzklassen}
+\paragraph{ Mehr als zwei Äquivalenzklassen} 
+Eine Auflistung der Beispiele hierzu findet man unter \ref{Atom_mehrKlassen}.\\
 \begin{itemize}
 	\item Jede Äquivalenzklasse enthält nur ein Konditional. Die Rückgabemenge besteht also lediglich aus den bedingten Konditionalen jeder Klasse; ein Constraint ist hier nicht notwendig.
-	\item Mindestens eine Äquivalenzklasse enthält ein Konditional, die anderen ein oder mehr als ein Konditional
+	\item Eine Äquivalenzklasse enthält ein Konditional, die anderen ein oder mehr als ein Konditional
 	\begin{itemize}
 		\item einstelliges Prädikat: Positive Generalisierung, \ref{PositiveGeneralisierung} \index{Generalisierung ! positiv}für die Klassen mit einem Konditional. Der Fall, dass nur eine Klasse ein Konditional enthält und alle anderen mehr, kommt nicht vor. Bei einstelligen Prädikaten kann sich eine eigene Klasse nur bei spezifischen Grundinstanzen ergeben. Dafür gibt es dann jeweils eine eigene Klasse, die generischen Grundinstanzen befinden sich in der gleichen Klasse. Wenn es zwei oder mehr Klassen mit je einem Konditional gibt, dann hängt die Vorgehensweise davon ab, ob die Anzahl der Elemente in der Klasse größer ist als die Anzahl der anderen Klassen. In diesem Fall ergibt sich das Konditional für die Klasse der generischen Grundinstanzen durch negative Generalisierung \ref{NegativeGeneralisierung} \index{Generalisierung ! negativ} über alle Konstanten der spezifischen Klassen, wenn die Summe der Konditionale der generischen Klasse höher ist als die Summe der Konditionale der spezifischen Klassen ansonsten über positive Generalisierung für die Generische Klasse. Für alle spezifischen Klassen erfolgt jeweils die positive Generalisierung . \ref{PositiveGeneralisierung} \index{Generalisierung ! positiv}. Ein Beispiel dafür ist Birds3Classes, \ref{Birds3Classes}.\\
 		\begin{Bsp}[Konditionale Generalisierung am Beispiel "{}Birds3Classes"{}]
-		Für die Anfrage $ flies(X) $ in "{}Birds3Classes"{} ergeben sich folgende Klassen:
+		Für die Anfrage $ flies(X) $ in "{}Birds3Classes"{} ergeben sich folgende Klassen:\\
+		
+		\noindent
 		Klasse 1: $ {flies(Sylvester)[0.664], flies(Kirby)[0.664]}  $\\
 		Klasse 2: $ {flies(Tweety)[0]} $\\
 		Klasse 3: $ {flies(Bully)[0.3]} $\\
+		\\
 		Das Konditional für Klasse 1: $ flies(X)[0.664]<(X = Sylvester \lor  X = Kirby)>$\\
 		Die Konditional für Klasse 2: $ flies(Tweety)[0] $\\
 		Das Konditional für Klasse 3: $ flies(Bully)[0.3] $
 		\end{Bsp}
 		\item zweistelliges Prädikat:\\ 
-		Dieser Fall soll aus der Betrachtung genommen werden; praktisch könnte er entsprechend dem Fall mit einstelligen Prädikaten behandelt werden. 
+		Dieser Fall ist nicht zu betrachten, da die Klassen bei zweistelligen Prädikaten jeweils mindestens zwei Elemente enthalten.
 			\end{itemize}
 	\item Alle Äquivalenzklassen enthalten mehr als ein Konditional
 	\begin{itemize}
 		\item einstelliges Prädikat: Der Fall kann nicht eintreten und muss daher nicht behandelt werden.  \\
-		\item mehrstelliges Prädikat:\\
+		\item zweistelliges Prädikat:\\
 		\begin{itemize}
 			\item eine spezifische Konstante:\\
 			Hier lassen sich drei Klassen unterscheiden. Eine Klasse, bei der die beiden Variablen mit der gleichen Konstante substituiert wurden. Das Konditional wird gebildet, indem man unbedingte Konditional mit der Wahrscheinlichkeit der Klasse versieht und einen Constraint der Gleichheit bildet. Eine Klasse, bei der keine der Variablen mit der spezifischen Konstante substituiert wurde. Das Konditional der wird gebildet, indem man das unbedingte Konditional mit der Wahrscheinlichkeit der Klasse versieht und einen Constraint bildet, der eine Konjunktion aus einem Constraint der Ungleichheit und einer Konjunktion von zwei Constraints der Ungleichheit mit der spezifischen Variable ist. Für die dritte Klasse wird das Konditional der Klasse gebildet in dem man das unbedingte Konditional mit der Wahrscheinlichkeit der Klasse versieht und den Constraint als Konjunktion von einem Constraint der Ungleichheit für die beiden Variablen und einer Disjunktion für einen Constraint der Gleichheit mit der spezifischen Variable für jeweils eine Konstante bildet.\\
-			\begin{Bsp}[Konditionale Generalisierung für mehrere Klassen am Beispiel "{}Misanthrope"{}] \index{Generalisierung ! konditional}
-				Klasse 1: $ { likes(a,a), likes(b,b), likes(c,c)} $
-				Klasse 2: $ {likes(c,b), likes(b,c)} $
-				Klasse 3: $ {likes(a,c), likes(a,b), likes(b,a), likes(c,a)} $
+			\begin{Bsp}[Konditionale Generalisierung für mehrere Klassen am Beispiel "{}Misanthrope"{}, \ref{Misanthrope}] \index{Generalisierung ! konditional}Die konditionale Generalisierung kommt für die Anfrage $ likes(X,Y) $ zum folgenden Ergebnis:\\
+				
+				\noindent
+				Klasse 1: $ { likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]} $\\
+				Klasse 2: $ {likes(c,b)[0.578], likes(b,c)[0.578]} $\\
+				Klasse 3: $ {likes(a,c)[0.050], likes(a,b)[0.050], likes(b,a)[0.050], likes(c,a)[0.050]} $\\
+				
+				\noindent
 				Konditional für Klasse 1: $ \{(likes(U,V))[0.0] <U = V>\} $\\
 				Konditional für Klasse 2: $ \{(likes(U,V))[0.578] <((U \neq a \land V \neq a) \land U \neq V)>\} $\\
 				Konditional für Klasse 3: $ \{(likes(U,V))[0.050] <((U = a \lor V = a)\land U \neq V)>\} $\\
 			\end{Bsp} 
-			\begin{Bsp}[Konditionale Generalisierung für mehrere Klassen am Beispiel "{}ColdSpez"{}] \index{Generalisierung ! konditional}
-			Klasse 1: $ { contact(a,a), contact(b,b), contact(c,c)} $
-			Klasse 2: $ {contact(c,b), contact(b,c)} $
-			Klasse 3: $ {likes(a,c), likes(a,b), likes(b,a), likes(c,a)} $
+			\begin{Bsp}[Konditionale Generalisierung für mehrere Klassen am Beispiel "{}ColdSpez"{}, \ref{ColdSpez}] \index{Generalisierung ! konditional}Die konditionale Generalisierung kommt für die Anfrage $ contact(X,Y) $ zum folgenden Ergebnis:\\
+				\\
+			Klasse 1: $ { contact(anna,anna), contact(bob,bob), contact(carl,carl)[0.0]} $\\
+			Klasse 2: $ {contact(carl,bob)[0.486], contact(bob,carl)[0.486]} $\\
+			Klasse 3: $ {contact(bob,anna)[0.068], contact(anna, carl)[0.068], contact(anna, bob)[0.068], contact(carl, anna)[0.068]} $\\
+		
+		
+			\noindent
 			Konditional für Klasse 1: $ \{(contact(X,Y))[0.0] <X = Y>\} $\\
-			Konditional für Klasse 2: $ \{(contact(X,Y))[0.578] <((X \neq anna \land Y \neq anna) \land X \neq Y)>\} $\\
-			Konditional für Klasse 3: $ \{(contact(X,Y))[0.050] <((X = anna \lor Y = anna)\land X \neq Y)>\} $\\
+			Konditional für Klasse 2: $ \{(contact(X,Y))[0.486] <((X \neq anna \land Y \neq anna) \land X \neq Y)>\} $\\
+			Konditional für Klasse 3: $ \{(contact(X,Y))[0.068] <((X = anna \lor Y = anna)\land X \neq Y)>\} $\\
 		\end{Bsp} 
-
+	\textcolor{blue}{
 			\item mehr als eine spezifische Konstante:\\
-			Die 
-			TODO
+			Für diese Fälle liefert Log4KR  keine Ergebnisse. Daher können diese Fälle ohne eine weitere Modifikation der Bibliothek nicht betrachtet werden, sh. auch \ref{Beispiele unausfuehrbar} und \ref{examplesdep}.}
 		\end{itemize}
 	\end{itemize}
 \end{itemize}
+
+\textcolor{blue}{
+\subsubsection{Die Anfrage ist eine (nichtatomare, logische) Formel} \label{KondGen_Formel}
+\paragraph{Eine Äquivalenzklasse}
+Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_eineKlasse}.\\
+Das ist der trivialste Fall. In diesem Fall besteht die Rückgabemenge aus dem unbedingten Konditional mit der Wahrscheinlichkeit und ohne Constraint.
+	\begin{Bsp}[Konditionale Generalisierung am Beispiel "{}BirdsWithoutNull"{}, \ref{BirdsWihoutNull}]
+	Für die Anfrage $ (flies(X) | isBird(X))$ in "{}BirdsWithoutNull"{} ergeben sich folgende Klassen:\\
+	\\
+	Klasse 1: $ (flies(Kirby) | isBird(Kirby)), (flies(Bully) | isBird(Bully)), (flies(Tweety) | isBird(Tweety)), (flies(Sylvester) | isBird(Sylvester)) $\\
+	\\
+	Das Konditional für Klasse 1: $ (flies(X) | isBird(X))[0.9]$
+\end{Bsp}
+\paragraph{Zwei Äquivalenzklassen}
+Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_zweiKlassen}.
+\begin{itemize}
+	\item Jede Äquivalenzklasse enthält nur ein Konditional:\\
+	In diesem Fall ist nichts weiteres zu tun. Da die Klasse nur ein Konditional enthält, kann nicht generalisiert werden. 
+	\item Eine Äquivalenzklasse enthält ein Konditional, die andere mehr als ein Konditional:\\
+	Dieser Fall dürfte nur bei einstelligen Prädikaten eintreten und muss daher auch nur für diese behandelt werden. Es ist negativ zu generalisieren, \ref{NegativeGeneralisierung}, ein Beispiel dazu findet sich in \ref{Bsp:Neg_Gen_Birds}.
+	\item Eine Äquivalenzklasse enthält ein Konditional, die andere mehr als ein Konditional:\\
+	Diesen Fall gibt es nur für einstellige Prädikate. Im Fall zweistelliger Prädikate enthalten die Klassen mindestens zwei Elemente. Das Konditional für die Klasse ist durch negative Generalisierung zu erzeugen, \ref{NegativeGeneralisierung}. 
+	\begin{Bsp}[Konditionale Generalisierung am Beispiel Birds, \ref{Birds}]
+	Für die Anfrage $ (flies(X) | isBird(X)) $ liefert die konditionale Generalisierung folgendes Ergebnis:\\
+	\\
+	Klasse 1: $ {(isBird(Tweety)|flies(Tweety))[1.0]} $\\
+	Klasse 2: $ {(isBird(Sylvester)|flies(Sylvester))[0.555], (isBird(Bully)|flies(Bully))[0.555] (isBird(Kirby)|flies(Kirby))[0.555] }  $\\
+	\\
+	Das Konditional für Klasse 1: $ {(isBird(Tweety)|flies(Tweety))[1.0]} $\\
+	Die Konditional für Klasse 2: $ {(isBird(X)|flies(X))[1.0]} <X \neq Tweety>$\\
+	\end{Bsp}
+	\item Beide Äquivalenzklassen enthalten mehr als ein Konditional:\\
+	\begin{itemize}
+		\item einstelliges Prädikat:\\
+		Dazu konnte kein Beispiel gefunden werden.
+		\item zweistelliges Prädikat:\\
+		Im Falle zweistelliger Prädikate und zwei Äquivalenzklassen, enthält die eine Klasse das reflexive Wissen, die andere alle anderen Konditionale. Für die Klasse mit dem reflexiven Wissen besteht das Konditional der Klasse aus einem unbedingten Konditional mit der Wahrscheinlichkeit und einem Contraint Gleichheit für die beiden Variablen. Für die andere Klasse wird das Konditional erzeugt, indem das unbedingte Konditional mit der Wahrscheinlichkeit der Klasse versehen und um einem Constraint der Ungleichheit für die Variablen versehen wird.
+		\begin{Bsp}[Konditionale Generalisierung bei zwei Klassen am Beispiel Cold, \ref{Cold}]
+			Für die Anfrage $ (contact(X,Y) \land cold(Y) $ ergit die konditionale Generalisierung:\\
+			\\
+		Klasse 1: $ { (contact(anna,anna) \land cold(anna))[0.0], (contact(bob,bob) \land cold(bob)[0.0]), (contact(carl,carl)\land cold(carl))[0.0]} $\\
+		Klasse 2: $ {(contact(anna,bob) \land cold(bob))[0.021] , (contact(carl, bob) \land cold(bob))[0.021] , (contact(bob, anna) \land cold(anna))[0.021], (contact(anna, carl)\land cold(carl)) [0.021], (contact(bob, carl)\land cold(carl)) [0.021], (contact(carl, anna) \land cold(anna))[0.021] ,} $\\
+		\\
+		Konditional für Klasse 1: $ \{(contact(X,Y) \land cold(Y))[0.0] <X = Y>\} $\\
+		Konditional für Klasse 2: $ \{(contact(X,Y))[0.021] <X \neq Y>\} $\\
+		\end{Bsp}
+	\end{itemize}
+\end{itemize}
+\paragraph{Mehr als zwei Äquivalenzklasse} 
+Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_mehrKlassen}.
+\begin{itemize}
+	\item Jede Äquivalenzklasse enthält nur ein Konditional:\\
+	In diesem Fall ist nichts weiteres zu tun. Da die Klasse nur ein Konditional enthält, kann nicht generalisiert werden.
+	\item Eine Äquivalenzklasse enthält ein Konditional, mindestens eine andere Klasse mehr als ein Konditional
+	\begin{itemize}
+		\item einstelliges Prädikat:\\
+		 in diesem Fall ist negativ zu generalisieren, \ref{NegativeGeneralisierung}. Für das angegebenen Beispiel, die Anfrage $ flies(X) $ in "{}Birds3Classes"{} würde auch die positive Generalisierung zum gewünschten Ergebnis führen, \ref{PositiveGeneralisierung}.
+		\begin{Bsp}[Konditionale Generalsisierung am Beispiel Birds3Classes, \ref{Birds3Classes}]
+			Für die Anfrage $ flies(X) $ in "{}Birds3Classes"{} ergeben sich folgende Klassen:\\
+			\\
+			Klasse 1: $ {flies(Sylvester)[0.664], flies(Kirby)[0.664]}  $\\
+			Klasse 2: $ {flies(Tweety)[0]} $\\
+			Klasse 3: $ {flies(Bully)[0.3]} $\\
+			\\
+			\noindent
+			Das Konditional für Klasse 1: $ flies(X)[0.664]<(X = Sylvester \lor  X = Kirby)>$\\
+			Die Konditional für Klasse 2: $ flies(Tweety)[0] $\\
+			Das Konditional für Klasse 3: $ flies(Bully)[0.3] $
+		\end{Bsp}
+		\item zweistelliges Prädikat:\\	
+		Dieser Fall kommt nicht vor, da die Klassen bei zweistelligen Prädikaten mindestens zwei Element enthalten.	
+	\end{itemize}
+	\item Alle Äquivalenzklassen enthalten mehr als ein Konditional
+	\begin{itemize}
+		\item einstelliges Prädikat: hierzu gibt es keine Beispiele.
+		\item zweistelliges Prädikat: Bei zweistelligen Prädikaten wird es immer eine Klasse geben, die das reflexive Wissen enthält. Für diese Klasse bildet man den Constraint als Constraint der Ungleichheit für die beiden Variablen des zweistelligen Prädikats. An dieser Stelle wird es kompliziert. Die übrigen Klassen unterscheiden sich darin, ob sie spezifisches Wissen enthalten oder nicht. Da aber im Voraus keine Überprüfung der Konditionale mit der Wissensbasis erfolgt, muss man dies durch einen geschickten Vergleich der Konditionale erreichen TODO Anmerkung: vielleicht muss man doch mit der Wissensbasis vergleichen, das ist kein trivialer Vergleich...große Not...Der für die jeweilige Klasse erhaltene Constraint muss dann noch mit einem Contraint der Ungleichheit für reflexives Wissen konjunktiv verknüpft werden.  
+			\end{itemize}
+		\begin{Bsp}[Konditionale Generalisierung am Beispiel ColdSpez, \ref{ColdSpez}]
+			Für die Anfrage $ (contact(X,Y) \land cold(Y)) $ ergibt sich:\\
+			Klasse 1: $ {(contact(anna,ann) \land cold(anna)), (contact(bob,bob) \land cold(bob)), (contact(carl,carl) \land cold(carl)) } $\\
+			Klasse 2: $ {(contact(bob,carl) \land cold(carl)), (contact(carl,bob) \land cold(bob)) } $\\
+			Klasse 3: $ {(contact(carl,anna) \land cold(anna)), (contact(ann, carl) \land cold(carl)), (contact(anna,bob) \land cold(bob)), (contact(bob, anna) \land cold(anna)) } $\\
+			\\
+			\noindent
+			Konditional für Klasse 1: $ {(contact(X,Y) \land cold(Y)) [0.0] <X = Y>} $\\
+			Konditional für Klasse 2: $ {(contact(X,Y) \land cold(Y)) [0.578] <((X \neq anna \land Y \neq anna) \land X \neq Y)>} $\\
+			Konditional für Klasse 3: $ {(contact(X,Y) \land cold(Y)) [0.050] <((X = anna \lor Y = anna)\land X \neq Y)>} $	
+		\end{Bsp}
+\end{itemize}
+}
 
 \chapter{Entwicklungsphasen}\label{Dok}
 \section{Vorüberlegungen}
@@ -2844,7 +2995,7 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 		& sh.  \\
 		\hline
 		nicht besprochen
-		& Generalisierung im Algorithmus beschrieben, Beispiele wären eine Wiederholung von Kapitel 4, darüber muss man reden, wenn man die Implementation bespricht sh. \ref{general} \newline Anmerkung zu unausführbaren Beispielen \ref{Beispiele unausfuehrbar} \newline Ergänzung der Auswertung \ref{Fallunterscheidung Formel 2Aequi}, \ref{Fallunterscheidung Formel MehrAequi} \\
+		& Generalisierung im Algorithmus beschrieben, Beispiele wären eine Wiederholung von Kapitel 4, darüber muss man reden, wenn man die Implementation bespricht sh. \ref{general} \newline Anmerkung zu unausführbaren Beispielen \ref{Beispiele unausfuehrbar} \newline Ergänzung der Auswertung \ref{Fallunterscheidung Formel 2Aequi}, \ref{Fallunterscheidung Formel MehrAequi} \newline Konditionale Generalisierung für Formeln ausformuliert \ref{KondGen_Formel} \\
 		\hline
 		\caption{Änderungen gegenüber der letzten Version}
 	\end{longtable}

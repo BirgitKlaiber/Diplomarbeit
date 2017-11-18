@@ -1430,7 +1430,7 @@ Es wird erwartet, dass alle generische Grundinstanzen ein und des selben Konditi
 		Das Ergebnis der Grundierung von $ (flies(X)) $ sind die spezifischen Grundinstanzen:\\
 		$ (flies(Kirby)) $,\\
 		$ (flies(Bully)) $,\\
-		$ (flies(Sylvester)) $,\\
+		$ (flies(Sylvester)) $\\
 		
 	\end{quote}
 \end{Bsp}
@@ -1444,6 +1444,11 @@ An dieser Stelle ist auch aufgefallen, dass es notwendig ist, einen Test durchzu
 
 \subsection{Bildung des Constraints}
 Die Aufgabenstellung verlangt die Bildung eines möglichst allgemeinen Konditionals für Grundinstanzen des angefragten Konditionals. Was darunter zu verstehen ist, wurde nicht definiert. Es waren eingehende Überlegungen notwendig, wie dieser Begriff zu interpretieren ist. Das Ergebnis war, dass ein möglichst allgemeines Konditional im Sinne dieser Arbeit ein Konditional mit einem möglichst kurzen, logisch minimierten Constraint ist.
+
+\textcolor{blue}{
+\subsection{Unausführbare Beispiele} \label{Beispiele unausfuehrbar} 
+Beispiele, die mehr als eine spezifische Konstante \index{Konstante ! spezifisch} enthielten, sh. \ref{Beispiele unausfuehrbar}, konnte Log4KR nicht verarbeiten, daher konnten leider keine Forschungen in diese Richtung unternommen werden, obwohl dies sehr interessant im Hinblick auf Interaktionen gewesen wäre. 
+}
 
 \section{Interaktionen}
 
@@ -1517,7 +1522,7 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 		\hline
 		\textbf{einstellig} 
 		& BirdsWithoutNull \ref{BirdsWihoutNull} \newline ColdSpez \ref{ColdSpez} \newline ColdTrans \ref{ColdTrans}
-		& $(flies(X) | isBird(X)\newline (cold(X) | susceptible(X) \newline (cold(X) | susceptible(X)$  \\
+		& $(flies(X) | isBird(X)\newline (cold(X) | susceptible(X)) \newline (cold(X) | susceptible(X))$  \\
 		\hline
 		\textbf{zweistellig}
 		&  Cold \ref{Cold} 
@@ -1586,13 +1591,13 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 
 
 
-
+\textbf{Mögliche Fallunterscheidungen:}
 \begin{itemize}
 	\item Jede Äquivalenzklasse enthält nur ein Konditional. Das ist der trivialste Fall. Zu finden beispielsweise in $ flies(X) $ in "{}Birds2Birds"{} \ref{Birds2Birds}.
 	\item Eine Klasse enthält ein Konditional und die andere mehr als ein Konditional. 
 	\begin{itemize}
 		\item einstelliges Prädikat (Exemplarisch: $ flies(X) $ und $ isBird(X) $ in "{}Birds"{}, \ref{Birds} oder $ cold(X) $ in "{}Cold"{}, \ref{Cold}).
-		\item mehrstelliges Prädikat (Exemplarisch: $ likes(a,V)$ in "{}Misanthrope"{}.        
+		\item mehrstelliges Prädikat (Exemplarisch: $ likes(a,V)$ in "{}Misanthrope"{} \ref{Misanthrope}.        
 	\end{itemize}
 	\item Beide Äquivalenzklassen enthalten mehr als ein Konditional
 	\begin{itemize}
@@ -1623,17 +1628,17 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 		\endlastfoot
 		\hline
 		\textbf{einstellig} 
-		& Birds \ref{Birds} \newline \newline Birds2Birds \ref{Birds2Birds} \newline \newline ColdTrans
-		& ($flies(X)|(isBird(X)), \newline (isBird(X)|(flies(X)) \newline (flies(X)|(isBird(X)), \newline (isBird(X)|(flies(X)) $\\
+		& Birds \ref{Birds} \newline \newline Birds2Birds \ref{Birds2Birds} \newline \newline ColdTrans \ref{ColdTrans}
+		& $(flies(X)|isBird(X)), \newline (isBird(X)|flies(X)) \newline (flies(X)|isBird(X)), \newline (isBird(X)|flies(X)) \newline (cold(X) | susceptible(Y) $\\
 		\hline
 		\textbf{zweistellig}
-		&  
-		&
+		& Friendship \ref{Friendship} \newline MisanthropeIrreflexive \ref{MisanthropeIrreflexive}
+		& $ (likes(U,V) \land likes[V,X]) \newline  (likes(U,V) \land likes[V,U]) $
 		\\
 		\hline
 		\textbf{ein- und zweistellig}
-		& Cold \ref{Cold} \newline ColdSpez \ref{ColdSpez}
-		& $(contact(X,Y) \land (cold(Y)))$ \newline $ (cold(X)|contact(X,Y) \land cold(Y) $
+		& Cold \ref{Cold} \newline ColdSpez \ref{ColdSpez} \newline ColdTrans \ref{ColdTrans}
+		& $(contact(X,Y) \land cold(Y))$ \newline $ (cold(X)|contact(X,Y) \land cold(Y)) $ \newline  $ (contact(X,Y) \land cold(Y) $
 		\\
 		
 		\hline
@@ -1641,6 +1646,25 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 	\end{longtable}
 \end{footnotesize}
 
+\textcolor{blue}{
+\textbf{Mögliche Fallunterscheidungen:} \label{Fallunterscheidung Formel 2Aequi}
+\begin{itemize}
+	\item Jede Äquivalenzklasse enthält nur ein Konditional 
+	\begin{itemize}
+		\item einstelliges Prädikat ($ (isBird(X)|flies(X)) $ in "{}Birds2Birds"{}, \ref{Birds2Birds}): dies ist ein Randfall, da das Universum nur zwei Konstanten enthält.
+	\end{itemize}
+	\item Eine Äquivalenzklasse enthält ein Konditional und die andere mehr als ein Konditional. 
+	\begin{itemize}
+		\item einstelliges Prädikat (Exemplarisch: $ flies(X) $ und $ isBird(X) $ in "{}Birds"{}, \ref{Birds}) 
+		\item zweistelliges Prädikat (Exemplarisch: $ (likes(U,V) \land likes(V,U)) $ in "{}MisanthropeIrreflexive"{} \ref{MisanthropeIrreflexive}.  
+		\item  ein- und zweistelliges Prädikat (Exemplarisch $ (contact(X,Y) \land cold(Y) $ in "{}Cold"{}, \ref{Cold} und $  (cold(X) | (contact(X,Y) \land cold(Y)) $ in "{}ColdSpez"{}, \ref{ColdSpez}     
+	\end{itemize}
+	\item Jede Äquivalenzklasse enthält mehr als ein Konditional (Exemplarisch $ (contact(X,Y) \land cold(Y)) $ in "{}ColdTrans"{}, \ref{ColdTrans})
+	\begin{itemize}
+		\item 
+	\end{itemize}
+\end{itemize}
+}
 
 \subsection{Mehr als zwei Äquivalenzklassen}
 
@@ -1681,7 +1705,8 @@ Es gibt einen Randfall, für den gilt, dass sich alle von einander in der berech
 
 \noindent
 Dies ist ein einfacher Fall und führt zur Ausgabe aller Grundkonditionale mit jeweils berechneter Wahrscheinlichkeit. Dieses Ergebnis wird erzeugt, wenn die Wissensbasis zu jeder Konstanten eine eigene Information bereit hält, die dazu führt, dass sich die Grundkonditionale voneinander unterscheiden. Ein Beispiel dafür ist "{}BirdsDiffer"{}, \ref{BirdsDiffer}.
-\paragraph{ Mehr als zwei Äquivalenzklassen und die Anfrage ist ein Atom}
+\paragraph{ Mehr als zwei Äquivalenzklassen und die Anfrage ist ein Atom}:\\
+\textbf{Mögliche Fallunterscheidungen:}
 \begin{itemize}
 	\item Jede Äquivalenzklasse enthält nur ein Konditional. Die Rückgabemenge besteht also lediglich aus den bedingten Konditionalen jeder Klasse. Das ist der o.g. Randfall.
 	\item Eine Äquivalenzklasse enthält ein Konditional, die anderen ein oder mehr als ein Konditional. 
@@ -1699,7 +1724,14 @@ Dies ist ein einfacher Fall und führt zur Ausgabe aller Grundkonditionale mit j
 
 
 \paragraph{Mehr als zwei Äquivalenzklassen und die Anfrage ist eine (nichtatomare, logische) Formel}
-TODO
+
+
+\textcolor{blue}{
+\textbf{Mögliche Fallunterscheidungen:}\label{Fallunterscheidung Formel MehrAequi}
+\begin{itemize}
+	\item TODO
+\end{itemize}
+}
 
 \setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
 \addtolength{\currentLongTableWidth}{-4\tabcolsep} %subtrahiere -8\cdot textbreite von asdf, 2 Abstände pro Zelle * Anzahl der Spalte
@@ -1722,13 +1754,13 @@ TODO
 		& ($flies(X)|(isBird(X)), \newline (isBird(X)|(flies(X)) \newline (flies(X)|(isBird(X)), \newline (isBird(X)|(flies(X))$\\
 		\hline
 		\textbf{zweistellig}
-		&  
+		&  kein Beispiel gefunden
 		&
 		\\
 		\hline
 		\textbf{ein- und zweistellig}
-		& Cold \ref{Cold} \newline ColdSpez \ref{ColdSpez}
-		& $(contact(X,Y) \land (cold(Y)))$ \newline $ (cold(X)|contact(X,Y) \land cold(Y) $
+		& Cold \ref{Cold} \newline ColdSpez \ref{ColdSpez} \newline ColdTrans \ref{ColdTrans} \newline ColdTransSpez \ref{ColdTransSpez}
+		& $(contact(X,Y) \land (cold(Y)))$ \newline $ (cold(X)|contact(X,Y) \land cold(Y) $ \newline $ (cold(Z) | contact(X,Y) \land cold(X) $ \newline $ (cold(Z) | ((contact(X,Y) \land contact(Y,Z)) \land cold(X)) \land cold(Z) )$
 		\\
 		
 		\hline
@@ -2589,6 +2621,15 @@ Diese wurde ergänzt.\\
 	\caption{InequalityConstraint.equals(Object obj)}
 \end{figure}
 
+
+\section{Unbehandelter Fehler in Log4KR} \label{Fehler unbehandelt}
+Beim Verarbeiten von mehr als einer spezifischen Konstante können Fehler auftreten. Die Beispiele wurden verworfen, eine Korrektur wurde nicht vorgenommen ist aber dringend anzuraten, sh. auch \ref{Beispiele unausfuehrbar} und \ref{examplesdep}.
+
+\includegraphics[scale = 1.0]{Graphics/Beispiele_unausfuehrbar}
+\begin{figure}[h]
+	
+\end{figure}
+
 \newpage
 
 
@@ -2794,7 +2835,7 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 		& sh. \ref{Fazit neg Gen}, \ref{Fazit pos Gen} \\
 		\hline
 		Bei den Beispielen, die Log4KR nicht verarbeiten kann, dies als Feststellung notieren
-		& sh. \ref{examplesdep} \\
+		& sh. \ref{examplesdep} und \ref{Beispiele unausfuehrbar} \\
 		\hline
 		logische Generalisierung ausbauen
 		& sh. \\
@@ -2803,7 +2844,7 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 		& sh.  \\
 		\hline
 		nicht besprochen
-		& Generalisierung im Algorithmus beschrieben, Beispiele wären eine Wiederholung von Kapitel 4, darüber muss man reden, wenn man die Implementation bespricht sh. \ref{general} \\
+		& Generalisierung im Algorithmus beschrieben, Beispiele wären eine Wiederholung von Kapitel 4, darüber muss man reden, wenn man die Implementation bespricht sh. \ref{general} \newline Anmerkung zu unausführbaren Beispielen \ref{Beispiele unausfuehrbar} \newline Ergänzung der Auswertung \ref{Fallunterscheidung Formel 2Aequi}, \ref{Fallunterscheidung Formel MehrAequi} \\
 		\hline
 		\caption{Änderungen gegenüber der letzten Version}
 	\end{longtable}

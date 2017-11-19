@@ -198,7 +198,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (cold(bob)|contact(bob,carl) * cold(bob))	[1.0]
 (cold(bob)|contact(bob,anna) * cold(bob))	[1.0]
 (cold(anna)|contact(anna,bob) * cold(anna))	[1.0]
-(cold(carl)|contact(carl,carl) * cold(carl)	)[1.0]
+(cold(carl)|contact(carl,carl) * cold(carl)	[1.0]
 (cold(carl)|contact(carl,bob) * cold(carl))	[1.0]
 (cold(bob)|contact(bob,bob) * cold(bob))	[1.0]
 (cold(anna)|contact(anna,carl) * cold(anna))	[1.0]

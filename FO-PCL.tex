@@ -1395,8 +1395,8 @@ Als Ausgabe der Inferenzkomponente wird ein bedingtes relationales Konditional m
 
 
 
-\section{Gleichheit von Konditionalen, vgl. \ref{Äquivalenz in FO-PCL}} 
-Gemäß Aufgabenstellung waren Konditionale, die die gleiche Wahrscheinlichkeit liefern zu einem allgemeinen Konditional zusammenzufassen.
+\section{Gleichheit von Konditionalen} 
+Gemäß Aufgabenstellung waren Konditionale, die die gleiche Wahrscheinlichkeit liefern zu einem allgemeinen Konditional zusammenzufassen. Zum Thema Äquivalenz von Konditionalen vgl.\ref{Äquivalenz in FO-PCL}.
 
 Das erwies sich mit Hilfe der Bibliothek Log4KR als nicht schwierig. Dabei ist eine Korrektur der Bibliothek notwendig geworden, s. \ref{sec:Korrektur1} "{}Korrektur in ConstraintBasedGroundingOperator"{}.
 
@@ -1771,8 +1771,9 @@ Dies ist ein einfacher Fall und führt zur Ausgabe aller Grundkonditionale mit j
 		\begin{itemize}
 			\item einstelliges Prädikat: kein Beispiel gefunden.
 			\item zweistelliges Prädikat: kein Beispiel gefunden.
-			\item ein- und zweistelliges Prädikat: 
+			\item ein- und zweistelliges Prädikat: kein Beispiel gefunden.
 		\end{itemize}
+		Offensichtlich führen Anfragen in Form von komplexeren Formen zu nicht trivialen Äquivalenzklassen. 
 		\item Alle Äquivalenzklassen enthalten mehr als ein Konditional
 			\begin{itemize}
 			\item einstelliges Prädikat: kein Beispiel gefunden.
@@ -1976,9 +1977,9 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Atom_mehrKlassen}.\\
 		Für die Anfrage $ flies(X) $ in "{}Birds3Classes"{} ergeben sich folgende Klassen:\\
 		
 		\noindent
-		Klasse 1: $ {flies(Sylvester)[0.664], flies(Kirby)[0.664]}  $\\
-		Klasse 2: $ {flies(Tweety)[0]} $\\
-		Klasse 3: $ {flies(Bully)[0.3]} $\\
+		Klasse 1: $ \{flies(Sylvester)[0.664], flies(Kirby)[0.664]\}  $\\
+		Klasse 2: $ \{flies(Tweety)[0]\} $\\
+		Klasse 3: $ \{flies(Bully)[0.3]\} $\\
 		\\
 		Das Konditional für Klasse 1: $ flies(X)[0.664]<(X = Sylvester \lor  X = Kirby)>$\\
 		Die Konditional für Klasse 2: $ flies(Tweety)[0] $\\
@@ -1997,9 +1998,9 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Atom_mehrKlassen}.\\
 			\begin{Bsp}[Konditionale Generalisierung für mehrere Klassen am Beispiel "{}Misanthrope"{}, \ref{Misanthrope}] \index{Generalisierung ! konditional}Die konditionale Generalisierung kommt für die Anfrage $ likes(X,Y) $ zum folgenden Ergebnis:\\
 				
 				\noindent
-				Klasse 1: $ { likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]} $\\
-				Klasse 2: $ {likes(c,b)[0.578], likes(b,c)[0.578]} $\\
-				Klasse 3: $ {likes(a,c)[0.050], likes(a,b)[0.050], likes(b,a)[0.050], likes(c,a)[0.050]} $\\
+				Klasse 1: $ \{ likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]\} $\\
+				Klasse 2: $ \{likes(c,b)[0.578], likes(b,c)[0.578]\} $\\
+				Klasse 3: $ \{likes(a,c)[0.050], likes(a,b)[0.050], likes(b,a)[0.050], likes(c,a)[0.050]\} $\\
 				
 				\noindent
 				Konditional für Klasse 1: $ \{(likes(U,V))[0.0] <U = V>\} $\\
@@ -2008,9 +2009,9 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Atom_mehrKlassen}.\\
 			\end{Bsp} 
 			\begin{Bsp}[Konditionale Generalisierung für mehrere Klassen am Beispiel "{}ColdSpez"{}, \ref{ColdSpez}] \index{Generalisierung ! konditional}Die konditionale Generalisierung kommt für die Anfrage $ contact(X,Y) $ zum folgenden Ergebnis:\\
 				\\
-			Klasse 1: $ { contact(anna,anna), contact(bob,bob), contact(carl,carl)[0.0]} $\\
-			Klasse 2: $ {contact(carl,bob)[0.486], contact(bob,carl)[0.486]} $\\
-			Klasse 3: $ {contact(bob,anna)[0.068], contact(anna, carl)[0.068], contact(anna, bob)[0.068], contact(carl, anna)[0.068]} $\\
+			Klasse 1: $ \{ contact(anna,anna), contact(bob,bob), contact(carl,carl)[0.0]\} $\\
+			Klasse 2: $ \{contact(carl,bob)[0.486], contact(bob,carl)[0.486]\} $\\
+			Klasse 3: $ \{contact(bob,anna)[0.068], contact(anna, carl)[0.068], contact(anna, bob)[0.068], contact(carl, anna)[0.068]\} $\\
 		
 		
 			\noindent
@@ -2033,7 +2034,7 @@ Das ist der trivialste Fall. In diesem Fall besteht die Rückgabemenge aus dem u
 	\begin{Bsp}[Konditionale Generalisierung am Beispiel "{}BirdsWithoutNull"{}, \ref{BirdsWihoutNull}]
 	Für die Anfrage $ (flies(X) | isBird(X))$ in "{}BirdsWithoutNull"{} ergeben sich folgende Klassen:\\
 	\\
-	Klasse 1: $ (flies(Kirby) | isBird(Kirby)), (flies(Bully) | isBird(Bully)), (flies(Tweety) | isBird(Tweety)), (flies(Sylvester) | isBird(Sylvester)) $\\
+	Klasse 1: $ \{(flies(Kirby) | isBird(Kirby)), (flies(Bully) | isBird(Bully)), (flies(Tweety) | isBird(Tweety)), (flies(Sylvester) | isBird(Sylvester))\} $\\
 	\\
 	Das Konditional für Klasse 1: $ (flies(X) | isBird(X))[0.9]$
 \end{Bsp}
@@ -2049,11 +2050,11 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_zweiKlassen}.
 	\begin{Bsp}[Konditionale Generalisierung am Beispiel Birds, \ref{Birds}]
 	Für die Anfrage $ (flies(X) | isBird(X)) $ liefert die konditionale Generalisierung folgendes Ergebnis:\\
 	\\
-	Klasse 1: $ {(isBird(Tweety)|flies(Tweety))[1.0]} $\\
-	Klasse 2: $ {(isBird(Sylvester)|flies(Sylvester))[0.555], (isBird(Bully)|flies(Bully))[0.555] (isBird(Kirby)|flies(Kirby))[0.555] }  $\\
+	Klasse 1: $ \{(isBird(Tweety)|flies(Tweety))[1.0]\} $\\
+	Klasse 2: $ \{(isBird(Sylvester)|flies(Sylvester))[0.555], (isBird(Bully)|flies(Bully))[0.555] (isBird(Kirby)|flies(Kirby))[0.555] \}  $\\
 	\\
-	Das Konditional für Klasse 1: $ {(isBird(Tweety)|flies(Tweety))[1.0]} $\\
-	Die Konditional für Klasse 2: $ {(isBird(X)|flies(X))[1.0]} <X \neq Tweety>$\\
+	Das Konditional für Klasse 1: $ (isBird(Tweety)|flies(Tweety))[1.0]$\\
+	Die Konditional für Klasse 2: $ (isBird(X)|flies(X))[1.0] <X \neq Tweety>$\\
 	\end{Bsp}
 	\item Beide Äquivalenzklassen enthalten mehr als ein Konditional:\\
 	\begin{itemize}
@@ -2064,11 +2065,11 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_zweiKlassen}.
 		\begin{Bsp}[Konditionale Generalisierung bei zwei Klassen am Beispiel Cold, \ref{Cold}]
 			Für die Anfrage $ (contact(X,Y) \land cold(Y) $ ergit die konditionale Generalisierung:\\
 			\\
-		Klasse 1: $ { (contact(anna,anna) \land cold(anna))[0.0], (contact(bob,bob) \land cold(bob)[0.0]), (contact(carl,carl)\land cold(carl))[0.0]} $\\
-		Klasse 2: $ {(contact(anna,bob) \land cold(bob))[0.021] , (contact(carl, bob) \land cold(bob))[0.021] , (contact(bob, anna) \land cold(anna))[0.021], (contact(anna, carl)\land cold(carl)) [0.021], (contact(bob, carl)\land cold(carl)) [0.021], (contact(carl, anna) \land cold(anna))[0.021] ,} $\\
+		Klasse 1: $ \{ (contact(anna,anna) \land cold(anna))[0.0], (contact(bob,bob) \land cold(bob)[0.0]), (contact(carl,carl)\land cold(carl))[0.0]\} $\\
+		Klasse 2: $ \{(contact(anna,bob) \land cold(bob))[0.021] , (contact(carl, bob) \land cold(bob))[0.021] , (contact(bob, anna) \land cold(anna))[0.021], (contact(anna, carl)\land cold(carl)) [0.021], (contact(bob, carl)\land cold(carl)) [0.021], (contact(carl, anna) \land cold(anna))[0.021] \} $\\
 		\\
-		Konditional für Klasse 1: $ \{(contact(X,Y) \land cold(Y))[0.0] <X = Y>\} $\\
-		Konditional für Klasse 2: $ \{(contact(X,Y))[0.021] <X \neq Y>\} $\\
+		Konditional für Klasse 1: $ (contact(X,Y) \land cold(Y))[0.0] <X = Y> $\\
+		Konditional für Klasse 2: $ (contact(X,Y))[0.021] <X \neq Y> $\\
 		\end{Bsp}
 	\end{itemize}
 \end{itemize}
@@ -2084,9 +2085,9 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_mehrKlassen}.
 		\begin{Bsp}[Konditionale Generalsisierung am Beispiel Birds3Classes, \ref{Birds3Classes}]
 			Für die Anfrage $ flies(X) $ in "{}Birds3Classes"{} ergeben sich folgende Klassen:\\
 			\\
-			Klasse 1: $ {flies(Sylvester)[0.664], flies(Kirby)[0.664]}  $\\
-			Klasse 2: $ {flies(Tweety)[0]} $\\
-			Klasse 3: $ {flies(Bully)[0.3]} $\\
+			Klasse 1: $ \{flies(Sylvester)[0.664], flies(Kirby)[0.664]\}  $\\
+			Klasse 2: $ \{flies(Tweety)[0]\} $\\
+			Klasse 3: $ \{flies(Bully)[0.3]\} $\\
 			\\
 			\noindent
 			Das Konditional für Klasse 1: $ flies(X)[0.664]<(X = Sylvester \lor  X = Kirby)>$\\
@@ -2099,22 +2100,39 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_mehrKlassen}.
 	\item Alle Äquivalenzklassen enthalten mehr als ein Konditional
 	\begin{itemize}
 		\item einstelliges Prädikat: hierzu gibt es keine Beispiele.
-		\item zweistelliges Prädikat: Bei zweistelligen Prädikaten wird es immer eine Klasse geben, die das reflexive Wissen enthält. Für diese Klasse bildet man den Constraint als Constraint der Ungleichheit für die beiden Variablen des zweistelligen Prädikats. An dieser Stelle wird es kompliziert. Die übrigen Klassen unterscheiden sich darin, ob sie spezifisches Wissen enthalten oder nicht. Da aber im Voraus keine Überprüfung der Konditionale mit der Wissensbasis erfolgt, muss man dies durch einen geschickten Vergleich der Konditionale erreichen TODO Anmerkung: vielleicht muss man doch mit der Wissensbasis vergleichen, das ist kein trivialer Vergleich...große Not...Der für die jeweilige Klasse erhaltene Constraint muss dann noch mit einem Contraint der Ungleichheit für reflexives Wissen konjunktiv verknüpft werden.  
-			\end{itemize}
+		\item zweistelliges Prädikat: Bei zweistelligen Prädikaten wird es immer eine Klasse geben, die das reflexive Wissen enthält. Für diese Klasse bildet man den Constraint als Constraint der Ungleichheit für die beiden Variablen des zweistelligen Prädikats. An dieser Stelle wird es kompliziert. Die übrigen Klassen unterscheiden sich darin, ob sie spezifisches Wissen enthalten oder nicht. Da aber im Voraus keine Überprüfung der Konditionale mit der Wissensbasis erfolgt, muss man dies durch einen geschickten Vergleich der Konditionale erreichen. Wie der Vergleich aussehen sollte wird im Folgenden erläutert. Der für die jeweilige Klasse erhaltene Constraint muss dann noch mit einem Contraint der Ungleichheit für reflexives Wissen konjunktiv verknüpft werden. 
+		\end{itemize}
+	\textbf{Exkurs: Vergleich von Konditionalen} \label{Vergleich von Konditionalen} \index{Vergleich von Konditionalen} \index{Konditional}\\
+	Sei $ R $ eine Menge von Äquivalenzklassen (von FO-PCL Grundkonditionalen). Um herauszufinden, welche der Klassen das  spezifische Wissen enthält, entfernt man zunächst die Menge mit dem reflexiven Wissen. Man bildet für die übrigen Mengen jeweils die Schnittmengen der in den Termen der Formeln vorkommenden Konstanten. Ergibt sich dabei eine Menge, die nur ein Element enthält, so hat man die spezifische Konstante gefunden. 
+	\begin{Bsp}[Vergleich von Konditionalen]
+		Man betrachte das Beispiel ColdSpez, \ref{ColdSpez}:\\
+		Sei $ R = {Klasse 1, Klasse 2, Klasse 3} $ mit:\\
+		Klasse 1: $ \{(contact(anna,anna) \land cold(anna)), (contact(bob,bob) \land cold(bob)), (contact(carl,carl) \land cold(carl)) \} $\\
+		Klasse 2: $ \{(contact(bob,carl) \land cold(carl)), (contact(carl,bob) \land cold(bob)) \} $\\
+		Klasse 3: $ \{(contact(carl,anna) \land cold(anna)), (contact(anna, carl) \land cold(carl)), (contact(anna,bob) \land cold(bob)), (contact(bob, anna) \land cold(anna)) \} $\\
+ 		\begin{enumerate}
+ 			\item Die Mengen der Terme der Konditionale für die Klassen 2 und 3 sieht wie folgt aus:\\
+ 			(Klasse 1 wurde entfernt, da sie das reflexive Wissen enthält)\\
+ 			Für Klasse 2: $ \{contact(bob,carl), contact(carl,bob)\}$ \\
+ 			Für Klasse 3: $ \{contact(carl,anna), contact(anna, carl), contact(anna,bob), contact(bob, anna) \}$ \\
+ 			\item Die Schnittmengen der in jeweils allen Termen der Klasse vorkommenden Konstanten sieht so aus:\\
+ 			Für Klasse 2: $ \{bob, carl\}$ \\
+ 			Für Klasse 3: $ \{anna\} $ 
+ 		\end{enumerate}\
+	\end{Bsp}
 		\begin{Bsp}[Konditionale Generalisierung am Beispiel ColdSpez, \ref{ColdSpez}]
 			Für die Anfrage $ (contact(X,Y) \land cold(Y)) $ ergibt sich:\\
-			Klasse 1: $ {(contact(anna,ann) \land cold(anna)), (contact(bob,bob) \land cold(bob)), (contact(carl,carl) \land cold(carl)) } $\\
-			Klasse 2: $ {(contact(bob,carl) \land cold(carl)), (contact(carl,bob) \land cold(bob)) } $\\
-			Klasse 3: $ {(contact(carl,anna) \land cold(anna)), (contact(ann, carl) \land cold(carl)), (contact(anna,bob) \land cold(bob)), (contact(bob, anna) \land cold(anna)) } $\\
+			Klasse 1: $ \{(contact(anna,anna) \land cold(anna)), (contact(bob,bob) \land cold(bob)), (contact(carl,carl) \land cold(carl)) \} $\\
+			Klasse 2: $ \{(contact(bob,carl) \land cold(carl)), (contact(carl,bob) \land cold(bob)) \} $\\
+			Klasse 3: $ \{(contact(carl,anna) \land cold(anna)), (contact(anna, carl) \land cold(carl)), (contact(anna,bob) \land cold(bob)), (contact(bob, anna) \land cold(anna)) \} $\\
 			\\
 			\noindent
-			Konditional für Klasse 1: $ {(contact(X,Y) \land cold(Y)) [0.0] <X = Y>} $\\
-			Konditional für Klasse 2: $ {(contact(X,Y) \land cold(Y)) [0.578] <((X \neq anna \land Y \neq anna) \land X \neq Y)>} $\\
-			Konditional für Klasse 3: $ {(contact(X,Y) \land cold(Y)) [0.050] <((X = anna \lor Y = anna)\land X \neq Y)>} $	
+			Konditional für Klasse 1: $ \{(contact(X,Y) \land cold(Y)) [0.0] <X = Y>\} $\\
+			Konditional für Klasse 2: $ \{(contact(X,Y) \land cold(Y)) [0.578] <((X \neq anna \land Y \neq anna) \land X \neq Y)>\} $\\
+			Konditional für Klasse 3: $ \{(contact(X,Y) \land cold(Y)) [0.050] <((X = anna \lor Y = anna)\land X \neq Y)>\} $	
 		\end{Bsp}
 \end{itemize}
 }
-
 \chapter{Entwicklungsphasen}\label{Dok}
 \section{Vorüberlegungen}
 Zur Bearbeitung der Aufgabe war es notwendig, sich intensiv mit der Aufgabenstellung und der angegebenen Primärliteratur auseinander zu setzen. Dies führte dazu, weitere Quellen kennenzulernen. Daneben war das Studium der Bibliothek Log4KR von grundlegender Bedeutung. 

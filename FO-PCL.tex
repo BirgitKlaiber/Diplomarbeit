@@ -112,7 +112,7 @@
 \end{center}
 
 \begin{center}
-\textcolor{blue}{	Version 20171116}
+\textcolor{blue}{Version 20171123}
 	
 \large{Kleingartach, 2018}
 \end{center}
@@ -269,10 +269,8 @@ Wenn man eine Menge von speziellen Konditionalen, die gemeinsame Eigenschaften b
 Eine Einordnung des Themas kann der Abbildung 1 \ref{Eingangsgrafik} entnommen werden.
 
 
-Zunächst wird in Kapitel \ref{FO-PCL} auf FO-PCL selbst eingegangen und diese ausführlich erläutert. Kapitel \ref{Inferenz} beschreibt den Inferenzprozess in FO-PCL.
-Über die einzelnen Phasen der Entwicklung der Inferenzkomponente gibt Kapitel  \ref{Dok} Auskunft.
-Die Bedeutung der maximalen Entropie bei der Selektion von Modellen für eine Wissensbasis wird in Kapitel \ref{Alg}  beschrieben. Die Implementation der Inferenzkomponente und der Inferenzprozess \index{Inferenzprozess} und seine Erläuterung anhand von Beispielen ist Inhalt von Kapitel \ref{Inf}. 
-Beobachtungen werden in Kapitel \ref{Beob} festgehalten.
+Zunächst wird in Kapitel \ref{FO-PCL} auf FO-PCL selbst eingegangen und diese ausführlich erläutert. Kapitel \ref{Inferenz} beschreibt den Inferenzprozess in FO-PCL. Die experimentellen Forschungen werden in Kapitel \ref{Experim. Forschungen} erläutert und in Kapitel \ref{Beob} ausgewertet. Ideen für Algorithmen werden in Kapitel \ref{Ideen Alg.} ausgeführt und diskutiert. Über die einzelnen Phasen der Entwicklung der Inferenzkomponente gibt Kapitel  \ref{Dok} Auskunft. Der entworfene Algorithmus wird in Kapitel \ref{Alg}  beschrieben. Die Implementation der Inferenzkomponente und der Inferenzprozess \index{Inferenzprozess} und seine Erläuterung anhand von Beispielen ist Inhalt von Kapitel \ref{Inf}. 
+
  Die Korrektheit und Vollständigkeit des Algorithmus wird in Kapitel \ref{eval} empirisch belegt. Ergebnisse und Ausblick beschließen diese Arbeit in Kapitel \ref{Erg}. Im Anhang befinden sich die Erläuterungen verschiedener theoretischer Grundlagen.
 
 
@@ -1108,7 +1106,7 @@ Die eigentliche Logik der Komponente liegt hierbei in der Erzeugung des jeweilig
 
 
 	
-\chapter{Experimentelle Forschungen}
+\chapter{Experimentelle Forschungen} \label{Experim. Forschungen}
 Als Ausgangsbasis für die Erstellung eines Algorithmus wurden verschiedene Beispiele betrachtet. Der Großteil der Beispiele ist der Bibliothek Log4KR entnommen. Es wurden verschiedene Anfragen an die Wissensbasis gestellt, um ermitteln zu können, welche Ergebnisse die Anfragen liefern. Das diente dazu Vermutungen zu bestätigen bzw. erste Erkenntnisse zu erhalten.\\
 Unzulässige Anfragen sollten nicht an die Wissensbasis gestellt werden. Das sind solche, deren Prämisse die Wahrscheinlichkeit Null besitzt und die sonst zu einer Division durch Null führen würde.\\
 Eine detaillierte Beschreibung der Beispiele in Fo-PCL Syntax, aufbereitet zur Verarbeitung in Log4KR findet sich im Anhang \ref{examples}.
@@ -1784,9 +1782,7 @@ Dies ist ein einfacher Fall und führt zur Ausgabe aller Grundkonditionale mit j
 }
 
 
-
-
-\chapter{Ideen für Algorithmen}
+\chapter{Ideen für Algorithmen} \label{Ideen Alg.}
 \section{Vorüberlegungen}
 Alle denkbaren Algorithmen haben die ersten Schritte gemeinsam. Das ist ein Erfordernis des Inferenzprozesses in FO-PCL, der in dieser Arbeit auf propositionaler Basis betrieben wird. Lifted Inference ist ein Thema für weitergehende Forschungen und soll nicht Gegenstand der Arbeit sein. 
 Voraussetzung ist in jedem Fall eine konsistente Wissensbasis, vgl. auch Definition \ref{KB}. Die Wissensbasis sollte ein oder mehrere Konditionale enthalten, die korrekt im Sinne der FO-PCL Syntax sind. Zur Formulierung der Wissensbasis wird eine Signatur benötigt, s. auch Definition  \ref{Signatur}. Unter einer Signatur versteht man eine Menge die ein- oder mehrsortig sein, aber nicht leer sein darf. Weitere Bestandteile sind eine Menge von Konstantensymbolen und von Prädikatensymbolen. Den Prädikaten sowie den Konstanten müssen Sorten zugeordnet sein. Die Wissensbasis sollte ein oder mehrere Konditionale enthalten, die korrekt im Sinne der FO-PCL Syntax sind. Im Übrigen soll sich in dieser Arbeit die Entwicklung eines Algorithmus auf ein- und zweistellige Prädikate beschränken.
@@ -1892,9 +1888,9 @@ Konditional für Klasse 2: $\{(flies(X))[0.66]\} <X \neq Tweety>$\\
 	\index{Generalisierung ! negativ} Negative Generalisierung für die Anfrage  $ (likes(U,V))$ :\\
 	
 	\noindent
-	Klasse 1: $ { likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]} $\\
-	Klasse 2: $ {likes(c,b)[0.578], likes(b,c)[0.578]} $\\
-	Klasse 3: $ {likes(a,c)[0.05], likes(a,b)[0.05], likes(b,a)[0.05], likes(c,a)[0.05]} $\\
+	Klasse 1: $ \{ likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]\} $\\
+	Klasse 2: $ \{likes(c,b)[0.578], likes(b,c)[0.578]\} $\\
+	Klasse 3: $ \{likes(a,c)[0.05], likes(a,b)[0.05], likes(b,a)[0.05], likes(c,a)[0.05]\} $\\
 	
 	\noindent
 	Konditional für Klasse 1: $ \{(likes(U,V))[0.0] <(((U = a \land V = a) \lor (U = b \land V = b)) \lor (U = c \land V = c)) >\} $\\
@@ -1920,6 +1916,144 @@ Anders verhält es sich beim Beispiel "{}cold"{} für die Anfrage contact(X,Y):
 
 \noindent
 Obwohl die negative Generalisierung für den Fall einstelliger Prädikate zum gewünschten Ergebnis kam und auch wie für die positive Generalisierung gilt, dass sie in jedem Fall zuverlässig und richtig arbeitet, für den Fall zweistelliger Prädikate kommt es zu keinem übersichtlicheren Ergebnis als bei der positiven Generalisierung. Es ist also nach Alternativen zu forschen.
+
+\textcolor{blue}{
+	\section{Modifikation des Versionenraum-Lernverfahrens} \label{Verwendbar VRL} \index{Versionenraum-Lernverfahren}
+	Nähere Ausführungen zum Knozept des Versionenraum-Lernverfahren finden sich in Anhang \ref{VRL}.\\
+	\subsection{Vorüberlegungen}
+	In diesem Kapitel soll untersucht werden inwieweit das Versionenraum-Lernverfahren modifiziert werden kann, um aus einer Menge von Constraints einen möglichst allgemeingültigen Constraint zu erzeugen. Wenn man das Konzept des Versionenraum-Verfahrens betrachtet, so drängt sich allein durch die Analogie der Begrifflichkeiten der Gedanke auf, in einer Modifikation ein verwendbares Konzept für die Erzeugung eines möglichst allgemeinen Konditionals zu finden.
+	\\
+	Die erste Modifikation des ursprünglichen Verfahrens besteht darin, dass man nur positive Beispiele, hier die Menge der Konditionale einer Äquivalenzklasse, betrachtet, d.h. für jede Hypothese $ h $ und jedes Beispiel $ e $ gilt $ h(e) = 1 $.
+	Bei der Startbelegung ist die speziellste Generalisierung zunächst leer. 
+	\subsection{Algorithmus}
+	Sei $ B $ die Menge der Konditionale, der Versionenraum $ V_B $ der bisher verarbeiteten Beispiele werde durch $ S $ und  $ G $ beschrieben. Weitere Voraussetzung ist, dass die Mächtigkeit von $ B  > 1$, die Äquivalenzklasse also mehr als ein Konditional enthält.  
+	\begin{enumerate}
+		\item Startbelegung:
+		\begin{itemize}
+			\item $ S_0 = \{\}$ 
+			\item $ G_0 = \{\} $ (Anmerkung: $ G_0 $ enthält kein Element, da der allgemeinste Constraint alle Variablen umfassen würde und daher seine explizite Angabe nicht notwendig ist)
+		\end{itemize}
+		\item Sei $ e \in B $ ein (der Voraussetzung gemäß positives) Beispiel. Ist die Menge der Konditionale der Äquivalenzklasse größer als die Summe der Menge der Konditionale der anderen Klasse (die Klasse mit reflexivem Wissen ausgenommen), so wird der Constraint im Zuge der negativen Generalisierung \ref{NegativeGeneralisierung} gebildet, sonst als positive Generalisierung \ref{PositiveGeneralisierung} und um das weitere Konditional ergänzt. So lange nicht alle Konstanten für alle Variablen vorkommen, bleibt G unverändert. 
+	\end{enumerate}
+\begin{Bsp}[Modifiziertes Versionenraum-Lernverfahren am Beispiel "{}Birds"{}]
+\noindent
+Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
+Klasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$\\
+\\\\
+Konditional für Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
+Das Konditional für Klasse 2 wird wie folgt generiert:\\
+\begin{enumerate}
+	\item Startbelegung
+	\begin{itemize}
+		\item $ S_0 = \{\}$ 
+		\item $ G_0 = \{\} $
+	\end{itemize}
+	\item $ e = (flies(Bully)) $
+	\begin{itemize}
+		\item $ S = \{(X \neq Tweety)\}$ 
+		\item $ G = \{\} $
+	\end{itemize}
+	\item $ e = (flies(Sylvester)) $
+	\begin{itemize}
+		\item $ S = \{(X \neq Tweety)\}$ 
+		\item $ G = \{\} $
+	\end{itemize}
+		\item $ e = (flies(Kirby)) $
+	\begin{itemize}
+		\item $ S = \{(X \neq Tweety)\}$ 
+		\item $ G = \{\} $
+	\end{itemize}	
+\end{enumerate}
+Konditional für Klasse 2: $\{(flies(X))[0.66]\} <X \neq Tweety>$\\
+\end{Bsp}
+\begin{Bsp}[Modifiziertes Versionenraum-Lernverfahren (MVL) am Beispiel "{}Misanthrope"{} ]	
+\noindent
+Klasse 1: $ \{likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]\} $\\
+Klasse 2: $ \{likes(c,b)[0.578], likes(b,c)[0.578]\} $\\
+Klasse 3: $ \{likes(a,c)[0.05], likes(a,b)[0.05], likes(b,a)[0.05], likes(c,a)[0.05]\} $\\
+\\
+\noindent
+\begin{itemize}
+	\item MVL für Klasse 1
+	\begin{enumerate}
+		\item Startbelegung
+		\begin{itemize}
+			\item $ S_0 = \{\}$ 
+			\item $ G_0 = \{\} $
+		\end{itemize}
+		\item $ e = (likes(a,a)) $
+		\begin{itemize}
+			\item $ S = \{U = a \land V = a\}$ 
+			\item $ G = \{(U \neq V)\} $
+		\end{itemize}
+		\item $ e = (likes(b,b)) $
+		\begin{itemize}
+			\item $ S = \{(U = a \land V = a) \lor (U = b \land V = b)\}$ 
+			\item $ G = \{(U \neq V)\} $
+		\end{itemize}
+		\item $ e = (likes(c,c)) $
+		\begin{itemize}
+		    \item $ S = \{((U = a \land V = a) \lor (U = b \land V = b)) \lor (U = c \land V = c)\}$ 
+			\item $ G = \{U = V\} $
+		\end{itemize}	
+	\end{enumerate}
+	\item MVL für Klasse 2
+	\begin{enumerate}
+		\item Startbelegung
+		\begin{itemize}
+			\item $ S_0 = \{\}$ 
+			\item $ G_0 = \{(U \neq V)\} $
+		\end{itemize}
+		\item $ e = (likes(c,b)) $
+		\begin{itemize}
+			\item $ S = \{U = c \land V = b\}$ 
+			\item $ G = \{(U \neq V)\} $
+		\end{itemize}
+		\item $ e = (likes(b,c)) $
+		\begin{itemize}
+			\item \item $ S = \{(U = c \land V = b) \lor (U = b \land V = c)\}$ 
+			\item $ G = \{(U \neq V)\} $
+		\end{itemize}
+		\end{enumerate}
+	\item MVL für Klasse 3
+	\begin{enumerate}
+		\item Startbelegung
+		\begin{itemize}
+			\item $ S_0 = \{\}$ 
+			\item $ G_0 = \{\} $
+		\end{itemize}
+		\item $ e = (likes(a,c)) $
+		\begin{itemize}
+			\item $ S = \{U = a \land V = c\}$ 
+			\item $ G = \{(U \neq V)\} $
+		\end{itemize}
+		\item $ e = (likes(a,b)) $
+		\begin{itemize}
+			\item $ S = \{(U = a \land V = c) \lor (U = a \land V = b)\}$ 
+			\item $ G = \{(U \neq V)\} $
+		\end{itemize}
+		\item $ e = (likes(a,c)) $
+		\begin{itemize}
+			\item $ S = \{((U = a \land V = c) \lor (U = a \land V = b) \lor (U = a \land V = c))\}$ 
+			\item $ G = \{(U \neq V)\} $
+		\end{itemize}	
+		\item $ e = (likes(b,a)) $
+		\begin{itemize}
+			\item $ S = \{((U = a \land V = c) \lor (U = a \land V = b) \lor (U = a \land V = c) \lor (U = b \land V = a))\}$ 
+			\item $ G = \{(U \neq V)\} $
+		\end{itemize}
+		\item $ e = (likes(c,a)) $
+		\begin{itemize}
+			\item $ S = \{(((U = a \land V = c) \lor (U = a \land V = b) \lor (U = a \land V = c) \lor (U = b \land V = a) \lor (U = c \land V = a))\}$ 
+			\item $ G = \{(U \neq V)\} $
+		\end{itemize}	
+	\end{enumerate}
+\end{itemize}
+\end{Bsp}
+\textbf{{\Large Fazit zur Modifikation des Versionenraum-Lernverfahrens:}} \label{Fazit VRL} 
+Auch wenn es auf den ersten Blick so scheinen mag, als ob es für das Problem der Arbeit eine qualifizierte Lösung bietet, gegenüber der bisherigen Ideen der negativen Generalisierung bietet es keinen Vorteil. Im Gegenteil, es funktioniert nur unter Verwendung der Methoden der negativen und der positiven Generalisierung. Ein interessantes Gedankenspiel, dass aber für die Lösung der Aufgabe leider nicht zielführend ist. 
+}
+
 
 \section{Idee: Logische Generalisierungsoptimierung} \index{Logische Generalisierungsoptimierung} \label{Logische Genopt}
 \textcolor{blue}{
@@ -2732,6 +2866,58 @@ Eine Herbrandinterpretation $ I_H $ ist eine Herbrandmodell $ M_H $, falls $ I_H
 \end{Def}
 
 
+\textcolor{blue}{
+	\chapter{Versionenraum-Lernverfahren} \label{VRL} \index{Versionenraum-Lernverfahren}
+	Die folgenden Ausführungen sind \cite{BKI08} entnommen.\\
+	\\
+	 Das Versionenraum-Lernverfahren fällt unter den Begriff des maschinellen Lernens. Es ist ein Verfahren des Lernens aus Konzepten und ist als solches ein induktives Lernverfahren. Konzepte beschreiben spezifische Teilmengen über einer größeren Menge und das Lernen von Konzepten kann man als einen Suchvorgang im Raum aller möglichen Hypothesen auffassen. 
+	\begin{Def}[Konzept, Beispiel, Instanzt; Def. 5.14, S 122, \cite{BKI08}]
+		Ein Konzept $ c $ ist eine einstellige Funktion\\
+		\hspace{2cm} $ c: M \rightarrow \{0,1\} $\\	
+		über einer Grundmenge M; die Elemtnte von M heißen Beispiele. Für ein Beispiel $ x \in M $ gilt:\\
+		\begin{itemize}
+			\item $ x $ gehört zum Konzept (x ist ein positives Beispiel) gdw. $ c(x) = 1 $
+			\item $ x $ gehört nicht zum Konzept (x ist ein negatives Beispiel) gdw. $ c(x) = 0 $
+		\end{itemize}
+	\end{Def}
+\begin{Def}[Vollständigkeit und Konsistenz von Konzepten, sh. Def. 5.15, S. 123, \cite{BKI08}]
+	Sei $ B \subseteq M $ eine Menge von Beispielen und $ c $ ein Konzept.
+	\begin{itemize}
+		\item $ c $ ist vollständig bzgl. $ B $ gdw. für alle $ b \in B $ gilt: wenn $ b $ positiv ist, dann ist $ c(b) = 1 $.
+		\item $ c $ ist korrekt bzgl. $ B $ gdw. für alle $ b \in B $ gilt: wenn b negativ ist, dann ist $ c(b) = 0 $.
+		\item $ c $ ist konsistent bzgl. $ B $ gdw. $ c $ ist vollständig und korrekt bzgl. $ B $. 
+	\end{itemize}
+\end{Def}
+Das Ergebnis des Konzeptlernverfahrens für ein zu erlernendes Konzept ist ein Konzept $ c $, dass aus einer Menge von positiven und negativen Beispielen ein Konzept generiert wird und das vollständig und korrekt gegenüber der Beispielmenge sein muss. Wichtig ist, dass aufgrund der Tatsache, dass es sich beim Versionenraum-Lernverfahren um ein induktives Lernen handelt nicht sicher gestellt werden kann, dass es tatsächlich völlig mit dem zu erlernenden Konzept übereinstimmt.
+\begin{Def}["{}spezieller als"{}-Relation, Def. 5.18, S. 126, \cite{BKI08}]
+	Seien $ h_1, h_2 : L_E (Beispielsprache \rightarrow \{0,1\}) $ zwei Konzepte.
+	\begin{enumerate}
+		\item $ h_1 $ ist spezieller oder gleich h, geschrieben $ h_1 \le h_2 $, gdw. \\
+		$ \forall e \in L_E(h_1(e) = 1 \Rightarrow h_2(e) = 1) $
+			\item $ h_1 $ ist (echt) spezieller oder gleich h, geschrieben $ h_1 \leq h_2 $, gdw. \\
+		$ h_1 \leq h_2 $ und $ h_2 \not \le h_1 $
+	\end{enumerate} 
+\end{Def}
+\begin{Def}[Versionenraum, Def. 5.20, S. 128 \cite{BKI08}]
+	Sei $ B $ eine Menge von Trainingsbeispielen. Dann ist die Menge\\
+	$ V_B = \{h \in L_ c \mid h $  ist korrekt und vollständig bzgl. $ B \} $\\
+	der Versionenraum bzgl. der Beispielmenge $ B $.
+\end{Def}
+\begin{Def}[speziellste und allgemeinste Generalisierung, Def. 5.23, S. 129 \cite{BKI08}] \label{spezGen}
+Das Konzept  $ h $ ist eine speziellste Generalisierung einer Beispielmenge $ B $ gdw.
+\begin{enumerate}
+	\item $ h $ ist vollständig und korrekt bzgl. $ B $;
+	\item es gibt kein Konzept $ h` $, das vollständig und korrekt bzgl. $ B $ ist und für das $ h` <  h $ gilt.
+\end{enumerate}
+Eine Hypothese ist eine allgemeinste Generalisierung von $ B $ gdw.
+\begin{enumerate}
+	\item $ h $ ist vollständig und korrekt bzgl. $ B $;
+	\item es gibt kein Konzept $ h` $, das vollständig und korrekt bzgl. $ B $ ist und für das $ h <  h` $ gilt.
+\end{enumerate}
+\end{Def}
+Das Versionenraum-Lernverfahren ist ein inkrementelles Lernverfahren. Zu Beginn enthält der Versionenraum alle möglichen Hypothesen. Wenn noch keine Beispiele aus der Menge $ B $ der Beispiele betrachtet wurden, wird der Versionenraum $ V_B $ durch der speziellste Generalisierung $ S_0 $, also der Hypothese, die das Zielkonzept negativ beschreibt und der allgemeinsten Generalisierung $ G_0 $, die das Zielkonzept positiv beschreibt, repräsentiert. Nun wird jedes Trainingsbeispiel betrachtet und die Mengen $ S $ und $ G $ so modifiziert, dass die Anforderungen in Definition \ref{spezGen} erfüllt sind.
+}
+
 \chapter{Modifikation, Korrektur der Bibliothek Log4KR}
 \section{Korrektur in ConstraintBasedGroundingOperator}
 \label{sec:Korrektur1}
@@ -2799,7 +2985,7 @@ Beim Verarbeiten von mehr als einer spezifischen Konstante können Fehler auftre
 	
 \end{figure}
 
-\newpage
+
 
 
 \chapter{Beispiele}
@@ -2965,7 +3151,8 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 
 \newpage
 
-\newpage
+
+
 
 \chapter{Änderungen gegenüber der letzten Version (wie besprochen)}
 
@@ -2995,7 +3182,7 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 		& sh. Deckblatt \\
 		\hline
 		Versionenraumverfahren aufführen, ausführen und auf Verwendbarkeit prüfen
-		& sh\\
+		& sh \ref{VRL}, \ref{Verwendbar VRL}\\
 		\hline
 		U ungleich V bei Bspen. 6.2.2ff einfügen
 		& sh.\ref{Zielbeschreibung} \\

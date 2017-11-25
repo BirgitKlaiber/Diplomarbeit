@@ -112,7 +112,7 @@
 \end{center}
 
 \begin{center}
-\textcolor{blue}{Version 20171123}
+\textcolor{blue}{Version 20171125}
 	
 \large{Kleingartach, 2018}
 \end{center}
@@ -250,7 +250,7 @@ Um unsicheres Wissen adäquat darstellen und verarbeiten zu können, bieten sich
 Inferenz erfolgt auf aussagenlogischer Ebene, d.h. um neues Wissen abzuleiten, betrachtet man die Grundinstanzen der Konditionale.
 
 
-Die Aufgabenstellung dieser Diplomarbeit beinhaltet den Entwurf und die Implementierung einer Inferenzkomponente für FO-PCL unter Verwendung bereits vorhandener Komponenten der Bibliothek Log4KR, eines Projektes der FernUniversität Hagen. Dabei soll die Inferenzkomponente qualitative Konditionale, das sind Konditionale ohne Wahrscheinlichkeit, als Anfrage entgegennehmen und diese mit einer zugeordneten Wahrscheinlichkeit zurückliefern. Es sollen Äquivalenzklassen  \index{Äquivalenzklassen} aus den Grundinstanzen\footnote{sh. Definition \ref{Grundinstanz}}  des angefragten Konditionals gebildet werden, die die Grundkonditionale mit gleichem Parameterwert zu möglichst allgemeinen Konditionalen zusammenfassen \footnote{Eine Definition des Begriffes und nähere Erläuterungen finden sich in \ref{Äquivalenzklassen}}. Dabei wird darauf geachtet werden, so wenig Äquivalenzklassen \index{Äquivalenzklassen} wie möglich zu bilden, sich gleichzeitig aber nicht in der Ausdrucksfähigkeit der Informationen der Wissensbasis zu beschränken.
+Die Aufgabenstellung dieser Diplomarbeit beinhaltet den Entwurf und die Implementierung einer Inferenzkomponente für FO-PCL unter Verwendung bereits vorhandener Komponenten der Bibliothek Log4KR, eines Projektes der FernUniversität Hagen. Dabei soll die Inferenzkomponente qualitative Konditionale, das sind Konditionale ohne Wahrscheinlichkeit, als Anfrage entgegennehmen und diese mit einer zugeordneten Wahrscheinlichkeit zurückliefern. Es sollen Äquivalenzklassen  \index{Äquivalenzklassen} aus den Grundinstanzen\footnote{sh. Definition \ref{Grundinstanz}}  des angefragten Konditionals gebildet werden, die die Grundkonditionale\footnote{Definition \ref{Grundkonditional}} \index{Grundkonditional} mit gleichem Parameterwert zu möglichst allgemeinen Konditionalen zusammenfassen \footnote{Eine Definition des Begriffes und nähere Erläuterungen finden sich in \ref{Äquivalenzklassen}}. Dabei wird darauf geachtet werden, so wenig Äquivalenzklassen \index{Äquivalenzklassen} wie möglich zu bilden, sich gleichzeitig aber nicht in der Ausdrucksfähigkeit der Informationen der Wissensbasis zu beschränken.
 
 Die wesentliche Aufgabe dieser neuen Inferenzkomponente ist es, das vorhandenes Wissen zu nutzen, auszuwerten und Schlüsse zu ziehen.\\
 Sie erlaubt die indirekte Kommunikation mit dem Anwender über eine Schnittstelle, nimmt Anfragen entgegen, bereitet sie gemäß der Semantik von FO-PCL auf, zieht die notwendigen logischen Schlüsse und nimmt unter Verwendung von bereits in Log4KR vorhandenen Komponenten die erforderlichen Berechnungen.
@@ -269,7 +269,7 @@ Wenn man eine Menge von speziellen Konditionalen, die gemeinsame Eigenschaften b
 Eine Einordnung des Themas kann der Abbildung 1 \ref{Eingangsgrafik} entnommen werden.
 
 
-Zunächst wird in Kapitel \ref{FO-PCL} auf FO-PCL selbst eingegangen und diese ausführlich erläutert. Kapitel \ref{Inferenz} beschreibt den Inferenzprozess in FO-PCL. Die experimentellen Forschungen werden in Kapitel \ref{Experim. Forschungen} erläutert und in Kapitel \ref{Beob} ausgewertet. Ideen für Algorithmen werden in Kapitel \ref{Ideen Alg.} ausgeführt und diskutiert. Über die einzelnen Phasen der Entwicklung der Inferenzkomponente gibt Kapitel  \ref{Dok} Auskunft. Der entworfene Algorithmus wird in Kapitel \ref{Alg}  beschrieben. Die Implementation der Inferenzkomponente und der Inferenzprozess \index{Inferenzprozess} und seine Erläuterung anhand von Beispielen ist Inhalt von Kapitel \ref{Inf}. 
+Zunächst wird in Kapitel \ref{FO-PCL} auf FO-PCL selbst eingegangen und diese ausführlich erläutert. Kapitel \ref{Inferenz} beschreibt den Inferenzprozess in FO-PCL. Die experimentellen Forschungen werden in Kapitel \ref{Experim. Forschungen} erläutert und in Kapitel \ref{Beob} ausgewertet. Ideen für Algorithmen werden in Kapitel \ref{Ideen Alg.} ausgeführt und diskutiert. Über die einzelnen Phasen der Entwicklung der Inferenzkomponente gibt Kapitel  \ref{Dok} Auskunft. Der entworfene Algorithmus wird in Kapitel \ref{Alg}  beschrieben. Die Implementation der Inferenzkomponente und der Inferenzprozess  und seine Erläuterung anhand von Beispielen ist Inhalt von Kapitel \ref{Inf}. 
 
  Die Korrektheit und Vollständigkeit des Algorithmus wird in Kapitel \ref{eval} empirisch belegt. Ergebnisse und Ausblick beschließen diese Arbeit in Kapitel \ref{Erg}. Im Anhang befinden sich die Erläuterungen verschiedener theoretischer Grundlagen.
 
@@ -396,7 +396,7 @@ D.h. die Menge $ Form_\Sigma $ der logischen FO-PCL-Formeln über $ \Sigma $ ent
 
 \paragraph{Constraint}\index{Constraint} \nomenclature{ $ C $}{Constraint} \label{constraint}
 
-Die Constraints  sind Formeln mit Nebenbedingungen, hier Formeln, die Relationen zwischen semantischen Objekten darstellen. Sie sind notwendig, da eine direkte Instanziierung eines FO-PCL-Konditionals \index{FO-PCL Konditional} leicht zu Inkonsistenzen führen kann. Um dies zu vermeiden, werden die Constraints eingesetzt, die die Menge der zulässigen Substitutionen eines probabilistischen Konditionals \index{Konditional ! probabilistisch} einzuschränken, vgl. Beispiel \ref{sec:Bsp1} "{}Grippe"{}  und Beispiel \ref{sec:BspSmp} "{}Sympathie"{} . Man verwendet sie auch, um besonderes Wissen über bestimmte Objekte des Universums auszudrücken, vgl. das Beispiel \ref{Bsp:Birds} "{}Birds"{} .
+Die Constraints  sind Formeln mit Nebenbedingungen, hier Formeln, die Relationen zwischen semantischen Objekten darstellen. Sie sind notwendig, da eine direkte Instanziierung eines FO-PCL-Konditionals \index{FO-PCL Konditional} leicht zu Inkonsistenzen führen kann. Um dies zu vermeiden, werden die Constraints eingesetzt, die die Menge der zulässigen Substitutionen eines probabilistischen Konditionals \index{Konditional ! probabilistisches} einzuschränken, vgl. Beispiel \ref{sec:Bsp1} "{}Grippe"{}  und Beispiel \ref{sec:BspSmp} "{}Sympathie"{} . Man verwendet sie auch, um besonderes Wissen über bestimmte Objekte des Universums auszudrücken, vgl. das Beispiel \ref{Bsp:Birds} "{}Birds"{} .
 
 Constraints beschreiben im Wesentlichen die Gleichheit bzw. Ungleichheit von Termen.
 
@@ -444,11 +444,11 @@ $ vars(\alpha \wedge \beta) $ &  $ := vars(\alpha) \cup vars(\beta) $,  & \hspac
 
 \end{Def}
 Der probabilistische Teil von FO-PCL wird mittels probabilistischer Konditionale definiert:
-\subsubsection{Probabilistische Konditionale}  \index{Konditional ! probabilistisch}
+\subsubsection{Probabilistische Konditionale}  \index{Konditional ! probabilistisches}
 (Nähere Ausführungen zu probabilistischen Konditionalen können dem Anhang \ref{probKond} entnommen werden.)
 
 \label{Fo-PCL Konditional}
-\begin{Def}[First-Order probabilistisches $ \Sigma $-Konditional]\cite[Kap. 6.2, S. 127, vgl. Def. 6.2.6]{Fis10} \index{Konditional ! FO probab. $ \Sigma $-}
+\begin{Def}[First-Order probabilistisches $ \Sigma $-Konditional]\cite[Kap. 6.2, S. 127, vgl. Def. 6.2.6]{Fis10} \index{Konditional ! FO probab. $ \Sigma $-} \index{FO-PCL Konditional}
 	
 \noindent
 Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur.\\
@@ -467,7 +467,7 @@ Wie FO-PCL Konditionalen praktisch aussehen können, demonstrieren die vorangega
 
 \paragraph{Grundkonditional}
 
-FO-PCL-Konditionale mit $ \Sigma $-Grundformeln $ \varphi, \psi $ werden Grundkonditionale genannt.\index{Grundkonditional}
+FO-PCL-Konditionale mit $ \Sigma $-Grundformeln $ \varphi, \psi $ werden Grundkonditionale genannt.\index{Grundkonditional} \label{Grundkonditional}
 
 \begin{Bsp}[Grundkonditional]
 	Ein einzelnes Grundkonditional für das Beispiel \ref{sec:Misanthrop} "{}Misanthrop"{} und das Konditional $ MI_1 $ könnte bei der Konstantenmenge $ \cal{D} $$_{MI} = \{ a, b, c\} $ wie folgt aussehen:\\
@@ -642,7 +642,7 @@ Bei FO-PCL erhält man Grundatome, wenn man alle zulässigen Grundsubstitutionen
 Die aussagenlogischen probabilistischen Konditionale, die man durch diese Grundsubstitution erhält korrespondieren mit einer aussagenlogischen probabilistischen Wissensbasis und können entsprechend verarbeitet werden.
 
 
-\subsubsection{Logische Semantik}
+\subsubsection{Logische Semantik} \index{Semantik ! logisch}
 
 \begin{Def}[Auswertung eines Constraint] \cite[Kap. 6.3, S. 130, Def. 6.3.1]{Fis10}\label{Constraint} \index{Constraint ! Auswertung eines}
 	
@@ -858,7 +858,7 @@ $
 \end{Def}
 
 
-\subsubsection{Probabilistische Semantik}
+\subsubsection{Probabilistische Semantik}  \index{Semantik ! probabilistisch}
 Die Menge $ gnd(R) $ \nomenclature{$ gnd(R) $}{Menge der Grundsubstitutionen} der Grundsubstitutionen eines Konditionals $  R =$ \\ $ \langle (\varphi \mid \psi)[\xi], C \rangle $ beschreibt eine Menge $ X(R) $ binärer Zufallsvariablen, was wiederum der Menge syntaktisch verschiedener Grundatome der Grundinstanzen \index{Grundinstanz} der Menge der Grundsubstitutionen entspricht. Damit stellt $ gnd(R) $ auch eine Herbrandbasis $ {\cal H} (R) := X(R)$ für alle möglichen Belegungen der Terme mit Konstanten und deren Wahrheitswerten dar, s. Definition \ref{FO-Herb} (Herbrandbasis).
 
 \begin{Def}[FO-PCL Interpretation] \index{FO-PCL Interpretation}\cite[Kap. 6.3.2, Def. 6.3.5]{Fis12}
@@ -970,7 +970,7 @@ Für jede Grundinstanz müssen folglich die entropieoptimalen Parameterwerte sol
 \label{sec:parÄ}
 Die folgenden Ausführungen sind \cite[Kap. 7.1, S. 148ff]{Fis10} entnommen.
 
-Voraussetzung für parametrische Gemeinsamkeit ist paarweise parametrische Äquivalenz \index{Äquivalenz ! parametrische}. Bei der parametrischen Äquivalenz \index{Äquivalenz ! parametrische} handelt es sich um eine Äquivalenzrelation. Sie liegt vor, wenn zwei Grundinstanzen \index{Grundinstanz} eines Konditionals \index{Konditional} den gleichen Parameterwert\footnote{Unter einem gleichen Parameterwert versteht man die gleiche Wahrscheinlichkeit} haben. In einer Menge von Grundinstanzen liegt parametrische Gemeinsamkeit dann vor, wenn alle Grundkonditionale paarweise parametrisch äquivalent sind. Ist dies bei allen Grundinstanzen der Fall, so handelt es sich um parametrische Uniformität siehe weiter unten.
+Voraussetzung für parametrische Gemeinsamkeit ist paarweise parametrische Äquivalenz \index{Äquivalenz ! parametrische}. Bei der parametrischen Äquivalenz \index{Äquivalenz ! parametrische} handelt es sich um eine Äquivalenzrelation. Sie liegt vor, wenn zwei Grundinstanzen \index{Grundinstanz} eines Konditionals \index{Konditional} den gleichen Parameterwert\footnote{Unter einem gleichen Parameterwert versteht man die gleiche Wahrscheinlichkeit} haben. In einer Menge von Grundinstanzen liegt parametrische Gemeinsamkeit dann vor, wenn alle Grundkonditionale, \ref{Grundkonditional},  paarweise parametrisch äquivalent sind. Ist dies bei allen Grundinstanzen der Fall, so handelt es sich um parametrische Uniformität siehe weiter unten.
 
 Die Grundinstanzen mit gleichen Parameterwerten kann man in Äquivalenzklassen \index{Äquivalenzklassen} zusammenfassen. 
 
@@ -1043,7 +1043,7 @@ Jetzt können beliebige Anfragen in Form eines unbedingten Konditionals gestellt
 
 \subsubsection{Grundierung der Anfrage}
 
-Das angefragte, unbedingte Konditional wird gemäß der Syntax von FO-PCL grundiert, d.h. es werden alle Grundkonditionale für das angefragte Konditional generiert.
+Das angefragte, unbedingte Konditional wird gemäß der Syntax von FO-PCL grundiert, d.h. es werden alle Grundkonditionale, \ref{Grundkonditional},  für das angefragte Konditional generiert.
 
 \subsubsection{Berechnung der Wahrscheinlichkeit für jedes Grundkonditional}
 Es wird zu jedem Grundkonditional eine Wahrscheinlichkeit mit Hilfe des epistemischen Zustands, der zur Wissensbasis gehört und der eine Wahrscheinlichkeitsfunktion umfasst, berechnet. Die Antwort zu diesem Zeitpunkt beinhaltet die Menge der Grundinstanzen des angefragten Konditionals und die jeweils dazu berechnete Wahrscheinlichkeit. Dabei wird von der berechneten Wahrscheinlichkeit erwartet, dass sie die Sicherheit angibt, mit der die Frage unter Berücksichtigung des bisher erworbenen Wissens beantwortet werden kann.
@@ -1066,7 +1066,7 @@ Eine Äquivalenzrelation auf einer Menge $ \cal{R} $ von FO-PCL Konditionalen is
 
 
 \textcolor{blue}{
-\begin{Def}[Parametrische Äquivalenz von FO-PCL Konditionalen] \label{Äquivalenz in FO-PCL} \index{Äquivalenz ! parametrische}
+\begin{Def}[Parametrische Äquivalenz von FO-PCL Konditionalen] \label{Äquivalenz in FO-PCL} \index{Äquivalenz ! parametrische} \index{FO-PCL Konditional}
 	Sei \cal{R} eine Menge von FO-PCL Konditionalen. Es gelte für alle $ R \in \cal{R} $, dass sie Grundinstanzen des gleichen Konditionals sind. Zwei Konditionale $ U,V \in \cal{R} $ sind parametrisch äquivalent, wenn sie den gleichen Parameterwert besitzen\footnote{Unter einem gleichen Parameterwert versteht man die gleiche Wahrscheinlichkeit}, sh. auch \ref{sec:parÄ}. Den gleichen Parameterwert besitzen sie dann, wenn die Wahrscheinlichkeiten mathematisch gleich sind. 
 \end{Def}
 }
@@ -1407,7 +1407,7 @@ Man unterscheidet im allgemeinen zwischen spezifischen und generischen Grundinst
 Bei spezifischen Grundinstanzen von Konditionalen handelt es sich um solche, die bereits in der Wissensbasis enthalten sind.
 
 \label{Bsp:Spez Grundinstanz} 
-\index{Grundinstanz ! spezifische}
+\index{Grundinstanz ! spezifisch}
 \begin{Bsp}[Spezifische Grundinstanz eines Konditionals]
 	
 	Vgl. das Beispiel \ref{Bsp:Birds}"{}Birds"{}
@@ -1787,12 +1787,12 @@ Dies ist ein einfacher Fall und führt zur Ausgabe aller Grundkonditionale mit j
 Alle denkbaren Algorithmen haben die ersten Schritte gemeinsam. Das ist ein Erfordernis des Inferenzprozesses in FO-PCL, der in dieser Arbeit auf propositionaler Basis betrieben wird. Lifted Inference ist ein Thema für weitergehende Forschungen und soll nicht Gegenstand der Arbeit sein. 
 Voraussetzung ist in jedem Fall eine konsistente Wissensbasis, vgl. auch Definition \ref{KB}. Die Wissensbasis sollte ein oder mehrere Konditionale enthalten, die korrekt im Sinne der FO-PCL Syntax sind. Zur Formulierung der Wissensbasis wird eine Signatur benötigt, s. auch Definition  \ref{Signatur}. Unter einer Signatur versteht man eine Menge die ein- oder mehrsortig sein, aber nicht leer sein darf. Weitere Bestandteile sind eine Menge von Konstantensymbolen und von Prädikatensymbolen. Den Prädikaten sowie den Konstanten müssen Sorten zugeordnet sein. Die Wissensbasis sollte ein oder mehrere Konditionale enthalten, die korrekt im Sinne der FO-PCL Syntax sind. Im Übrigen soll sich in dieser Arbeit die Entwicklung eines Algorithmus auf ein- und zweistellige Prädikate beschränken.
 
-Unabhängig vom Algorithmus müssen die folgenden Schritte ausgeführt werden. Die Eingabe erfolgt in Form eines unbedingten Konditionals. Wissensbasis und das Konditional müssen grundiert werden. Die Modelle für die Wissensbasis müssen berechnet werden und das Modell, das die relative Entropie maximiert muss gewählt werden. Für jedes Grundkonditional aus der Grundierung der Anfrage muss die Wahrscheinlichkeit berechnet werden. Konditionale mit gleichen Wahrscheinlichkeiten müssen zusammengefasst werden. 
+Unabhängig vom Algorithmus müssen die folgenden Schritte ausgeführt werden. Die Eingabe erfolgt in Form eines unbedingten Konditionals. Wissensbasis und das Konditional müssen grundiert werden. Die Modelle für die Wissensbasis müssen berechnet werden und das Modell, das die relative Entropie maximiert muss gewählt werden. Für jedes Grundkonditional  \index{Grundkonditional} aus der Grundierung der Anfrage muss die Wahrscheinlichkeit berechnet werden. Konditionale mit gleichen Wahrscheinlichkeiten müssen zusammengefasst werden. 
 
 Der darauf folgende Prozess, die Konditionale mit gleichen Wahrscheinlichkeiten zu einem möglichst allgemeinen Konditional zusammen zu fassen ist abhängig vom gewählten Algorithmus.
 
 \section{Zielbeschreibung} \label{Zielbeschreibung}                                                                                                                                                                   
-Das Ziel des Algorithmus ist die Generierung einer Rückgabemenge von bedingten Konditionalen, die n Grundkonditionalen mit gleicher Wahrscheinlichkeit und sollte möglichst allgemein sein. Unter einem allgemeinen Konditional im Sinne dieser Arbeit versteht man ein möglichst kurzes Konditional. Ein Konditional ist möglichst kurz, wenn der logische Constraint eine möglichst einfache Formel ist, also nur so viele atomare Ausdrücke und Junktoren wie unbedingt nötig enthält.
+Das Ziel des Algorithmus ist die Generierung einer Rückgabemenge von bedingten Konditionalen. Jedes dieser Konditionale sollte die jeweilige Menge der Grundkonditionale, \ref{Grundkonditional}, mit gleicher Wahrscheinlichkeit beschreiben und möglichst allgemein sein. Unter einem allgemeinen Konditional im Sinne dieser Arbeit versteht man ein möglichst kurzes Konditional. Ein Konditional ist möglichst kurz, wenn der logische Constraint eine möglichst einfache Formel ist, also nur so viele atomare Ausdrücke und Junktoren wie unbedingt nötig enthält.
 
 
 \begin{Bsp}[Angestrebte Ausgabe am Beispiel "{}Birds"{} \ref{Bsp:Birds}, bzw.  \ref{Birds}]\index{angestrebte Ausgabe}
@@ -2341,7 +2341,7 @@ Dabei müssen die Wissensbasis und das Konditional zunächst grundiert werden. W
 
 Für jede Grundinstanz des angefragten Konditionals soll anschließend die (bedingte) Wahrscheinlichkeit berechnet werden.
 
-Dazu nutzt man das Wissen der Wissensbasis und betreibt Inferenz, d.h. man leitet neues Wissen ab,  in diesem Fall die Berechnung der bedingten Wahrscheinlichkeit für jedes Grundkonditional des angefragten Konditionals.
+Dazu nutzt man das Wissen der Wissensbasis und betreibt Inferenz, d.h. man leitet neues Wissen ab,  in diesem Fall die Berechnung der bedingten Wahrscheinlichkeit für jedes Grundkonditional \index{Grundkonditional} des angefragten Konditionals.
 
 Ausgangsbasis dafür ist ein Modell der Wissensbasis. Es eignet sich jedoch nicht jedes beliebige Modell. Aus allen Modellen muss zunächst das bestmögliche ausgewählt werden.
 Das geschieht bei FO-PCL mit Hilfe der Maximierung der Entropie, s. \ref{MaxEnt}. Aus den möglichen Welten wird diejenige mit der maximalen Entropie ausgewählt; d.h. diejenige, die nur das Wissen der Wissensbasis und ihrer probabilistischen Konsequenzen darstellt, im Übrigen aber so wenig Informationen wie möglich hinzufügt.
@@ -2676,7 +2676,7 @@ Dazu wird ihr das relationale Konditional und die Grundinstanzen der Anfrage üb
 Über die Methode compute(Collection<RelationalConditional>), der die Grundinstanzen des angefragten Konditionals übergeben werden, wird die Methode queryProbability(Formula<RelationalAtom>, Formula<RelationalAtom>) aus Log4KR aufgerufen, um die Wahrscheinlichkeit jeden Konditionals zu berechnen. Als Ergebnis erhält man die Grundinstanzen des angefragten Konditionals zusammen mit der berechneten Wahrscheinlichkeit.
 
 Nun wird die Generalisierungsmethode generalize (RelationalConditional, Collection<Collection<RelationalConditional>>)auf dem  Generalisierungsoperator aufgerufen, der die Konditionale mit der gleichen Wahrscheinlichkeit in eine Klasse zusammenfasst und ein generalisiertes Konditional pro Klasse erzeugt.\\
-Ein erster Ansatz erzeugt eine positive oder negative Generalisierung \index{Generalisierung ! positiv} \index{Generalisierung ! negativ} abhängig von der Anzahl der Grundkonditionale. Da dabei die Behandlung reflexiven Wissens ein Problem darstellt, soll eine Lösung gesucht werden, bei der zunächst das reflexive Wissen verarbeitet werden könnte und dann negativ und positiv generalisiert wird, die Constraints der Generalisierungen optimiert werden und dann die bessere Lösung gewählt wird. \\
+Ein erster Ansatz erzeugt eine positive oder negative Generalisierung \index{Generalisierung ! positiv} \index{Generalisierung ! negativ} abhängig von der Anzahl der Grundkonditionale \index{Grundkonditional}. Da dabei die Behandlung reflexiven Wissens ein Problem darstellt, soll eine Lösung gesucht werden, bei der zunächst das reflexive Wissen verarbeitet werden könnte und dann negativ und positiv generalisiert wird, die Constraints der Generalisierungen optimiert werden und dann die bessere Lösung gewählt wird. \\
 Bei der ersten praktischen Realisierung wurde aber das reflexive Wissen im Zuge der jeweiligen Generalisierung betrachtet. Das Ergebnis beider Generalisierungen ist für zwei Klassen von denen eine reflexiv ist und die andere nicht tatsächlich gleich.\\
 
 TODO 

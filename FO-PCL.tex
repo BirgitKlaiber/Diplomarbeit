@@ -112,7 +112,7 @@
 \end{center}
 
 \begin{center}
-\textcolor{blue}{Version 20171125}
+\textcolor{blue}{Version 20171130}
 	
 \large{Kleingartach, 2018}
 \end{center}
@@ -1918,7 +1918,7 @@ Anders verhält es sich beim Beispiel "{}cold"{} für die Anfrage contact(X,Y):
 Obwohl die negative Generalisierung für den Fall einstelliger Prädikate zum gewünschten Ergebnis kam und auch wie für die positive Generalisierung gilt, dass sie in jedem Fall zuverlässig und richtig arbeitet, für den Fall zweistelliger Prädikate kommt es zu keinem übersichtlicheren Ergebnis als bei der positiven Generalisierung. Es ist also nach Alternativen zu forschen.
 
 \textcolor{blue}{
-	\section{Modifikation des Versionenraum-Lernverfahrens} \label{Verwendbar VRL} \index{Versionenraum-Lernverfahren}
+	\section{Idee: Modifikation des Versionenraum-Lernverfahrens} \label{Verwendbar VRL} \index{Versionenraum-Lernverfahren}
 	Nähere Ausführungen zum Knozept des Versionenraum-Lernverfahren finden sich in Anhang \ref{VRL}.\\
 	\subsection{Vorüberlegungen}
 	In diesem Kapitel soll untersucht werden inwieweit das Versionenraum-Lernverfahren modifiziert werden kann, um aus einer Menge von Constraints einen möglichst allgemeingültigen Constraint zu erzeugen. Wenn man das Konzept des Versionenraum-Verfahrens betrachtet, so drängt sich allein durch die Analogie der Begrifflichkeiten der Gedanke auf, in einer Modifikation ein verwendbares Konzept für die Erzeugung eines möglichst allgemeinen Konditionals zu finden.
@@ -2060,16 +2060,210 @@ Auch wenn es auf den ersten Blick so scheinen mag, als ob es für das Problem de
 \begin{Def}[Logische Generalisierungsoptimierung]
 	Unter der logischen Generalisierungsoptimierung versteht man den Prozess der Erzeugung eines logisch minimierten Konditionals. Logisch minimiert ist ein Konditional genau dann, wenn der Constraint logisch minimiert ist.  
 \end{Def}
-Diese Idee baut auf der positiven und der negativen Generalisierung auf. Es werden beide Generalisierungen erzeugt und der generierte Constraint in jeder der beiden Alternativen logisch optimiert. Die beiden Ausdrücke werden im einfachsten Fall über die Länge des Constraints verglichen und der kürzere gewählt.
+Diese Idee baut auf der positiven und der negativen Generalisierung auf. Es werden beide Generalisierungen erzeugt und der generierte Constraint in jeder der beiden Alternativen logisch optimiert. Die beiden Ausdrücke werden im einfachsten Fall über die Länge des Constraints verglichen und der kürzere gewählt.\\
+\subsection{Logische Optimierung von Constraints} \label{LogOpt}
+Zur Optimierung boolescher Funktionen sind Ausführungen im Anhang unter \ref{Minimierung} zu finden.
+\subsubsection{Minimierung nach Quine/McClusky} \label{Min_Besch_QMC} \index{Minimierung ! nach Quine/McClusky}
+Eine kurze Szizze zu diesem Verfahren findet sich in \ref{Min_QMC}.\\
+Das Verfahren soll hier an einem Beispiel erläutert werden.
+\begin{enumerate}
+	\item Reflexives Klasse von der Minimierung ausnehmen\footnote{Die Klasse mit dem reflexiven Konditionalen ist von der Minimierung auszunehmen; der Constraint dafür ist ein Constraint der Gleichheit für beide Variablen. Dieser Constraint ist minimal.}
+	\item Den Constraint der Klasse um den reflexiven Constraint kürzen
+	\item Aus der DNK eine KDNF erstellen 
+	\item Ermitteln der Primterme
+	\item Erstellen der Primtermtabelle
+	\begin{enumerate}
+		\item Spaltendominanzprüfung
+		\item Zeilendominanzprüfung
+	\end{enumerate}
+	\item Auswahl der Primterme
+	\item Aus den Primtermen den Constraint und ein Konditional erzeugen	
+\end{enumerate}
+\begin{Bsp}[Minimierung nach Quine/McClusky am Beispiel "{}Misanthrope"{} im Falle der positiven Generalisierung]
+	Klasse 1: $ \{likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]\} $\\
+	Klasse 2: $ \{likes(c,b)[0.578], likes(b,c)[0.578]\} $\\
+	Klasse 3: $ \{likes(a,c)[0.05], likes(a,b)[0.05], likes(b,a)[0.05], likes(c,a)[0.05]\} $\\
+	\\
+	\noindent
+	Konditionale für die Klassen nach der positiven Generalisierung:\\
+	Konditional für Klasse 1: $ \{(likes(U,V))[0.578] <((U = c \land V = b) \lor (U = b \land V = c)>\} $\\
+	Konditional für Klasse 2: $ \{(likes(U,V))[0.0] <(((U = a \land V = a) \lor (U = b \land V = b)) \lor (U = c \land V = c)) >\} $\\
+	Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
+	\begin{enumerate}
+		\item Reflexive Klasse von der Minimierung ausnehmen:\\
+		Es bleiben Klasse 2 und 3 übrig.	
+		\item Aus der DNK eine KDNF erstellen:\\\\
+		Am Beispiel Klasse 3:\\
+		$ X_0 = (U = a) $\\
+		$ X_1 = (U = b) $\\
+		$ X_2 = (U = c) $\\
+		$ X_3 = (V = a) $\\
+		$ X_4 = (V = b) $\\
+		$ X_4 = (V = c) $\\
+		\\
+		\noindent
+		Die DNF sieht für Klasse 3 so aus:\\
+		$ (X_5 \land X_0) \lor (X_4 \land X_0) \lor (X_3 \land X_1) \lor (X_3 \land X_2) $
+		\begin{footnotesize}
+			\begin{longtable}{ |  p {0.05\currentLongTableWidth} | p {0.05\currentLongTableWidth}  p {0.05\currentLongTableWidth}  p {0.05\currentLongTableWidth} p {0.05\currentLongTableWidth} p {0.05\currentLongTableWidth} p {0.05\currentLongTableWidth} |}
+				\hline
+				\multicolumn{7}{|c|}{\textbf{KDNF für Klasse 3}}\\
+				\hline\hline
+				\hline 
+				i
+				& $ X_5 $
+				& $ X_4 $
+				& $ X_3 $
+				& $ X_2 $
+				& $ X_1 $
+				& $ X_0 $\\
+				\endhead
+				\hline
+				\endfoot
+				\endlastfoot
+				\hline
+				0
+				&  1
+				& 0
+				& 0
+				& 0
+				& 0
+				& 1\\
+				1
+				&  1
+				& 0
+				& 0
+				& 0
+				& 1
+				& 1\\
+				2
+				& 1
+				& 0
+				& 0
+				& 1
+				& 0
+				& 1\\
+				3
+				&  1
+				& 0
+				& 0
+				& 1
+				& 1
+				& 1\\
+				4
+				&  1
+				& 0
+				& 1
+				& 0
+				& 0
+				& 1\\
+				5
+				& 1
+				& 0
+				& 1
+				& 0
+				& 1
+				& 1\\
+				6
+				& 1
+				& 0
+				& 1
+				& 1
+				& 0
+				& 1\\
+				7
+				& 1
+				& 0
+				& 1
+				& 1
+				& 1
+				& 1\\
+				8
+				& 1
+				& 1
+				& 0
+				& 0
+				& 0
+				& 1\\
+				9
+				& 1
+				& 1
+				& 0
+				& 0
+				& 1
+				& 1\\
+				10
+				& 1
+				& 1
+				& 0
+				& 1
+				& 0
+				& 1\\
+				11
+				& 1
+				& 1
+				& 0
+				& 1
+				& 1
+				& 1\\
+				12
+				& 1
+				& 1
+				& 1
+				& 0
+				& 0
+				& 1\\
+				13
+				& 1
+				& 1
+				& 1
+				& 0
+				& 1
+				& 1\\
+				14
+				& 1
+				& 1
+				& 1
+				& 0
+				& 1
+				& 1\\
+				15
+				& 1
+				& 1
+				& 1
+				& 1
+				& 1
+				& 1\\
+				\hline
+				\caption{KDNF für Klasse 3 als Tabelle}
+			\end{longtable}
+		\end{footnotesize}
+		\item Ermitteln der Primterme
+		\item Erstellen der Primtermtabelle:\\
+		An dieser Stelle wollen wir die Ausführungen am Beispiel beenden und das Ergebnis präsentieren
+		\begin{enumerate}
+			\item Spaltendominanzprüfung
+			\item Zeilendominanzprüfung
+		\end{enumerate}
+		\item Aus den Primtermen den Constraint und ein Konditional erzeugen:\\
+			Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
+		Die Anwendung der Minimierung bringt hier keinerlei Verbesserung gegenüber der positiven Generalisierung.	
+		\subsubsection{Minimierung im Karnaugh-Diagramm}  \label{Min_Besch_K} \index{Minimierung ! im Karnaugh-Diagramm}
+		Die Idee des Verfahrens wird unter \ref{Min_K_Dia} beschrieben.
+		\subsubsection{Fazit}
+		Die Minimierung nach Quine/McClusky bringt im Beispiel "{}Misanthrope"{} für die Klasse 3 keinerlei Verbesserung. Hier wäre die Anwendung des Distributivgesetzes sinnvoller gewesen mit dem Ergebnis:\\
+		Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \land (V = c \lor V = b)) \lor ((U = b \lor U = c) \land V = a))>\} $
+	\end{enumerate}
+\end{Bsp}
 }
-
+\subsection{Einzelne Schritte}
 \begin{itemize}
 	\item Positive Generalisierung \index{Generalisierung ! positiv}, \ref{PositiveGeneralisierung}
 	\item Negative Generalisierung \index{Generalisierung ! negativ}, \ref{NegativeGeneralisierung}
-	\item Logische Optimierung TODO
+	\item Logische Optimierung, \ref{LogOpt}
 	\item Generalisierungsvergleich
 \end{itemize}
-
+TODO: Abbildung
 \section{Idee: Konditionale Generalisierung}
 \index{Generalisierung ! konditional}
 \subsection{Vorüberlegungen}
@@ -2688,10 +2882,10 @@ TODO
 
 
 \section{Architektur}
-
+TODO
 
 \section{Umgebungseinstellungen}
-
+TODO
 
 \section{Paketstruktur der Komponente}
 \begin{itemize}
@@ -2766,19 +2960,17 @@ TODO
 
 
 
-\chapter{Evaluation}\label{eval}
+\chapter{Evaluation}\label{eval} TODO
 \section{Korrektheit}
 \section{Vollständigkeit}
 \section{Terminierung}
 \section{Laufzeit}
 
 
-\chapter{Ergebnisse und Ausblick}\label{Erg}
+\chapter{Ergebnisse und Ausblick}\label{Erg}TOTO
 
 
 
-
-\newpage
 
 
 \appendix{}
@@ -3149,11 +3341,31 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 \label{Misanthrope3Spez}
 \lstinputlisting{Examples/Misanthrope3Spez.txt}
 
-\newpage
-
-
-
-
+\textcolor{blue}{
+\chapter{Minimierung boolescher Funktionen} \label{Minimierung}
+Es soll nur einen groben Überblick über zwei einfache Verfahren zur Minimierung boolescher Ausdrücke gegeben werden. Weiter Ausführungen entnehmen sie bitte \cite{G01}.
+\section{Das Verfahren nach Quine/McClusky} \label{Min_QMC} \index{Minimierung ! nach Quine/McClusky}
+Der grundlegende Gedanke, der dem Verfahren von Quine/McClusky zugrunde liegt ist der, dass zwei disjunktiv verknüpfte  Konjunktionsterme, die sich nur in der Negation einer einzigen Variablen unterscheiden verschmelzen und die betroffene Variable entfernen kann. Voraussetzung ist, dass die boolesche Funktion in Kanonisch Disjunktiver Normalform (KDNF) vorliegt. Eine KDNF besteht aus einer Disjunktion von Mintermen. Minterme sind Konjunktionsterme maximaler Länge, sie enthalten also jede Variable.\\
+\\
+Sei die boolesche Funktion in KDNF. Dann kann man eine minimale äquivalente Funktion mit folgenden Schritten erzeugen:
+\begin{enumerate}
+	\item Ermitteln der Primterme:\\
+	Man vergleicht alle Minterme paarweise, ob sie sich in einer einzigen Negation unterscheiden und verschmilzt sie in diesem Fall. Auf die verschmolzenen Terme wendet man dieses Verfahren so lange an, bis keine Verschmelzungen mehr möglich sind. Die dabei erhaltenen Terme nennt man Primterme.
+	\item Erstellen der Primtermtabelle:\\
+	Um herauszufinden, welche der Primterme man benötigt, erstellt man eine Tabelle, bei der man die Primterme an den Spalten abträgt, die Minterme an den Zeilen. Man markiert in der jeweiligen Zeile, wen ein Minterm Element des Primterms ist.
+	\item Dominanzprüfung
+	Hier werden überflüssige Zeilen oder Spalten eliminiert. 
+	\begin{enumerate}
+		\item Spaltendominanzprüfung:\\
+		Es werden sie Spalten paarweise verglichen. Dabei wird ermittelt, ob Spalten existieren, in denen Primterme Teilmenge von Primtermen anderer Spalten ist. Ist das der Fall, kann die Obermenge gestrichen werden. 
+		\item Zeilendominanzprüfung:\\
+		Man vergleicht die Zeilen paarweise auf Teilmengenbeziehungen. Wenn Minterme eine Teilmenge der Minterme einer anderen Zeile sind, so kann der Primterm mit der Teilmenge gestrichen werden. 
+	\end{enumerate}
+	\item Auswahl der Primterme:\\
+	Die verbleibenden Primterme muss man so auswählen, dass alle Minterme abgedeckt werden. 
+\end{enumerate}
+\section{Minimierung im Karnaugh-Diagramm}\label{Min_K_Dia} \index{Minimierung ! im Karnaugh-Diagramm}
+}
 \chapter{Änderungen gegenüber der letzten Version (wie besprochen)}
 
 \setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
@@ -3194,10 +3406,10 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 		& sh. \ref{examplesdep} und \ref{Beispiele unausfuehrbar} \\
 		\hline
 		logische Generalisierung ausbauen
-		& sh. \\
+		& sh. \ref{Logische Genopt} \ref{Minimierung} \\
 		\hline
 		Idee: Flussplan fertig machen und ins Dokument einbauen
-		& sh.  \\
+		& kommt in der nächsten Version \\
 		\hline
 		nicht besprochen
 		& Generalisierung im Algorithmus beschrieben, Beispiele wären eine Wiederholung von Kapitel 4, darüber muss man reden, wenn man die Implementation bespricht sh. \ref{general} \newline Anmerkung zu unausführbaren Beispielen \ref{Beispiele unausfuehrbar} \newline Ergänzung der Auswertung \ref{Fallunterscheidung Formel 2Aequi}, \ref{Fallunterscheidung Formel MehrAequi} \newline Konditionale Generalisierung für Formeln ausformuliert \ref{KondGen_Formel} \\

@@ -112,7 +112,7 @@
 \end{center}
 
 \begin{center}
-\textcolor{blue}{Version 20171130}
+\textcolor{blue}{Version 20171201}
 	
 \large{Kleingartach, 2018}
 \end{center}
@@ -2108,9 +2108,9 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 			\begin{longtable}{ |  p {0.05\currentLongTableWidth} | p {0.05\currentLongTableWidth}  p {0.05\currentLongTableWidth}  p {0.05\currentLongTableWidth} p {0.05\currentLongTableWidth} p {0.05\currentLongTableWidth} p {0.05\currentLongTableWidth} |}
 				\hline
 				\multicolumn{7}{|c|}{\textbf{KDNF für Klasse 3}}\\
-				\hline\hline
+				\hline
 				\hline 
-				i
+				$ m_i mit i =$
 				& $ X_5 $
 				& $ X_4 $
 				& $ X_3 $
@@ -2238,12 +2238,66 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 				\caption{KDNF für Klasse 3 als Tabelle}
 			\end{longtable}
 		\end{footnotesize}
-		\item Ermitteln der Primterme
-		\item Erstellen der Primtermtabelle:\\
-		An dieser Stelle wollen wir die Ausführungen am Beispiel beenden und das Ergebnis präsentieren
+		\item Ermitteln der Primterme:\\
+			\begin{footnotesize}
+			\begin{longtable}{ |  p {0.15\currentLongTableWidth} | p {0.05\currentLongTableWidth}  p {0.05\currentLongTableWidth}  p {0.05\currentLongTableWidth} p {0.05\currentLongTableWidth} p {0.05\currentLongTableWidth} p {0.05\currentLongTableWidth} | p {0.15\currentLongTableWidth } |}
+				\hline
+				\multicolumn{8}{|c|}{\textbf{Ermittlung der Primterme}}\\
+				\hline
+				\hline 
+				$ m_i,j,k,l,m,n $
+				& $ X_5 $
+				& $ X_4 $
+				& $ X_3 $
+				& $ X_2 $
+				& $ X_1 $
+				& $ X_0 $
+				& Primterme\\
+				\endhead
+				\hline
+				\endfoot
+				\endlastfoot
+				\hline
+				$ m_i,j,k,l,m,n $
+				& 1
+				& -
+				& -
+				& -
+				& -
+				& 1
+				& $ P_0 $ \\
+				$ m_i,j,k,l,m,n $
+				& -
+				& 1
+				& -
+				& -
+				& -
+				& 1
+				& $ P_1 $\\
+					$ m_i,j,k,l,m,n $
+				& -
+				& -
+				& 1
+				& -
+				& 1
+				& -
+				& $ P_2 $\\
+				$ m_i,j,k,l,m,n $
+				& -
+				& -
+				& 1
+				& 1
+				& -
+				& -
+				& $ P_3 $\\
+				\hline
+				\caption{Ermittlung der Primterme}
+			\end{longtable}
+		\end{footnotesize}
+		\item Erstellen der Primtermtabelle
 		\begin{enumerate}
-			\item Spaltendominanzprüfung
-			\item Zeilendominanzprüfung
+			\item Spaltendominanzprüfung: keine Verbesserung
+			\item Zeilendominanzprüfung: keine Verbesserung
 		\end{enumerate}
 		\item Aus den Primtermen den Constraint und ein Konditional erzeugen:\\
 			Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\

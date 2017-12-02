@@ -99,7 +99,7 @@
 \begin{center}
 
 
-\LARGE \textbf{Probabilistische Inferenz mit der relationalen Konditionallogik FO-PCL}\\[3.5cm]
+\LARGE \textbf{Ein Ansatz zur Beantwortung von Anfragen mit Variablen in der probabilistischen Konditionallogik FO-PCL}\\[3.5cm]
 \end{center}
 
 
@@ -112,7 +112,7 @@
 \end{center}
 
 \begin{center}
-\textcolor{blue}{Version 20171201}
+\textcolor{blue}{Version 20171202}
 	
 \large{Kleingartach, 2018}
 \end{center}
@@ -2301,13 +2301,19 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 		\end{enumerate}
 		\item Aus den Primtermen den Constraint und ein Konditional erzeugen:\\
 			Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
-		Die Anwendung der Minimierung bringt hier keinerlei Verbesserung gegenüber der positiven Generalisierung.	
-		\subsubsection{Minimierung im Karnaugh-Diagramm}  \label{Min_Besch_K} \index{Minimierung ! im Karnaugh-Diagramm}
-		Die Idee des Verfahrens wird unter \ref{Min_K_Dia} beschrieben.
-		\subsubsection{Fazit}
-		Die Minimierung nach Quine/McClusky bringt im Beispiel "{}Misanthrope"{} für die Klasse 3 keinerlei Verbesserung. Hier wäre die Anwendung des Distributivgesetzes sinnvoller gewesen mit dem Ergebnis:\\
-		Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \land (V = c \lor V = b)) \lor ((U = b \lor U = c) \land V = a))>\} $
-	\end{enumerate}
+		\end{enumerate}
+		\subsubsection{Fazit zu Quine/McClusky}
+		Die Minimierung nach Quine/McClusky bringt im Beispiel "{}Misanthrope"{} für die Klasse 3 keinerlei Verbesserung gegenüber der positiven Generalisierung. Hier wäre die Anwendung des Distributivgesetzes sinnvoller gewesen mit dem Ergebnis:\\
+		Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \land (V = c \lor V = b)) \lor ((U = b \lor U = c) \land V = a))>\} $ \label{Kond3}
+		\subsubsection{Minimierung im Karnaugh-Diagramm (K-Diagramm)}  \label{Min_Besch_K} \index{Minimierung ! im Karnaugh-Diagramm}
+		Die Idee des Verfahrens wird unter \ref{Min_K_Dia} beschrieben. Weitere Ausführungen sollen nicht gemacht werden, denn genau wie beim oben beschriebenen Minimierungsverfahren nach Quine/McClusky muss man zunächst die KNF erstellen und aus der systematisch Terme verschmelzen, die Variablen in negierter und nicht negierter Form enthalten. Man erhält danach den Ausdruck, den man vor Anwendung des Verfahrens hatte.
+		\subsubsection{Fazit zur Minimierung im K-Diagramm}
+		Da der Constraint bis auf Anwendung des Distributivgesetzes bereits in logisch minimaler Form vorliegt, bringt dieses Verfahren keine Verbesserung bzw. Verkürzung oder Vereinfachung des Constraints mit sich.
+		\subsubsection{Anwendung des Distributivgesetzes}
+		Ausdrücke, die in zwei Konjunktionstermen vorkommen, werden ausgeklammert, Bsp. sh unter \ref{Kond3}.
+		\subsubsection{Fazit zur logischen Optimierung}
+		 Die Constraints enthalten die einzelnen Contraints der Gleichheit nur in nicht negierter Form und auch nur jeweils einmal, denn bei der Grundsubstitution entstehen kein Duplikate. 
+		 Logische Optimierung kann für die Constraints hier nur in der Anwendung des Distributivgesetzes Anwendung finden, da die logischen Ausdrücke bereits minimal sind.		 
 \end{Bsp}
 }
 \subsection{Einzelne Schritte}
@@ -3419,6 +3425,7 @@ Sei die boolesche Funktion in KDNF. Dann kann man eine minimale äquivalente Fun
 	Die verbleibenden Primterme muss man so auswählen, dass alle Minterme abgedeckt werden. 
 \end{enumerate}
 \section{Minimierung im Karnaugh-Diagramm}\label{Min_K_Dia} \index{Minimierung ! im Karnaugh-Diagramm}
+Das Karnaugh bzw. Karnaugh-Veitch-Diagramm (K-Diagramm, bzw. KV-Diagramm) dient der Minimierung logischer Ausdrücke. Das Verfahren wird hier nur in seiner Grundidee skizziert. Eine logische Formel, die in disjunktiver Normalform (DNF) vorliegt, genauer gesagt kanonischer disjunktiver Normalform (KDNF)\footnote{Eine KDNF enthält jede Variable genau einmal (Negiert oder nicht negiert)}. Es wird zunächst eine Boolesche Wahrheitstafel erstellt. Bei $ n $ Eingangsvariablen hat diese Tabelle $ 2^{n} $ Felder. Es werden nur die Zeilen betrachtet, die in der DNF zu dem Wahrheitswert wahr ausgewertet werden. Diese werden in ein K-Diagramm übertragen.  Die Grundregel lautet, benachbarte Felder, die sich nur durch Negierung unterscheiden, zusammengefasst werden können. Den so erhaltenen äquivalenten Ausdruck kann man gegebnenfalls durch Anwenden des Distributivgesetzes (Ausklammern) weiter vereinfachen.
 }
 \chapter{Änderungen gegenüber der letzten Version (wie besprochen)}
 

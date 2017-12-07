@@ -108,11 +108,11 @@
 \end{center}
 
 \begin{center}
-\large{Betreuer: Dr. Marc Finthammer}\\[1.0cm]
+\large{Prüfer: Professor Dr. Christoph Beierle }\\[1.0cm]
 \end{center}
 
 \begin{center}
-\textcolor{blue}{Version 20171202}
+\textcolor{blue}{Version 20171207}
 	
 \large{Kleingartach, 2018}
 \end{center}
@@ -283,7 +283,7 @@ Unter FO-PCL\index{FO-PCL} versteht man die Erweiterung von propositionalen (d.h
 \begin{Bsp}[Inkonsistenz]
 \label{sec:Bsp}
 
-Wenn man Beispiel \ref{sec:Bsp1} "{}Grippe"{} betrachtet, enthält das Konditional $ GrFO_{3}$ den Constraint der Ungleichheit $ "{} X \neq Y "{} $. Ohne diese Einschränkung könnte man X und Y mit der gleichen Konstante instanziieren und erhielte  für eine Menge $ \cal D $$_{GrFO} $ von Konstanten mit\\
+Wenn man Beispiel \ref{sec:Bsp1} "{}Grippe"{} betrachtet, enthält das Konditional $ GrFO_{3}$ den Constraint der Ungleichheit $ "{} X \neq Y "{} $. Ohne diese Einschränkung könnte man X und Y mit der gleichen Konstante instantiieren und erhielte  für eine Menge $ \cal D $$_{GrFO} $ von Konstanten mit\\
  $ \cal D $$_{GrFO}  $ $ = \{Anna, Bob \} $ unter anderem die folgende Grundformeln:\\
  \begin{quote}
  	$ GrFO_{1, 1}  :  \langle (Gr(Anna))[0,01], \top \rangle $,\\
@@ -553,7 +553,7 @@ Die Menge aller Grundsubstitutionen für $ V \subseteq {\cal V} $ wird als $ Sub
 
 
 
-\begin{Pro}[Anwendung einer Grundsubsitution] \cite[Kap. 6.2, S. 131, Proposition 6.2.11]{Fis10}\index{Grundsubstitution ! Anwendung einer}\label{Grundsubstitution}
+\begin{Pro}[Anwendung einer Grundsubstitution] \cite[Kap. 6.2, S. 131, Proposition 6.2.11]{Fis10}\index{Grundsubstitution ! Anwendung einer}\label{Grundsubstitution}
 	
 \noindent
 Sei $ \Sigma = (S, {\cal D},$  $ Präd) $ eine mehrsortige Signatur, $ \sigma: {\cal V} \rightarrow Term_{\Sigma}$ eine Substitution.\\
@@ -630,7 +630,7 @@ Ein Beispiel für den Einsatz, die Modellierung probabilistischen Wissens, mit F
 	$ T_{2} : \langle (isBird(Tweety) [1], \top \rangle$\\
 	$ T_{3} : \langle (flies(X) \mid isBird(X)[0,9], X \neq Tweety \rangle$\\
 	\end{quote}
-	 Der Constraint $  "{} X \neq Tweety "{} $ wird benutzt um im Konditional unser Wissen um die Flugunfähigkeit von Tweety zu modellieren, die trotz seiner Zugehörigkeit zur Gattung der Vögel vorliegt und stellt gleichzeitig sicher, dass es nicht zur Inkonsistenz in der Wissensbasis kommt, die entstünde, wenn die Variable X mit der Konstanten Tweety instanziiert würde.
+	 Der Constraint $  "{} X \neq Tweety "{} $ wird benutzt um im Konditional unser Wissen um die Flugunfähigkeit von Tweety zu modellieren, die trotz seiner Zugehörigkeit zur Gattung der Vögel vorliegt und stellt gleichzeitig sicher, dass es nicht zur Inkonsistenz in der Wissensbasis kommt, die entstünde, wenn die Variable X mit der Konstanten Tweety instantiiert würde.
 \end{Bsp}
 
 
@@ -732,16 +732,17 @@ Die Menge der (zulässigen) Grundinstanzen einer Menge $ \cal R $ $ = \{ R_1, ..
 \begin{Def}[Spezifische Konstanten] \index{Konstante ! spezifisch} \label{Konstanten spezifisch}
 	Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL Wissensbasis. Dann gilt für $ d \in \cal{D} $ d ist eine spezifische Konstante, wenn es ein $ R \in \cal{R}$ gibt, so dass d in $ \varphi $ oder $\psi $ vorkommt. 
 \end{Def}
-Die Prämisse oder Konklusion eines Konditionals der Wissensbasis enthält eine Konstante. Das bedeutet, dass die Wissensbasis bereits über weitergehende Informationen über ein Objekt des Universums verfügt. ein Spezifische Konstanten kommen somit in irgendeiner Form in einem Konditional der Wissensbasis vor. 
+Die Prämisse oder Konklusion eines Konditionals der Wissensbasis enthält eine Konstante. Das bedeutet, dass die Wissensbasis über differenziertere Informationen über ein Objekt des Universums verfügt. ein Spezifische Konstanten kommen somit in irgendeiner Form in einem Konditional der Wissensbasis vor. 
 }
 
 \textcolor{blue}{
 \begin{Def}[Generische Grundinstanzen von Konditionalen] \index{Grundinstanz ! generisch} \label{Grundinstanz generisch}
-Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ R = \langle (\varphi \mid \psi)[\xi], C \rangle $ ein probabilistisches $ \Sigma- $Konditional $ ( $erster Stufe $ ) Sei t \in Term_{\Sigma}.  $. 
+Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ R = \langle (\varphi \mid \psi)[\xi], C \rangle $ ein probabilistisches $ \Sigma- $Konditional $ ( $erster Stufe $ ). $ Seit $ t \in Term_{\Sigma}  $. 
+\\
 \\
 Die Menge genGnd(R) der zulässigen Grundinstanzen von R ist definiert als\\
 \\
-\hspace{0,5 cm} genGnd(R) $ :=  \{ \langle(\sigma(\varphi) \mid \sigma(\psi)[\xi], \top \rangle \mid \sigma\in Sol(C, vars(R)), (\forall t $, die in $ \varphi $ vorkommen $: t \notin \cal{D}) \land (\forall $  $ t $, die in $\psi $ vorkommen $: t \notin \cal{D}) \} $\\
+\hspace{2 cm} genGnd(R) $ :=  \{ \langle(\sigma(\varphi) \mid \sigma(\psi)[\xi], \top \rangle \mid \sigma\in Sol(C, vars(R)), (\forall t $, die in $ \varphi $ vorkommen $: t \notin \cal{D}) \land (\forall $  $ t $, die in $\psi $ vorkommen $: t \notin \cal{D}) \} $\\
 \end{Def}
 Generische Grundinstanzen von Konditionalen enthalten folglich keine spezifischen Konstanten, \ref{Konstanten spezifisch}.. 
 }
@@ -1030,7 +1031,7 @@ Vergleiche auch \cite{BHM14}.
 \\
 	
 \subsubsection{Definition einer Wissensbasis}	
-Um in FO-PCL Inferenz betreiben zu können, ist es zunächst notwendig, das erworbene bzw. vorhandene Wissen gemäß der Syntax in FO-PCL in einer Wissenbasis zu formulieren. Eine Wissensbasis ist Voraussetzung, um vorhandenes Wissen in eine Form zu bringen, in der es verarbeitet werden kann und ist notwendig, um mit der Inferenzkomponente Wissen ableiten zu können. Dazu wird eine Menge von Konditionalen definiert, die das vorhandene Wissen repräsentieren.  Diese Informationen über die Domäne inklusive der Abhängigkeiten und Wahrscheinlichkeiten müssen vom Benutzer zur Verfügung gestellt werden. Ob das bereitgestellte Wissen aus statistisch erhobenen Daten stammt oder Erfahrungswerte, möglicherweise sogar Schätzungen beinhaltet, ist dabei irrelevant.
+Um in FO-PCL Inferenz betreiben zu können, ist es zunächst notwendig, das erworbene bzw. vorhandene Wissen gemäß der Syntax in FO-PCL in einer Wissensbasis zu formulieren. Eine Wissensbasis ist Voraussetzung, um vorhandenes Wissen in eine Form zu bringen, in der es verarbeitet werden kann und ist notwendig, um mit der Inferenzkomponente Wissen ableiten zu können. Dazu wird eine Menge von Konditionalen definiert, die das vorhandene Wissen repräsentieren.  Diese Informationen über die Domäne inklusive der Abhängigkeiten und Wahrscheinlichkeiten müssen vom Benutzer zur Verfügung gestellt werden. Ob das bereitgestellte Wissen aus statistisch erhobenen Daten stammt oder Erfahrungswerte, möglicherweise sogar Schätzungen beinhaltet, ist dabei irrelevant.
 
 \subsubsection{Überführung der relationalen Wissensbasis in eine propositionale Wissensbasis}
 Es ist notwendig, die Wissensbasis zu grundieren indem die Konditionale unter Beachtung der Constraints grundiert werden. Dazu werden den Termen, soweit sie Variablen enthalten, Konstanten (aus der Domäne bzw. dem Universum)zugeordnet. Das geschieht gemäß der Semantik von FO-PL, vgl. \ref{sec:semantik}.
@@ -1052,7 +1053,7 @@ Es wird zu jedem Grundkonditional eine Wahrscheinlichkeit mit Hilfe des epistemi
 Die einzelnen Grundinstanzen des angefragten Konditionals, welche die gleichen Wahrscheinlichkeiten enthalten, werden in Klassen zusammengefasst.
 \textcolor{blue}{
 \begin{Def}[Äquivalenzrelation] \label{Äquivalenzrelation}
-Eine Äquivalenzrelation auf einer Menge $ \cal{R} $ von FO-PCL Konditionalen ist eine Teilemenge $ \cal{M} \subset \cal{R} x \cal{R}$, welche folgende Bedingungen erfüllt:\\
+Eine Äquivalenzrelation auf einer Menge $ \cal{R} $ von FO-PCL Konditionalen ist eine Teilemenge $ \cal{M} \subset \cal{R} \times \cal{R}$, welche folgende Bedingungen erfüllt:\\
 \begin{itemize}
 	\item Reflexivität:\\
 	 Für alle $ R \in \cal{R} $ ist $ (R,R) \in \cal{M} $.
@@ -1067,7 +1068,7 @@ Eine Äquivalenzrelation auf einer Menge $ \cal{R} $ von FO-PCL Konditionalen is
 
 \textcolor{blue}{
 \begin{Def}[Parametrische Äquivalenz von FO-PCL Konditionalen] \label{Äquivalenz in FO-PCL} \index{Äquivalenz ! parametrische} \index{FO-PCL Konditional}
-	Sei \cal{R} eine Menge von FO-PCL Konditionalen. Es gelte für alle $ R \in \cal{R} $, dass sie Grundinstanzen des gleichen Konditionals sind. Zwei Konditionale $ U,V \in \cal{R} $ sind parametrisch äquivalent, wenn sie den gleichen Parameterwert besitzen\footnote{Unter einem gleichen Parameterwert versteht man die gleiche Wahrscheinlichkeit}, sh. auch \ref{sec:parÄ}. Den gleichen Parameterwert besitzen sie dann, wenn die Wahrscheinlichkeiten mathematisch gleich sind. 
+	Sei $  \cal{R} $ eine Menge von FO-PCL Konditionalen. Es gelte für alle $ R \in \cal{R} $, dass sie Grundinstanzen des gleichen Konditionals sind. Zwei Konditionale $ U,V \in \cal{R} $ sind parametrisch äquivalent, wenn sie den gleichen Parameterwert besitzen\footnote{Unter einem gleichen Parameterwert versteht man die gleiche Wahrscheinlichkeit}, sh. auch \ref{sec:parÄ}. Den gleichen Parameterwert besitzen sie dann, wenn die Wahrscheinlichkeiten mathematisch gleich sind. 
 \end{Def}
 }
 
@@ -1089,20 +1090,19 @@ Das Ergebnis  "{}0"{} erhält man unter anderem für reflexives Wissen, da dies 
 \subsubsection{Generalisierung der Klassen}
 \textcolor{blue}{
 \begin{Def}[Generalisierung]\index{Generalisierung} \label{Generalisierung}
-	Sei $\cal{R}$ eine FO-PCL Wissenbasis, $ \cal{Q} $ eine Anfrage in Form eines unbedingten Konditionals. Unter der Generalisierung versteht man den Prozess, für eine Klasse von Konditionalen ein einziges Konditional zu erzeugen, dass die Klasse repräsentiert und alle Konditionale umfasst. 
+	Sei $\cal{R}$ eine FO-PCL Wissensbasis, $ \cal{Q} $ eine Anfrage in Form eines unbedingten Konditionals. Unter einer Generalisierung versteht man den Prozess, für eine Klasse von Konditionalen ein einziges Konditional zu erzeugen, das die Klasse repräsentiert und alle Konditionale erfasst. 
 \end{Def}
-}
 In der Phase der Generalisierung werden die gemäß der gleichen Wahrscheinlichkeit zusammengefassten Konditionale einer Klasse zu einem möglichst allgemeinen Konditional zusammengefasst.\\
-Die eigentliche Logik der Komponente liegt hierbei in der Erzeugung des jeweiligen Konditionals.
+Die eigentliche Logik der Komponente liegt hierbei in der Erzeugung des jeweiligen Konditionals.}
 
 \textcolor{blue}{
 \subsubsection{(Angestrebte) Ausgabe} \index{angestrebte Ausgabe}
 	\begin{Def}[Angestrebte Ausgabe] \index{angestrebte Ausgabe} \label{angestrebte Ausgabe}
-		Sei $\cal{R}$ eine FO-PCL Wissenbasis,  $ \cal{Q} $ eine Anfrage in Form eines unbedingten Konditionals. Dann ist die angestrebte Ausgabe das allgemeinste Konditional unter allen Konditionalen, die die Klasse repräsentieren ohne an Gültigkeit zu verlieren.
+		Sei $\cal{R}$ eine FO-PCL Wissensbasis,  $ \cal{Q} $ eine Anfrage in Form eines unbedingten Konditionals. Dann ist die angestrebte Ausgabe das allgemeinste Konditional unter allen Konditionalen, die die Klasse repräsentieren ohne an Gültigkeit zu verlieren.
 	\end{Def}
 }
 \textcolor{blue}{
-	Unter der angestrebten Ausgabe im Sinne dieser Arbeit ist das Ergebnis eines subjektiven Prozesses der Betrachtung der Klassen der Generierung eines möglichst allgemeinen Konditionals zu verstehen. Das generierte Konditional sollte dabei intersubjektiv als möglichst allgemein akzeptiert werden.}
+	Unter der angestrebten Ausgabe im Sinne dieser Arbeit ist das Ergebnis eines Prozesses der Betrachtung und des Vergleichs der Klassen und daraus resultierend der Generierung eines möglichst allgemeinen Konditionals zu verstehen. Das generierte Konditional sollte dabei intersubjektiv als möglichst allgemein akzeptiert werden.}
 
 
 	
@@ -1317,7 +1317,7 @@ Dieses Beispiel entspricht dem Beispiel "{}Cold"{}, s. \ref{Cold}, erweitert um 
 	\item \textsl{ColdTrans} \label{BColdTrans} s. \ref{ColdTrans}:\\
 Das Beispiel "{}Cold"{} erweitert um transitives Wissen. Unterschiedliche Wahrscheinlichkeiten ergeben sich durch die gleiche Belegung von Variablen, wobei diese Fälle in der Wissensbasis mit der Wahrscheinlichkeit von Null definiert wurden. Wenn die Prämisse eine Formel enthält, die in der Konklusion vorkommt und man diese Formel als wahr annimmt, so ist natürlich auch die Konklusion wahr und die Wahrscheinlichkeit erwartungsgemäß 100 \%.
 
- Man betrachte das unbedingte Konditional $\langle (cold(X) \mid ((contact(X,Y)  \land contact(Y,Z)) \land cold(Z)),  X = Z \rangle$ . Sei cold(Z) (als Teil der Prämisse) wahr. Dann ist cold(X) (also die Konklusion) auch wahr für X = Z, was nicht weiter überraschend ist, aber an dieser Stelle für erwähnenswert gehalten wurde, da es durchaus für den Entwurf eines regelbasierten Algorithmus relevant sein könnte. Das bedingte Konditional sollte damit wie folgt aussehen: $\langle (cold(X) \mid ((contact(X,Y)  \land contact(Y,Z)) \land cold(Z)) [1.00000],  X = Z \rangle$.\\ Im Ergebnis bleibt zu sagen, dass auch Transitivität zu keinen überraschenden Ergebnissen führt. Lediglich die Belegung unterschiedlicher Variablen mit gleichen Konstanten hat einen erheblichen Einfluss. Ebenso die Gestalt bzw. das Wissen der Anfrage.
+ Man betrachte das unbedingte Konditional $\langle (cold(X) \mid ((contact(X,Y)  \land contact(Y,Z)) \land cold(Z)),  X = Z \rangle$ . Sei cold(Z) (als Teil der Prämisse) wahr. Dann ist $ cold(X) $ (also die Konklusion) auch wahr für X = Z, was nicht weiter überraschend ist, aber an dieser Stelle für erwähnenswert gehalten wurde, da es durchaus für den Entwurf eines regelbasierten Algorithmus relevant sein könnte. Das bedingte Konditional sollte damit wie folgt aussehen: $\langle (cold(X) \mid ((contact(X,Y)  \land contact(Y,Z)) \land cold(Z)) [1.00000],  X = Z \rangle$.\\ Im Ergebnis bleibt zu sagen, dass auch Transitivität zu keinen überraschenden Ergebnissen führt. Lediglich die Belegung unterschiedlicher Variablen mit gleichen Konstanten hat einen erheblichen Einfluss. Ebenso die Gestalt bzw. das Wissen der Anfrage.
 \end{itemize}
 
 
@@ -1360,7 +1360,7 @@ Dieses Beispiel ist die Erweiterung des Beispiels "{}ColdTrans"{} um spezifische
 		\item der Wechselwirkung von spezifischem Wissen der Wissensbasis und reflexivem Wissen
 		\end{itemize}
 	\item Generische Grundkonditionale haben immer die gleiche Wahrscheinlichkeit
-	\item Wenn man die Anzahl der Sorten erhöht, wird die Anzahl der Äquivalenzklassen \index{Äquivalenzklassen} nur bei spezifischem Wissen größer, das Konditional für die Klasse wird aber komplexer (in diesem Fall der Contraint des Konditionals)
+	\item Wenn man die Anzahl der Sorten erhöht, wird die Anzahl der Äquivalenzklassen \index{Äquivalenzklassen} nur bei spezifischem Wissen größer, das Konditional für die Klasse wird aber komplexer (in diesem Fall der Constraint des Konditionals)
 \end{itemize}
 
 
@@ -1919,7 +1919,7 @@ Obwohl die negative Generalisierung für den Fall einstelliger Prädikate zum ge
 
 \textcolor{blue}{
 	\section{Idee: Modifikation des Versionenraum-Lernverfahrens} \label{Verwendbar VRL} \index{Versionenraum-Lernverfahren}
-	Nähere Ausführungen zum Knozept des Versionenraum-Lernverfahren finden sich in Anhang \ref{VRL}.\\
+	Nähere Ausführungen zum Konzept des Versionenraum-Lernverfahren finden sich in Anhang \ref{VRL}.\\
 	\subsection{Vorüberlegungen}
 	In diesem Kapitel soll untersucht werden inwieweit das Versionenraum-Lernverfahren modifiziert werden kann, um aus einer Menge von Constraints einen möglichst allgemeingültigen Constraint zu erzeugen. Wenn man das Konzept des Versionenraum-Verfahrens betrachtet, so drängt sich allein durch die Analogie der Begrifflichkeiten der Gedanke auf, in einer Modifikation ein verwendbares Konzept für die Erzeugung eines möglichst allgemeinen Konditionals zu finden.
 	\\
@@ -2051,7 +2051,7 @@ Klasse 3: $ \{likes(a,c)[0.05], likes(a,b)[0.05], likes(b,a)[0.05], likes(c,a)[0
 \end{itemize}
 \end{Bsp}
 \textbf{{\Large Fazit zur Modifikation des Versionenraum-Lernverfahrens:}} \label{Fazit VRL} 
-Auch wenn es auf den ersten Blick so scheinen mag, als ob es für das Problem der Arbeit eine qualifizierte Lösung bietet, gegenüber der bisherigen Ideen der negativen Generalisierung bietet es keinen Vorteil. Im Gegenteil, es funktioniert nur unter Verwendung der Methoden der negativen und der positiven Generalisierung. Ein interessantes Gedankenspiel, dass aber für die Lösung der Aufgabe leider nicht zielführend ist. 
+Auch wenn es auf den ersten Blick so scheinen mag, als ob es für das Problem der Arbeit eine qualifizierte Lösung bietet, gegenüber der bisherigen Ideen der negativen Generalisierung bietet es keinen Vorteil. Im Gegenteil, es funktioniert nur unter Verwendung der Methoden der negativen und der positiven Generalisierung. Ein interessantes Gedankenspiel, das aber für die Lösung der Aufgabe leider nicht zielführend ist. 
 }
 
 
@@ -2110,7 +2110,7 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 				\multicolumn{7}{|c|}{\textbf{KDNF für Klasse 3}}\\
 				\hline
 				\hline 
-				$ m_i mit i =$
+				$ m_i $ 
 				& $ X_5 $
 				& $ X_4 $
 				& $ X_3 $
@@ -2245,7 +2245,7 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 				\multicolumn{8}{|c|}{\textbf{Ermittlung der Primterme}}\\
 				\hline
 				\hline 
-				$ m_i,j,k,l,m,n $
+				$ m_{i,j,k,l,m,n} $
 				& $ X_5 $
 				& $ X_4 $
 				& $ X_3 $
@@ -2258,7 +2258,7 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 				\endfoot
 				\endlastfoot
 				\hline
-				$ m_i,j,k,l,m,n $
+				$ m_{i,j,k,l,m,n} $
 				& 1
 				& -
 				& -
@@ -2266,7 +2266,7 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 				& -
 				& 1
 				& $ P_0 $ \\
-				$ m_i,j,k,l,m,n $
+			$ m_{i,j,k,l,m,n} $
 				& -
 				& 1
 				& -
@@ -2274,7 +2274,7 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 				& -
 				& 1
 				& $ P_1 $\\
-					$ m_i,j,k,l,m,n $
+			$ m_{i,j,k,l,m,n} $
 				& -
 				& -
 				& 1
@@ -2282,7 +2282,7 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 				& 1
 				& -
 				& $ P_2 $\\
-				$ m_i,j,k,l,m,n $
+			$ m_{i,j,k,l,m,n} $
 				& -
 				& -
 				& 1
@@ -2302,6 +2302,7 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 		\item Aus den Primtermen den Constraint und ein Konditional erzeugen:\\
 			Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
 		\end{enumerate}
+	\end{Bsp}
 		\subsubsection{Fazit zu Quine/McClusky}
 		Die Minimierung nach Quine/McClusky bringt im Beispiel "{}Misanthrope"{} für die Klasse 3 keinerlei Verbesserung gegenüber der positiven Generalisierung. Hier wäre die Anwendung des Distributivgesetzes sinnvoller gewesen mit dem Ergebnis:\\
 		Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \land (V = c \lor V = b)) \lor ((U = b \lor U = c) \land V = a))>\} $ \label{Kond3}
@@ -2313,15 +2314,16 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 		Ausdrücke, die in zwei Konjunktionstermen vorkommen, werden ausgeklammert, Bsp. sh unter \ref{Kond3}.
 		\subsubsection{Fazit zur logischen Optimierung}
 		 Die Constraints enthalten die einzelnen Contraints der Gleichheit nur in nicht negierter Form und auch nur jeweils einmal, denn bei der Grundsubstitution entstehen kein Duplikate. 
-		 Logische Optimierung kann für die Constraints hier nur in der Anwendung des Distributivgesetzes Anwendung finden, da die logischen Ausdrücke bereits minimal sind.		 
-\end{Bsp}
+		 Logische Optimierung kann für die Constraints hier nur in der Anwendung des Distributivgesetzes Anwendung finden, da die logischen Ausdrücke bereits minimal sind.	
+		 \subsubsection{Generalisierungsvergleich} \index{Generalisierungsvergleich} \label{Gen_Vergleich}
+		 Die beiden logisch optimierten Generalisierungen werden über ihre Länge bzw. über die Anzahl der verwendeten Junktoren verglichen und die kürzere Variante, bzw. die Variante mit der geringsten Anzahl von Junktoren wird ausgewählt.
 }
 \subsection{Einzelne Schritte}
 \begin{itemize}
 	\item Positive Generalisierung \index{Generalisierung ! positiv}, \ref{PositiveGeneralisierung}
 	\item Negative Generalisierung \index{Generalisierung ! negativ}, \ref{NegativeGeneralisierung}
 	\item Logische Optimierung, \ref{LogOpt}
-	\item Generalisierungsvergleich
+	\item Generalisierungsvergleich \ref{Gen_Vergleich}
 \end{itemize}
 TODO: Abbildung
 \section{Idee: Konditionale Generalisierung}
@@ -2451,7 +2453,7 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_zweiKlassen}.
 		\item zweistelliges Prädikat:\\
 		Im Falle zweistelliger Prädikate und zwei Äquivalenzklassen, enthält die eine Klasse das reflexive Wissen, die andere alle anderen Konditionale. Für die Klasse mit dem reflexiven Wissen besteht das Konditional der Klasse aus einem unbedingten Konditional mit der Wahrscheinlichkeit und einem Contraint Gleichheit für die beiden Variablen. Für die andere Klasse wird das Konditional erzeugt, indem das unbedingte Konditional mit der Wahrscheinlichkeit der Klasse versehen und um einem Constraint der Ungleichheit für die Variablen versehen wird.
 		\begin{Bsp}[Konditionale Generalisierung bei zwei Klassen am Beispiel Cold, \ref{Cold}]
-			Für die Anfrage $ (contact(X,Y) \land cold(Y) $ ergit die konditionale Generalisierung:\\
+			Für die Anfrage $ (contact(X,Y) \land cold(Y) $ ergibt die konditionale Generalisierung:\\
 			\\
 		Klasse 1: $ \{ (contact(anna,anna) \land cold(anna))[0.0], (contact(bob,bob) \land cold(bob)[0.0]), (contact(carl,carl)\land cold(carl))[0.0]\} $\\
 		Klasse 2: $ \{(contact(anna,bob) \land cold(bob))[0.021] , (contact(carl, bob) \land cold(bob))[0.021] , (contact(bob, anna) \land cold(anna))[0.021], (contact(anna, carl)\land cold(carl)) [0.021], (contact(bob, carl)\land cold(carl)) [0.021], (contact(carl, anna) \land cold(anna))[0.021] \} $\\
@@ -3123,10 +3125,10 @@ Eine Herbrandinterpretation $ I_H $ ist eine Herbrandmodell $ M_H $, falls $ I_H
 	Die folgenden Ausführungen sind \cite{BKI08} entnommen.\\
 	\\
 	 Das Versionenraum-Lernverfahren fällt unter den Begriff des maschinellen Lernens. Es ist ein Verfahren des Lernens aus Konzepten und ist als solches ein induktives Lernverfahren. Konzepte beschreiben spezifische Teilmengen über einer größeren Menge und das Lernen von Konzepten kann man als einen Suchvorgang im Raum aller möglichen Hypothesen auffassen. 
-	\begin{Def}[Konzept, Beispiel, Instanzt; Def. 5.14, S 122, \cite{BKI08}]
+	\begin{Def}[Konzept, Beispiel, Instanz; Def. 5.14, S 122, \cite{BKI08}]
 		Ein Konzept $ c $ ist eine einstellige Funktion\\
 		\hspace{2cm} $ c: M \rightarrow \{0,1\} $\\	
-		über einer Grundmenge M; die Elemtnte von M heißen Beispiele. Für ein Beispiel $ x \in M $ gilt:\\
+		über einer Grundmenge M; die Elemente von M heißen Beispiele. Für ein Beispiel $ x \in M $ gilt:\\
 		\begin{itemize}
 			\item $ x $ gehört zum Konzept (x ist ein positives Beispiel) gdw. $ c(x) = 1 $
 			\item $ x $ gehört nicht zum Konzept (x ist ein negatives Beispiel) gdw. $ c(x) = 0 $
@@ -3169,7 +3171,32 @@ Eine Hypothese ist eine allgemeinste Generalisierung von $ B $ gdw.
 \end{Def}
 Das Versionenraum-Lernverfahren ist ein inkrementelles Lernverfahren. Zu Beginn enthält der Versionenraum alle möglichen Hypothesen. Wenn noch keine Beispiele aus der Menge $ B $ der Beispiele betrachtet wurden, wird der Versionenraum $ V_B $ durch der speziellste Generalisierung $ S_0 $, also der Hypothese, die das Zielkonzept negativ beschreibt und der allgemeinsten Generalisierung $ G_0 $, die das Zielkonzept positiv beschreibt, repräsentiert. Nun wird jedes Trainingsbeispiel betrachtet und die Mengen $ S $ und $ G $ so modifiziert, dass die Anforderungen in Definition \ref{spezGen} erfüllt sind.
 }
-
+\textcolor{blue}{
+	\chapter{Minimierung boolescher Funktionen} \label{Minimierung}
+	Es soll nur einen groben Überblick über zwei einfache Verfahren zur Minimierung boolescher Ausdrücke gegeben werden. Weiter Ausführungen entnehmen sie bitte \cite{G01}.
+	\section{Das Verfahren nach Quine/McClusky} \label{Min_QMC} \index{Minimierung ! nach Quine/McClusky}
+	Der grundlegende Gedanke, der dem Verfahren von Quine/McClusky zugrunde liegt ist der, dass zwei disjunktiv verknüpfte  Konjunktionsterme, die sich nur in der Negation einer einzigen Variablen unterscheiden verschmelzen und die betroffene Variable entfernen kann. Voraussetzung ist, dass die boolesche Funktion in Kanonisch Disjunktiver Normalform (KDNF) vorliegt. Eine KDNF besteht aus einer Disjunktion von Mintermen. Minterme sind Konjunktionsterme maximaler Länge, sie enthalten also jede Variable.\\
+	\\
+	Sei die boolesche Funktion in KDNF. Dann kann man eine minimale äquivalente Funktion mit folgenden Schritten erzeugen:
+	\begin{enumerate}
+		\item Ermitteln der Primterme:\\
+		Man vergleicht alle Minterme paarweise, ob sie sich in einer einzigen Negation unterscheiden und verschmilzt sie in diesem Fall. Auf die verschmolzenen Terme wendet man dieses Verfahren so lange an, bis keine Verschmelzungen mehr möglich sind. Die dabei erhaltenen Terme nennt man Primterme.
+		\item Erstellen der Primtermtabelle:\\
+		Um herauszufinden, welche der Primterme man benötigt, erstellt man eine Tabelle, bei der man die Primterme an den Spalten abträgt, die Minterme an den Zeilen. Man markiert in der jeweiligen Zeile, wen ein Minterm Element des Primterms ist.
+		\item Dominanzprüfung
+		Hier werden überflüssige Zeilen oder Spalten eliminiert. 
+		\begin{enumerate}
+			\item Spaltendominanzprüfung:\\
+			Es werden sie Spalten paarweise verglichen. Dabei wird ermittelt, ob Spalten existieren, in denen Primterme Teilmenge von Primtermen anderer Spalten ist. Ist das der Fall, kann die Obermenge gestrichen werden. 
+			\item Zeilendominanzprüfung:\\
+			Man vergleicht die Zeilen paarweise auf Teilmengenbeziehungen. Wenn Minterme eine Teilmenge der Minterme einer anderen Zeile sind, so kann der Primterm mit der Teilmenge gestrichen werden. 
+		\end{enumerate}
+		\item Auswahl der Primterme:\\
+		Die verbleibenden Primterme muss man so auswählen, dass alle Minterme abgedeckt werden. 
+	\end{enumerate}
+	\section{Minimierung im Karnaugh-Diagramm}\label{Min_K_Dia} \index{Minimierung ! im Karnaugh-Diagramm}
+	Das Karnaugh bzw. Karnaugh-Veitch-Diagramm (K-Diagramm, bzw. KV-Diagramm) dient der Minimierung logischer Ausdrücke. Das Verfahren wird hier nur in seiner Grundidee skizziert. Eine logische Formel, die in disjunktiver Normalform (DNF) vorliegt, genauer gesagt kanonischer disjunktiver Normalform (KDNF)\footnote{Eine KDNF enthält jede Variable genau einmal (Negiert oder nicht negiert)}. Es wird zunächst eine Boolesche Wahrheitstafel erstellt. Bei $ n $ Eingangsvariablen hat diese Tabelle $ 2^{n} $ Felder. Es werden nur die Zeilen betrachtet, die in der DNF zu dem Wahrheitswert wahr ausgewertet werden. Diese werden in ein K-Diagramm übertragen.  Die Grundregel lautet, benachbarte Felder, die sich nur durch Negierung unterscheiden, zusammengefasst werden können. Den so erhaltenen äquivalenten Ausdruck kann man gegebenenfalls durch Anwenden des Distributivgesetzes (Ausklammern) weiter vereinfachen.
+}
 \chapter{Modifikation, Korrektur der Bibliothek Log4KR}
 \section{Korrektur in ConstraintBasedGroundingOperator}
 \label{sec:Korrektur1}
@@ -3401,32 +3428,7 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 \label{Misanthrope3Spez}
 \lstinputlisting{Examples/Misanthrope3Spez.txt}
 
-\textcolor{blue}{
-\chapter{Minimierung boolescher Funktionen} \label{Minimierung}
-Es soll nur einen groben Überblick über zwei einfache Verfahren zur Minimierung boolescher Ausdrücke gegeben werden. Weiter Ausführungen entnehmen sie bitte \cite{G01}.
-\section{Das Verfahren nach Quine/McClusky} \label{Min_QMC} \index{Minimierung ! nach Quine/McClusky}
-Der grundlegende Gedanke, der dem Verfahren von Quine/McClusky zugrunde liegt ist der, dass zwei disjunktiv verknüpfte  Konjunktionsterme, die sich nur in der Negation einer einzigen Variablen unterscheiden verschmelzen und die betroffene Variable entfernen kann. Voraussetzung ist, dass die boolesche Funktion in Kanonisch Disjunktiver Normalform (KDNF) vorliegt. Eine KDNF besteht aus einer Disjunktion von Mintermen. Minterme sind Konjunktionsterme maximaler Länge, sie enthalten also jede Variable.\\
-\\
-Sei die boolesche Funktion in KDNF. Dann kann man eine minimale äquivalente Funktion mit folgenden Schritten erzeugen:
-\begin{enumerate}
-	\item Ermitteln der Primterme:\\
-	Man vergleicht alle Minterme paarweise, ob sie sich in einer einzigen Negation unterscheiden und verschmilzt sie in diesem Fall. Auf die verschmolzenen Terme wendet man dieses Verfahren so lange an, bis keine Verschmelzungen mehr möglich sind. Die dabei erhaltenen Terme nennt man Primterme.
-	\item Erstellen der Primtermtabelle:\\
-	Um herauszufinden, welche der Primterme man benötigt, erstellt man eine Tabelle, bei der man die Primterme an den Spalten abträgt, die Minterme an den Zeilen. Man markiert in der jeweiligen Zeile, wen ein Minterm Element des Primterms ist.
-	\item Dominanzprüfung
-	Hier werden überflüssige Zeilen oder Spalten eliminiert. 
-	\begin{enumerate}
-		\item Spaltendominanzprüfung:\\
-		Es werden sie Spalten paarweise verglichen. Dabei wird ermittelt, ob Spalten existieren, in denen Primterme Teilmenge von Primtermen anderer Spalten ist. Ist das der Fall, kann die Obermenge gestrichen werden. 
-		\item Zeilendominanzprüfung:\\
-		Man vergleicht die Zeilen paarweise auf Teilmengenbeziehungen. Wenn Minterme eine Teilmenge der Minterme einer anderen Zeile sind, so kann der Primterm mit der Teilmenge gestrichen werden. 
-	\end{enumerate}
-	\item Auswahl der Primterme:\\
-	Die verbleibenden Primterme muss man so auswählen, dass alle Minterme abgedeckt werden. 
-\end{enumerate}
-\section{Minimierung im Karnaugh-Diagramm}\label{Min_K_Dia} \index{Minimierung ! im Karnaugh-Diagramm}
-Das Karnaugh bzw. Karnaugh-Veitch-Diagramm (K-Diagramm, bzw. KV-Diagramm) dient der Minimierung logischer Ausdrücke. Das Verfahren wird hier nur in seiner Grundidee skizziert. Eine logische Formel, die in disjunktiver Normalform (DNF) vorliegt, genauer gesagt kanonischer disjunktiver Normalform (KDNF)\footnote{Eine KDNF enthält jede Variable genau einmal (Negiert oder nicht negiert)}. Es wird zunächst eine Boolesche Wahrheitstafel erstellt. Bei $ n $ Eingangsvariablen hat diese Tabelle $ 2^{n} $ Felder. Es werden nur die Zeilen betrachtet, die in der DNF zu dem Wahrheitswert wahr ausgewertet werden. Diese werden in ein K-Diagramm übertragen.  Die Grundregel lautet, benachbarte Felder, die sich nur durch Negierung unterscheiden, zusammengefasst werden können. Den so erhaltenen äquivalenten Ausdruck kann man gegebnenfalls durch Anwenden des Distributivgesetzes (Ausklammern) weiter vereinfachen.
-}
+
 \chapter{Änderungen gegenüber der letzten Version (wie besprochen)}
 
 \setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite

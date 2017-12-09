@@ -112,7 +112,7 @@
 \end{center}
 
 \begin{center}
-\textcolor{blue}{Version 20171207}
+\textcolor{blue}{Version 20171209}
 	
 \large{Kleingartach, 2018}
 \end{center}
@@ -1862,7 +1862,7 @@ Wie man unschwer erkennen kann, sind die Konditionale der Klasse zu einem einzig
 \\
 
 
-\textbf{{\Large Fazit zur positiven Generalisierung:}}\index{Generalisierung ! positiv}\label{Fazit pos Gen} 
+\textbf{{\large Fazit zur positiven Generalisierung:}}\index{Generalisierung ! positiv}\label{Fazit pos Gen} 
 \noindent
 
 Der Vorteil der positiven Generalisierung liegt darin, dass einfach zu realisieren ist und in jedem Fall gilt. Der Nachteil ist, dass sie im Grunde genommen nicht zielführend ist, da das erzeugte allgemeine Konditional in der Regel nicht einfacher oder übersichtlicher und nicht selbsterklärend ist. Das führte zu der Überlegung, ob es nicht sinnvoller, übersichtlicher und zu einem kürzeren Constraint führen würde, wenn man einen Weg finden könnte, nicht über die Elemente der Klasse sondern über die Elemente, die nicht in der Klasse sind, zu operieren,  also über Ausnahmen. Das führte dann zur Idee der negativen Generalisierung 
@@ -1912,7 +1912,7 @@ Anders verhält es sich beim Beispiel "{}cold"{} für die Anfrage contact(X,Y):
 	Konditional für Klasse 2: $ \{(contact(X,Y))[0.486]<(((X \neq anna \land Y \neq anna) \land (X \neq bob \land Y \neq bob)) \land (X \neq carl \land Y \neq carl))>\} $\\
 \end{Bsp}
 
-\textbf{{\Large Fazit zur negativen Generalisierung:}}\index{Generalisierung ! negativ} \label{Fazit neg Gen} 
+\textbf{{\large Fazit zur negativen Generalisierung:}}\index{Generalisierung ! negativ} \label{Fazit neg Gen} 
 
 \noindent
 Obwohl die negative Generalisierung für den Fall einstelliger Prädikate zum gewünschten Ergebnis kam und auch wie für die positive Generalisierung gilt, dass sie in jedem Fall zuverlässig und richtig arbeitet, für den Fall zweistelliger Prädikate kommt es zu keinem übersichtlicheren Ergebnis als bei der positiven Generalisierung. Es ist also nach Alternativen zu forschen.
@@ -2050,7 +2050,7 @@ Klasse 3: $ \{likes(a,c)[0.05], likes(a,b)[0.05], likes(b,a)[0.05], likes(c,a)[0
 	\end{enumerate}
 \end{itemize}
 \end{Bsp}
-\textbf{{\Large Fazit zur Modifikation des Versionenraum-Lernverfahrens:}} \label{Fazit VRL} 
+\textbf{{\large Fazit zur Modifikation des Versionenraum-Lernverfahrens:}} \label{Fazit VRL} 
 Auch wenn es auf den ersten Blick so scheinen mag, als ob es für das Problem der Arbeit eine qualifizierte Lösung bietet, gegenüber der bisherigen Ideen der negativen Generalisierung bietet es keinen Vorteil. Im Gegenteil, es funktioniert nur unter Verwendung der Methoden der negativen und der positiven Generalisierung. Ein interessantes Gedankenspiel, das aber für die Lösung der Aufgabe leider nicht zielführend ist. 
 }
 
@@ -2312,7 +2312,7 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 		Da der Constraint bis auf Anwendung des Distributivgesetzes bereits in logisch minimaler Form vorliegt, bringt dieses Verfahren keine Verbesserung bzw. Verkürzung oder Vereinfachung des Constraints mit sich.
 		\subsubsection{Anwendung des Distributivgesetzes}
 		Ausdrücke, die in zwei Konjunktionstermen vorkommen, werden ausgeklammert, Bsp. sh unter \ref{Kond3}.
-		\subsubsection{Fazit zur logischen Optimierung}
+		\subsubsection{\large{ Fazit zur logischen Optimierung}}
 		 Die Constraints enthalten die einzelnen Contraints der Gleichheit nur in nicht negierter Form und auch nur jeweils einmal, denn bei der Grundsubstitution entstehen kein Duplikate. 
 		 Logische Optimierung kann für die Constraints hier nur in der Anwendung des Distributivgesetzes Anwendung finden, da die logischen Ausdrücke bereits minimal sind.	
 		 \subsubsection{Generalisierungsvergleich} \index{Generalisierungsvergleich} \label{Gen_Vergleich}
@@ -2325,7 +2325,10 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 	\item Logische Optimierung, \ref{LogOpt}
 	\item Generalisierungsvergleich \ref{Gen_Vergleich}
 \end{itemize}
-TODO: Abbildung
+\includegraphics[scale = 0.6]{Graphics/Logische_Generalisierungsoptimierung}\label{Abb_Log_Gen}
+\begin{figure}[h]
+	\caption{Logische Generalisierungsoptimierung }\
+\end{figure}
 \section{Idee: Konditionale Generalisierung}
 \index{Generalisierung ! konditional}
 \subsection{Vorüberlegungen}
@@ -3469,7 +3472,7 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 		& sh. \ref{examplesdep} und \ref{Beispiele unausfuehrbar} \\
 		\hline
 		logische Generalisierung ausbauen
-		& sh. \ref{Logische Genopt} \ref{Minimierung} \\
+		& sh. \ref{Logische Genopt} und \ref{Minimierung} und \ref{Abb_Log_Gen} \\
 		\hline
 		Idee: Flussplan fertig machen und ins Dokument einbauen
 		& kommt in der nächsten Version \\

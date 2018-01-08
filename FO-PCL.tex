@@ -19,8 +19,7 @@
 \include{xcolor}
 
 
-\usepackage[citecolor=green,urlcolor=black,linkcolor=red]{hyperref}
-\hypersetup{colorlinks=true,}
+
 
 
 
@@ -32,15 +31,14 @@
 
 \usepackage{makeidx}
 
-\usepackage{hyperref}
+
 
 \usepackage{listings}
 
-\makeindex
 
 \usepackage[german,refpage]{nomencl}
 
-\makenomenclature
+
 
 \usepackage[utf8]{inputenc}
 
@@ -66,14 +64,16 @@
 \usepackage[numbers]{natbib}
 
 \usepackage[all]{nowidow}
-
+\usepackage[citecolor=green,urlcolor=black,linkcolor=red]{hyperref}
+\hypersetup{colorlinks=true}
 \lstset{ language={java}, basicstyle=\ttfamily\footnotesize, breaklines=true, numbers=left, stepnumber=5, numberstyle=\tiny\color{gray}, mathescape=true, showstringspaces=false, inputencoding=utf8}
 
 \newtheorem{Def}{Definition }[section]
 \newtheorem{Pro}{Proposition}[section]
 \newtheorem{Bsp}{Beispiel}[section]
 
-
+\makeindex
+\makenomenclature
 % Längendefinitionen
 \newlength{\currentLongTableWidth} %jeweils lokal anpassen
 %\setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
@@ -113,7 +113,7 @@
 \end{center}
 
 \begin{center}
-\textcolor{blue}{Version 20180104}
+\textcolor{blue}{Version 20180108}
 	
 \large{Kleingartach, 2018}
 \end{center}
@@ -1085,16 +1085,16 @@ Das Ergebnis  "{}0"{} erhält man unter anderem für reflexives Wissen, da dies 
 \subsubsection{Generalisierung der Klassen}
 \textcolor{blue}{
 \begin{Def}[Generalisierung]\index{Generalisierung} \label{Generalisierung}
-	Sei $\cal{R}$ eine FO-PCL Wissensbasis, wobei definitionsgemäß $\cal{R} = {R_1, ..., R_m}$ eine Menge von FO-PCL Konditionalen ist, $ \cal{Q} $ eine Anfrage in Form eines unbedingten Konditionals. Sei ferner $ \cal{E}$  $ = {E_1, ..., E_j}$ eine Menge von Äquivalenzklassen gemäß Definition \ref{Äquivalenzklassen}.\\
+	Sei $\cal{R}$ eine FO-PCL Wissensbasis, wobei definitionsgemäß $\cal{R}$  = $ {R_1, ..., R_m} $ eine Menge von FO-PCL Konditionalen ist, $ \cal{Q} $ eine Anfrage in Form eines unbedingten Konditionals. Sei ferner $ \cal{E}$  $ = {E_1, ..., E_j}$ eine Menge von Äquivalenzklassen gemäß Definition \ref{Äquivalenzklassen}.\\
 	Eine Generalisierung ist eine Abbildung\\
-	\hspace{3.0 cm} $ \beta: E \rightarrow R $\\
+	\hspace{3.0 cm} $ \beta:  E \rightarrow  R $\\
 	die jeder Äquivalenzklasse ein einziges Konditional zuordnet. 
 \end{Def}
-In der Phase der Generalisierung werden die gemäß der gleichen Wahrscheinlichkeit zusammengefassten Konditionale einer Klasse zu einem möglichst allgemeinen Konditional zusammengefasst.\\
+In der Phase der Generalisierung werden die gemäß der gleichen Wahrscheinlichkeit in einer Äquivalenzklasse befindenden Konditionale zu einem möglichst allgemeinen Konditional zusammengefasst.\\
 Die eigentliche Logik der Komponente liegt hierbei in der Erzeugung des jeweiligen Konditionals. Wie das Konditional der Klasse aussieht hängt von der Klasse und dem ausgeführten Generalisierungsprozess ab. }
 
 \textcolor{blue}{
-\subsubsection{(Angestrebte) Ausgabe} \index{angestrebte Ausgabe} \label{angestrebte Ausgabe}
+\subsubsection{Angestrebte Ausgabe} \index{angestrebte Ausgabe} \label{angestrebte Ausgabe}
 	 Die angestrebte Ausgabe soll das allgemeinste Konditional unter allen Konditionalen, die die Klasse repräsentieren ohne an Gültigkeit zu verlieren.
 	Unter der angestrebten Ausgabe im Sinne dieser Arbeit ist das Ergebnis eines Prozesses der Betrachtung und des Vergleichs der Klassen und daraus resultierend der Generierung eines möglichst allgemeinen Konditionals zu verstehen. Das generierte Konditional sollte dabei intersubjektiv als möglichst allgemein akzeptiert werden.
 }
@@ -2318,7 +2318,7 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 	\item Logische Optimierung, \ref{LogOpt}
 	\item Generalisierungsvergleich \ref{Gen_Vergleich}
 \end{itemize}
-\includegraphics[scale = 0.6]{Graphics/Logische_Generalisierungsoptimierung}\label{Abb_Log_Gen}
+\includegraphics[scale = 0.5]{Graphics/Logische_Generalisierungsoptimierung}\label{Abb_Log_Gen}
 \begin{figure}[h]
 	\caption{Logische Generalisierungsoptimierung }\
 \end{figure}
@@ -2327,12 +2327,30 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 \subsection{Vorüberlegungen}
 An dieser Stelle sollen Regeln gefunden werden, wie man die Interaktionen zwischen Fakten, die in der Anfrage verwendet werden für Aussagen, die in der Wissensbasis mit einer bestimmten Wahrscheinlichkeit vorbelegt wurden; wenn es denn solche gibt, die für alle Fälle gelten. Ebenso sollten die anderen Fälle betrachtet werden, die zu unterschiedlichen Wahrscheinlichkeiten führen. Auf den ersten Blick sind solche Regeln nicht erkennbar, da unzählige Interaktionen vorkommen können.\\
 In den folgenden Kapiteln werden die Regeln erstellt nach denen die Konditionale für die jeweiligen Klassen in Abhängigkeit der Art der Anfrage gebildet werden können.\\
+\newpage
+\includegraphics[scale = 0.7]{Graphics/Flussplan_Generalisierung_kond}
+\begin{figure}[h]
+	\caption{Übersicht logische Generalisierungsoptimierung}
+	\label{Fig_Log_Genopt}
+\end{figure}
+\newpage
+
 \subsection{Erzeugung der Konditionale für die Klassen}
+\includegraphics[scale = 0.8]{Graphics/Flussplan_Generalisierung_nichtatomar}
+\begin{figure}[h]
+	\caption{Übersicht Generalsierung}
+	\label{Fig_General}
+\end{figure}
 \subsubsection {Die Anfrage ist ein Atom} 
 \paragraph{ Eine Äquivalenzklasse}
 Eine Auflistung der Beispiele hierzu findet man unter \ref{Atom_eineKlasse}.\\
 Das Konditional für die Klasse ist sehr trivial zu erzeugen. Es handelt sich um das unbedingte Konditional mit der dazugehörigen Wahrscheinlichkeit und ohne einen Constraint.
 \paragraph{ Zwei Äquivalenzklassen}
+\includegraphics[scale = 0.6]{Graphics/Flussplan_Generalisierung_zweiKlassen}
+\begin{figure}[h]
+	\caption{Übersicht Generalisierung für zwei Äquivalenzklasse}
+	\label{Fig_}
+\end{figure}
 Eine Auflistung der  Experimente hierzu findet man unter \ref{Atom_zweiKlassen}.
 \begin{itemize}
 \item Jede Äquivalenzklasse enthält nur ein Konditional. Das Konditional für jede Klasse ist trivialerweise das bedingte Konditional, also das Konditional mit Wahrscheinlichkeit, aber ohne Constraint. Im Fall "{}Birds2Birds"{} \ref{Birds2Birds} würden sich für die Anfrage $flies(X)$ die beiden Konditionale $ (flies(Bully)[0.663]) $ und $ (flies(Tweety))[0.0] $ ergeben. Die Rückgabemenge besteht also lediglich aus den bedingten Konditionalen jeder Klasse.
@@ -2428,9 +2446,7 @@ Das ist der trivialste Fall. In diesem Fall besteht die Rückgabemenge aus dem u
 Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_zweiKlassen}.
 \begin{itemize}
 	\item Jede Äquivalenzklasse enthält nur ein Konditional:\\
-	In diesem Fall ist nichts weiteres zu tun. Da die Klasse nur ein Konditional enthält, kann nicht generalisiert werden. 
-	\item Eine Äquivalenzklasse enthält ein Konditional, die andere mehr als ein Konditional:\\
-	Dieser Fall dürfte nur bei einstelligen Prädikaten eintreten und muss daher auch nur für diese behandelt werden. Es ist negativ zu generalisieren, \ref{NegativeGeneralisierung}, ein Beispiel dazu findet sich in \ref{Bsp:Neg_Gen_Birds}.
+	In diesem Fall ist nichts weiteres zu tun. Im Zuge der positiven Generalisierung wird das Konditional so zurückgegeben als bedingtes Konditional mit Wahrscheinlichkeit.
 	\item Eine Äquivalenzklasse enthält ein Konditional, die andere mehr als ein Konditional:\\
 	Diesen Fall gibt es nur für einstellige Prädikate. Im Fall zweistelliger Prädikate enthalten die Klassen mindestens zwei Elemente. Das Konditional für die Klasse ist durch negative Generalisierung zu erzeugen, \ref{NegativeGeneralisierung}. 
 	\begin{Bsp}[Konditionale Generalisierung am Beispiel Birds, \ref{Birds}]
@@ -3511,7 +3527,7 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 		& sh. \ref{Logische Genopt} und \ref{Minimierung} und \ref{Abb_Log_Gen} \\
 		\hline
 		Idee: Flussplan fertig machen und ins Dokument einbauen
-		& kommt in der nächsten Version \\
+		& \ref{Fig_General}, \ref{Fig_Log_Genopt} \\
 		\hline
 		nicht besprochen und noch zu diskutieren
 		& Generalisierung im Algorithmus beschrieben, Beispiele wären eine Wiederholung von Kapitel 4, darüber muss man reden, wenn man die Implementation bespricht sh. \ref{general} \newline Anmerkung zu unausführbaren Beispielen \ref{Beispiele unausfuehrbar} \newline Ergänzung der Auswertung \ref{Fallunterscheidung Formel 2Aequi}, \ref{Fallunterscheidung Formel MehrAequi} \newline Konditionale Generalisierung für Formeln ausformuliert \ref{KondGen_Formel} \\

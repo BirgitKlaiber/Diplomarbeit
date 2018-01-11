@@ -1091,7 +1091,7 @@ Das Ergebnis  "{}0"{} erhält man unter anderem für reflexives Wissen, da dies 
 \subsubsection{Generalisierung der Klassen}
 \textcolor{blue}{
 \begin{Def}[Generalisierung]\index{Generalisierung} \label{Generalisierung}
-	Sei $\cal{R}$ eine FO-PCL Wissensbasis, wobei definitionsgemäß $\cal{R}$  = \{$ R_1, ..., R_m $\} eine Menge von FO-PCL Konditionalen ist, $ \cal{Q} $ eine Anfrage in Form eines unbedingten Konditionals. Sei ferner $ \cal{E}$  $ = \{E_1, ..., E_j\}$ eine Menge von Äquivalenzklassen gemäß Definition \ref{Äquivalenzklassen}.\\
+	Sei $\cal{R}$ eine FO-PCL Wissensbasis, wobei definitionsgemäß $\cal{R}$  = \{$ R_1, ..., R_m $\} eine Menge von FO-PCL Konditionalen ist. Sei ferner $ \cal{Q} $ eine Anfrage in Form eines unbedingten Konditionals. Sei ferner $ \cal{E}$  $ = \{E_1, ..., E_j\}$ eine Menge von Äquivalenzklassen gemäß Definition \ref{Äquivalenzklassen}.\\
 	Eine Generalisierung ist eine Abbildung\\
 	\hspace{3.0 cm} $ \beta:  E \rightarrow  R $\\
 	die jeder Äquivalenzklasse ein einziges Konditional zuordnet. 
@@ -1102,10 +1102,10 @@ Die eigentliche Logik der Komponente liegt hierbei in der Erzeugung des jeweilig
 \textcolor{blue}{
 \subsubsection{Ausgabe der Komponente}
 \begin{Def}[Ausgabe der Komponente] \index{Ausgabe der Komponente} \label{Ausgabe der Komponente}
-	Sei $\cal{R}$ eine FO-PCL Wissensbasis, wobei definitionsgemäß $\cal{R}$  = $ {R_1, ..., R_m} $ eine Menge von FO-PCL Konditionalen ist, $ \cal{Q} $ eine Anfrage in Form eines unbedingten Konditionals.\\
+	Sei $\cal{R}$ eine FO-PCL Wissensbasis, wobei definitionsgemäß $\cal{R}$  = $ {R_1, ..., R_m} $ eine Menge von FO-PCL Konditionalen ist. Sei ferner $ \cal{Q} $ eine Anfrage in Form eines unbedingten Konditionals.\\
 	Die Ausgabe der Komponente ist das Bild der Abbildung:\\
-		\hspace{3.0 cm} $ \delta $: $ \cal{Q}  $ $  \rightarrow  \cal{R}$  = $\{R_1, ..., R_j\}   $,\\
-		die jedem unbedingten Konditional eine nichtleere Menge von bedingten Konditionalen zuordnet. 
+		\hspace{3.0 cm} $ \delta $: $ \cal{Q}  $ $  \rightarrow  \cal{R}$  = $\{R_1, ..., R_j\} $,\\
+		die jeder Anfrage (in Form eines unbedingten Konditionals) eine nichtleere Menge von bedingten Konditionalen zuordnet. 
 	\end{Def}
 }
 
@@ -1117,7 +1117,7 @@ Unzulässige Anfragen sollten nicht an die Wissensbasis gestellt werden. Das sin
 Eine detaillierte Beschreibung der Beispiele in Fo-PCL Syntax, aufbereitet zur Verarbeitung in Log4KR findet sich im Anhang \ref{examples}.
 
 \textcolor{blue}{
-Bei den Beispielen findet sich der Begriff "{}angestrebte Ausgabe "{}.\index{angestrebte Ausgabe} \label{angestrebte Ausgabe}
+Bei den Beispielen findet sich der Begriff "{}angestrebte Ausgabe"{}.\index{angestrebte Ausgabe} \label{angestrebte Ausgabe}
 Unter der angestrebten Ausgabe im Sinne dieser Arbeit ist das Ergebnis eines Prozesses der Betrachtung und des Vergleichs der Klassen und daraus resultierend der Generierung eines möglichst allgemeinen Konditionals zu verstehen. Sie ist das Ergebnis der individuellen Betrachtung. Und es ist das Ziel, im Wege des Inferenzprozesses eine Menge von Konditionalen zu erzeugen, die identisch oder zumindest äquivalent mit der angestrebten Ausgabe sind.  Die generierten Konditionale sollten dabei intersubjektiv als möglichst allgemein akzeptiert werden. Dabei wird angestrebt, dass der Constraint des erzeugten Konditionals möglichst kurz ist, d.h., er soll möglichst wenig Junktoren und Terme enthalten. Ob das algorithmisch so umsetzbar ist, werden die weiteren Forschungen ergeben. 
 }
 
@@ -2356,24 +2356,34 @@ In den folgenden Kapiteln werden die Regeln erstellt nach denen die Konditionale
 	\caption{Übersicht logische Generalisierungsoptimierung}
 	\label{Fig_Log_Genopt}
 \end{figure}
-\newpage
+
 
 \subsection{Erzeugung der Konditionale für die Klassen}
-\includegraphics[scale = 0.8]{Graphics/Flussplan_Generalisierung_nichtatomar}
+Die folgenden Flussdiagramme sollen den jeweiligen Inferenzprozess visualisieren.
+
+\includegraphics[scale = 0.7]{Graphics/Flussplan_Generalisierung_nichtatomar}
 \begin{figure}[h]
 	\caption{Übersicht Generalisierung}
 	\label{Fig_General}
+\end{figure}
+\newpage
+Die folgende Abbildung illustriert die Generalisierung bei zwei Äquivalenzklassen.
+\includegraphics[scale = 0.8]{Graphics/Flussplan_Generalisierung_zweiKlassen}
+\begin{figure}[h]
+	\caption{Übersicht Generalisierung für zwei Äquivalenzklasse}
+	\label{Fig_ZweiKlassen}
+\end{figure}
+
+\includegraphics[scale = 0.7]{Graphics/Flussplan_Generalisierung_mehr_als_zweiKlassen}
+\begin{figure}[h]
+	\caption{Übersicht Generalisierung für mehr als zwei Äquivalenzklasse}
+	\label{Fig_Mehr_Klassen}
 \end{figure}
 \subsubsection {Die Anfrage ist ein Atom} 
 \paragraph{ Eine Äquivalenzklasse}
 Eine Auflistung der Beispiele hierzu findet man unter \ref{Atom_eineKlasse}.\\
 Das Konditional für die Klasse ist sehr trivial zu erzeugen. Es handelt sich um das unbedingte Konditional mit der dazugehörigen Wahrscheinlichkeit und ohne einen Constraint.
 \paragraph{ Zwei Äquivalenzklassen}
-\includegraphics[scale = 0.6]{Graphics/Flussplan_Generalisierung_zweiKlassen}
-\begin{figure}[h]
-	\caption{Übersicht Generalisierung für zwei Äquivalenzklasse}
-	\label{Fig_ZweiKlassen}
-\end{figure}
 Eine Auflistung der  Experimente hierzu findet man unter \ref{Atom_zweiKlassen}.
 \begin{itemize}
 \item Jede Äquivalenzklasse enthält nur ein Konditional. Das Konditional für jede Klasse ist trivialerweise das bedingte Konditional, also das Konditional mit Wahrscheinlichkeit, aber ohne Constraint. Im Fall "{}Birds2Birds"{} \ref{Birds2Birds} würden sich für die Anfrage $flies(X)$ die beiden Konditionale $ (flies(Bully)[0.663]) $ und $ (flies(Tweety))[0.0] $ ergeben. Die Rückgabemenge besteht also lediglich aus den bedingten Konditionalen jeder Klasse.
@@ -2421,7 +2431,7 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Atom_mehrKlassen}.\\
 		\item zweistelliges Prädikat:\\
 		\begin{itemize}
 			\item eine spezifische Konstante:\\
-			Hier lassen sich drei Klassen unterscheiden. Eine Klasse, bei der die beiden Variablen mit der gleichen Konstante substituiert wurden. Das Konditional wird gebildet, indem man unbedingte Konditional mit der Wahrscheinlichkeit der Klasse versieht und einen Constraint der Gleichheit bildet. Eine Klasse, bei der keine der Variablen mit der spezifischen Konstante substituiert wurde. Das Konditional der wird gebildet, indem man das unbedingte Konditional mit der Wahrscheinlichkeit der Klasse versieht und einen Constraint bildet, der eine Konjunktion aus einem Constraint der Ungleichheit und einer Konjunktion von zwei Constraints der Ungleichheit mit der spezifischen Variable ist. Für die dritte Klasse wird das Konditional der Klasse gebildet in dem man das unbedingte Konditional mit der Wahrscheinlichkeit der Klasse versieht und den Constraint als Konjunktion von einem Constraint der Ungleichheit für die beiden Variablen und einer Disjunktion für einen Constraint der Gleichheit mit der spezifischen Variable für jeweils eine Konstante bildet.\\
+		Negative Generalisierung. Es lassen sich drei Klassen unterscheiden. Eine Klasse, bei der die beiden Variablen mit der gleichen Konstante substituiert wurden. Das Konditional wird gebildet, indem man unbedingte Konditional mit der Wahrscheinlichkeit der Klasse versieht und einen Constraint der Gleichheit bildet. Eine Klasse, bei der keine der Variablen mit der spezifischen Konstante substituiert wurde. Das Konditional der wird gebildet, indem man das unbedingte Konditional mit der Wahrscheinlichkeit der Klasse versieht und einen Constraint bildet, der eine Konjunktion aus einem Constraint der Ungleichheit und einer Konjunktion von zwei Constraints der Ungleichheit mit der spezifischen Variable ist. Für die dritte Klasse wird das Konditional der Klasse gebildet in dem man das unbedingte Konditional mit der Wahrscheinlichkeit der Klasse versieht und den Constraint als Konjunktion von einem Constraint der Ungleichheit für die beiden Variablen und einer Disjunktion für einen Constraint der Gleichheit mit der spezifischen Variable für jeweils eine Konstante bildet.\\
 			\begin{Bsp}[Konditionale Generalisierung für mehrere Klassen am Beispiel "{}Misanthrope"{}, \ref{Misanthrope}] \index{Generalisierung ! konditional}Die konditionale Generalisierung kommt für die Anfrage $ likes(X,Y) $ zum folgenden Ergebnis:\\
 				
 				\noindent
@@ -2525,7 +2535,7 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_mehrKlassen}.
 	\item Alle Äquivalenzklassen enthalten mehr als ein Konditional
 	\begin{itemize}
 		\item einstelliges Prädikat: hierzu gibt es keine Beispiele.
-		\item zweistelliges Prädikat: Bei zweistelligen Prädikaten wird es immer eine Klasse geben, die das reflexive Wissen enthält. Für diese Klasse bildet man den Constraint als Constraint der Ungleichheit für die beiden Variablen des zweistelligen Prädikats. An dieser Stelle wird es kompliziert. Die übrigen Klassen unterscheiden sich darin, ob sie spezifisches Wissen enthalten oder nicht. Da aber im Voraus keine Überprüfung der Konditionale mit der Wissensbasis erfolgt, muss man dies durch einen geschickten Vergleich der Konditionale erreichen. Wie der Vergleich aussehen sollte wird im Folgenden erläutert. Der für die jeweilige Klasse erhaltene Constraint muss dann noch mit einem Contraint der Ungleichheit für reflexives Wissen konjunktiv verknüpft werden. 
+		\item zweistelliges Prädikat: Negative Generalisierung. Bei zweistelligen Prädikaten wird es immer eine Klasse geben, die das reflexive Wissen enthält. Für diese Klasse bildet man den Constraint als Constraint der Ungleichheit für die beiden Variablen des zweistelligen Prädikats. An dieser Stelle wird es kompliziert. Die übrigen Klassen unterscheiden sich darin, ob sie spezifisches Wissen enthalten oder nicht. Da aber im Voraus keine Überprüfung der Konditionale mit der Wissensbasis erfolgt, muss man dies durch einen geschickten Vergleich der Konditionale erreichen. Wie der Vergleich aussehen sollte wird im Folgenden erläutert. Der für die jeweilige Klasse erhaltene Constraint muss dann noch mit einem Contraint der Ungleichheit für reflexives Wissen konjunktiv verknüpft werden. 
 		\end{itemize}
 	\textbf{Exkurs: Vergleich von Konditionalen} \label{Vergleich von Konditionalen} \index{Vergleich von Konditionalen} \index{Konditional}\\
 	Sei $ R $ eine Menge von Äquivalenzklassen (von FO-PCL Grundkonditionalen). Um herauszufinden, welche der Klassen das  spezifische Wissen enthält, entfernt man zunächst die Menge mit dem reflexiven Wissen. Man bildet für die übrigen Mengen jeweils die Schnittmengen der in den Termen der Formeln vorkommenden Konstanten. Ergibt sich dabei eine Menge, die nur ein Element enthält, so hat man die spezifische Konstante gefunden. 

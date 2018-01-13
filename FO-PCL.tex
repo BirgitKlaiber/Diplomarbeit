@@ -113,7 +113,7 @@
 \end{center}
 
 \begin{center}
-\textcolor{blue}{Version 20180109}
+\textcolor{blue}{Version 20180113}
 	
 \large{Kleingartach, 2018}
 \end{center}
@@ -2063,10 +2063,22 @@ Auch wenn es auf den ersten Blick so scheinen mag, als ob es für das Problem de
 }
 
 
-\section{Idee: Logische Generalisierungsoptimierung} \index{Logische Generalisierungsoptimierung} \label{Logische Genopt}
+\section{Idee: Logische Generalisierungsoptimierung} \index{Logische Generalisierungsoptimierung}
+
 \textcolor{blue}{
-\begin{Def}[Logische Generalisierungsoptimierung]
-	Unter der logischen Generalisierungsoptimierung versteht man den Prozess der Erzeugung eines logisch minimierten Konditionals. Logisch minimiert ist ein Konditional genau dann, wenn der Constraint logisch minimiert ist.  
+	Die logische Generalisierungsoptimierung soll die Vorteile der vorangehende geschilderten Verfahren zusammenfassen und so zu einem möglichst aussagekräftigen und kurzen Konditional führen.
+\begin{Def}[Logische Minimierung in FO-PCL] \label{Logische Min} \index{Logische Minimierung}
+	Sei $\cal{R}$ eine FO-PCL Wissensbasis, wobei definitionsgemäß $\cal{R}$  = \{$ R_1, ..., R_m $\} eine Menge von FO-PCL Konditionalen ist. Sei $ R $ ein FO-PCL Konditional mit Constraint $ C $. Sei $ \cal B $ die Menge der booleschen Gesetze. Des Weiteren sei $ |T| $, die Anzahl der in $ C $ vorkommenden Terme, $ |J| $, die Anzahl der in $ C $ vorkommenden Junktoren,  \\
+	Ein FO-PCL Konditional ist genau dann logisch minimiert, wenn der Constraint $ C $ logisch minimiert ist. Der Constraint $ C $ ist genau dann logisch minimiert, wenn gilt:\\
+	$ \neg \exists B \in \cal{B} $ : $ B(C)$  $\land  \neg \exists$   $ C_1 : ( |T_1| + |J_1|) < ( |T| + |J|) $\\
+\end{Def}
+Unter einem logisch minimierten FO-PCL Konditional im Sinne dieser Arbeit ist ein möglichst kurzes Konditional zu verstehen, d.h. ein Konditional mit einem möglichst kurzen Constraint. Der Contraint ist aber als möglichst kurz anzusehen, wenn es kein boolesches Gesetz gibt, mit dem er weiter verkürzt werden kann, so dass die Anzahl der im Constraint vorkommenden Junktoren und Terme verringert werden kann. 
+}
+
+
+\textcolor{blue}{
+\begin{Def}[Logische Generalisierungsoptimierung]\label{Logische Genopt}
+	Unter der logischen Generalisierungsoptimierung versteht man den Prozess der Erzeugung eines logisch minimierten Konditionals im Sinne von Definition \ref{Logische Min}.
 \end{Def}
 Diese Idee baut auf der positiven und der negativen Generalisierung auf. Es werden beide Generalisierungen erzeugt und der generierte Constraint in jeder der beiden Alternativen logisch optimiert. Die beiden Ausdrücke werden im einfachsten Fall über die Länge des Constraints verglichen und der kürzere gewählt.\\
 \subsection{Logische Optimierung von Constraints} \label{LogOpt}
@@ -3498,19 +3510,19 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 		&  sh. \newline \newline \ref{angestrebte Ausgabe} \newline \ref{Generalisierung} \newline \ref{Äquivalenzrelation}, \ref{Äquivalenz in FO-PCL} \newline \newline \ref{Konstanten spezifisch} \newline \ref{Grundinstanz generisch} \newline \ref{Grundinstanz spezifisch} \newline \ref{Ausgabe der Komponente} \\
 		\hline
 		logische Minimierung formal definieren
-		& noch umzusetzen\ref{LogOpt} \\
+		& \ref{LogOpt}, bzw. Def. \ref{Logische Min} und Def. \ref{Logische Genopt}\\
 		\hline
 		Noch nicht diskutiert: Versionenraumverfahren 
 		& sh \ref{VRL}, \ref{Verwendbar VRL}\\
 		\hline
 		nicht diskutiert und zu überarbeiten: logische Generalisierung 
-		& sh. \ref{Logische Genopt} und \ref{Minimierung} \\
+		& sh. \ref{Logische Genopt}  \\
 		\hline
 		Idee: Flussplan fertig machen und ins Dokument einbauen
-		& \ref{Fig_General}, \ref{Fig_Log_Genopt}, \ref{Fig_ZweiKlassen} \\
+		& \ref{Fig_General}, \ref{Fig_Log_Genopt}, \ref{Fig_ZweiKlassen}, \ref{Fig_Mehr_Klassen} \\
 		\hline
 		nicht besprochen und noch zu diskutieren
-		& Generalisierung im Algorithmus beschrieben, Beispiele wären eine Wiederholung von Kapitel 4, darüber muss man reden, wenn man die Implementation bespricht sh. \ref{general} \newline Anmerkung zu unausführbaren Beispielen \ref{Beispiele unausfuehrbar} \newline Ergänzung der Auswertung \ref{Fallunterscheidung Formel 2Aequi}, \ref{Fallunterscheidung Formel MehrAequi} \newline Konditionale Generalisierung für Formeln ausformuliert \ref{KondGen_Formel} \\
+		& Generalisierung im Algorithmus beschrieben, Beispiele wären eine Wiederholung von Kapitel 4, darüber muss man reden, wenn man die Implementation bespricht sh. \ref{general} \newline Anmerkung zu unausführbaren Beispielen \ref{Beispiele unausfuehrbar} \newline Ergänzung der Auswertung \ref{Fallunterscheidung Formel 2Aequi}, \ref{Fallunterscheidung Formel MehrAequi} \newline Konditionale Generalisierung für Formeln ausformuliert \ref{KondGen_Formel} \newline Minimierung boolescher Ausdrücke \ref{Minimierung}, \ref{Logische Min} \\
 		\hline
 		\caption{Änderungen gegenüber der letzten Version}
 	\end{longtable}

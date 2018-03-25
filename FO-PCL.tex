@@ -114,7 +114,7 @@
 \end{center}
 
 \begin{center}
-\textcolor{blue}{Version 20180322}
+\textcolor{blue}{Version 20180325}
 	
 \large{Kleingartach, 2018}
 \end{center}
@@ -474,8 +474,8 @@ Der probabilistische Teil von FO-PCL wird mittels probabilistischer Konditionale
 \subsubsection{Probabilistische Konditionale}  \index{Konditional ! probabilistisches}
 (Nähere Ausführungen zu probabilistischen Konditionalen können dem Anhang \ref{probKond} entnommen werden.)
 
-\label{Fo-PCL Konditional}
-\begin{Def}[First-Order probabilistisches $ \Sigma $-Konditional]\cite[Kap. 6.2, S. 127, vgl. Def. 6.2.6]{Fis10} \index{Konditional ! FO probab. $ \Sigma $-} \index{FO-PCL Konditional}
+
+\begin{Def}[First-Order probabilistisches $ \Sigma $-Konditional]\cite[Kap. 6.2, S. 127, vgl. Def. 6.2.6]{Fis10} \index{Konditional ! FO probab. $ \Sigma $-} \index{FO-PCL Konditional} \label{Fo-PCL Konditional}
 	
 \noindent
 Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur.\\
@@ -494,7 +494,7 @@ Wie FO-PCL Konditionalen praktisch aussehen können, demonstrieren die vorangega
 
 \paragraph{Grundkonditional}
 
-FO-PCL-Konditionale mit $ \Sigma $-Grundformeln $ \varphi, \psi $ werden Grundkonditionale genannt.\index{Grundkonditional} \label{Grundkonditional}
+FO-PCL-Konditionale mit $ \Sigma $-Grundformeln $ \varphi, \psi $ werden Grundkonditionale genannt.\index{Grundkonditional} 
 
 \begin{Bsp}[Grundkonditional]
 	Ein einzelnes Grundkonditional für das Beispiel \ref{sec:Misanthrop} "{}Misanthrop"{} und das Konditional $ MI_1 $ könnte bei der Konstantenmenge $ \cal{D} $$_{MI} = \{ a, b, c\} $ wie folgt aussehen:\\
@@ -1037,7 +1037,7 @@ Nun können beliebige Anfragen an die Wissensbasis gestellt werden. Dabei liegt 
 \item \textbf{Wissensbasis:} 
 Das vorhandene Wissen muss in einer eigenen Wissensbasis formuliert werden.
 \item \textbf{Grundierung:}
-Eine Wissensbasis wird grundiert, indem sämtlichen Termen in der Wissensbasis Konstanten aus der Domäne zugeordnet werden, vgl. Proposition  \ref{Grundsubstitution} und ausführlich Abschnitt \ref{sec:semantik}.
+Eine Wissensbasis wird grundiert, indem sämtlichen Variablen in den Termen in der Wissensbasis Konstanten aus der Domäne zugeordnet werden, d.h. eine Grundsubstitution durchgeführt wird, vgl. Proposition  \ref{Grundsubstitution} und ausführlich Abschnitt \ref{sec:semantik}.
 \item \textbf{Modellselektion:}
 Um Inferenz betreiben zu können, wählt man bei FO-PCL aus allen theoretisch möglichen Modellen dasjenige mit der maximalen Entropie aus, vgl. Abschnitt \ref{Fo-PCL-MaxEnt}. Man erhält damit einen epistemischen Zustand, dem eine Wahrscheinlichkeitsfunktion innewohnt.
 \item \textbf{Anfragen:}
@@ -1073,7 +1073,7 @@ Jetzt können beliebige Anfragen in Form eines unbedingten Konditionals gestellt
 
 \subsubsection{Grundierung der Anfrage}
 
-Das angefragte, unbedingte Konditional wird gemäß der Syntax von FO-PCL grundiert, d.h. es werden alle Grundkonditionale, \ref{Grundkonditional},  für das angefragte Konditional generiert.
+Das angefragte, unbedingte Konditional wird gemäß der Syntax von FO-PCL grundiert, d.h. es werden alle Grundkonditionale, vgl. Definition \ref{Fo-PCL Konditional}, für das angefragte Konditional durch Anwendung einer Grundsubstitution, vgl. Proposition \ref{Grundsubstitution} generiert.
 
 \subsubsection{Berechnung der Wahrscheinlichkeit für jedes Grundkonditional}
 Es wird zu jedem Grundkonditional eine Wahrscheinlichkeit mit Hilfe des epistemischen Zustands, der zur Wissensbasis gehört und der eine Wahrscheinlichkeitsfunktion umfasst, berechnet. Die Antwort zu diesem Zeitpunkt beinhaltet die Menge der Grundinstanzen des angefragten Konditionals und die jeweils dazu berechnete Wahrscheinlichkeit. Dabei wird von der berechneten Wahrscheinlichkeit erwartet, dass sie die Sicherheit angibt, mit der die Frage unter Berücksichtigung des bisher erworbenen Wissens beantwortet werden kann.
@@ -1118,7 +1118,7 @@ Das Ergebnis  "{}0"{} erhält man unter anderem für reflexives Wissen, da dies 
 \textcolor{blue}{
 \begin{Def}[Generalisierung]\index{Generalisierung} \label{Generalisierung}
 Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL Wissensbasis, gemäß Definition \ref{KB}. Sei ferner $ \cal{Q} $ eine Anfrage in Form eines unbedingten Konditionals und sei  $ \cal{E}$  $ = \{E_1, ..., E_j\}$ eine Menge von Äquivalenzklassen gemäß Definition \ref{Äquivalenzklassen}.\\
-	Eine Generalisierung ist eine Abbildung, die jeder Äquivalenzklasse $ E_i \in \cal{E} $  $ mit$  $ i \in \{1, ..., j\} $ jeweils genau ein einziges Konditional zuordnet. 
+	Eine Generalisierung ist eine Abbildung, die jeder Äquivalenzklasse $ E_i \in \cal{E} $  $ mit$  $ i \in \{1, ..., j\} $ jeweils genau ein einziges quantifiziertes Konditional zuordnet. Das Konditional muss der Signatur folgen und darf in Prämisse und Konklusion nur Variablen enthalten. Aus jedem dieser Konditionale müssen alle Konditionale der zugehörigen Äquivalenzklasse aus den Konstanten in $ \cal{D} $ und unter Beachtung des Constraints durch Grundsubstitution, vgl. \ref{Grundsubstitution} gebildet werden können.\\
 	Dieses Konditional wird auch generalisiertes Konditional genannt. \index{Konditional ! generalisiertes}
 \end{Def}
 In der Phase der Generalisierung werden die gemäß der gleichen Wahrscheinlichkeit in einer Äquivalenzklasse befindenden Konditionale zu einem möglichst allgemeinen Konditional zusammengefasst.\\
@@ -1152,10 +1152,10 @@ Für das Beispiel "{} Birds "{}, \ref{Birds} könnte ein qualitatives Konditiona
   $(flies(Tweety))[0.0]$\\ 
 \end{Bsp}
 \begin{Def}[Ausgabe der Komponente] \index{Ausgabe der Komponente} \label{Ausgabe der Komponente}
-	Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL  Wissensbasis, gemäß Definition \ref{KB}. Sei ferner  $ \cal{Q} $ eine nichtleere Menge von Anfragen in Form qualitativer Konditionale und sei $ \cal G $ die Menge aller quantifizierter Konditionale.\\
+	Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL  Wissensbasis, gemäß Definition \ref{KB}. Sei ferner  $ \cal{Q} $ eine nichtleere Menge von Anfragen in Form qualitativer Konditionale und sei $ G $ die Menge aller quantifizierter Konditionale, die der Signatur $ \Sigma $ folgen und die in Prämisse und Konklusion nur Variablen enthalten.\\
 	Die Ausgabe der Komponente ist das Bild der Abbildung:\\
-		\hspace{3.0 cm} $ \delta $: $ \cal{Q}  $ $  \rightarrow  \cal{G}$, $ \delta(q)  $ = $ \{g \in G \mid $  g ist ein logisch minimales und generalisiertes Konditional $\} $\\
-		die jeder Anfrage $ q \in \cal Q $ (in Form eines qualitativen Konditionals) eine nichtleere Menge $ G \subset \cal G $ von Konditionalen zuordnet. 
+		\hspace{3.0 cm} $ \delta $: $ \cal{Q}  $ $  \rightarrow 2^G  $\\
+		die jeder Anfrage $ q \in \cal Q $ (in Form eines qualitativen Konditionals) eine nichtleere Menge von generalisierten Konditionalen gemäß Definition \ref{Generalisierung},  zuordnet. 
 	\end{Def}
 \begin{Bsp}[Ausgabe der Komponente] \label{Bsp:Ausgabe der Komponente}
 Für das Beispiel "{} Birds "{}, \ref{Birds} ist für die Anfrage $ (flies(X)) $ die Ausgabe der Komponente: \\
@@ -3609,7 +3609,7 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 		\endlastfoot
 		\hline
 		Definitionen sollten überarbeitet werden-, dazu gehören: \newline Generalisierung, insbes. generalisiertes Konditional \newline spezifische Konstanten \newline generische Grundinstanzen \newline \newline  \newline spezifische Grundinstanzen (Mengenbeziehung korrigieren) \newline Ausgabe der Komponente
-		&  sh. \newline \newline\newline \ref{Generalisierung} noch offen \newline \ref{Konstanten spezifisch} (um 'oder Constraint' ergänzt)\newline \ref{Grundinstanz generisch} der Constraint ist eine Tautologie bei Grundinstanzen, deshalb taucht es nicht in der Defintion auf; sie wurde insgesamt überarbeitet \newline \ref{Grundinstanz spezifisch} \newline \newline \ref{Ausgabe der Komponente} \\
+		&  sh. \newline \newline\newline \ref{Generalisierung}  \newline \ref{Konstanten spezifisch} (um 'oder Constraint' ergänzt)\newline \ref{Grundinstanz generisch} der Constraint ist eine Tautologie bei Grundinstanzen, deshalb taucht es nicht in der Defintion auf; sie wurde insgesamt überarbeitet \newline \ref{Grundinstanz spezifisch} \newline \newline \ref{Ausgabe der Komponente} \\
 		Qualitatives Konditional
 		& \ref{qualitatives_Konditional}\\
 		\hline

@@ -1116,15 +1116,27 @@ Das Ergebnis  "{}0"{} erhält man unter anderem für reflexives Wissen, da dies 
 	
 \subsubsection{Generalisierung der Klassen}
 \textcolor{blue}{
+	\begin{Def}[Qualitatives Konditional]\label{qualitatives_Konditional} \index{Konditional ! qualitatives}
+		Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL Wissensbasis, gemäß Definition \ref{KB}.	
+		Unter einem qualitativen Konditional im Sinne dieser Arbeit versteht man ein Konditional ohne zugeordnete Wahrscheinlichkeit, d.h. ein nicht quantifiziertes Konditional. \label{quantifiziertes_Konditional} \index{Konditional ! quantifiziertes}\\
+		Dagegen ist unter einem quantifizierten Konditional ein Konditional mit zugeordneter Wahrscheinlichkeit zu verstehen.
+	\end{Def}
+	\begin{Bsp}[Qualitatives Konditional] \label{Bsp:Qualitatives Konditional}
+		Für das Beispiel "{} Birds "{}, \ref{Birds} könnte ein qualitatives Konditional so aussehen: \\
+		$(flies(Tweety))$,  $(flies(X))$\\
+		Ein quantifiziertes Konditional dagegen könnte so aussehen:\\
+		$(flies(Tweety))[0.0]$\\ 
+	\end{Bsp}
+}
+
+\textcolor{blue}{
 \begin{Def}[Generalisierung]\index{Generalisierung} \label{Generalisierung}
-Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL Wissensbasis, gemäß Definition \ref{KB}. Sei ferner $ \cal{Q} $ eine Anfrage in Form eines unbedingten Konditionals und sei  $ \cal{E}$  $ = \{E_1, ..., E_j\}$ eine Menge von Äquivalenzklassen gemäß Definition \ref{Äquivalenzklassen}.\\
-	Eine Generalisierung ist eine Abbildung, die jeder Äquivalenzklasse $ E_i \in \cal{E} $  $ mit$  $ i \in \{1, ..., j\} $ jeweils genau ein einziges quantifiziertes Konditional zuordnet. Das Konditional muss der Signatur folgen und darf in Prämisse und Konklusion nur Variablen enthalten. Aus jedem dieser Konditionale müssen alle Konditionale der zugehörigen Äquivalenzklasse aus den Konstanten in $ \cal{D} $ und unter Beachtung des Constraints durch Grundsubstitution, vgl. \ref{Grundsubstitution} gebildet werden können.\\
-	Dieses Konditional wird auch generalisiertes Konditional genannt. \index{Konditional ! generalisiertes}
+Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL Wissensbasis, gemäß Definition \ref{KB}. Sei ferner $ Q $ eine Anfrage in Form eines unbedingten Konditionals und sei  $ \cal{E}$  $ = \{E_1, ..., E_j\}$ eine Menge von Äquivalenzklassen gemäß Definition \ref{Äquivalenzklassen}.\\
+	Eine Generalisierung ist eine Abbildung, die jeder Äquivalenzklasse $ E_i \in \cal{E} $  $ mit$  $ i \in \{1, ..., j\} $ jeweils genau ein einziges quantifiziertes Konditional, d.h. ein Konditional mit Wahrscheinlichkeit, zuordnet. Dieses Konditional wird im Folgenden auch generalisiertes Konditional genannt. \index{Konditional ! generalisiertes} Das Konditional muss der Signatur folgen und darf in Prämisse und Konklusion nur Variablen enthalten, wenn die Äquivalenzklasse mehr als ein Konditional enthält. Aus diesem Konditionale müssen jeweils alle Konditionale der zugehörigen Äquivalenzklasse mit den Konstanten in $ \cal{D} $ und unter Beachtung des Constraints durch Grundsubstitution, vgl. \ref{Grundsubstitution} gebildet werden können. Für Äquivalenzklassen mit einem Konditional ordnet die Abbildung dem Konditional nur die berechnete Wahrscheinlichkeit zu; das generalisierte Konditional ist folglich ein Grundkonditional mit zugeordneter Wahrscheinlichkeit. 	
 \end{Def}
 In der Phase der Generalisierung werden die gemäß der gleichen Wahrscheinlichkeit in einer Äquivalenzklasse befindenden Konditionale zu einem möglichst allgemeinen Konditional zusammengefasst.\\
 Die eigentliche Logik der Komponente liegt hierbei in der Erzeugung des jeweiligen Konditionals. Wie das Konditional der Klasse aussieht hängt von der Klasse und dem ausgeführten Generalisierungsprozess ab. 
 }
-
 \textcolor{blue}{
 \begin{Bsp}[Generalisierung]\label{Bsp:Generalisierung}
 Für das Beispiel "{} Birds "{}, \ref{Birds} könnten für die Anfrage $ (flies(X)) $ bei einer möglichen Generalisierung der beiden Klassen folgende generalisierten Konditionale ergeben: \\
@@ -1140,22 +1152,11 @@ Konditional für Klasse 2: $\{(flies(X))[0.66]\} <X \neq Tweety>$\\
 
 \textcolor{blue}{
 \subsubsection{Ausgabe der Komponente}
-\begin{Def}[Qualitatives Konditional]\label{qualitatives_Konditional} \index{Konditional ! qualitatives}
-Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL Wissensbasis, gemäß Definition \ref{KB}.	
-Unter einem qualitativen Konditional im Sinne dieser Arbeit versteht man ein Konditional ohne zugeordnete Wahrscheinlichkeit, d.h. ein nicht quantifiziertes Konditional. \label{quantifiziertes_Konditional} \index{Konditional ! quantifiziertes}\\
-Dagegen ist unter einem quantifizierten Konditional ein Konditional mit zugeordneter Wahrscheinlichkeit zu verstehen.
-\end{Def}
-\begin{Bsp}[Qualitatives Konditional] \label{Bsp:Qualitatives Konditional}
-Für das Beispiel "{} Birds "{}, \ref{Birds} könnte ein qualitatives Konditional so aussehen: \\
- $(flies(Tweety))$,  $(flies(X))$\\
- Ein quantifiziertes Konditional dagegen könnte so aussehen:\\
-  $(flies(Tweety))[0.0]$\\ 
-\end{Bsp}
 \begin{Def}[Ausgabe der Komponente] \index{Ausgabe der Komponente} \label{Ausgabe der Komponente}
-	Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL  Wissensbasis, gemäß Definition \ref{KB}. Sei ferner  $ \cal{Q} $ eine nichtleere Menge von Anfragen in Form qualitativer Konditionale und sei $ G $ die Menge aller quantifizierter Konditionale, die der Signatur $ \Sigma $ folgen und die in Prämisse und Konklusion nur Variablen enthalten.\\
+	Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL  Wissensbasis, gemäß Definition \ref{KB}. Sei ferner  $ \cal{Q} $ eine nichtleere Menge von Anfragen in Form qualitativer Konditionale und sei $ G $ die Menge aller quantifizierter Konditionale, die der Signatur $ \Sigma $ folgen und die aus der Wissensbasis durch den Inferenzprozess über Grundierung, ME-Inferenz, Klassifizierung und Generalisierung gebildet werden können, \ref{Generalisierung}, gebildet werden können.\\
 	Die Ausgabe der Komponente ist das Bild der Abbildung:\\
 		\hspace{3.0 cm} $ \delta $: $ \cal{Q}  $ $  \rightarrow 2^G  $\\
-		die jeder Anfrage $ q \in \cal Q $ (in Form eines qualitativen Konditionals) eine nichtleere Menge von generalisierten Konditionalen gemäß Definition \ref{Generalisierung},  zuordnet. 
+		die jeder Anfrage $ Q \in \cal Q $ (in Form eines qualitativen Konditionals) eine nichtleere Menge von generalisierten Konditionalen gemäß Definition \ref{Generalisierung}, zuordnet. 
 	\end{Def}
 \begin{Bsp}[Ausgabe der Komponente] \label{Bsp:Ausgabe der Komponente}
 Für das Beispiel "{} Birds "{}, \ref{Birds} ist für die Anfrage $ (flies(X)) $ die Ausgabe der Komponente: \\
@@ -2126,7 +2127,7 @@ Auch wenn es auf den ersten Blick so scheinen mag, als ob es für das Problem de
 	Die logische Generalisierungsoptimierung soll die Vorteile der vorangehende geschilderten Verfahren zusammenfassen und so zu einem möglichst aussagekräftigen und kurzen Konditional führen.
 \begin{Def}[Logische Minimierung in FO-PCL] \label{Logische Min} \index{Logische Minimierung}
 	Sei $\cal{R}$ eine FO-PCL Wissensbasis, wobei definitionsgemäß $\cal{R}$  = \{$ R_1, ..., R_m $\} eine Menge von FO-PCL Konditionalen ist. Sei $ R $ ein FO-PCL Konditional mit Constraint $ C $. Sei $ \cal B $ die Menge der Axiome aus Anhang \ref{Boolesche Axiome}.\\
-	Ein FO-PCL Konditional ist genau dann logisch minimiert, wenn der Constraint $ C $ logisch minimiert ist. Der Constraint $ C $ ist genau dann logisch minimiert, wenn gilt: es gibt kein boolesches Axiom aus der Menge der booleschen Axiome aus Anhang \ref{Boolesche Axiome}, das anwendbar wäre und dessen Anwendung zu einer Verkleinerung der Anzahl der im Constraint $ C $ vorkommenden Junktoren führen würde.
+	Ein FO-PCL Konditional ist genau dann logisch minimiert, wenn der Constraint $ C $ logisch minimiert ist. Der Constraint $ C $ ist genau dann logisch minimiert, wenn gilt: es gibt kein boolesches Axiom aus der Menge der booleschen Axiome aus Anhang \ref{Boolesche Axiome}, dessen Anwendung zu einer Verringerung der Anzahl der im Constraint $ C $ vorkommenden Junktoren führen würde.
 \end{Def}
 Unter einem logisch minimierten FO-PCL Konditional im Sinne dieser Arbeit ist ein möglichst kurzes Konditional zu verstehen, d.h. ein Konditional mit einem möglichst kurzen Constraint. Der Contraint ist aber als möglichst kurz anzusehen, wenn es kein boolesches Axiom gibt, mit dem er weiter verkürzt werden kann, so dass die Anzahl der im Constraint vorkommenden Junktoren verringert werden kann. 
 }

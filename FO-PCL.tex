@@ -2,6 +2,7 @@
 
 
 
+
  
 
 
@@ -114,7 +115,7 @@
 \end{center}
 
 \begin{center}
-\textcolor{blue}{Version 20180325}
+\textcolor{blue}{Version 20180414}
 	
 \large{Kleingartach, 2018}
 \end{center}
@@ -1123,7 +1124,7 @@ Das Ergebnis  "{}0"{} erhält man unter anderem für reflexives Wissen, da dies 
 	\end{Def}
 	\begin{Bsp}[Qualitatives Konditional] \label{Bsp:Qualitatives Konditional}
 		Für das Beispiel "{} Birds "{}, \ref{Birds} könnte ein qualitatives Konditional so aussehen: \\
-		$(flies(Tweety))$,  $(flies(X))$\\
+		$(flies(Tweety))$ oder auch $(flies(X))$\\
 		Ein quantifiziertes Konditional dagegen könnte so aussehen:\\
 		$(flies(Tweety))[0.0]$\\ 
 	\end{Bsp}
@@ -1131,10 +1132,10 @@ Das Ergebnis  "{}0"{} erhält man unter anderem für reflexives Wissen, da dies 
 
 \textcolor{blue}{
 \begin{Def}[Generalisierung]\index{Generalisierung} \label{Generalisierung}
-Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL Wissensbasis, gemäß Definition \ref{KB}. Sei ferner $ Q $ eine Anfrage in Form eines unbedingten Konditionals und sei  $ \cal{E}$  $ = \{E_1, ..., E_j\}$ eine Menge von Äquivalenzklassen gemäß Definition \ref{Äquivalenzklassen}.\\
-	Eine Generalisierung ist eine Abbildung, die jeder Äquivalenzklasse $ E_i \in \cal{E} $  $ mit$  $ i \in \{1, ..., j\} $ jeweils genau ein einziges quantifiziertes Konditional, d.h. ein Konditional mit Wahrscheinlichkeit, zuordnet. Dieses Konditional wird im Folgenden auch generalisiertes Konditional genannt. \index{Konditional ! generalisiertes} Das Konditional muss der Signatur folgen und darf in Prämisse und Konklusion nur Variablen enthalten, wenn die Äquivalenzklasse mehr als ein Konditional enthält. Aus diesem Konditionale müssen jeweils alle Konditionale der zugehörigen Äquivalenzklasse mit den Konstanten in $ \cal{D} $ und unter Beachtung des Constraints durch Grundsubstitution, vgl. \ref{Grundsubstitution} gebildet werden können. Für Äquivalenzklassen mit einem Konditional ordnet die Abbildung dem Konditional nur die berechnete Wahrscheinlichkeit zu; das generalisierte Konditional ist folglich ein Grundkonditional mit zugeordneter Wahrscheinlichkeit. 	
+Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL Wissensbasis, gemäß Definition \ref{KB}. Sei ferner $ Q $ eine Anfrage in Form eines qualitativen Konditionals und sei  $ \cal{E}$  $ = \{E_1, ..., E_j\}$ eine Menge von Äquivalenzklassen von FO-PCL Konditionalen gemäß Definition \ref{Äquivalenzklassen}.\\
+	Eine Generalisierung ist eine Abbildung, die jeder Äquivalenzklasse $ E_i \in \cal{E} $  $ mit$  $ i \in \{1, ..., j\} $ jeweils genau ein einziges quantifiziertes Konditional, d.h. ein Konditional mit Wahrscheinlichkeit, zuordnet. Dieses Konditional wird im Folgenden auch generalisiertes Konditional genannt. \index{Konditional ! generalisiertes} Das Konditional muss der Signatur folgen und darf in Prämisse und Konklusion nur Variablen enthalten, wenn die Äquivalenzklasse mehr als ein Konditional enthält. Aus diesem Konditional müssen jeweils alle Konditionale der zugehörigen Äquivalenzklasse mit den Konstanten in $ \cal{D} $ und unter Beachtung des Constraints durch Grundsubstitution, vgl. \ref{Grundsubstitution} gebildet werden können. Für Äquivalenzklassen mit einem Konditional ordnet die Abbildung dem Konditional nur die berechnete Wahrscheinlichkeit zu; das generalisierte Konditional ist folglich ein Grundkonditional mit zugeordneter Wahrscheinlichkeit. 	
 \end{Def}
-In der Phase der Generalisierung werden die gemäß der gleichen Wahrscheinlichkeit in einer Äquivalenzklasse befindenden Konditionale zu einem möglichst allgemeinen Konditional zusammengefasst.\\
+In der Phase der Generalisierung werden die Konditionale, die sich aufgrund der gleichen Wahrscheinlichkeit in einer Äquivalenzklasse befinden, zu einem möglichst allgemeinen Konditional zusammengefasst.\\
 Die eigentliche Logik der Komponente liegt hierbei in der Erzeugung des jeweiligen Konditionals. Wie das Konditional der Klasse aussieht hängt von der Klasse und dem ausgeführten Generalisierungsprozess ab. 
 }
 \textcolor{blue}{
@@ -1153,7 +1154,7 @@ Konditional für Klasse 2: $\{(flies(X))[0.66]\} <X \neq Tweety>$\\
 \textcolor{blue}{
 \subsubsection{Ausgabe der Komponente}
 \begin{Def}[Ausgabe der Komponente] \index{Ausgabe der Komponente} \label{Ausgabe der Komponente}
-	Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL  Wissensbasis, gemäß Definition \ref{KB}. Sei ferner  $ \cal{Q} $ eine nichtleere Menge von Anfragen in Form qualitativer Konditionale und sei $ G $ die Menge aller quantifizierter Konditionale, die der Signatur $ \Sigma $ folgen und die aus der Wissensbasis durch den Inferenzprozess über Grundierung, ME-Inferenz, Klassifizierung und Generalisierung gebildet werden können, \ref{Generalisierung}, gebildet werden können.\\
+	Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL  Wissensbasis, gemäß Definition \ref{KB}. Sei ferner  $ \cal{Q} $ eine nichtleere Menge von Anfragen in Form qualitativer Konditionale und sei $ G $ die Menge aller quantifizierter Konditionale, die der Signatur $ \Sigma $ folgen und die aus der Wissensbasis durch den Inferenzprozess über Grundierung, ME-Inferenz, Klassifizierung und Generalisierung \ref{Generalisierung}, gebildet werden können.\\
 	Die Ausgabe der Komponente ist das Bild der Abbildung:\\
 		\hspace{3.0 cm} $ \delta $: $ \cal{Q}  $ $  \rightarrow 2^G  $\\
 		die jeder Anfrage $ Q \in \cal Q $ (in Form eines qualitativen Konditionals) eine nichtleere Menge von generalisierten Konditionalen gemäß Definition \ref{Generalisierung}, zuordnet. 
@@ -1455,7 +1456,7 @@ Um die Grundkonditionale, für die unterschiedliche Wahrscheinlichkeiten berechn
 Es wurde die Anzahl der Elemente der Äquivalenzklassen \index{Äquivalenzklassen} betrachtet. Ausgehend davon war zu betrachten, welche Unterscheidungskriterien zwischen den einzelnen Klassen bestanden.\\
 Der Ansatz, die Klassen bezüglich der in der Konklusion oder und Prämisse verwendeten Konstanten zu schneiden, wies sich nur als erfolgreich für ganz einfache Beispiele und wenig Klassen. Dieser Ansatz wurde daraufhin nicht weiter verfolgt.\\
 Das führte zu der Überlegung, die Bibliothek von Log4KR noch einmal näher zu betrachten und zu erforschen, welche Gestaltungsmöglichkeiten sie in Hinblick auf die zu bildenden Konditionale bot.\\
-Als Ausgabe der Inferenzkomponente wird ein bedingtes relationales Konditional mit Wahrscheinlichkeit und Constraint pro Äquivalenzklasse erwartet, nähere Erläuterungen zu den erarbeiteten Ergebnissen folgen in einem späteren Kapitel \ref{Eine Äquivalenzklasse}.
+Als Ausgabe der Inferenzkomponente wird ein einziges quantifiziertes relationales Konditional mit Constraint pro Äquivalenzklasse erwartet, nähere Erläuterungen zu den erarbeiteten Ergebnissen folgen in einem späteren Kapitel \ref{Eine Äquivalenzklasse}.
 
 
 
@@ -2127,7 +2128,7 @@ Auch wenn es auf den ersten Blick so scheinen mag, als ob es für das Problem de
 	Die logische Generalisierungsoptimierung soll die Vorteile der vorangehende geschilderten Verfahren zusammenfassen und so zu einem möglichst aussagekräftigen und kurzen Konditional führen.
 \begin{Def}[Logische Minimierung in FO-PCL] \label{Logische Min} \index{Logische Minimierung}
 	Sei $\cal{R}$ eine FO-PCL Wissensbasis, wobei definitionsgemäß $\cal{R}$  = \{$ R_1, ..., R_m $\} eine Menge von FO-PCL Konditionalen ist. Sei $ R $ ein FO-PCL Konditional mit Constraint $ C $. Sei $ \cal B $ die Menge der Axiome aus Anhang \ref{Boolesche Axiome}.\\
-	Ein FO-PCL Konditional ist genau dann logisch minimiert, wenn der Constraint $ C $ logisch minimiert ist. Der Constraint $ C $ ist genau dann logisch minimiert, wenn gilt: es gibt kein boolesches Axiom aus der Menge der booleschen Axiome aus Anhang \ref{Boolesche Axiome}, dessen Anwendung zu einer Verringerung der Anzahl der im Constraint $ C $ vorkommenden Junktoren führen würde.
+	Ein FO-PCL Konditional ist genau dann logisch minimiert, wenn der Constraint $ C $ logisch minimiert ist. Der Constraint $ C $ ist genau dann logisch minimiert, wenn gilt: es gibt kein boolesches Axiom aus der Menge der booleschen Axiome aus Anhang \ref{Boolesche Axiome}, dessen Anwendung, wobei die Anwendbarkeit vorausgesetzt ist, zu einer Verringerung der Anzahl der im Constraint $ C $ vorkommenden Junktoren führen würde.
 \end{Def}
 Unter einem logisch minimierten FO-PCL Konditional im Sinne dieser Arbeit ist ein möglichst kurzes Konditional zu verstehen, d.h. ein Konditional mit einem möglichst kurzen Constraint. Der Contraint ist aber als möglichst kurz anzusehen, wenn es kein boolesches Axiom gibt, mit dem er weiter verkürzt werden kann, so dass die Anzahl der im Constraint vorkommenden Junktoren verringert werden kann. 
 }
@@ -2454,11 +2455,11 @@ Das Konditional für die Klasse ist sehr trivial zu erzeugen. Es handelt sich um
 \paragraph{ Zwei Äquivalenzklassen}
 Eine Auflistung der  Experimente hierzu findet man unter \ref{Atom_zweiKlassen}.
 \begin{itemize}
-\item Jede Äquivalenzklasse enthält nur ein Konditional. Das Konditional für jede Klasse ist trivialerweise das bedingte Konditional, also das Konditional mit Wahrscheinlichkeit, aber ohne Constraint. Im Fall "{}Birds2Birds"{} \ref{Birds2Birds} würden sich für die Anfrage $flies(X)$ die beiden Konditionale $ (flies(Bully)[0.663]) $ und $ (flies(Tweety))[0.0] $ ergeben. Die Rückgabemenge besteht also lediglich aus den bedingten Konditionalen jeder Klasse.
+\item Jede Äquivalenzklasse enthält nur ein Konditional. Das Konditional für jede Klasse ist trivialerweise das bedingte Konditional, also das Konditional mit Wahrscheinlichkeit, aber ohne Constraint. Im Fall "{}Birds2Birds"{} \ref{Birds2Birds} würden sich für die Anfrage $flies(X)$ die beiden Konditionale $ (flies(Bully)[0.663]) $ und $ (flies(Tweety))[0.0] $ ergeben. Die Rückgabemenge besteht also lediglich aus den quantifizierten  Grundkonditionalen jeder Klasse.
 \item Eine Äquivalenzklasse enthält ein Konditional, die andere mehr als ein Konditional
 \begin{itemize}
 	\item einstelliges Prädikat:\\
-	Hier sind die beiden Konditionale über negative Generalisierung \ref{NegativeGeneralisierung} zu generieren. Für die Klasse mit einem Konditional ist es das bedingte Konditional, für die andere Klasse wird ein Constraint der Ungleichheit gebildet (s. \ref{Def:Constraint}), der die (spezifische) Konstante der anderen Klasse enthält, s \ref{Bsp:Neg_Gen_Birds}. 
+	Hier sind die beiden Konditionale über negative Generalisierung \ref{NegativeGeneralisierung} zu generieren. Für die Klasse mit einem Konditional ist es das quantifizierte Grundkonditional, für die andere Klasse wird ein Constraint der Ungleichheit gebildet (s. \ref{Def:Constraint}), der die (spezifische) Konstante der anderen Klasse enthält, s \ref{Bsp:Neg_Gen_Birds}. 
 	\item zweistelliges Prädikat:\\
 	Zwei Äquivalenzklassen dürften sich bei zweistelligen Prädikaten nur dann ergeben, wenn bereits die Anfrage ein spezifisches Konditional enthält. Das ist ein Randfall, der hier nicht weiter betrachtet werden soll. 
 \end{itemize}
@@ -2547,7 +2548,7 @@ Das ist der trivialste Fall. In diesem Fall besteht die Rückgabemenge aus dem u
 Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_zweiKlassen}.
 \begin{itemize}
 	\item Jede Äquivalenzklasse enthält nur ein Konditional:\\
-	In diesem Fall ist nichts weiteres zu tun. Im Zuge der positiven Generalisierung wird das Konditional so zurückgegeben als bedingtes Konditional mit Wahrscheinlichkeit.
+	In diesem Fall ist nichts weiteres zu tun. Im Zuge der positiven Generalisierung wird das Konditional so zurückgegeben als quantifiziertes Konditional.
 	\item Eine Äquivalenzklasse enthält ein Konditional, die andere mehr als ein Konditional:\\
 	Diesen Fall gibt es nur für einstellige Prädikate. Im Fall zweistelliger Prädikate enthalten die Klassen mindestens zwei Elemente. Das Konditional für die Klasse ist durch negative Generalisierung zu erzeugen, \ref{NegativeGeneralisierung}. 
 	\begin{Bsp}[Konditionale Generalisierung am Beispiel Birds, \ref{Birds}]
@@ -2603,11 +2604,11 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_mehrKlassen}.
 	\item Alle Äquivalenzklassen enthalten mehr als ein Konditional
 	\begin{itemize}
 		\item einstelliges Prädikat: hierzu gibt es keine Beispiele.
-		\item zweistelliges Prädikat: Negative Generalisierung. Bei zweistelligen Prädikaten wird es immer eine Klasse geben, die das reflexive Wissen enthält. Für diese Klasse bildet man den Constraint als Constraint der Ungleichheit für die beiden Variablen des zweistelligen Prädikats. An dieser Stelle wird es kompliziert. Die übrigen Klassen unterscheiden sich darin, ob sie spezifisches Wissen enthalten oder nicht. Da aber im Voraus keine Überprüfung der Konditionale mit der Wissensbasis erfolgt, muss man dies durch einen geschickten Vergleich der Konditionale erreichen. Wie der Vergleich aussehen sollte wird im Folgenden erläutert. Der für die jeweilige Klasse erhaltene Constraint muss dann noch mit einem Contraint der Ungleichheit für reflexives Wissen konjunktiv verknüpft werden. 
+		\item zweistelliges Prädikat: Negative Generalisierung. Bei zweistelligen Prädikaten wird es immer eine Klasse geben, die das reflexive Wissen enthält. Für diese Klasse bildet man den Constraint als Constraint der Ungleichheit für die beiden Variablen des zweistelligen Prädikats. An dieser Stelle wird es kompliziert. Die übrigen Klassen unterscheiden sich darin, ob sie spezifisches Wissen enthalten oder nicht. Da im Voraus keine Überprüfung der Konditionale mit der Wissensbasis erfolgt, muss man dies an dieser Stelle vornehmen. Wie der Vergleich aussehen sollte wird im Folgenden erläutert. Der für die jeweilige Klasse erhaltene Constraint muss dann noch mit einem Contraint der Ungleichheit für reflexives Wissen konjunktiv verknüpft werden. 
 		\end{itemize}
-
+\textcolor{blue}{
 	\textbf{Exkurs: Vergleich von Konditionalen} \label{Vergleich von Konditionalen} \index{Vergleich von Konditionalen} \index{Konditional}\\
-	Sei $ R $ eine Menge von Äquivalenzklassen (von FO-PCL Grundkonditionalen). Um herauszufinden, welche der Klassen das  spezifische Wissen enthält, entfernt man zunächst die Menge mit dem reflexiven Wissen. Man bildet für die übrigen Mengen jeweils die Schnittmengen der in den Termen der Formeln vorkommenden Konstanten. Ergibt sich dabei eine Menge, die nur ein Element enthält, so hat man die spezifische Konstante gefunden. 
+	Sei $ R $ eine Menge von Äquivalenzklassen (von FO-PCL Grundkonditionalen). Um herauszufinden, welche der Klassen das  spezifische Wissen enthält, entfernt man zunächst die Menge mit dem reflexiven Wissen. Jetzt kann man die Konstanten der Terme mit den spezifischen Konstanten der Wissensbasis vergleichen. Die spezifischen Konstanten der Wissensbasis erhält man, indem man testet, ob Konditionale der Wissensbasis spezifische Konstanten enthalten, \ref{Konstanten spezifisch}; das ist dann der Fall, wenn Konditionale der Wissensbasis in Prämisse, Konklusion oder Constraint eine Konstante enthalten (statt einer Variablen).
 	\begin{Bsp}[Vergleich von Konditionalen]
 		Man betrachte das Beispiel ColdSpez, \ref{ColdSpez}:\\
 		Sei $ R = {Klasse 1, Klasse 2, Klasse 3} $ mit:\\
@@ -2619,11 +2620,12 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_mehrKlassen}.
  			(Klasse 1 wurde entfernt, da sie das reflexive Wissen enthält)\\
  			Für Klasse 2: $ \{contact(bob,carl), contact(carl,bob)\}$ \\
  			Für Klasse 3: $ \{contact(carl,anna), contact(anna, carl), contact(anna,bob), contact(bob, anna) \}$ \\
- 			\item Die Schnittmengen der in jeweils allen Termen der Klasse vorkommenden Konstanten sieht so aus:\\
- 			Für Klasse 2: $ \{bob, carl\}$ \\
- 			Für Klasse 3: $ \{anna\} $ 
+ 			\item Der Vergleich der mit den in der Wissensbasis vorkommenden Konstanten (für das Beispiel enthält die Wissensbasis die spezifische Konstante $ anna $) ergibt:\\
+ 			Klasse 2 enthält keine spezifischen Konstanten: $ \{bob, carl\}$ \\
+ 			Klasse 3 enthält eine spezifische Konstante : $ \{anna\} $ 
  		\end{enumerate}\
 	\end{Bsp}
+}
 		\begin{Bsp}[Konditionale Generalisierung am Beispiel ColdSpez, \ref{ColdSpez}]
 			Für die Anfrage $ (contact(X,Y) \land cold(Y)) $ ergibt sich:\\
 			Klasse 1: $ \{(contact(anna,anna) \land cold(anna)), (contact(bob,bob) \land cold(bob)), (contact(carl,carl) \land cold(carl)) \} $\\
@@ -2794,9 +2796,9 @@ Konditional.
 	Dieser Schritt beinhaltet die eigentliche Logik der Inferenzkomponente.\\
 	Es erfolgt eine negative und eine positive Generalisierung. Was darunter zu verstehen ist, wird im Folgenden erläutert, s. \ref{general}. 
 	Es wird zunächst ein negativer und ein positiver Constraint erzeugt. Beide werden der Größe nach verglichen und der kürzere wird gewählt. Eine detaillierte Beschreibung dieses Prozesses erfolgt in einem der unten stehenden Kapitel.\\
-	Unter Verwendung des erzeugten Constraints und der berechneten Wahrscheinlichkeit wird für jede klasse ein bedingtes relationales Konditional erzeugt.
+	Unter Verwendung des erzeugten Constraints und der berechneten Wahrscheinlichkeit wird für jede klasse ein quantifiziertes relationales Konditional erzeugt.
 	
-	\item Ausgabe: bedingtes Konditional bzw. bedingte Konditionale zur Anfrage $ Q $ , wie sie im Laufe des Algorithmus als Ausgabe generiert wurden.
+	\item Ausgabe: quantifiziertes Konditional bzw. quantifizierte Konditionale zur Anfrage $ Q $ , wie sie im Laufe des Algorithmus als Ausgabe generiert wurden.
 	
 	
 	
@@ -3625,6 +3627,9 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 		\hline
 		Forschungsauftrag spezifische Konstante
 		& keine Sekundärliteratur gefunden, die sich mit spezifischen Konstanten beschäftigt\\
+		\hline
+		neu: Exkurs: Vergleich von Konditionalen überarbeitet
+		&\ref{Vergleich von Konditionalen} \\
 		\hline
 		\caption{Änderungen gegenüber der letzten Version}
 	\end{longtable}

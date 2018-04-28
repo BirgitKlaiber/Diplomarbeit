@@ -115,7 +115,7 @@
 \end{center}
 
 \begin{center}
-\textcolor{blue}{Version 20180414}
+\textcolor{blue}{Version 20180415}
 	
 \large{Kleingartach, 2018}
 \end{center}
@@ -203,21 +203,21 @@ Man möchte modellieren, dass in einer Gruppe von Personen bestimmte Sympathien 
 Im aussagenlogischen probabilistischen konditionalen Fall könnte man die Aussage, dass eine Person Anna eine Person Bob mag mit AmB beschreiben. Wenn Anna Bob mag, dann mag Bob auch Anna (BmA) mit einer hohen Wahrscheinlichkeit.
 Mit PCL Konditionalen ausgedrückt, könnte das so aussehen:
 \begin{quote}
-$ S_{1} : \langle (BmA \mid AmB)[0,9]\rangle$\\
+$ S_{1} : \langle (BlA \mid AlB)[0,9]\rangle$\\
 \end{quote}
 Wenn unsere Personengruppe mehr Personen enthält, wollen wir vielleicht den allgemeinen Fall modellieren, der besagt, dass Sympathie mit hoher Wahrscheinlichkeit auf Gegenseitigkeit beruht.
 Mit FO-PCL Konditionalen ausgedrückt:
 \begin{quote}
-	$ S_{2} : \langle (mag(Y, X) \mid mag(X, Y)[0,9], X \neq Y \rangle$\\
+	$ S_{2} : \langle (likes(U, V) \mid likes(V, U)[0,9], U \neq V \rangle$\\
 \end{quote}
 
 \end{Bsp}
 
-\begin{Bsp}[Misanthrop]\label{sec:Misanthrop}\
-Man kann nun das Beispiel \ref{sec:BspSmp} "{}Sympathie"{} um ein weiteres Konditional erweitern, welches besagt, dass es in der (endlichen) Gruppe einen Misanthropen gibt, identifiziert mit dem Konstantensymbol a, der nur selten Sympathie empfindet. Das Beispiel "{}Misanthrop"{} wurde \cite[Bsp. 6.5.3, S. 144]{Fis10} entnommen.
+\begin{Bsp}[Misanthrope (Idee)]\label{sec:Misanthrop}\
+Man kann nun das Beispiel \ref{sec:BspSmp} "{}Sympathie"{} um ein weiteres Konditional erweitern, welches besagt, dass es in der (endlichen) Gruppe einen Misanthropen gibt, identifiziert mit dem Konstantensymbol a, der nur selten Sympathie empfindet. Das Beispiel "{}Misanthrope"{} wurde \cite[Bsp. 6.5.3, S. 144]{Fis10} entnommen. Eine ausführlichere Version dieses Beispieles findet sich unter \ref{Bsp:Misanthrope} und \ref{Misanthrope}.
 \begin{quote}
-$ MI_1 : \langle (mag(Y, X) \mid mag(X, Y)[0,9], X \neq Y \rangle$\\
-$ MI_2 : \langle (mag(a, Y))[0,05], Y \neq a \rangle$\\
+$ MI_1 : \langle (likes(U, V) \mid likes(V, U)[0,9], U \neq V \rangle$\\
+$ MI_2 : \langle (likes(a, V))[0,05], V \neq a \rangle$\\
 \end{quote}
 
 
@@ -253,7 +253,7 @@ Um unsicheres Wissen adäquat darstellen und verarbeiten zu können, bieten sich
 Inferenz erfolgt auf aussagenlogischer Ebene, d.h. um neues Wissen abzuleiten, betrachtet man die Grundinstanzen der Konditionale.
 
 
-Die Aufgabenstellung dieser Diplomarbeit beinhaltet den Entwurf und die Implementierung einer Inferenzkomponente für FO-PCL unter Verwendung bereits vorhandener Komponenten der Bibliothek Log4KR, eines Projektes der FernUniversität Hagen. Dabei soll die Inferenzkomponente qualitative Konditionale, das sind Konditionale ohne Wahrscheinlichkeit, als Anfrage entgegennehmen und diese mit einer zugeordneten Wahrscheinlichkeit zurückliefern. Es sollen Äquivalenzklassen   aus den Grundinstanzen\footnote{sh. Definition \ref{Grundinstanz}}  des angefragten Konditionals gebildet werden, die die Grundkonditionale\footnote{Definition \ref{Grundkonditional}} mit gleichem Parameterwert zu möglichst allgemeinen Konditionalen zusammenfassen \footnote{Eine Definition des Begriffes und nähere Erläuterungen finden sich in \ref{Äquivalenzklassen}}. Dabei wird darauf geachtet werden, so wenig Äquivalenzklassen wie möglich zu bilden, sich gleichzeitig aber nicht in der Ausdrucksfähigkeit der Informationen der Wissensbasis zu beschränken.
+Die Aufgabenstellung dieser Diplomarbeit beinhaltet den Entwurf und die Implementierung einer Inferenzkomponente für FO-PCL unter Verwendung bereits vorhandener Komponenten der Bibliothek Log4KR, eines Projektes der FernUniversität Hagen. Dabei soll die Inferenzkomponente qualitative Konditionale, das sind Konditionale ohne Wahrscheinlichkeit, als Anfrage entgegennehmen und diese mit einer zugeordneten Wahrscheinlichkeit zurückliefern. Es sollen Äquivalenzklassen   aus den Grundinstanzen\footnote{sh. Definition \ref{Grundinstanz}}  des angefragten Konditionals gebildet werden, die die Grundkonditionale\footnote{sh. Definition \ref{Generalisierung}} mit gleichem Parameterwert zu möglichst allgemeinen Konditionalen zusammenfassen \footnote{Eine Definition des Begriffes und nähere Erläuterungen finden sich in \ref{Äquivalenzklassen}}. Dabei wird darauf geachtet werden, so wenig Äquivalenzklassen wie möglich zu bilden, sich gleichzeitig aber nicht in der Ausdrucksfähigkeit der Informationen der Wissensbasis zu beschränken.
 
 Die wesentliche Aufgabe dieser neuen Inferenzkomponente ist es, das vorhandenes Wissen zu nutzen, auszuwerten und Schlüsse zu ziehen.\\
 Sie erlaubt die indirekte Kommunikation mit dem Anwender über eine Schnittstelle, nimmt Anfragen entgegen, bereitet sie gemäß der Semantik von FO-PCL auf, zieht die notwendigen logischen Schlüsse und nimmt unter Verwendung von bereits in Log4KR vorhandenen Komponenten die erforderlichen Berechnungen.
@@ -308,7 +308,7 @@ Wenn man Beispiel \ref{sec:Bsp1} "{}Grippe"{} betrachtet, enthält das Kondition
 
 \begin{Bsp}[Constraint]
 \label{sec:BspConstraint}
-Der Constraint $ "{} X \neq Y "{} $ im Konditional $ S_{2} $ aus Beispiel \ref{sec:BspSmp} "{}Sympathie"{} dient der Vermeidung der Inkonsistenz, die aus der Instanziierung von X und Y mit der gleichen Konstanten entstehen würden und die besagten, dass sich jemand, der sich sicher mag mit einer hohen Wahrscheinlichkeit mag. 
+Der Constraint $ "{} U \neq V "{} $ im Konditional $ S_{2} $ aus Beispiel \ref{sec:BspSmp} "{}Sympathie"{} dient der Vermeidung der Inkonsistenz, die aus der Instanziierung von X und Y mit der gleichen Konstanten entstehen würden und die besagten, dass sich jemand, der sich sicher mag mit einer hohen Wahrscheinlichkeit mag. 
 \end{Bsp}
 Constraints dienen dazu, Inkonsistenzen in der Menge aller Grundinstanzen zu vermeiden, vgl. Beispiel \ref{sec:Bsp1} "{}Grippe"{}  und \ref{sec:BspSmp} "{}Sympathie"{} oder um besonderes Wissen über bestimmte Objekte auszudrücken, was im Folgenden noch näher erläutert wird.
 
@@ -364,14 +364,15 @@ Die Menge aller Variablen wird definiert als $ {\cal V} := \bigcup_{s \in S} V^{
 Die Menge $ Term^{(s)}_{\Sigma}$ der Terme der Sorten $ s \in S $ ist definiert als \nomenclature{ $ Term^{(s)}_{\Sigma}$}{Menge der Terme der Sorten}
 $ Term^{(s)}_{\Sigma}$ := $ V^{(s)} \cup D^{(s)} $, und die Menge aller Terme ist definiert als $ Term_\Sigma $ := $ \bigcup_{s \in S }  Term^{(s)}_\Sigma = \cal V  \cup \cal D $ \nomenclature{ $ Term_{\Sigma}$}{Menge aller Terme} \\
 
-\end{Def}\textcolor{blue}{
+\end{Def}
+
 \begin{Bsp}[Terme] \label{Terme}
 Die Menge der Terme zum Beispiel \ref{sec:Bsp1} "{}Grippe"{} könnte wie folgt aussehen:\\
 $  {\cal D}_{Gr} = \{Anna, Bob\}$\\
 $  {\cal V}_{Gr} = \{X, Y\}$\\
 $ Term^{(s)}_\Sigma = \{Anna, Bob, X, Y\} $
 \end{Bsp}
-}
+
 
 FO-PCL verwendet zwei Arten von Formeln: logische Formeln und Constraints\index{Constraint}. Beide nutzen die vordefinierten Prädikatensymbole der Tautologie bzw. der Kontradiktion, unterscheiden sich aber in den für atomare Formeln zulässigen Prädikatensymbolen. Bei atomaren Constraints ist nur das Prädikatensymbol für die Gleichheit von Termen, bzw. Ungleichheit von Termen, d.h die negierte Gleichheit von Termen zulässig, bei atomaren logischen Formeln beliebige andere Prädikatensymbole ohne das Prädikatensymbol für die Gleichheit. Logische Formeln in FO-PCL sind entsprechend den logischen Formeln der Prädikatenlogik erster Stufe definiert, allerdings ohne Quantoren. Dabei ist es wichtig zur Kenntnis zu nehmen, dass Formeln in FO-PCL implizit allquantifiziert sind. Besonderes Wissen über einzelne Objekte muss man in einer eignen Formel formulieren. 
 
@@ -432,15 +433,15 @@ Ein negierter Constraint der Gleichheit kann auch geschrieben werden als $ t_1 \
 \noindent
 Die Menge der Constraints wird als $ Cons_{\Sigma} $ \nomenclature{$ Cons_{\Sigma} $}{Menge der Constraints} bezeichnet.
 
-\textcolor{blue}{
+
 \begin{Bsp}[Constraint] \label{Bsp:Constraint}
-	Die Constraints zum Beispiel \ref{sec:Misanthrop} "{}Misanthrop"{} sehen wie folgt aus:\\
+	Die Constraints zum Beispiel \ref{sec:Misanthrop} "{}Misanthrope"{} sehen wie folgt aus:\\
 	\begin{quote}
-	Bei	$ MI_1 : \langle (mag(Y, X) \mid mag(X, Y)[0,9], X \neq Y \rangle$ lautet der Constraint: $  X \neq Y  $\\
-	Bei	$ MI_2 : \langle (mag(a, Y))[0,05], Y \neq a \rangle$ lautet der Constraint: $  Y \neq a  $\\
+	Bei	$ MI_1 : \langle (likes(U, V) \mid likes(V, U)[0,9], U \neq V \rangle$ lautet der Constraint: $  U \neq V  $\\
+	Bei	$ MI_2 : \langle (likes(a, V))[0,05], V \neq a \rangle$ lautet der Constraint: $  V \neq a  $\\
 	\end{quote}
 \end{Bsp}
-}
+
 
 \begin{Def}[Variablen]\cite[Kap. 6.2, S.127 vgl. Def. 6.2.5]{Fis10} \index{Variablen}
 	
@@ -491,15 +492,15 @@ Die Menge aller Konditionale über $ \Sigma $ wird $ Cond_{\Sigma} $ \nomenclatu
 
 \end{Def}
 \vspace{1cm}
-Wie FO-PCL Konditionalen praktisch aussehen können, demonstrieren die vorangegangenen Beispiele \ref{sec:Bsp1} "{}Grippe"{}, \ref{sec:BspSmp} "{}Sympathie"{} und \ref{sec:Misanthrop} "{}Misanthrop"{}.
+Wie FO-PCL Konditionalen praktisch aussehen können, demonstrieren die vorangegangenen Beispiele \ref{sec:Bsp1} "{}Grippe"{}, \ref{sec:BspSmp} "{}Sympathie"{} und \ref{sec:Misanthrop} "{}Misanthrope"{}.
 
 \paragraph{Grundkonditional}
 
 FO-PCL-Konditionale mit $ \Sigma $-Grundformeln $ \varphi, \psi $ werden Grundkonditionale genannt.\index{Grundkonditional} 
 
 \begin{Bsp}[Grundkonditional]
-	Ein einzelnes Grundkonditional für das Beispiel \ref{sec:Misanthrop} "{}Misanthrop"{} und das Konditional $ MI_1 $ könnte bei der Konstantenmenge $ \cal{D} $$_{MI} = \{ a, b, c\} $ wie folgt aussehen:\\
-	$ MI_{11} : \langle (mag(b, a) \mid mag(a, b
+	Ein einzelnes Grundkonditional für das Beispiel \ref{sec:Misanthrop} "{}Misanthrope"{} und das Konditional $ MI_1 $ sieht bei der Konstantenmenge $ \cal{D} $$_{MI} = \{ a, b, c\} $ beispielsweise wie folgt aussehen:\\
+	$ MI_{11} : \langle (likes(b, a) \mid likes(a, b
 	)[0,9], \top \rangle $\\
 	
 \end{Bsp}
@@ -516,16 +517,16 @@ Eine Menge $ R = \{R_1, ..., R_m\} $ von FO-PCL Konditionalen mit\\
 
 \begin{Bsp}[FO-PCL Wissensbasis]
 Die FO-PCL Wissensbasis zum Beispiel \ref{sec:Bsp1} "{}Grippe"{} ,
-würde so aussehen: $ \cal{R} $$_{GrFO}  $ = $ (GrFO_1, GrFO_2, GrFO_3)  $ mit den Konditionalen 
+sieht so aus: $ \cal{R} $$_{GrFO}  $ = $ (GrFO_1, GrFO_2, GrFO_3)  $ mit den Konditionalen 
 \begin{quote}
 $ GrFO_{1}  :  \langle (Gr(X))[0,01], \top \rangle $,\\
 $ GrFO_{2} : \langle (Gr(X) \mid An(X)[0,01], \top \rangle$\\
 $ GrFO_{3} : \langle (Gr(Y) \mid Kon(X, Y) \wedge Gr(X )[0,6], X \neq Y \rangle$.\\
 \end{quote}
-Die FO-PCL Wissensbasis zum Beispiel \ref{sec:Misanthrop} "{}Misanthrop"{} würde so aussehen: $ \cal{R} $$_{MI}  $ = $ (MI_1, MI_2)  $  mit den Konditionalen 
+Die FO-PCL Wissensbasis zum Beispiel \ref{sec:Misanthrop} "{}Misanthrop"{} sieht so aus: $ \cal{R} $$_{MI}  $ = $ (MI_1, MI_2)  $  mit den Konditionalen 
 \begin{quote}
-	$ MI_1 : \langle (mag(Y, X) \mid mag(X, Y)[0,9], X \neq Y \rangle$\\
-	$ MI_2 : \langle (mag(a, Y))[0,05], Y \neq a \rangle$.\\
+	$ MI_1 : \langle (likes(U, V) \mid likes(V, U)[0,9], U \neq V \rangle$\\
+	$ MI_2 : \langle (likes(a, V))[0,05], V \neq a \rangle$.\\
 \end{quote}
  	
 \end{Bsp}
@@ -623,14 +624,14 @@ Atome$(  \langle (\varphi \mid \psi)[\xi], C \rangle) $ & $ :=   $ Atome $ (\var
 Die Atome für das Beispiel \ref{sec:Bsp1} "{}Grippe"{}  wären:\\
 $ Atome(Gr_{21}) = $  \{ $Gr(X) $\}, $ Atome(GR_{22}) = $\{$Gr(X), An(X)$\},  $Atome(Gr_{23}) = $\{ $Gr(X), Kon(X, Y) $\}. \\
 
-Die Atome für das Beispiel \ref{sec:Misanthrop} "{}Misanthrop"{} wären:\\
-$ Atome(MI_{1}) = $  \{ $mag(X, Y) $, $mag(Y, X) $\}, $Atome(MI_{2}) = $\{ $mag(a, Y)  $\}. \\
+Die Atome für das Beispiel \ref{sec:Misanthrop} "{}Misanthrope"{} wären:\\
+$ Atome(MI_{1}) = $  \{ $likes(U, V) $, $likes(V, U) $\}, $Atome(MI_{2}) = $\{ $likes(a, V)  $\}. \\
 \\
 \end{Bsp}
 
 \begin{Bsp}[Grundatome]
 Die Grundatome für das Beispiel \ref{sec:Misanthrop} "{}Misanthrop"{} und die Konstantenmenge $ \cal{D} = \{$ a, b, c $\} $  wären:\\
-$ Grundatome(MI_{1}) = $  \{ $mag(a, b) $, $mag(a, c) $, $mag(b, a) $, $mag(b, c),  $ $mag(c, a)$, $mag(c, b) $\}, $Grundatome(MI_{2}) = $\{ $mag(a, b)  $, $mag(a, c)  $\}. \\
+$ Grundatome(MI_{1}) = $  \{ $likes(a, b) $, $likes(a, c) $, $likes(b, a) $, $likes(b, c),  $ $likes(c, a)$, $likes(c, b) $\}, $Grundatome(MI_{2}) = $\{ $likes(a, b)  $, $likes(a, c)  $\}. \\
 	
 	
 \end{Bsp}
@@ -638,15 +639,16 @@ $ Grundatome(MI_{1}) = $  \{ $mag(a, b) $, $mag(a, c) $, $mag(b, a) $, $mag(b, c
 
 Ein Beispiel für den Einsatz, die Modellierung probabilistischen Wissens, mit FO-PCL ist das aus der probabilistischen Logik bekannte Beispiel "{}Tweety"{}, vgl. \cite[Bsp. 8.30, S. 261]{BKI08}. Im Allgemeinen fliegen Vögel. Tweety ist zwar ein Vogel, kann aber nicht fliegen (weil er in unserem Fall beispielsweise ein Pinguin sein könnte). Dieses Wissen könnten wir mit Hilfe von FO-PCL wie folgt repräsentieren:
 
+\textcolor{blue}{
 \begin{Bsp}[Birds]\label{Bsp:Birds}\
-	Das Beispiel "{}Birds"{} wurde der Aufgabenstellung entnommen. Sei $ \Sigma $ eine (FO-PCL)Signatur $ \Sigma = (S, {\cal D}, Präd) $ wobei\\
+	Das Beispiel "{}Birds"{} wurde der Aufgabenstellung entnommen. Eine ausführliche Darstellung des Beispiels findet sich in \ref{Birds} Sei $ \Sigma $ eine (FO-PCL)Signatur $ \Sigma = (S, {\cal D}, Präd) $ wobei\\
 	es eine Sorte $ Bird  \in S $  gibt,\\
-	
+	\\
 	$ {\cal D}$$_{Birds}  $ $ = \{Tweety, Kirby, Bully, Sylvester\}$ \\
 	\\
 	\noindent
 	die Menge der Konstantensymbole ist und\\
-	
+	\\
 	$ Präd = \{flies(X), isBird(X)\} $, \\
 	\\
 	\noindent
@@ -654,13 +656,36 @@ Ein Beispiel für den Einsatz, die Modellierung probabilistischen Wissens, mit F
 	\\
 	Sei nun $ \cal{R} $$_{Birds}  $ = $ (T_1, T_2, T_3)  $ eine FO-PCL Wissensbasis mit den Konditionalen \\
 	\begin{quote}
-	$ T_{1}  :  \langle (flies(Tweety))[0], \top \rangle $,\\
-	$ T_{2} : \langle (isBird(Tweety) [1], \top \rangle$\\
-	$ T_{3} : \langle (flies(X) \mid isBird(X)[0,9], X \neq Tweety \rangle$\\
+	$ T_{1} : \langle (flies(X) \mid isBird(X)[0,9], X \neq Tweety \rangle$\\	
+	$ T_{2}  :  \langle (flies(Tweety))[0], \top \rangle $,\\
+	$ T_{3} : \langle (isBird(Tweety) [1], \top \rangle$\\
 	\end{quote}
 	 Der Constraint $  "{} X \neq Tweety "{} $ wird benutzt um im Konditional unser Wissen um die Flugunfähigkeit von Tweety zu modellieren, die trotz seiner Zugehörigkeit zur Gattung der Vögel vorliegt und stellt gleichzeitig sicher, dass es nicht zur Inkonsistenz in der Wissensbasis kommt, die entstünde, wenn die Variable X mit der Konstanten Tweety instantiiert würde.
 \end{Bsp}
-
+Ein weiteres Beispiel für die Wissenmodellierung mit FO-PCL soll am Beispiel "{}Misanthrop"{} \ref{sec:Misanthrop} demonstriert werden (eine ausführliche Darstellung des Beispiels findet sich unter \ref{Misanthrope}):\\
+\begin{Bsp}[Misanthrope]\label{Bsp:Misanthrope}
+ Sei $ \Sigma $ eine (FO-PCL)Signatur $ \Sigma = (S, {\cal D}, Präd) $ wobei\\
+es eine Sorte $ Group  \in S $  gibt,\\
+\\
+$ {\cal D}$$_{MI}  $ $ = \{a, b, c\}$ \\
+\\
+\noindent
+die Menge der Konstantensymbole ist und\\
+\\
+$ Präd = \{(likes(U, V))\} $, \\
+\\
+\noindent
+die Menge der Prädikatensymbole ist, wobei allen Prädikaten in diesem Beispiel die Sorte $ Group $ zugeordnet ist.\\
+\\
+Sei nun $ \cal{R} $$_{MI}  $ = $ (MI_1, MI_2, MI_3)  $ eine FO-PCL Wissensbasis mit den Konditionalen
+\\
+\\
+	$ MI_1 : \langle (likes(U, V) \mid likes(V, U)[0,9], U \neq V \rangle$\\
+	$ MI_2 : \langle (likes(a, V))[0,05], V \neq a \rangle$.\\
+	$ MI_3 : \langle (likes(U, U))[0,0]\rangle $
+\end{Bsp}
+Dieses Beispiel soll das Wissen wiedergeben, dass sich in der Gruppe, in der üblicherweise gegenseitige Sympathie herrscht, ($ MI_! $) eine Person a befindet, im Allgemeinen niemanden mag, das drückt Konditional $ MI_2 $ aus. Konditional $ MI_3 $ dient lediglich dazu, das reflexive Wissen auszuschließen. 
+}
 
 
 \subsection{Semantik}\label{sec:semantik}
@@ -741,17 +766,21 @@ Die Menge der (zulässigen) Grundinstanzen einer Menge $ \cal R $ $ = \{ R_1, ..
 
 
 \begin{Bsp}[Grundinstanzen von Konditionalen]  \index{Grundinstanz}
-	Die Grundkonditionale für das Beispiel \ref{sec:Misanthrop} "{}Misanthrop"{} würden bei der Konstantenmenge $ \cal D$$_{MI}  $ $ = \{ a, b, c\} $ wie folgt aussehen:\\
+	Die Grundkonditionale für das Beispiel \ref{Bsp:Misanthrope} "{}Misanthrope"{} würden bei der Konstantenmenge $ \cal D$$_{MI}  $ $ = \{ a, b, c\} $ wie folgt aussehen:\\
 	\begin{quote}
-	$ MI_{1,1}: \langle (mag(a, b) \mid mag(b, a)[0,9], \top \rangle $\\
-	$ MI_{1,2} : \langle (mag(a, c) \mid mag(c, a)[0,9], \top \rangle$\\
-	$ MI_{1,3}: \langle (mag(b, c) \mid mag(c, b)[0,9], \top \rangle $\\
-	$ MI_{1,4} : \langle (mag(c, b) \mid mag(b, c)[0,9], \top \rangle$\\
-	$ MI_{1,5} : \langle (mag(b, a) \mid mag(a, b)[0,9], \top \rangle$\\
-	$ MI_{1,6} : \langle (mag(c, a) \mid mag(a, c)[0,9], \top \rangle$\\
+	$ MI_{1,1}: \langle (likes(a, b) \mid likes(b, a)[0,9], \top \rangle $\\
+	$ MI_{1,2} : \langle (likes(a, c) \mid likes(c, a)[0,9], \top \rangle$\\
+	$ MI_{1,3}: \langle (likes(b, c) \mid likes(c, b)[0,9], \top \rangle $\\
+	$ MI_{1,4} : \langle (likes(c, b) \mid likes(b, c)[0,9], \top \rangle$\\
+	$ MI_{1,5} : \langle (likes(b, a) \mid likes(a, b)[0,9], \top \rangle$\\
+	$ MI_{1,6} : \langle (likes(c, a) \mid likes(a, c)[0,9], \top \rangle$\\
 	\\			
-	$ MI_{2,1} : \langle (mag(a, b))[0,05], \top \rangle$\\
-	$ MI_{2,2} : \langle (mag(a, c))[0,05], \top \rangle$\\
+	$ MI_{2,1} : \langle (likes(a, b))[0,05], \top \rangle$\\
+	$ MI_{2,2} : \langle (likes(a, c))[0,05], \top \rangle$\\
+	\\
+	$ MI_{3,1} : \langle (likes(a, a))[0,0], \top \rangle$\\
+	$ MI_{3,2} : \langle (likes(b, b))[0,0], \top \rangle$\\
+	$ MI_{3,3} : \langle (likes(c, c))[0,0], \top \rangle$\\
 	\end{quote}
 	
 \end{Bsp}
@@ -760,14 +789,14 @@ Die Menge der (zulässigen) Grundinstanzen einer Menge $ \cal R $ $ = \{ R_1, ..
 \begin{Def}[Spezifische Konstanten] \index{Konstante ! spezifisch} \label{Konstanten spezifisch}
 	Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL Wissensbasis, gemäß Definition \ref{KB}. Dann gilt für alle Konstanten $ d \in \cal{D} $: $ d $ ist eine spezifische Konstante, wenn es ein probabilistisches Konditional $ R \in \cal{R}$  gibt, so dass $ d $ in der Konklusion, der Prämisse oder dem Constraint vorkommt. 
 \end{Def}
-Ein Konditional der Wissensbasis ist genau dann ein spezifisches Konditional, wenn die Prämisse oder die Konklusion (oder auch beide) eine Konstante enthalten. Das bedeutet, dass die Wissensbasis über differenziertere Informationen über ein Objekt des Universums verfügt. Eine spezifische Konstante kommt somit in einem Konditional der Wissensbasis vor. 
+Ein Konditional der Wissensbasis ist ein spezifisches Konditional, wenn die Prämisse, Konklusion oder Prämisse eine Konstante enthalten. Das bedeutet, dass die Wissensbasis über differenziertere Informationen über ein Objekt des Universums verfügt. Eine spezifische Konstante kommt somit in einem Konditional der Wissensbasis vor. 
 }
 
-\textcolor{blue}{
+
 \begin{Bsp}[Spezifische Konstanten] \label{Bsp:Spezifische Konstante}
-Im Beispiel \ref{sec:Misanthrop} "{}Misanthrop"{} gibt es eine spezifische Konstante: die Konstante $ a $. Sie findet sich im Konditional $ MI_2 $ in der Konklusion im Atom $ mag(a,Y) $. In der Wissensbasis soll ausgedrückt werden, dass $ a $ grundsätzlich niemanden mag. Dieses besondere Wissen der Wissensbasis, das im Konditional $ MI_2 $ ausgedrückt wird, macht somit $ a $ zu einer spezifischen Konstante. 
+Im Beispiel \ref{sec:Misanthrop} "{}Misanthrop"{} gibt es eine spezifische Konstante: die Konstante $ a $. Sie findet sich im Konditional $ MI_2 $ in der Konklusion im Atom $ likes(a,V) $. In der Wissensbasis soll ausgedrückt werden, dass $ a $ grundsätzlich niemanden mag. Dieses besondere Wissen der Wissensbasis, das im Konditional $ MI_2 $ ausgedrückt wird, macht somit $ a $ zu einer spezifischen Konstante. 
 \end{Bsp}
-}
+
 
 \textcolor{blue}{
 \begin{Def}[Generische Grundinstanzen von Konditionalen] \index{Grundinstanz ! generisch} \label{Grundinstanz generisch}
@@ -782,10 +811,10 @@ Generische Grundinstanzen von Konditionalen enthalten folglich keine spezifische
 }
 
 \textcolor{blue}{\begin{Bsp}[Generische Grundinstanzen von Konditionalen]  \index{Grundinstanz ! generisch}
-		Die generischen Grundkonditionale für das Beispiel \ref{sec:Misanthrop} "{}Misanthrop"{} würden bei der Konstantenmenge $ \cal D$$_{MI}  $ $ = \{ a, b, c\} $ und dem Konditional $ MI_1 $ wie folgt aussehen:\\
+		Die generischen Grundkonditionale für das Beispiel \ref{Bsp:Misanthrop} "{}Misanthrope"{} würden bei der Konstantenmenge $ \cal D$$_{MI}  $ $ = \{ a, b, c\} $ und dem Konditional $ MI_1 $ wie folgt aussehen:\\
 		\begin{quote}
-			$ MI_{1,3}: \langle (mag(b, c) \mid mag(c, b)[0,9], \top \rangle $\\
-			$ MI_{1,4} : \langle (mag(c, b) \mid mag(b, c)[0,9], \top \rangle$\\
+			$ MI_{1,3}: \langle (likes(b, c) \mid likes(c, b)[0,9], \top \rangle $\\
+			$ MI_{1,4} : \langle (likes(c, b) \mid likes(b, c)[0,9], \top \rangle$\\
 		\end{quote}
 			\end{Bsp}
 }
@@ -802,10 +831,10 @@ Spezifische Grundinstanzen von Konditionalen sind diejenigen zulässigen Grundin
 
 
 	\begin{Bsp}[Spezifische Grundinstanzen von Konditionalen]  \index{Grundinstanz ! spezifisch}
-		Die spezifischen Grundkonditionale für das Beispiel \ref{sec:Misanthrop} "{}Misanthrop"{} würden bei der Konstantenmenge $ \cal D$$_{MI}  $ $ = \{ a, b, c\} $ und dem Konditional $ MI_1 $ wie folgt aussehen:\\
+		Die spezifischen Grundkonditionale für das Beispiel \ref{Bsp:Misanthrope} "{}Misanthrope"{} würden für das Konditional $ MI_1 $ wie folgt aussehen:\\
 		\begin{quote}
-			$ MI_{2,1} : \langle (mag(a, b))[0,05], \top \rangle$\\
-			$ MI_{2,2} : \langle (mag(a, c))[0,05], \top \rangle$\\
+			$ MI_{2,1} : \langle (likes(a, b))[0,05], \top \rangle$\\
+			$ MI_{2,2} : \langle (likes(a, c))[0,05], \top \rangle$\\
 		\end{quote}
 	\end{Bsp}
 
@@ -935,10 +964,11 @@ Diese Definition kann auf eine Menge $ {\cal R} = \{R_1, ..., R_m\} $ von probab
 	\end{quote}
 	\noindent
 	\\
-	Sei $ \cal{R} $$_{MI} $ = $ (MI_1, MI_2)  $ die FO-PCL Wissensbasis aus Beispiel \ref{sec:Misanthrop} "{}Misanthrop"{} mit den Konditionalen 
+	Sei $ \cal{R} $$_{MI} $ = $ (MI_1, MI_2, MI_3)  $ die FO-PCL Wissensbasis aus Beispiel \ref{Bsp:Misanthrope} "{}Misanthrope"{} mit den Konditionalen 
 	\begin{quote}
-	$ MI_1 : \langle (likes(Y, X) \mid likes(X, Y)[0,9], X \neq Y \rangle$\\
-	$ MI_2 : \langle (likes(a, Y))[0,05], Y \neq a \rangle$\\
+	$ MI_1 : \langle (likes(U, V) \mid likes(V, U)[0,9], U \neq V \rangle$\\
+	$ MI_2 : \langle (likes(a, V))[0,05], V \neq a \rangle$\\
+	$ MI_{3} : \langle (likes(U, U))[0,0], \top \rangle$\\
 	\end{quote}
 	und der Menge $ \cal{D} $$_{MI}  $ der Konstanten mit
 	
@@ -954,6 +984,10 @@ Diese Definition kann auf eine Menge $ {\cal R} = \{R_1, ..., R_m\} $ von probab
 	$ MI_{1,6} : \langle (likes(c, a) \mid likes(a, c)[0,9], \top \rangle$\\		
 	$ MI_{2,1} : \langle (likes(a, b))[0,05], \top \rangle$\\
 	$ MI_{2,2} : \langle (likes(a, c))[0,05], \top \rangle$\\
+	$ MI_{3,1} : \langle (likes(a, a))[0,0], \top \rangle$\\
+	$ MI_{3,2} : \langle (likes(b, b))[0,0], \top \rangle$\\
+	$ MI_{3,3} : \langle (likes(c, c))[0,0], \top \rangle$\\
+
 	\end{quote}
 
 	
@@ -1101,11 +1135,11 @@ Eine Äquivalenzrelation auf einer Menge $ \cal{R} $  ist eine Teilemenge $ \cal
 	Zwei FO-PCL Konditionale sind in der gleichen Äquivalenzklasse bezüglich der Äquivalenzrelation, wenn sie parametrisch äquivalent sind. \label{Äquivalenzklassen} \index{Äquivalenzklassen}
 \end{Def}
 
-\textcolor{blue}{
+
 \begin{Bsp}[Parametrische Äquivalenz von FO-PCL Konditionalen]\label{Bsp:parametische Äquivalenz}
 	Für das Beispiel "{} Birds "{}, \ref{Birds} sind für die Anfrage $ (flies(X)) $ die Grundkonditionale $ (flies(Sylvester)), (flies(Bully)) $ und $ (flies(Kirby)) $ mit der Wahrscheinlichkeit von jeweils $ [0.664] $ parametrisch äquivalent.
 \end{Bsp}	
-}
+
 
 
 Bei der Klassifizierung durch die Komponente sind in der praktischen Umsetzung die folgenden Dinge zu beachten. 
@@ -1122,47 +1156,51 @@ Das Ergebnis  "{}0"{} erhält man unter anderem für reflexives Wissen, da dies 
 		Unter einem qualitativen Konditional im Sinne dieser Arbeit versteht man ein Konditional ohne zugeordnete Wahrscheinlichkeit, d.h. ein nicht quantifiziertes Konditional. \label{quantifiziertes_Konditional} \index{Konditional ! quantifiziertes}\\
 		Dagegen ist unter einem quantifizierten Konditional ein Konditional mit zugeordneter Wahrscheinlichkeit zu verstehen.
 	\end{Def}
-	\begin{Bsp}[Qualitatives Konditional] \label{Bsp:Qualitatives Konditional}
-		Für das Beispiel "{} Birds "{}, \ref{Birds} könnte ein qualitatives Konditional so aussehen: \\
-		$(flies(Tweety))$ oder auch $(flies(X))$\\
-		Ein quantifiziertes Konditional dagegen könnte so aussehen:\\
-		$(flies(Tweety))[0.0]$\\ 
-	\end{Bsp}
 }
 
+	\begin{Bsp}[Qualitatives Konditional] \label{Bsp:Qualitatives Konditional}
+		Für das Beispiel "{}Birds"{}, \ref{Bsp:Birds} sieht ein qualitatives Konditional so aus: \\
+		$(flies(Tweety))$ oder auch $(flies(X))$\\
+		Ein quantifiziertes Konditional dagegen sieht so aus:\\
+		$(flies(Tweety))[0.0]$, $ (flies(X)[0.664]) $\\ 
+	\end{Bsp}
+
+
 \textcolor{blue}{
-\begin{Def}[Generalisierung]\index{Generalisierung} \label{Generalisierung}
-Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL Wissensbasis, gemäß Definition \ref{KB}. Sei ferner $ Q $ eine Anfrage in Form eines qualitativen Konditionals und sei  $ \cal{E}$  $ = \{E_1, ..., E_j\}$ eine Menge von Äquivalenzklassen von FO-PCL Konditionalen gemäß Definition \ref{Äquivalenzklassen}.\\
-	Eine Generalisierung ist eine Abbildung, die jeder Äquivalenzklasse $ E_i \in \cal{E} $  $ mit$  $ i \in \{1, ..., j\} $ jeweils genau ein einziges quantifiziertes Konditional, d.h. ein Konditional mit Wahrscheinlichkeit, zuordnet. Dieses Konditional wird im Folgenden auch generalisiertes Konditional genannt. \index{Konditional ! generalisiertes} Das Konditional muss der Signatur folgen und darf in Prämisse und Konklusion nur Variablen enthalten, wenn die Äquivalenzklasse mehr als ein Konditional enthält. Aus diesem Konditional müssen jeweils alle Konditionale der zugehörigen Äquivalenzklasse mit den Konstanten in $ \cal{D} $ und unter Beachtung des Constraints durch Grundsubstitution, vgl. \ref{Grundsubstitution} gebildet werden können. Für Äquivalenzklassen mit einem Konditional ordnet die Abbildung dem Konditional nur die berechnete Wahrscheinlichkeit zu; das generalisierte Konditional ist folglich ein Grundkonditional mit zugeordneter Wahrscheinlichkeit. 	
+\begin{Def}[Generalisierung, generalisiertes Konditional]\index{Generalisierung} \index{Konditional ! generalisiertes}\label{Generalisierung}
+Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL Wissensbasis, gemäß Definition \ref{KB}. Sei ferner $ Q $ eine Anfrage in Form eines qualitativen Konditionals und sei  $ \cal{E}$  $ = \{E_1, ..., E_t\}$ eine Menge von Äquivalenzklassen von FO-PCL Konditionalen gemäß Definition \ref{Äquivalenzklassen}.\\
+	Eine Generalisierung ist eine Abbildung, die jeder Äquivalenzklasse $ E_i \in \cal{E} $  $ mit$  $ i \in \{1, ..., t\} $ jeweils genau ein einziges quantifiziertes Konditional, d.h. ein Konditional mit Wahrscheinlichkeit, zuordnet. Dieses Konditional wird im Folgenden auch generalisiertes Konditional genannt. \index{Konditional ! generalisiertes} Das Konditional muss der Signatur folgen und darf in Prämisse und Konklusion nur Variablen enthalten, wenn die Äquivalenzklasse mehr als ein Konditional enthält. Aus diesem Konditional müssen jeweils alle Konditionale der zugehörigen Äquivalenzklasse mit den Konstanten in $ \cal{D} $ und unter Beachtung des Constraints durch Grundsubstitution, vgl. \ref{Grundsubstitution} gebildet werden können. Für Äquivalenzklassen mit einem Konditional ordnet die Abbildung dem Konditional nur die berechnete Wahrscheinlichkeit zu; das generalisierte Konditional ist folglich ein Grundkonditional mit zugeordneter Wahrscheinlichkeit. 	
 \end{Def}
-In der Phase der Generalisierung werden die Konditionale, die sich aufgrund der gleichen Wahrscheinlichkeit in einer Äquivalenzklasse befinden, zu einem möglichst allgemeinen Konditional zusammengefasst.\\
-Die eigentliche Logik der Komponente liegt hierbei in der Erzeugung des jeweiligen Konditionals. Wie das Konditional der Klasse aussieht hängt von der Klasse und dem ausgeführten Generalisierungsprozess ab. 
-}
-\textcolor{blue}{
+D.h. in der Phase der Generalisierung werden die Konditionale, die sich aufgrund der gleichen Wahrscheinlichkeit in einer Äquivalenzklasse befinden, zu einem möglichst allgemeinen Konditional zusammengefasst.\\
+Die eigentliche Leistung der Komponente liegt hierbei in der Erzeugung des jeweiligen Konditionals. Wie das Konditional der Klasse aussieht hängt von der Klasse und dem ausgeführten Generalisierungsprozess ab. 
 \begin{Bsp}[Generalisierung]\label{Bsp:Generalisierung}
 Für das Beispiel "{} Birds "{}, \ref{Birds} könnten für die Anfrage $ (flies(X)) $ bei einer möglichen Generalisierung der beiden Klassen folgende generalisierten Konditionale ergeben: \\
 \\
 \noindent
-Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
-Klasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$\\
+Sei nun $ \cal{R} $$_{MI}  $ = $ (MI_1, MI_2, MI_3)  $ die FO-PCL Wissensbasis aus dem Beispiel mit den Konditionalen
 \\
-Konditional für Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
-Konditional für Klasse 2: $\{(flies(X))[0.66]\} <X \neq Tweety>$\\
+$ MI_1 : \langle (likes(U, V) \mid likes(V, U)[0,9], U \neq V \rangle$\\
+$ MI_2 : \langle (likes(a, V))[0,05], V \neq a \rangle$.\\
+$ MI_3 : \langle (likes(U, U))[0,0]\rangle $
+\\
+Äquivalenzklasse 1: $\{(flies(Tweety))[0.0]\}$\\
+Äquivalenzklasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$\\
+\noindent
+Generalisiertes Konditional für Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
+Generalisiertes Konditional für Klasse 2: $\{(flies(X))[0.664]<X \neq Tweety>\}$\\
 \end{Bsp}
 }
 
 \textcolor{blue}{
 \subsubsection{Ausgabe der Komponente}
 \begin{Def}[Ausgabe der Komponente] \index{Ausgabe der Komponente} \label{Ausgabe der Komponente}
-	Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL  Wissensbasis, gemäß Definition \ref{KB}. Sei ferner  $ \cal{Q} $ eine nichtleere Menge von Anfragen in Form qualitativer Konditionale und sei $ G $ die Menge aller quantifizierter Konditionale, die der Signatur $ \Sigma $ folgen und die aus der Wissensbasis durch den Inferenzprozess über Grundierung, ME-Inferenz, Klassifizierung und Generalisierung \ref{Generalisierung}, gebildet werden können.\\
-	Die Ausgabe der Komponente ist das Bild der Abbildung:\\
-		\hspace{3.0 cm} $ \delta $: $ \cal{Q}  $ $  \rightarrow 2^G  $\\
-		die jeder Anfrage $ Q \in \cal Q $ (in Form eines qualitativen Konditionals) eine nichtleere Menge von generalisierten Konditionalen gemäß Definition \ref{Generalisierung}, zuordnet. 
+	Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL  Wissensbasis, gemäß Definition \ref{KB}. Sei ferner  $ \cal{Q} $ eine nichtleere Menge von Anfragen in Form qualitativer Konditionale und sei $ G $ die Menge aller generalisierter Konditionale, vgl. \ref{Generalisierung}, d.h. die Konditionale die der Signatur $ \Sigma $ folgen und die aus der Wissensbasis durch den Inferenzprozess über Grundierung, ME-Inferenz, Klassifizierung und Generalisierung, gebildet werden können.\\
+	Die Ausgabe der Komponente zu einer Anfrage ist eine nichtleere Menge von generalisierten Konditionalen gemäß o.g. Definition. 
 	\end{Def}
 \begin{Bsp}[Ausgabe der Komponente] \label{Bsp:Ausgabe der Komponente}
 Für das Beispiel "{} Birds "{}, \ref{Birds} ist für die Anfrage $ (flies(X)) $ die Ausgabe der Komponente: \\
 \noindent
-$G = \{(flies(Tweety))[0.0], (flies(X))[0.66] <X \neq Tweety>\}$
+$ \{(flies(Tweety))[0.0], (flies(X))[0.66] <X \neq Tweety>\}$
 \end{Bsp}
 }
 
@@ -1866,12 +1904,12 @@ Das Ziel des Algorithmus ist die Generierung einer Rückgabemenge von bedingten 
 	Beim Beispiel "{}Birds"{} ergeben sich für die Anfrage nach der Wahrscheinlichkeit , mit der X fliegt (flies(X)) zwei Klassen, die folgendermaßen aussehen:\\
 	
 	\noindent
-			Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
-			Klasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$\\
+			Äquivalenzklasse 1: $\{(flies(Tweety))[0.0]\}$\\
+			Äquivalenzklasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$\\
 			\\
 			Die Ausgabe, die am intuitiv logischsten und möglichst allgemein aussieht und erwünscht wäre, würde so aussehen:\\
-				Konditional für Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
-				Konditional für Klasse 2: $\{(flies(X))[0.66]\} <X \neq Tweety>$\\
+			   	Generalisiertes Konditional für Äquivalenzklasse 1: $\{(flies(Tweety))[0.0]\}$\\
+				Generalisiertes Konditional für Äquivalenzklasse 2: $\{(flies(X))[0.66]\} <X \neq Tweety>$\\
 \end{Bsp}
 
 
@@ -1881,15 +1919,15 @@ Und um ein Beispiel mit zweistelligen Prädikaten zu betrachten:
 	\begin{Bsp}[Angestrebte Ausgabe am Beispiel "{}Misanthrope"{}, vgl. auch \ref{sec:Misanthrop} und \ref{Misanthrope}]\index{angestrebte Ausgabe}
 		Beim Beispiel "{}Misanthrope"{} ergeben sich für die Anfrage nach der Wahrscheinlichkeit, mit der U V mag, drei Klassen, die folgendermaßen aussehen:\\
 		\\
-		Klasse 1: $ \{(likes(c,b))[0.578], (likes(b,c))[0.587]\} $\\
-		Klasse 2: $ \{(likes(a,a))[0.0], (likes(b,b))[0.0], (likes(c,c))[0.0]\} $\\
-		Klasse 3: $ \{(likes(a,c))[0.050], (likes(a,b))[0.050], (likes(b,a))[0.050], (likes(c,a))[0.050]\} $\\
+		Äquivalenzklasse 1: $ \{(likes(c,b))[0.578], (likes(b,c))[0.587]\} $\\
+		Äquivalenzklasse 2: $ \{(likes(a,a))[0.0], (likes(b,b))[0.0], (likes(c,c))[0.0]\} $\\
+		Äquivalenzklasse 3: $ \{(likes(a,c))[0.050], (likes(a,b))[0.050], (likes(b,a))[0.050], (likes(c,a))[0.050]\} $\\
 		
 		\noindent
 		Die erwünschte Ausgabe würde in diesem Fall so aussehen:\\
 		Konditional für Klasse 1: $ \{(likes(U,V))[0.578] <((U \neq a \land V \neq a) \land U \neq V)>\} $\\
-		Konditional für Klasse 2: $ \{(likes(U,V))[0.0] <U = V>\} $\\
-		Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \lor V = a) \land U \neq V)>\} $\\
+		Generalisiertes Konditional für Klasse 2: $ \{(likes(U,V))[0.0] <U = V>\} $\\
+		Generalisiertes Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \lor V = a) \land U \neq V)>\} $\\
 	\end{Bsp}
 
 
@@ -1903,25 +1941,25 @@ Das würde für die o.g. Beispiele wie folgt aussehen:\\
 	Es ergibt sich:\\
 	
 	\noindent
-	Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
-	Klasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$\\
+	Äquivalenzklasse 1: $\{(flies(Tweety))[0.0]\}$\\
+	Äquivalenzklasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$\\
 	\\
-	Konditional für Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
-	Konditional für Klasse 2: $\{(flies(X))[0.66]\} <((X = Bully \lor X = Sylvester) \lor X = Kirby)>$\\
+	Generalisiertes Konditional für Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
+	Generalisiertes Konditional für Klasse 2: $\{(flies(X))[0.66]\} <((X = Bully \lor X = Sylvester) \lor X = Kirby)>$\\
 \end{Bsp}
 \begin{Bsp}[Positive Generalisierung am Beispiel "{}Misanthrope"{}, s. \ref{Ausgabe_Misanthrope} und \ref{Misanthrope}]
 	\index{Generalisierung ! positiv}
 	Es ergibt sich:\\
 	
 	\noindent
-	Klasse 1: $ \{(likes(c,b))[0.578], (likes(b,c))[0.587]\} $\\
-	Klasse 2: $ \{(likes(a,a))[0.0], (likes(b,b))[0.0], (likes(c,c))[0.0]\} $\\
-	Klasse 3: $ \{(likes(a,c))[0.050], (likes(a,b))[0.050], (likes(b,a))[0.050], (likes(c,a))[0.050]\} $\\
+	Äquivalenzklasse 1: $ \{(likes(c,b))[0.578], (likes(b,c))[0.587]\} $\\
+	Äquivalenzklasse 2: $ \{(likes(a,a))[0.0], (likes(b,b))[0.0], (likes(c,c))[0.0]\} $\\
+	Äquivalenzklasse 3: $ \{(likes(a,c))[0.050], (likes(a,b))[0.050], (likes(b,a))[0.050], (likes(c,a))[0.050]\} $\\
 
 	\noindent
-	Konditional für Klasse 1: $ \{(likes(U,V))[0.578] <((U = c \land V = b) \lor (U = b \land V = c)>\} $\\
-	Konditional für Klasse 2: $ \{(likes(U,V))[0.0] <(((U = a \land V = a) \lor (U = b \land V = b)) \lor (U = c \land V = c)) >\} $\\
-	Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
+	Generalisiertes Konditional für Äquivalenzklasse 1: $ \{(likes(U,V))[0.578] <((U = c \land V = b) \lor (U = b \land V = c)>\} $\\
+	Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(likes(U,V))[0.0] <(((U = a \land V = a) \lor (U = b \land V = b)) \lor (U = c \land V = c)) >\} $\\
+	Generalisiertes Konditional für Äquivalenzklasse 3: $ \{(likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
 \end{Bsp}
 Wie man unschwer erkennen kann, sind die Konditionale der Klasse zu einem einzigen allgemeinen Konditional zusammengefasst, die erzeugten Constraints erschließen sich nicht unbedingt ohne weitere Überlegung. Das ist bereits bei kleinen und einfachen Beispielen der Fall.
 \\
@@ -1941,11 +1979,11 @@ Zum besseren Verständnis der Vorgehensweise soll diese an Beispielen demonstrie
 	\label{Bsp:Neg_Gen_Birds} Für die Anfrage $ (flies(X)) $ ergibt sich: \\
 	
 	\noindent
-	Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
-	Klasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$\\
+	Äquivalenzklasse 1: $\{(flies(Tweety))[0.0]\}$\\
+	Äquivalenzklasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$\\
 	\\
-Konditional für Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
-Konditional für Klasse 2: $\{(flies(X))[0.66]\} <X \neq Tweety>$\\
+Generalisiertes Konditional für Äquivalenzklasse 1: $\{(flies(Tweety))[0.0]\}$\\
+Generalisiertes Konditional für Äquivalenzklasse 2: $\{(flies(X))[0.66]\} <X \neq Tweety>$\\
 \end{Bsp}
  
 
@@ -1953,14 +1991,14 @@ Konditional für Klasse 2: $\{(flies(X))[0.66]\} <X \neq Tweety>$\\
 	\index{Generalisierung ! negativ} Negative Generalisierung für die Anfrage  $ (likes(U,V))$ :\\
 	
 	\noindent
-	Klasse 1: $ \{ likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]\} $\\
-	Klasse 2: $ \{likes(c,b)[0.578], likes(b,c)[0.578]\} $\\
-	Klasse 3: $ \{likes(a,c)[0.05], likes(a,b)[0.05], likes(b,a)[0.05], likes(c,a)[0.05]\} $\\
+	Äquivalenzklasse 1: $ \{ likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]\} $\\
+	Äquivalenzklasse 2: $ \{likes(c,b)[0.578], likes(b,c)[0.578]\} $\\
+	Äquivalenzklasse 3: $ \{likes(a,c)[0.05], likes(a,b)[0.05], likes(b,a)[0.05], likes(c,a)[0.05]\} $\\
 	
 	\noindent
-	Konditional für Klasse 1: $ \{(likes(U,V))[0.0] <(((U = a \land V = a) \lor (U = b \land V = b)) \lor (U = c \land V = c)) >\} $\\
-	Konditional für Klasse 2: $ \{(likes(U,V))[0.578] <((U = c \land V = b) \lor (U = b \land V = c)>\} $\\	
-	Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
+	Generalisiertes Konditional für Äquivalenzklasse 1: $ \{(likes(U,V))[0.0] <(((U = a \land V = a) \lor (U = b \land V = b)) \lor (U = c \land V = c)) >\} $\\
+	Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(likes(U,V))[0.578] <((U = c \land V = b) \lor (U = b \land V = c)>\} $\\	
+	Generalisiertes Konditional für Äquivalenzklasse 3: $ \{(likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
 	\end{Bsp}
 Wie man unschwer erkennen kann, ergibt sich beim Beispiel "{}Misanthrope"{} für die Anfrage $ (likes(U,V))$  keine Veränderung gegenüber der positiven Generalisierung. Das liegt daran, dass die kleineren Klassen in der Summe mehr Elemente enthalten als die größte Klasse.\\ 
 Anders verhält es sich beim Beispiel "{}cold"{} für die Anfrage contact(X,Y):
@@ -1969,12 +2007,12 @@ Anders verhält es sich beim Beispiel "{}cold"{} für die Anfrage contact(X,Y):
 	Für die Anfrage contact(X,Y) ergibt sich:\\
 	
 	\noindent
-	Klasse 1: $ \{(contact(anna,anna))[0.0], (contact(bob,bob))[0.0],(contact(carl, carl))[0.0]\} $\\
-	Klasse 2: $ \{(contact(anna,bob)[0.486], contact(bob,anna)[0.486], contact(carl,bob)[0.486], contact(bob,carl)[0.486], contact(anna,carl)[0.486],contact(carl,anna)[0.486],\} $\\
+	Äquivalenzklasse 1: $ \{(contact(anna,anna))[0.0], (contact(bob,bob))[0.0],(contact(carl, carl))[0.0]\} $\\
+	Äquivalenzklasse 2: $ \{(contact(anna,bob)[0.486], contact(bob,anna)[0.486], contact(carl,bob)[0.486], contact(bob,carl)[0.486], contact(anna,carl)[0.486],contact(carl,anna)[0.486],\} $\\
 	
 	\noindent
-	Konditional für Klasse 1: $ \{(contact(X,Y))[0.0]<(((X = anna \land Y = anna) \lor (X = bob \land Y = bob)) \lor (X = carl \land Y = carl))>\} $\\
-	Konditional für Klasse 2: $ \{(contact(X,Y))[0.486]<(((X \neq anna \land Y \neq anna) \land (X \neq bob \land Y \neq bob)) \land (X \neq carl \land Y \neq carl))>\} $\\
+	Generalisiertes Konditional für Äquivalenzklasse 1: $ \{(contact(X,Y))[0.0]<(((X = anna \land Y = anna) \lor (X = bob \land Y = bob)) \lor (X = carl \land Y = carl))>\} $\\
+	Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(contact(X,Y))[0.486]<(((X \neq anna \land Y \neq anna) \land (X \neq bob \land Y \neq bob)) \land (X \neq carl \land Y \neq carl))>\} $\\
 \end{Bsp}
 
 \textbf{{\large Fazit zur negativen Generalisierung:}}\index{Generalisierung ! negativ} \label{Fazit neg Gen} 
@@ -2002,12 +2040,12 @@ Obwohl die negative Generalisierung für den Fall einstelliger Prädikate zum ge
 	\end{enumerate}
 \begin{Bsp}[Modifiziertes Versionenraum-Lernverfahren am Beispiel "{}Birds"{}]
 \noindent
-Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
-Klasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$\\
+Äquivalenzklasse 1: $\{(flies(Tweety))[0.0]\}$\\
+Äquivalenzklasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$\\
 \\
-Das Konditional für Klasse 1 lautet: $\{(flies(Tweety))[0.0]\}$\\
+Das generalisierte Konditional für Klasse 1 lautet: $\{(flies(Tweety))[0.0]\}$\\
 \\
-Das Konditional für Klasse 2 wird wie folgt generiert:
+Das generalisierte Konditional für Klasse 2 wird wie folgt generiert:
 
 \begin{enumerate}
 	\item Startbelegung
@@ -2031,13 +2069,13 @@ Das Konditional für Klasse 2 wird wie folgt generiert:
 		\item $ G = \{\} $
 	\end{itemize}	
 \end{enumerate}
-Konditional für Klasse 2: $\{(flies(X))[0.66]\} <X \neq Tweety>$\\
+Das generalisierte Konditional für Äquivalenzklasse 2: $\{(flies(X))[0.66]\} <X \neq Tweety>$\\
 \end{Bsp}
 \begin{Bsp}[Modifiziertes Versionenraum-Lernverfahren (MVL) am Beispiel "{}Misanthrope"{} ]	
 \noindent
-Klasse 1: $ \{likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]\} $\\
-Klasse 2: $ \{likes(c,b)[0.578], likes(b,c)[0.578]\} $\\
-Klasse 3: $ \{likes(a,c)[0.05], likes(a,b)[0.05], likes(b,a)[0.05], likes(c,a)[0.05]\} $\\
+Äquivalenzklasse 1: $ \{likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]\} $\\
+Äquivalenzklasse 2: $ \{likes(c,b)[0.578], likes(b,c)[0.578]\} $\\
+Äquivalenzklasse 3: $ \{likes(a,c)[0.05], likes(a,b)[0.05], likes(b,a)[0.05], likes(c,a)[0.05]\} $\\
 \\
 \noindent
 \begin{itemize}
@@ -2124,14 +2162,14 @@ Auch wenn es auf den ersten Blick so scheinen mag, als ob es für das Problem de
 
 \section{Idee: Logische Generalisierungsoptimierung} \index{Logische Generalisierungsoptimierung}
 
-\textcolor{blue}{
+
 	Die logische Generalisierungsoptimierung soll die Vorteile der vorangehende geschilderten Verfahren zusammenfassen und so zu einem möglichst aussagekräftigen und kurzen Konditional führen.
 \begin{Def}[Logische Minimierung in FO-PCL] \label{Logische Min} \index{Logische Minimierung}
 	Sei $\cal{R}$ eine FO-PCL Wissensbasis, wobei definitionsgemäß $\cal{R}$  = \{$ R_1, ..., R_m $\} eine Menge von FO-PCL Konditionalen ist. Sei $ R $ ein FO-PCL Konditional mit Constraint $ C $. Sei $ \cal B $ die Menge der Axiome aus Anhang \ref{Boolesche Axiome}.\\
 	Ein FO-PCL Konditional ist genau dann logisch minimiert, wenn der Constraint $ C $ logisch minimiert ist. Der Constraint $ C $ ist genau dann logisch minimiert, wenn gilt: es gibt kein boolesches Axiom aus der Menge der booleschen Axiome aus Anhang \ref{Boolesche Axiome}, dessen Anwendung, wobei die Anwendbarkeit vorausgesetzt ist, zu einer Verringerung der Anzahl der im Constraint $ C $ vorkommenden Junktoren führen würde.
 \end{Def}
 Unter einem logisch minimierten FO-PCL Konditional im Sinne dieser Arbeit ist ein möglichst kurzes Konditional zu verstehen, d.h. ein Konditional mit einem möglichst kurzen Constraint. Der Contraint ist aber als möglichst kurz anzusehen, wenn es kein boolesches Axiom gibt, mit dem er weiter verkürzt werden kann, so dass die Anzahl der im Constraint vorkommenden Junktoren verringert werden kann. 
-}
+
 
 
 \begin{Def}[Logische Generalisierungsoptimierung]\label{Logische Genopt}
@@ -2157,20 +2195,20 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 	\item Aus den Primtermen den Constraint und ein Konditional erzeugen	
 \end{enumerate}
 \begin{Bsp}[Minimierung nach Quine/McClusky am Beispiel "{}Misanthrope"{} im Falle der positiven Generalisierung]
-	Klasse 1: $ \{likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]\} $\\
-	Klasse 2: $ \{likes(c,b)[0.578], likes(b,c)[0.578]\} $\\
-	Klasse 3: $ \{likes(a,c)[0.05], likes(a,b)[0.05], likes(b,a)[0.05], likes(c,a)[0.05]\} $\\
+	Äquivalenzklasse 1: $ \{likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]\} $\\
+	Äquivalenzklasse 2: $ \{likes(c,b)[0.578], likes(b,c)[0.578]\} $\\
+	Äquivalenzklasse 3: $ \{likes(a,c)[0.05], likes(a,b)[0.05], likes(b,a)[0.05], likes(c,a)[0.05]\} $\\
 	\\
 	\noindent
-	Konditionale für die Klassen nach der positiven Generalisierung:\\
-	Konditional für Klasse 1: $ \{(likes(U,V))[0.578] <((U = c \land V = b) \lor (U = b \land V = c)>\} $\\
-	Konditional für Klasse 2: $ \{(likes(U,V))[0.0] <(((U = a \land V = a) \lor (U = b \land V = b)) \lor (U = c \land V = c)) >\} $\\
-	Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
+	Generalisierte Konditionale für die Klassen nach der positiven Generalisierung:\\
+	Generalisiertes Konditional für Äquivalenzklasse 1: $ \{(likes(U,V))[0.578] <((U = c \land V = b) \lor (U = b \land V = c)>\} $\\
+	Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(likes(U,V))[0.0] <(((U = a \land V = a) \lor (U = b \land V = b)) \lor (U = c \land V = c)) >\} $\\
+	Generalisiertes Konditional für Äquivalenzklasse 3: $ \{(likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
 	\begin{enumerate}
 		\item Reflexive Klasse von der Minimierung ausnehmen:\\
-		Es bleiben Klasse 2 und 3 übrig.	
+		Es bleiben Äquivalenzklasse 2 und 3 übrig.	
 		\item Aus der DNK eine KDNF erstellen:\\\\
-		Am Beispiel Klasse 3:\\
+		Am Beispiel Äquivalenzklasse 3:\\
 		$ X_0 = (U = a) $\\
 		$ X_1 = (U = b) $\\
 		$ X_2 = (U = c) $\\
@@ -2483,13 +2521,13 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Atom_mehrKlassen}.\\
 		Für die Anfrage $ flies(X) $ in "{}Birds3Classes"{} ergeben sich folgende Klassen:\\
 		
 		\noindent
-		Klasse 1: $ \{flies(Sylvester)[0.664], flies(Kirby)[0.664]\}  $\\
-		Klasse 2: $ \{flies(Tweety)[0]\} $\\
-		Klasse 3: $ \{flies(Bully)[0.3]\} $\\
+		Äquivalenzklasse 1: $ \{flies(Sylvester)[0.664], flies(Kirby)[0.664]\}  $\\
+		Äquivalenzklasse 2: $ \{flies(Tweety)[0]\} $\\
+		Äquivalenzklasse 3: $ \{flies(Bully)[0.3]\} $\\
 		\\
-		Das Konditional für Klasse 1: $ flies(X)[0.664]<(X = Sylvester \lor  X = Kirby)>$\\
-		Die Konditional für Klasse 2: $ flies(Tweety)[0] $\\
-		Das Konditional für Klasse 3: $ flies(Bully)[0.3] $
+		Das generalisierte Konditional für Äquivalenzklasse 1: $ flies(X)[0.664]<(X = Sylvester \lor  X = Kirby)>$\\
+		Das generalisierte Konditional für Äquivalenzklasse 2: $ flies(Tweety)[0] $\\
+		Das generalisierte Konditional für Äquivalenzklasse 3: $ flies(Bully)[0.3] $
 		\end{Bsp}
 		\item zweistelliges Prädikat:\\ 
 		Dieser Fall ist nicht zu betrachten, da die Klassen bei zweistelligen Prädikaten jeweils mindestens zwei Elemente enthalten.
@@ -2504,26 +2542,26 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Atom_mehrKlassen}.\\
 			\begin{Bsp}[Konditionale Generalisierung für mehrere Klassen am Beispiel "{}Misanthrope"{}, \ref{Misanthrope}] \index{Generalisierung ! konditional}Die konditionale Generalisierung kommt für die Anfrage $ likes(X,Y) $ zum folgenden Ergebnis:\\
 				
 				\noindent
-				Klasse 1: $ \{ likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]\} $\\
-				Klasse 2: $ \{likes(c,b)[0.578], likes(b,c)[0.578]\} $\\
-				Klasse 3: $ \{likes(a,c)[0.050], likes(a,b)[0.050], likes(b,a)[0.050], likes(c,a)[0.050]\} $\\
+				Äquivalenzklasse 1: $ \{ likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]\} $\\
+				Äquivalenzklasse 2: $ \{likes(c,b)[0.578], likes(b,c)[0.578]\} $\\
+				Äquivalenzklasse 3: $ \{likes(a,c)[0.050], likes(a,b)[0.050], likes(b,a)[0.050], likes(c,a)[0.050]\} $\\
 				
 				\noindent
-				Konditional für Klasse 1: $ \{(likes(U,V))[0.0] <U = V>\} $\\
-				Konditional für Klasse 2: $ \{(likes(U,V))[0.578] <((U \neq a \land V \neq a) \land U \neq V)>\} $\\
+				Generalisiertes Konditional für Klasse 1: $ \{(likes(U,V))[0.0] <U = V>\} $\\
+				Generalisiertes Konditional für Klasse 2: $ \{(likes(U,V))[0.578] <((U \neq a \land V \neq a) \land U \neq V)>\} $\\
 				Konditional für Klasse 3: $ \{(likes(U,V))[0.050] <((U = a \lor V = a)\land U \neq V)>\} $\\
 			\end{Bsp} 
 			\begin{Bsp}[Konditionale Generalisierung für mehrere Klassen am Beispiel "{}ColdSpez"{}, \ref{ColdSpez}] \index{Generalisierung ! konditional}Die konditionale Generalisierung kommt für die Anfrage $ contact(X,Y) $ zum folgenden Ergebnis:\\
 				\\
-			Klasse 1: $ \{ contact(anna,anna), contact(bob,bob), contact(carl,carl)[0.0]\} $\\
-			Klasse 2: $ \{contact(carl,bob)[0.486], contact(bob,carl)[0.486]\} $\\
-			Klasse 3: $ \{contact(bob,anna)[0.068], contact(anna, carl)[0.068], contact(anna, bob)[0.068], contact(carl, anna)[0.068]\} $\\
+			Äquivalenzklasse 1: $ \{ contact(anna,anna), contact(bob,bob), contact(carl,carl)[0.0]\} $\\
+			Äquivalenzklasse 2: $ \{contact(carl,bob)[0.486], contact(bob,carl)[0.486]\} $\\
+			Äquivalenzklasse 3: $ \{contact(bob,anna)[0.068], contact(anna, carl)[0.068], contact(anna, bob)[0.068], contact(carl, anna)[0.068]\} $\\
 		
 		
 			\noindent
-			Konditional für Klasse 1: $ \{(contact(X,Y))[0.0] <X = Y>\} $\\
-			Konditional für Klasse 2: $ \{(contact(X,Y))[0.486] <((X \neq anna \land Y \neq anna) \land X \neq Y)>\} $\\
-			Konditional für Klasse 3: $ \{(contact(X,Y))[0.068] <((X = anna \lor Y = anna)\land X \neq Y)>\} $\\
+			Generalisiertes Konditional für Äquivalenzklasse 1: $ \{(contact(X,Y))[0.0] <X = Y>\} $\\
+			Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(contact(X,Y))[0.486] <((X \neq anna \land Y \neq anna) \land X \neq Y)>\} $\\
+			Generalisiertes Konditional für Äquivalenzklasse 3: $ \{(contact(X,Y))[0.068] <((X = anna \lor Y = anna)\land X \neq Y)>\} $\\
 		\end{Bsp} 
 	\textcolor{blue}{
 			\item mehr als eine spezifische Konstante:\\
@@ -2540,25 +2578,25 @@ Das ist der trivialste Fall. In diesem Fall besteht die Rückgabemenge aus dem u
 	\begin{Bsp}[Konditionale Generalisierung am Beispiel "{}BirdsWithoutNull"{}, \ref{BirdsWihoutNull}]
 	Für die Anfrage $ (flies(X) | isBird(X))$ in "{}BirdsWithoutNull"{} ergeben sich folgende Klassen:\\
 	\\
-	Klasse 1: $ \{(flies(Kirby) | isBird(Kirby)), (flies(Bully) | isBird(Bully)), (flies(Tweety) | isBird(Tweety)), (flies(Sylvester) | isBird(Sylvester))\} $\\
+	Äquivalenzklasse 1: $ \{(flies(Kirby) | isBird(Kirby)), (flies(Bully) | isBird(Bully)), (flies(Tweety) | isBird(Tweety)), (flies(Sylvester) | isBird(Sylvester))\} $\\
 	\\
-	Das Konditional für Klasse 1: $ (flies(X) | isBird(X))[0.9]$
+	Das generalisierte Konditional für Äquivalenzklasse 1: $ (flies(X) | isBird(X))[0.9]$
 \end{Bsp}
 \paragraph{Zwei Äquivalenzklassen}
 Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_zweiKlassen}.
 \begin{itemize}
 	\item Jede Äquivalenzklasse enthält nur ein Konditional:\\
 	In diesem Fall ist nichts weiteres zu tun. Im Zuge der positiven Generalisierung wird das Konditional so zurückgegeben als quantifiziertes Konditional.
-	\item Eine Äquivalenzklasse enthält ein Konditional, die andere mehr als ein Konditional:\\
-	Diesen Fall gibt es nur für einstellige Prädikate. Im Fall zweistelliger Prädikate enthalten die Klassen mindestens zwei Elemente. Das Konditional für die Klasse ist durch negative Generalisierung zu erzeugen, \ref{NegativeGeneralisierung}. 
+	\item Eine Äquivalenzklasse enthält ein Konditional, die andere mehr als ein Konditional:\\ %für zweistellige Prädikate z.B. likes(U,V)<U ungleich b> bei D ={a,b}; das würde man aber in der Wb als Grundkonditional schreiben likes(a,b)
+	Diesen Fall gibt es voraussichtlich nur für einstellige Prädikate. Im Fall zweistelliger Prädikate enthalten die Klassen in der Regel mindestens zwei Elemente.  Die Konditionale für die Klasse sind durch negative Generalisierung zu erzeugen, \ref{NegativeGeneralisierung}. 
 	\begin{Bsp}[Konditionale Generalisierung am Beispiel Birds, \ref{Birds}]
 	Für die Anfrage $ (flies(X) | isBird(X)) $ liefert die konditionale Generalisierung folgendes Ergebnis:\\
 	\\
-	Klasse 1: $ \{(isBird(Tweety)|flies(Tweety))[1.0]\} $\\
-	Klasse 2: $ \{(isBird(Sylvester)|flies(Sylvester))[0.555], (isBird(Bully)|flies(Bully))[0.555] (isBird(Kirby)|flies(Kirby))[0.555] \}  $\\
+	Äquivalenzklasse 1: $ \{(isBird(Tweety)|flies(Tweety))[1.0]\} $\\
+	Äquivalenzklasse 2: $ \{(isBird(Sylvester)|flies(Sylvester))[0.555], (isBird(Bully)|flies(Bully))[0.555] (isBird(Kirby)|flies(Kirby))[0.555] \}  $\\
 	\\
-	Das Konditional für Klasse 1: $ (isBird(Tweety)|flies(Tweety))[1.0]$\\
-	Die Konditional für Klasse 2: $ (isBird(X)|flies(X))[1.0] <X \neq Tweety>$\\
+	Das generalisierte Konditional für Äquivalenzklasse 1: $ (isBird(Tweety)|flies(Tweety))[1.0]$\\
+	Das generalisierte Konditional für Äquivalenzklasse 2: $ (isBird(X)|flies(X))[1.0] <X \neq Tweety>$\\
 	\end{Bsp}
 	\item Beide Äquivalenzklassen enthalten mehr als ein Konditional:\\
 	\begin{itemize}
@@ -2569,11 +2607,11 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_zweiKlassen}.
 		\begin{Bsp}[Konditionale Generalisierung bei zwei Klassen am Beispiel Cold, \ref{Cold}]
 			Für die Anfrage $ (contact(X,Y) \land cold(Y) $ ergibt die konditionale Generalisierung:\\
 			\\
-		Klasse 1: $ \{ (contact(anna,anna) \land cold(anna))[0.0], (contact(bob,bob) \land cold(bob)[0.0]), (contact(carl,carl)\land cold(carl))[0.0]\} $\\
-		Klasse 2: $ \{(contact(anna,bob) \land cold(bob))[0.021] , (contact(carl, bob) \land cold(bob))[0.021] , (contact(bob, anna) \land cold(anna))[0.021], (contact(anna, carl)\land cold(carl)) [0.021], (contact(bob, carl)\land cold(carl)) [0.021], (contact(carl, anna) \land cold(anna))[0.021] \} $\\
+		Äquivalenzklasse 1: $ \{ (contact(anna,anna) \land cold(anna))[0.0], (contact(bob,bob) \land cold(bob)[0.0]), (contact(carl,carl)\land cold(carl))[0.0]\} $\\
+		Äquivalenzklasse 2: $ \{(contact(anna,bob) \land cold(bob))[0.021] , (contact(carl, bob) \land cold(bob))[0.021] , (contact(bob, anna) \land cold(anna))[0.021], (contact(anna, carl)\land cold(carl)) [0.021], (contact(bob, carl)\land cold(carl)) [0.021], (contact(carl, anna) \land cold(anna))[0.021] \} $\\
 		\\
-		Konditional für Klasse 1: $ (contact(X,Y) \land cold(Y))[0.0] <X = Y> $\\
-		Konditional für Klasse 2: $ (contact(X,Y))[0.021] <X \neq Y> $\\
+		Generalisiertes Konditional für Äquivalenzklasse 1: $ (contact(X,Y) \land cold(Y))[0.0] <X = Y> $\\
+		Generalisiertes Konditional für Äquivalenzklasse 2: $ (contact(X,Y))[0.021] <X \neq Y> $\\
 		\end{Bsp}
 	\end{itemize}
 \end{itemize}
@@ -2589,14 +2627,14 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_mehrKlassen}.
 		\begin{Bsp}[Konditionale Generalsisierung am Beispiel Birds3Classes, \ref{Birds3Classes}]
 			Für die Anfrage $ flies(X) $ in "{}Birds3Classes"{} ergeben sich folgende Klassen:\\
 			\\
-			Klasse 1: $ \{flies(Sylvester)[0.664], flies(Kirby)[0.664]\}  $\\
-			Klasse 2: $ \{flies(Tweety)[0]\} $\\
-			Klasse 3: $ \{flies(Bully)[0.3]\} $\\
+			Äquivalenzklasse 1: $ \{flies(Sylvester)[0.664], flies(Kirby)[0.664]\}  $\\
+			Äquivalenzklasse 2: $ \{flies(Tweety)[0]\} $\\
+			Äquivalenzklasse 3: $ \{flies(Bully)[0.3]\} $\\
 			\\
 			\noindent
-			Das Konditional für Klasse 1: $ flies(X)[0.664]<(X = Sylvester \lor  X = Kirby)>$\\
-			Die Konditional für Klasse 2: $ flies(Tweety)[0] $\\
-			Das Konditional für Klasse 3: $ flies(Bully)[0.3] $
+			Das generalisierte Konditional für Äquivalenzklasse 1: $ flies(X)[0.664]<(X = Sylvester \lor  X = Kirby)>$\\
+			Das generalisierte Konditional für Äquivalenzklasse 2: $ flies(Tweety)[0] $\\
+			Das generalisierte  Konditional für Äquivalenzklasse 3: $ flies(Bully)[0.3] $
 		\end{Bsp}
 		\item zweistelliges Prädikat:\\	
 		Dieser Fall kommt nicht vor, da die Klassen bei zweistelligen Prädikaten mindestens zwei Element enthalten.	
@@ -2607,35 +2645,35 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_mehrKlassen}.
 		\item zweistelliges Prädikat: Negative Generalisierung. Bei zweistelligen Prädikaten wird es immer eine Klasse geben, die das reflexive Wissen enthält. Für diese Klasse bildet man den Constraint als Constraint der Ungleichheit für die beiden Variablen des zweistelligen Prädikats. An dieser Stelle wird es kompliziert. Die übrigen Klassen unterscheiden sich darin, ob sie spezifisches Wissen enthalten oder nicht. Da im Voraus keine Überprüfung der Konditionale mit der Wissensbasis erfolgt, muss man dies an dieser Stelle vornehmen. Wie der Vergleich aussehen sollte wird im Folgenden erläutert. Der für die jeweilige Klasse erhaltene Constraint muss dann noch mit einem Contraint der Ungleichheit für reflexives Wissen konjunktiv verknüpft werden. 
 		\end{itemize}
 \textcolor{blue}{
-	\textbf{Exkurs: Vergleich von Konditionalen} \label{Vergleich von Konditionalen} \index{Vergleich von Konditionalen} \index{Konditional}\\
-	Sei $ R $ eine Menge von Äquivalenzklassen (von FO-PCL Grundkonditionalen). Um herauszufinden, welche der Klassen das  spezifische Wissen enthält, entfernt man zunächst die Menge mit dem reflexiven Wissen. Jetzt kann man die Konstanten der Terme mit den spezifischen Konstanten der Wissensbasis vergleichen. Die spezifischen Konstanten der Wissensbasis erhält man, indem man testet, ob Konditionale der Wissensbasis spezifische Konstanten enthalten, \ref{Konstanten spezifisch}; das ist dann der Fall, wenn Konditionale der Wissensbasis in Prämisse, Konklusion oder Constraint eine Konstante enthalten (statt einer Variablen).
-	\begin{Bsp}[Vergleich von Konditionalen]
+	\textbf{Exkurs: Ermittlung spezifischer Konstanten} \label{Ermittlung spezifischer Konstanten} \index{Vergleich von Konditionalen} \index{Konditional}\\
+	Sei $ \cal E $ eine Menge von Äquivalenzklassen (von FO-PCL Grundkonditionalen). Um herauszufinden, welche der Klassen das  spezifische Wissen enthält, entfernt man zunächst die Menge mit dem reflexiven Wissen. Jetzt kann man die Konstanten der Terme mit den spezifischen Konstanten der Wissensbasis vergleichen. Die spezifischen Konstanten der Wissensbasis erhält man, indem man testet, ob Konditionale der Wissensbasis spezifische Konstanten enthalten, \ref{Konstanten spezifisch}; das ist dann der Fall, wenn Konditionale der Wissensbasis in Prämisse, Konklusion oder Constraint eine Konstante enthalten (statt einer Variablen).
+	\begin{Bsp}[Ermittlung spezifischer Konstanten]
 		Man betrachte das Beispiel ColdSpez, \ref{ColdSpez}:\\
 		Sei $ R = {Klasse 1, Klasse 2, Klasse 3} $ mit:\\
-		Klasse 1: $ \{(contact(anna,anna) \land cold(anna)), (contact(bob,bob) \land cold(bob)), (contact(carl,carl) \land cold(carl)) \} $\\
-		Klasse 2: $ \{(contact(bob,carl) \land cold(carl)), (contact(carl,bob) \land cold(bob)) \} $\\
-		Klasse 3: $ \{(contact(carl,anna) \land cold(anna)), (contact(anna, carl) \land cold(carl)), (contact(anna,bob) \land cold(bob)), (contact(bob, anna) \land cold(anna)) \} $\\
+		Äquivalenzklasse 1: $ \{(contact(anna,anna) \land cold(anna)), (contact(bob,bob) \land cold(bob)), (contact(carl,carl) \land cold(carl)) \} $\\
+		Äquivalenzklasse 2: $ \{(contact(bob,carl) \land cold(carl)), (contact(carl,bob) \land cold(bob)) \} $\\
+		Äquivalenzklasse 3: $ \{(contact(carl,anna) \land cold(anna)), (contact(anna, carl) \land cold(carl)), (contact(anna,bob) \land cold(bob)), (contact(bob, anna) \land cold(anna)) \} $\\
  		\begin{enumerate}
  			\item Die Mengen der Terme der Konditionale für die Klassen 2 und 3 sieht wie folgt aus:\\
  			(Klasse 1 wurde entfernt, da sie das reflexive Wissen enthält)\\
- 			Für Klasse 2: $ \{contact(bob,carl), contact(carl,bob)\}$ \\
+ 			Für Äquivalenzklasse 2: $ \{contact(bob,carl), contact(carl,bob)\}$ \\
  			Für Klasse 3: $ \{contact(carl,anna), contact(anna, carl), contact(anna,bob), contact(bob, anna) \}$ \\
  			\item Der Vergleich der mit den in der Wissensbasis vorkommenden Konstanten (für das Beispiel enthält die Wissensbasis die spezifische Konstante $ anna $) ergibt:\\
- 			Klasse 2 enthält keine spezifischen Konstanten: $ \{bob, carl\}$ \\
- 			Klasse 3 enthält eine spezifische Konstante : $ \{anna\} $ 
+ 			Äquivalenzklasse 2 enthält keine spezifischen Konstanten: $ \{bob, carl\}$ \\
+ 			Äquivalenzklasse 3 enthält eine spezifische Konstante : $ \{anna\} $ 
  		\end{enumerate}\
 	\end{Bsp}
 }
 		\begin{Bsp}[Konditionale Generalisierung am Beispiel ColdSpez, \ref{ColdSpez}]
 			Für die Anfrage $ (contact(X,Y) \land cold(Y)) $ ergibt sich:\\
-			Klasse 1: $ \{(contact(anna,anna) \land cold(anna)), (contact(bob,bob) \land cold(bob)), (contact(carl,carl) \land cold(carl)) \} $\\
-			Klasse 2: $ \{(contact(bob,carl) \land cold(carl)), (contact(carl,bob) \land cold(bob)) \} $\\
-			Klasse 3: $ \{(contact(carl,anna) \land cold(anna)), (contact(anna, carl) \land cold(carl)), (contact(anna,bob) \land cold(bob)), (contact(bob, anna) \land cold(anna)) \} $\\
+			Äquivalenzklasse 1: $ \{(contact(anna,anna) \land cold(anna)), (contact(bob,bob) \land cold(bob)), (contact(carl,carl) \land cold(carl)) \} $\\
+			Äquivalenzklasse 2: $ \{(contact(bob,carl) \land cold(carl)), (contact(carl,bob) \land cold(bob)) \} $\\
+			Äquivalenzklasse 3: $ \{(contact(carl,anna) \land cold(anna)), (contact(anna, carl) \land cold(carl)), (contact(anna,bob) \land cold(bob)), (contact(bob, anna) \land cold(anna)) \} $\\
 			\\
 			\noindent
-			Konditional für Klasse 1: $ \{(contact(X,Y) \land cold(Y)) [0.0] <X = Y>\} $\\
-			Konditional für Klasse 2: $ \{(contact(X,Y) \land cold(Y)) [0.578] <((X \neq anna \land Y \neq anna) \land X \neq Y)>\} $\\
-			Konditional für Klasse 3: $ \{(contact(X,Y) \land cold(Y)) [0.050] <((X = anna \lor Y = anna)\land X \neq Y)>\} $	
+			Generalisiertes Konditional für Äquivalenzklasse 1: $ \{(contact(X,Y) \land cold(Y)) [0.0] <X = Y>\} $\\
+			Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(contact(X,Y) \land cold(Y)) [0.578] <((X \neq anna \land Y \neq anna) \land X \neq Y)>\} $\\
+			Generalisiertes Konditional für Äquivalenzklasse 3: $ \{(contact(X,Y) \land cold(Y)) [0.050] <((X = anna \lor Y = anna)\land X \neq Y)>\} $	
 		\end{Bsp}
 	
 \end{itemize}
@@ -2921,8 +2959,8 @@ Hat die Prämisse die Wahrscheinlichkeit Null, so würde die Berechnung des bedi
 		\item Zusammenfassung der Grundkonditionale mit der gleichen Wahrscheinlichkeit zu Äquivalenzklassen:
 		
 		\begin{quote}
-			Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
-			Klasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$
+			Äquivalenzklasse 1: $\{(flies(Tweety))[0.0]\}$\\
+			Äquivalenzklasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$
 		\end{quote}
 		
 		\item Generalisierung der Äquivalenzklassen
@@ -2946,37 +2984,37 @@ Die Vorgehensweise des Algorithmus wird wie folgt anhand des einfachen Beispiels
 \begin{Bsp}[Beispielhafte Vorgehensweise des Algorithmus mit einem zweistelligen Prädikat als Anfrage]
 		Es sei  $ \cal{R} $$_{Misanthrop}  $ = $ (M_1, M_2)  $ die FO-PCL Wissensbasis aus Beispiel \ref{sec:Misanthrop} mit den Konditionalen 
 	\begin{quote}
-	$ M_{1}  :  \langle (mag(Y, X)|mag(X, Y), X \neq Y)[0.9], X \neq Y \rangle $,\\
-	$ M_{2}  :  \langle (mag(a, Y))[0.05], Y \neq a \rangle $,\\
+	$ M_{1}  :  \langle (likes(U, V)|likes(V, U), X \neq Y)[0.9], U \neq V \rangle $,\\
+	$ M_{2}  :  \langle (likes(a, V))[0.05], V \neq a \rangle $,\\
 	\end{quote}
-	Es sei mag(X, Y) die Anfrage $ Q $.
+	Es sei likes(U, V) die Anfrage $ Q $.
 		\begin{enumerate}
 		\item Eingabe: Anfrage in Form des unbedingten Konditionals:\\
-		$ Q = \langle (mag(X, Y)) \rangle $.
-		\item Grundierung der Wissensbasis $ \cal  R$$_{Birds}  $ $ = \{M_1, M_2\} $:\\
+		$ Q = \langle (likes(U, V)) \rangle $.
+		\item Grundierung der Wissensbasis $ \cal  R$$_{MI}  $ $ = \{M_1, M_2\} $:\\
 		Ergebnis:
 		\begin{quote}
-			$ (mag (a, c)|mag(c, a)[0.9] <a \neq c>$\\
-			$ (mag (a, c))[0.05] <c\neq a>$\\	
-			$ (mag (a, b)[0.05] <b \neq a>$\\
-			$ (mag (a, b)|mag(b, a)[0.9] <a \neq b>$\\
-			$ (mag (b, c)|mag(c, b)[0.9] <b\neq c>$\\
-			$ (mag (c, a)|mag(a, c)[0.9] <c \neq a>$\\
-			$ (mag (c, b)|mag(b, c)[0.9] <c \neq b>$\\	
-			$ (mag (b, a)|mag(a, b)[0.9] <a \neq c>$\\	
+			$ (likes (a, c)|likes(c, a)[0.9] <a \neq c>$\\
+			$ (likes (a, c))[0.05] <c\neq a>$\\	
+			$ (likes (a, b)[0.05] <b \neq a>$\\
+			$ (likes (a, b)|likes(b, a)[0.9] <a \neq b>$\\
+			$ (likes (b, c)|likes(c, b)[0.9] <b\neq c>$\\
+			$ (likes (c, a)|likes(a, c)[0.9] <c \neq a>$\\
+			$ (likes (c, b)|likes(b, c)[0.9] <c \neq b>$\\	
+			$ (likes (b, a)|likes(a, b)[0.9] <a \neq c>$\\	
 		\end{quote}
 		\item Grundierung der Anfrage $ Q $\\
 		Ergebnis:
 		\begin{quote}
-		$ (mag(c, b))$\\
-		$ (mag(a, c))$\\
-		$ (mag(a, b))$\\
-		$ (mag(b, c))$\\
-		$ (mag(b, b))$\\
-		$ (mag(a, a))$\\
-		$ (mag(c, c))$\\
-		$ (mag(b, a))$\\	
-		$ (mag(c, a))$\\
+		$ (likes(c, b))$\\
+		$ (likes(a, c))$\\
+		$ (likes(a, b))$\\
+		$ (likes(b, c))$\\
+		$ (likes(b, b))$\\
+		$ (likes(a, a))$\\
+		$ (likes(c, c))$\\
+		$ (likes(b, a))$\\	
+		$ (likes(c, a))$\\
 		\end{quote}
 		\item Berechnung der möglichen Welten für die Wissensbasis, d.h. der potentiellen Interpretationen der Wissensbasis : $ p_1, ..., p_n $.
 		\item Ermittlung des epistemischen Status: Extrahierung der Modelle für jedes Konditional der Wissensbasis aus den Interpretationen: $ p_1, ..., p_l $ erfolgt automatisch mit Hilfe der Algorithmen der Bibliothek. Es würde den Rahmen sprengen alle Interpretationen aufzuführen.\\
@@ -2984,32 +3022,32 @@ Die Vorgehensweise des Algorithmus wird wie folgt anhand des einfachen Beispiels
 		\item Berechnung der Wahrscheinlichkeiten für jedes Grundkonditional der Anfrage $ Q $\\
 		Ergebnis:
 		\begin{quote}
-		$ (mag(c, b))[0.59]$\\
-		$ (mag(a, c))[0.05]$\\
-		$ (mag(a, b))[0.05]$\\
-		$ (mag(b, c))[0.59]$\\
-		$ (mag(b, b))[0.0]$\\
-		$ (mag(a, a))[0.0]$\\
-		$ (mag(c, c))[0.0]$\\
-		$ (mag(b, a))[0.05]$\\	
-		$ (mag(c, a))[0.05]$\\
+		$ (likes(c, b))[0.59]$\\
+		$ (likes(a, c))[0.05]$\\
+		$ (likes(a, b))[0.05]$\\
+		$ (likes(b, c))[0.59]$\\
+		$ (likes(b, b))[0.0]$\\
+		$ (likes(a, a))[0.0]$\\
+		$ (likes(c, c))[0.0]$\\
+		$ (likes(b, a))[0.05]$\\	
+		$ (likes(c, a))[0.05]$\\
 		\end{quote}
 		\item Zusammenfassung der Grundkonditionale mit der gleichen Wahrscheinlichkeit zu Äquivalenzklassen:
 		\begin{quote}
-		Klasse 1: $\{(mag(a, a))[0.0], (mag(b, b))[0.0], (mag(c, c))[0.0]\}$\\
-		Klasse 2: $\{(mag(a, c))[0.05], (mag(a, b))[0.05], (mag(c, a))[0.05], (mag(b, a))[0.05]\}$\\
-		Klasse 3: $\{(mag(c, b))[0.59](mag(b, c))[0.59]\}$
+		Äquivalenzklasse 1: $\{(likes(a, a))[0.0], (likes(b, b))[0.0], (likes(c, c))[0.0]\}$\\
+		Äquivalenzklasse 2: $\{(likes(a, c))[0.05], (likes(a, b))[0.05], (likes(c, a))[0.05], (likes(b, a))[0.05]\}$\\
+		Äquivalenzklasse 3: $\{(likes(c, b))[0.59](likes(b, c))[0.59]\}$
 		\end{quote}
 		\item Generalisierung der Äquivalenzklassen
 		\begin{quote}
 		Positive Generalisierung:\\  
-		 $ (mag(X, Y))[0.0], (X=a \land Y= a) \lor (X=b \land Y= b) \lor (X=c \land Y=c)) $\\
-		 $(mag(X, Y)[0.05],(((X=a \land Y= c) \lor (X=a \land Y= b)) \lor (X=c \land Y=a))) $\\
-		  $(mag(X, Y)[0.59],((X=c \land Y= b) \lor (X=b \land Y= c) ) $\\
+		 $ (likes(U, V))[0.0], (U=a \land V= a) \lor (U=b \land V= b) \lor (U=c \land V=c)) $\\
+		 $(likes(U, V)[0.05],(((U=a \land V= c) \lor (U=a \land V= b)) \lor (U=c \land V=a))) $\\
+		  $(likes(U, V)[0.59],((U=c \land V= b) \lor (U=b \land V= c) ) $\\
 		Negative Generalisierung:\\  
-	 	 $ (mag(X, Y))[0.0], (X=Y)  $\\
-		 $(mag(X, Y)[0.05],((X=a \land Y \neq a) \lor (X \neq a \land Y= a)) $\\
-		 $(mag(X, Y)[0.59],((X \neq a \land Y \neq a) \land X \neq Y) $\\
+	 	 $ (likes(U, V))[0.0], (U=V)  $\\
+		 $(likes(U, V)[0.05],((U=a \land V \neq a) \lor (U \neq a \land V= a)) $\\
+		 $(likes(U, V)[0.59],((U \neq a \land V \neq a) \land U \neq V) $\\
 		Logische Minimierung des Constraints\\
 		Vergleich der Generalisierungen und Wahl derjenigen mit dem kürzeren Constraint\\
 			\end{quote}
@@ -3442,7 +3480,7 @@ Die folgenden Beispiele dienten der Gewinnung statistisch relevanten Materials u
 Es wurden verschiedene Anfragen an die jeweilige Wissensbasis gestellt, die ebenso grundiert und mit der berechneten Wahrscheinlichkeit versehen wurden.
 Anschließend wurde die angestrebte Ausgabe \index{angestrebte Ausgabe} generiert. 
 
-\section{Birds} Erläuterungen s. \ref{BBirds}
+\section{Birds} Erläuterungen s. \ref{BBirds}, eine Kurzversion des Beispieles findet sich unter \ref{Bsp:Birds}
 \label{Birds}
 \lstinputlisting{Examples/Birds.txt}
 \newpage
@@ -3523,7 +3561,7 @@ Anschließend wurde die angestrebte Ausgabe \index{angestrebte Ausgabe} generier
 
 \newpage
 
-\section{Misanthrope} Erläuterungen s. \ref{BMisanthrope}
+\section{Misanthrope} Erläuterungen s. \ref{BMisanthrope}, eine Kurzfassung dieses Beispiel findet sich unter \ref{sec:Misanthrop}
 \label{Misanthrope}
 \lstinputlisting{Examples/Misanthrope.txt}
 \newpage
@@ -3611,25 +3649,20 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 		\endfoot
 		\endlastfoot
 		\hline
-		Definitionen sollten überarbeitet werden-, dazu gehören: \newline Generalisierung, insbes. generalisiertes Konditional \newline spezifische Konstanten \newline generische Grundinstanzen \newline \newline  \newline spezifische Grundinstanzen (Mengenbeziehung korrigieren) \newline Ausgabe der Komponente
-		&  sh. \newline \newline\newline \ref{Generalisierung}  \newline \ref{Konstanten spezifisch} (um 'oder Constraint' ergänzt)\newline \ref{Grundinstanz generisch} der Constraint ist eine Tautologie bei Grundinstanzen, deshalb taucht es nicht in der Defintion auf; sie wurde insgesamt überarbeitet \newline \ref{Grundinstanz spezifisch} \newline \newline \ref{Ausgabe der Komponente} \\
+		Definitionen sollten überarbeitet werden-, dazu gehören:\newline generische Grundinstanzen \newline  spezifische Grundinstanzen 
+		&  sh. \newline \newline \ref{Grundinstanz generisch} \newline \ref{Grundinstanz spezifisch} \newline \\
 		Qualitatives Konditional
 		& \ref{qualitatives_Konditional}\\
+		Generalisierung, insbes. generalisiertes Konditional 
+		&  \ref{Generalisierung}\\
+		Ausgabe der Komponente
+		& \ref{Ausgabe der Komponente}\\
 		\hline
-		Beispiele zu den Definitionen soweit möglich und sinnvoll ergänzen
-		& sh. \ref{Terme}, \ref{Bsp:Constraint}, \ref{Bsp:Spezifische Konstante}, \ref{Bsp:parametische Äquivalenz}, \ref{Bsp:Generalisierung},  \ref{Bsp:Qualitatives Konditional}, \ref{Bsp:Ausgabe der Komponente} \\
-		\hline
-		logische Minimierung überarbeiten
-		&  \ref{Logische Min}\\
-		\hline
-		Menge der booleschen Gesetze aufführen
-		& sh. Anhang \ref{Boolesche Axiome} \\
-		\hline
-		Forschungsauftrag spezifische Konstante
-		& keine Sekundärliteratur gefunden, die sich mit spezifischen Konstanten beschäftigt\\
+		Beispiele überarbeitet
+		& sh.  \ref{Bsp:Generalisierung},  \ref{Bsp:Ausgabe der Komponente}  \ref{Bsp:Birds}\\
 		\hline
 		neu: Exkurs: Vergleich von Konditionalen überarbeitet
-		&\ref{Vergleich von Konditionalen} \\
+		&\ref{Ermittlung spezifischer Konstanten} \\
 		\hline
 		\caption{Änderungen gegenüber der letzten Version}
 	\end{longtable}

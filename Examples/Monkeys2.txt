@@ -16,34 +16,33 @@ conditionals
 	   }
 
 Grundkonditionale der Wissensbasis: 
-(!feeds(andy,charly)|!hungry(andy) * !hungry(charly))		[0.9]
-(feeds(bob,bob))						[0.0]
-(!feeds(bob,charly)|hungry(bob))				[0.999]
 (feeds(andy,bob)|(!hungry(andy) * hungry(bob)))			[0.8]
-(!feeds(bob,charly)|!hungry(bob) * !hungry(charly))		[0.9]
-(!feeds(andy,bob)|hungry(andy))					[0.999]
-(!feeds(charly,bob)|!hungry(charly) * !hungry(bob))		[0.9]
-(!feeds(charly,andy)|hungry(charly))				[0.999]
-(!feeds(andy,andy)|!hungry(andy) * !hungry(andy))		[0.9]
-(!feeds(bob,andy)|!hungry(bob) * !hungry(andy))			[0.9]
-(feeds(bob,charly)|!hungry(bob))				[0.95]
-(feeds(andy,charly)|!hungry(andy))				[0.95]
 (feeds(bob,charly)|(!hungry(bob) * hungry(charly)))		[0.8]
-(!feeds(andy,bob)|!hungry(andy) * !hungry(bob))			[0.9]
-(!feeds(bob,bob)|!hungry(bob) * !hungry(bob))			[0.9]
 (feeds(charly,bob)|(!hungry(charly) * hungry(bob)))		[0.8]
-(!feeds(andy,charly)|hungry(andy))				[0.999]
-(!feeds(charly,charly)|!hungry(charly) * !hungry(charly))	[0.9]
 (feeds(andy,charly)|(!hungry(andy) * hungry(charly)))		[0.8]
 (feeds(charly,andy)|(!hungry(charly) * hungry(andy)))		[0.8]
-(feeds(charly,charly)|!hungry(charly))				[0.95]
-(!feeds(bob,andy)|hungry(bob))					[0.999]
-(feeds(charly,charly))						[0.0]
 (feeds(bob,andy)|(!hungry(bob) * hungry(andy)))			[0.8]
+(!feeds(bob,charly)|hungry(bob))				[0.999]
+(!feeds(andy,bob)|hungry(andy))					[0.999]
+(!feeds(charly,andy)|hungry(charly))				[0.999]
+(!feeds(bob,andy)|hungry(bob))					[0.999]
+(!feeds(andy,charly)|hungry(andy))				[0.999]
 (!feeds(charly,bob)|hungry(charly))				[0.999]
-(feeds(andy,andy))						[0.0]
+(!feeds(andy,charly)|!hungry(andy) * !hungry(charly))		[0.9]
+(!feeds(bob,charly)|!hungry(bob) * !hungry(charly))		[0.9]
+(!feeds(charly,bob)|!hungry(charly) * !hungry(bob))		[0.9]
+(!feeds(andy,andy)|!hungry(andy) * !hungry(andy))		[0.9]
+(!feeds(bob,andy)|!hungry(bob) * !hungry(andy))			[0.9]
+(!feeds(andy,bob)|!hungry(andy) * !hungry(bob))			[0.9]
+(!feeds(bob,bob)|!hungry(bob) * !hungry(bob))			[0.9]
+(!feeds(charly,charly)|!hungry(charly) * !hungry(charly))	[0.9]
 (!feeds(charly,andy)|!hungry(charly) * !hungry(andy))		[0.9]
-
+(feeds(bob,charly)|!hungry(bob))				[0.95]
+(feeds(andy,charly)|!hungry(andy))				[0.95]
+(feeds(charly,charly)|!hungry(charly))				[0.95]
+(feeds(charly,charly))						[0.0]
+(feeds(andy,andy))						[0.0]
+(feeds(bob,bob))						[0.0]
 
 Anfrage: (!feeds(X,Y)|hungry(X))
 
@@ -66,15 +65,15 @@ Angestrebte Ausgabe:
 Anfrage: (feeds(X,Y))
 
 Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
-(feeds(bob,charly))		[0.00100]
-(feeds(andy,bob))		[0.00100]
 (feeds(charly,charly))		[0.00000]
 (feeds(andy,andy))		[0.00000]
-(feeds(bob,andy))		[0.00100]
 (feeds(bob,bob))		[0.00000]
 (feeds(andy,charly))		[0.00100]
 (feeds(charly,bob))		[0.00000]
 (feeds(charly,andy))		[0.00000]
+(feeds(bob,andy))		[0.00100]
+(feeds(bob,charly))		[0.00100]
+(feeds(andy,bob))		[0.00100]
 
 Angestrebte Ausgabe:
 (feeds(X,Y))[0.000]<X = Y + X = charly>
@@ -103,15 +102,15 @@ Anfrage: (feeds(X,Y)|!hungry(X))
 
 
 Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
-(feeds(andy,bob)|!hungry(andy))		[0.70560]
-(feeds(charly,bob)|!hungry(charly))	[0.98210]
-(feeds(bob,andy)|!hungry(bob))		[0.70560]
+(feeds(bob,bob)|!hungry(bob))		[0.00000]
 (feeds(andy,andy)|!hungry(andy))	[0.00000]
 (feeds(bob,charly)|!hungry(bob))	[0.99687]
 (feeds(andy,charly)|!hungry(andy))	[0.99687]
-(feeds(charly,charly)|!hungry(charly))	[0.74840]
-(feeds(bob,bob)|!hungry(bob))		[0.00000]
 (feeds(charly,andy)|!hungry(charly))	[0.98210]
+(feeds(charly,bob)|!hungry(charly))	[0.98210]
+(feeds(bob,andy)|!hungry(bob))		[0.70560]
+(feeds(andy,bob)|!hungry(andy))		[0.70560]
+(feeds(charly,charly)|!hungry(charly))	[0.74840]
 
 Angestrebte Ausgabe:
 (feeds(X, Y)|!hungry(X))[0.0]<((X = Y )* X != charly)>
@@ -125,15 +124,15 @@ Angestrebte Ausgabe:
 Anfrage: (!feeds(X,Y)|!hungry(X) * !hungry(Y))
 
 Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(!feeds(andy,charly)|!hungry(andy) * !hungry(charly))		[0.00000]
+(!feeds(bob,charly)|!hungry(bob) * !hungry(charly))		[0.00000]
 (!feeds(andy,bob)|!hungry(andy) * !hungry(bob))			[1.00000]
 (!feeds(bob,andy)|!hungry(bob) * !hungry(andy))			[1.00000]
-(!feeds(charly,charly)|!hungry(charly) * !hungry(charly))	[0.25164]
-(!feeds(andy,charly)|!hungry(andy) * !hungry(charly))		[0.00000]
 (!feeds(andy,andy)|!hungry(andy) * !hungry(andy))		[1.00000]
+(!feeds(charly,charly)|!hungry(charly) * !hungry(charly))	[0.25164]
 (!feeds(charly,andy)|!hungry(charly) * !hungry(andy))		[0.98912]
-(!feeds(bob,charly)|!hungry(bob) * !hungry(charly))		[0.00000]
 (!feeds(charly,bob)|!hungry(charly) * !hungry(bob))		[0.98912]
-(!feeds(bob,bob)|!hungry(bob) * !hungry(bob))			[1.00000]
+
 
 Angestrebte Ausgabe:
 (!feeds(X,Y)|!hungry(X) * !hungry(Y))[0.00000]< ((X != charly) * Y = charly)>

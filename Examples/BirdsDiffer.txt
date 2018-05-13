@@ -18,8 +18,8 @@ conditionals
 
 Grundkonditionale der Wissensbasis: 
 (flies(Bully)|isBird(Bully))[0.9]
-(flies(Tweety))[0.0]
 (flies(Sylvester)|isBird(Sylvester))[0.9]
+(flies(Tweety))[0.0]
 (isBird(Tweety))[1.0]
 (isBird(Bully))[0.3]
 (isBird(Kirby))[0.4]
@@ -38,9 +38,9 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 
 Angestrebte Ausgabe:
 (flies(Sylvester))				[0.74000]
+(flies(Tweety))					[0.00000]
 (flies(Kirby))					[0.66000]
 (flies(Bully))					[0.62000]
-(flies(Tweety))					[0.00000]
 
 
 
@@ -53,9 +53,9 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (isBird(Bully))					[0.30000]
 
 Angestrebte Ausgabe:
+(isBird(X))[0.40000]
 (isBird(Tweety))[1.00000]
 (isBird(Sylvester))[0.60000]
-(isBird(X))[0.40000]
 (isBird(X))[0.30000]
 
 
@@ -83,10 +83,9 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (isBird(Tweety)|flies(Tweety))		[1.00000]
 
 Angestrebte Ausgabe:
-(isBird(Tweety)|flies(Tweety))[1.00000]
 (isBird(Sylvester)|flies(Sylvester))[0.72973]
 (isBird(Kirby)|flies(Kirby))[0.54546]
 (isBird(Bully)|flies(Bully))[0.43549]
-
+(isBird(Tweety)|flies(Tweety))[1.00000]
 
 

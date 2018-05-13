@@ -116,7 +116,7 @@
 \end{center}
 
 \begin{center}
-\textcolor{blue}{Version 20180415}
+\textcolor{blue}{Version 20180513}
 	
 \large{Kleingartach, 2018}
 \end{center}
@@ -787,24 +787,23 @@ Die Menge der (zulässigen) Grundinstanzen einer Menge $ \cal R $ $ = \{ R_1, ..
 \end{Bsp}
 
 \textcolor{blue}{
-\begin{Def}[Spezifische Konstanten, spezifisches Konditional] \index{Konstante ! spezifisch} \index{Konditional ! spezifisch} \label{Konstanten spezifisch}
+\begin{Def}[Spezifische Konstante, spezifisches Konditional] \index{Konstante ! spezifisch} \index{Konditional ! spezifisch} \label{Konstanten spezifisch}
 	Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL Wissensbasis, gemäß Definition \ref{KB}. Ein Konditional der Wissensbasis ist ein spezifisches Konditional, wenn es eine Konstante enthält. Diese Konstante ist  eine spezifische Konstante.
+	 $  D_s $ sei definiert als die Menge der in der Wissensbasis vorkommenden spezifischen Konstanten.
 \end{Def}
-Wenn die Wissensbasis ein spezifisches Konditional enthält, bedeutet das, dass sie über differenziertere Informationen über ein Objekt des Universums verfügt. Eine Konstante, die in einem Konditional der Wissensbasis vorkommt ist folglich eine spezifische Konstante. 
+Wenn die Wissensbasis ein spezifisches Konditional enthält, bedeutet das, dass sie über differenziertere Informationen über ein Objekt des Universums verfügt. Eine Konstante, die in einem Konditional der Wissensbasis vorkommt, ist folglich eine spezifische Konstante. 
 }
 
 
-\begin{Bsp}[Spezifische Konstanten] \label{Bsp:Spezifische Konstante}
-Im Beispiel \ref{Bsp:Misanthrope} "{}Misanthrope"{} gibt es eine spezifische Konstante: die Konstante $ a $. Sie findet sich im Konditional $ MI_2 $ in der Konklusion im Atom $ likes(a,V) $. In der Wissensbasis soll ausgedrückt werden, dass $ a $ grundsätzlich niemanden mag. Dieses besondere Wissen der Wissensbasis, das im Konditional $ MI_2 $ ausgedrückt wird, macht somit $ a $ zu einer spezifischen Konstante. 
+\begin{Bsp}[Spezifische Konstante] \label{Bsp:Spezifische Konstante}
+Im Beispiel \ref{Bsp:Misanthrope} "{}Misanthrope"{} gibt es eine spezifische Konstante: die Konstante $ a $. Sie findet sich im Konditional $ MI_2 $ in der Konklusion im Atom $ likes(a,V) $. In der Wissensbasis soll ausgedrückt werden, dass $ a $ grundsätzlich niemanden mag. Dieses besondere Wissen der Wissensbasis, das im Konditional $ MI_2 $ ausgedrückt wird, macht somit $ a $ zu einer spezifischen Konstante.
 \end{Bsp}
 
 
 \textcolor{blue}{
 \begin{Def}[Spezifische Grundinstanzen von Konditionalen] \index{Grundinstanz ! spezifisch} \label{Grundinstanz spezifisch}
-Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL Wissensbasis, gemäß Definition \ref{KB}. Sei $ R \in \cal R $ ein Konditional gemäß Definition \ref{Fo-PCL Konditional} mit Prämisse $ \psi $ und Konklusion $ \varphi $ und sei $ t \in Term_{\Sigma}  $. Des Weiteren sei $  D_s $ die Menge der in der Wissensbasis vorkommenden spezifischen Konstanten. Sei $ gnd(R) $ die Menge der zulässigen Grundinstanzen von $ R $ gemäß Definition \ref{Grundinstanz}.
-\\
-\\
-Die Menge $ spezGnd(R) $ der zulässigen spezifischen Grundinstanzen von $ R $ ist definiert als eine Teilmenge der zulässigen Grundinstanzen, die eine spezifische Konstante enthalten.
+Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL Wissensbasis, gemäß Definition \ref{KB}. Sei $ R \in \cal R $ ein Konditional gemäß Definition \ref{Fo-PCL Konditional}. Des Weiteren sei $  D_s $ die Menge der in der Wissensbasis vorkommenden spezifischen Konstanten. Sei $ gnd(R) $ die Menge der zulässigen Grundinstanzen von $ R $ gemäß Definition \ref{Grundinstanz}.
+Die Menge $ spezGnd(R) $ der zulässigen spezifischen Grundinstanzen von $ R $ ist definiert als eine Teilmenge der zulässigen Grundinstanzen die eine spezifische Konstante $ d  \in  D_s $ enthalten.
 \end{Def}
 }
 
@@ -1178,7 +1177,7 @@ Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R
 	Eine Generalisierung ist eine Abbildung, die jeder Äquivalenzklasse $ E_i \in \cal{E} $  $ mit$  $ i \in \{1, ..., t\} $ jeweils genau ein einziges quantifiziertes Konditional $R_{gen} $, d.h. ein Konditional mit der für das Modell berechneten Wahrscheinlichkeit der Äquivalenzklasse, zuordnet.  $R_{gen} $ wird im Folgenden auch generalisiertes Konditional genannt. \index{Konditional ! generalisiertes}  $R_{gen} $ muss der Signatur folgen und darf in Prämisse und Konklusion nur Variablen enthalten, wenn die Äquivalenzklasse mehr als ein Konditional enthält. Aus  $R_{gen} $ müssen jeweils alle Konditionale der zugehörigen Äquivalenzklasse mit den Konstanten in $ \cal{D} $ und unter Beachtung des Constraints durch Grundsubstitution, vgl. \ref{Grundsubstitution} gebildet werden können. Für Äquivalenzklassen mit einem Konditional entspricht  $R_{gen} $ genau diesem Konditional.  Bei $R_{gen} $ handelt es sich für diesen Fall folglich um ein Grundkonditional mit zugeordneter Wahrscheinlichkeit. 	
 \end{Def}
 D.h. in der Phase der Generalisierung werden die Konditionale, die sich aufgrund der gleichen Wahrscheinlichkeit in einer Äquivalenzklasse befinden, zu einem möglichst allgemeinen Konditional zusammengefasst.\\
-Die eigentliche Leistung der Komponente liegt hierbei in der Erzeugung des jeweiligen Konditionals. Wie das Konditional der Klasse aussieht hängt von der Klasse und dem ausgeführten Generalisierungsprozess ab. 
+Die eigentliche Leistung der Komponente liegt hierbei in der Erzeugung des jeweiligen Konditionals. Wie das Konditional der Klasse aussieht, hängt von der Klasse und dem ausgeführten Generalisierungsprozess ab. 
 \begin{Bsp}[Generalisierung]\label{Bsp:Generalisierung}
 Für das Beispiel "{} Birds "{}, \ref{Birds} könnten für die Anfrage $ (flies(X)) $ bei einer möglichen Generalisierung der beiden Klassen folgende generalisierten Konditionale ergeben: \\
 \\
@@ -1929,15 +1928,16 @@ Und um ein Beispiel mit zweistelligen Prädikaten zu betrachten:
 		Beim Beispiel "{}Misanthrope"{} ergeben sich für die Anfrage nach der Wahrscheinlichkeit, mit der U V mag, drei Klassen, die folgendermaßen aussehen:\\
 		\\
 		Äquivalenzklasse 1: $ \{(likes(c,b))[0.578], (likes(b,c))[0.587]\} $\\
-		Äquivalenzklasse 2: $ \{(likes(a,a))[0.0], (likes(b,b))[0.0], (likes(c,c))[0.0]\} $\\
-		Äquivalenzklasse 3: $ \{(likes(a,c))[0.050], (likes(a,b))[0.050], (likes(b,a))[0.050], (likes(c,a))[0.050]\} $\\
+		Äquivalenzklasse 2: $ \{(likes(a,c))[0.050], (likes(a,b))[0.050], (likes(b,a))[0.050],
+		 (likes(c,a))[0.050]\} $\\
+		Äquivalenzklasse 3: $ \{(likes(a,a))[0.0], (likes(b,b))[0.0], (likes(c,c))[0.0]\} $\\
 		
 		\noindent
-		Die erwünschte Ausgabe würde in diesem Fall so aussehen:\\
-		Konditional für Klasse 1: $ \{(likes(U,V))[0.578] <((U \neq a \land V \neq a) \land U \neq V)>\} $\\
-		Generalisiertes Konditional für Klasse 2: $ \{(likes(U,V))[0.0] <U = V>\} $\\
-		Generalisiertes Konditional für Klasse 3: $ \{(likes(U,V))[0.05] <((U = a \lor V = a) \land U \neq V)>\} $\\
-	\end{Bsp}
+		Die angestrebte Ausgabe sieht in diesem Fall so aus:\\
+		Generalisiertes Konditional für Äquivalenzklasse 1: $ \{(likes(U,V))[0.578] <((U \neq a \land V \neq a) \land U \neq V)>\} $\\
+		Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(likes(U,V))[0.05] <((U = a \lor V = a) \land U \neq V)>\} $\\
+		Generalisiertes Konditional für Äquivalenzklasse 3: $ \{(likes(U,V))[0.0] <U = V>\} $\\
+			\end{Bsp}
 
 
 \section{Idee: Positive Generalisierung}
@@ -1953,8 +1953,8 @@ Das würde für die o.g. Beispiele wie folgt aussehen:\\
 	Äquivalenzklasse 1: $\{(flies(Tweety))[0.0]\}$\\
 	Äquivalenzklasse 2: $\{(flies(Bully))[0.664], (flies(Sylvester))[0.664], (flies(Kirby))[0.664]\}$\\
 	\\
-	Generalisiertes Konditional für Klasse 1: $\{(flies(Tweety))[0.0]\}$\\
-	Generalisiertes Konditional für Klasse 2: $\{(flies(X))[0.66]\} <((X = Bully \lor X = Sylvester) \lor X = Kirby)>$\\
+	Generalisiertes Konditional für Äquivalenzklasse 1: $\{(flies(Tweety))[0.0]\}$\\
+	Generalisiertes Konditional für Äquivalenzklasse 2: $\{(flies(X))[0.66]\} <((X = Bully \lor X = Sylvester) \lor X = Kirby)>$\\
 \end{Bsp}
 \begin{Bsp}[Positive Generalisierung am Beispiel "{}Misanthrope"{}, s. \ref{Ausgabe_Misanthrope} und \ref{Misanthrope}]
 	\index{Generalisierung ! positiv}
@@ -3541,6 +3541,7 @@ Anschließend wurde die angestrebte Ausgabe \index{angestrebte Ausgabe} generier
 
 \newpage
 
+
 \section{ColdTrans} Erläuterungen s.  \ref{BColdTrans}
 \label{ColdTrans}
 \lstinputlisting{Examples/ColdTrans.txt}
@@ -3658,14 +3659,18 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 		\endfoot
 		\endlastfoot
 		\hline
-		Definitionen sollten überarbeitet werden-, dazu gehören:\newline generische Grundinstanzen \newline  spezifische Grundinstanzen 
-		&  sh. \newline \newline \ref{Grundinstanz generisch} \newline \ref{Grundinstanz spezifisch} \newline \\
+		Definitionen sollten überarbeitet werden-, dazu gehören: 
+		\newline spezifische Konstante, spezifisches Konditional
+		& \newline \newline \ref{Konstanten spezifisch}\\
+		\newline generische Grundinstanzen \newline  spezifische Grundinstanzen 
+		&   \newline \newline \ref{Grundinstanz generisch} \newline \ref{Grundinstanz spezifisch} \newline \\
 		Qualitatives Konditional
 		& \ref{qualitatives_Konditional}\\
 		Generalisierung, insbes. generalisiertes Konditional 
 		&  \ref{Generalisierung}\\
 		Ausgabe der Komponente
 		& \ref{Ausgabe der Komponente}\\
+
 		\hline
 		Beispiele überarbeitet
 		& sh.  \ref{Bsp:Generalisierung},  \ref{Bsp:Ausgabe der Komponente}  \ref{Bsp:Birds}\\

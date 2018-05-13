@@ -24,17 +24,18 @@ conditionals
 
 Grundkonditionale der Wissensbasis: 
 (isStupid(Odie))						[1.0]
+(isStupid(Butcher))						[0.6]
 (isIntelligent(Nermal))						[0.8]
+(isIntelligent(Garfield))					[0.8]
 (moreIntelligent(Nermal,Odie)|isStupid(Odie))			[0.75]
 (moreIntelligent(Garfield,Butcher)|isStupid(Butcher))		[0.75]
-(moreIntelligent(Garfield,Butcher)|isIntelligent(Garfield))  	[0.9]
-(isStupid(Butcher))						[0.6]
-(moreIntelligent(Garfield,Odie)|isIntelligent(Garfield))	[0.9]
-(moreIntelligent(Nermal,Odie)|isIntelligent(Nermal))		[0.9]
 (moreIntelligent(Nermal,Butcher)|isStupid(Butcher))		[0.75]
 (moreIntelligent(Garfield,Odie)|isStupid(Odie))			[0.75]
 (moreIntelligent(Nermal,Butcher)|isIntelligent(Nermal))		[0.9]
-(isIntelligent(Garfield))					[0.8]
+(moreIntelligent(Garfield,Butcher)|isIntelligent(Garfield))  	[0.9]
+(moreIntelligent(Garfield,Odie)|isIntelligent(Garfield))	[0.9]
+(moreIntelligent(Nermal,Odie)|isIntelligent(Nermal))		[0.9]
+
 
 
 

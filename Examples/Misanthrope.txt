@@ -12,28 +12,33 @@ conditionals
 
 Grundkonditionale der Wissensbasis: 
 (likes(a,c)|likes(c,a))		[0.9]
-(likes(a,c))			[0.05]
-(likes(a,b))			[0.05]
 (likes(a,b)|likes(b,a))		[0.9]
 (likes(b,c)|likes(c,b))		[0.9]
 (likes(c,a)|likes(a,c))		[0.9]
 (likes(c,b)|likes(b,c))		[0.9]
 (likes(b,a)|likes(a,b))		[0.9]
+(likes(c,a))			[0.05]
+(likes(b,a))			[0.05]
+(likes(a,c))			[0.05]
+(likes(a,b))			[0.05]
+(likes(a,a))			[0.0]
+(likes(b,b))			[0.0]
+(likes(c,c))			[0.0]
 
 
 
 Anfrage: (likes(U,V))
 
 Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
-(likes(c,b))[0.58700]
 (likes(a,c))[0.05000]
 (likes(a,b))[0.05000]
+(likes(b,a))[0.05000]
+(likes(c,a))[0.05000]
+(likes(c,b))[0.58700]
 (likes(b,c))[0.58700]
 (likes(b,b))[0.00000]
 (likes(a,a))[0.00000]
 (likes(c,c))[0.00000]
-(likes(b,a))[0.05000]
-(likes(c,a))[0.05000]
 
 Angestrebte Ausgabe:
 (likes(U,V))[0.05000]<((U = a + V = a) * U != V)>
@@ -51,7 +56,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (likes(a,a))[0.00000]
 
 Angestrebte Ausgabe:
-(likes(a,a))[0.0]<V = a> 
-(likes(a,V))[0.05000]<V != a> 
 
+(likes(a,V))[0.05000]<V != a> 
+(likes(a,a))[0.0]<V = a> 
 

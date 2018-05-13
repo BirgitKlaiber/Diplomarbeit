@@ -18,15 +18,16 @@ Grundkonditionale der Wissensbasis:
 (!feeds(c2,c1)|hungry(c2))				[0.999]
 (!feeds(c3,c1)|hungry(c3))				[0.999]
 (!feeds(c3,c2)|hungry(c3))				[0.999]
+(!feeds(c1,c3)|hungry(c1))				[0.999]
+(!feeds(c1,c2)|hungry(c1))				[0.999]
+(!feeds(c2,c3)|hungry(c2))				[0.999]
 (feeds(c3,c2)|(!hungry(c3) * hungry(c2)))		[0.8]
 (feeds(c3,c1)|(!hungry(c3) * hungry(c1)))		[0.8]
 (feeds(c1,c3)|(!hungry(c1) * hungry(c3)))		[0.8]
 (feeds(c1,c2)|(!hungry(c1) * hungry(c2)))		[0.8]
-(!feeds(c1,c3)|hungry(c1))				[0.999]
 (feeds(c2,c3)|(!hungry(c2) * hungry(c3)))		[0.8]
 (feeds(c2,c1)|(!hungry(c2) * hungry(c1)))		[0.8]
-(!feeds(c1,c2)|hungry(c1))				[0.999]
-(!feeds(c2,c3)|hungry(c2))				[0.999]
+
 
 
 
@@ -63,13 +64,13 @@ Angestrebte Ausgabe:
 Anfrage: (feeds(X,Y))
 
 Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(feeds(c2,c2))[0.00000]
+(feeds(c1,c1))[0.00000]
+(feeds(c3,c3))[0.00000]
 (feeds(c1,c2))[0.45608]
 (feeds(c1,c3))[0.45608]
 (feeds(c2,c1))[0.45608]
 (feeds(c2,c3))[0.45608]
-(feeds(c2,c2))[0.00000]
-(feeds(c1,c1))[0.00000]
-(feeds(c3,c3))[0.00000]
 (feeds(c3,c1))[0.45608]
 (feeds(c3,c2))[0.45608]
 

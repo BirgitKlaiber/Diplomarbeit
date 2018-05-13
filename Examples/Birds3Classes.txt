@@ -17,12 +17,13 @@ conditionals
 
 
 Grundkonditionale der Wissensbasis: 
-(isBird(Tweety))[1.0]
-(flies(Tweety))[0.0]
 (flies(Sylvester)|isBird(Sylvester))[0.9]
+(flies(Kirby)|isBird(Kirby))[0.9]
+(flies(Tweety))[0.0]
+(isBird(Tweety))[1.0]
 (isBird(Bully))[0.7]
 (flies(Bully))[0.3]
-(flies(Kirby)|isBird(Kirby))[0.9]
+
 
 
 
@@ -30,9 +31,9 @@ Anfrage: (flies(X))
 
 Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
 (flies(Sylvester))			[0.66360]
-(flies(Tweety))				[0.00000]
-(flies(Bully))				[0.30000]
 (flies(Kirby))				[0.66360]
+(flies(Bully))				[0.30000]
+(flies(Tweety))				[0.00000]
 
 Angestrebte Ausgabe:
 (flies(X))[0.66360]<(X = Sylvester + X = Kirby)>

@@ -16,9 +16,9 @@ conditionals
 
 Grundkonditionale der Wissensbasis: 
 (flies(Bully)|isBird(Bully))	[0.9]
-(isBird(Tweety))		[1.0]
 (flies(Kirby)|isBird(Kirby))	[0.9]
 (flies(Tweety))			[0.0]
+(isBird(Tweety))		[1.0]
 
 
 

@@ -25,10 +25,10 @@ Grundkonditionale der Wissensbasis:
 Anfrage: (flies(X))
 
 Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(flies(Tweety))		[0.90000]
 (flies(Bully))		[0.66360]
 (flies(Sylvester))	[0.66360]
-(flies(Tweety))		[0.90000]
-(flies(Kirby))		[0.66360
+(flies(Kirby))		[0.66360]
 
 Angestrebte Ausgabe:
 (flies(Tweety))[0.90000]
@@ -39,9 +39,9 @@ Angestrebte Ausgabe:
 Anfrage: (isBird(X))
 
 Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(isBird(Tweety))	[1.00000]
 (isBird(Bully))		[0.40901]
 (isBird(Sylvester))	[0.40901]
-(isBird(Tweety))	[1.00000]
 (isBird(Kirby))		[0.40901]
 
 Angestrebte Ausgabe:

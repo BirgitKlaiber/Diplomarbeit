@@ -11,32 +11,31 @@ signature
 conditionals
 	kb{
 		(normalWeight(X) | sport(X))[0.80]
+		(sport(Y) | sport(X), family(X, Y))[0.7]
 		(normalWeight(X) | sport(X), balancedDiet(X) )[0.90]
  		(sport(Chris) )[0]
-		(sport(Y) | sport(X), family(X, Y))[0.8]
 		(family(X,X) )[0]}
 
 Grundkonditionale der Wissensbasis: 
-
-(sport(Chris))						[0.0]
-(family(Chris,Chris))					[0.0]
 (normalWeight(Bob)|sport(Bob))				[0.8]
+(normalWeight(Chris)|sport(Chris))			[0.8]
+(normalWeight(Anna)|sport(Anna))			[0.8]
 (sport(Anna)|sport(Bob) * family(Bob,Anna))		[0.7]
 (sport(Chris)|sport(Anna) * family(Anna,Chris))		[0.7]
 (sport(Chris)|sport(Chris) * family(Chris,Chris))	[0.7]
-(normalWeight(Anna)|sport(Anna) * balancedDiet(Anna))	[0.9]
 (sport(Bob)|sport(Bob) * family(Bob,Bob))		[0.7]
-(family(Anna,Anna))					[0.0]
-(family(Bob,Bob))					[0.0]
-(normalWeight(Chris)|sport(Chris) * balancedDiet(Chris))[0.9]
-(normalWeight(Bob)|sport(Bob) * balancedDiet(Bob))	[0.9]
 (sport(Anna)|sport(Anna) * family(Anna,Anna))		[0.7]
 (sport(Chris)|sport(Bob) * family(Bob,Chris))		[0.7]
 (sport(Bob)|sport(Anna) * family(Anna,Bob))		[0.7]
-(normalWeight(Chris)|sport(Chris))			[0.8]
 (sport(Bob)|sport(Chris) * family(Chris,Bob))		[0.7]
 (sport(Anna)|sport(Chris) * family(Chris,Anna))		[0.7]
-(normalWeight(Anna)|sport(Anna))			[0.8]
+(normalWeight(Anna)|sport(Anna) * balancedDiet(Anna))	[0.9]
+(normalWeight(Chris)|sport(Chris) * balancedDiet(Chris))[0.9]
+(normalWeight(Bob)|sport(Bob) * balancedDiet(Bob))	[0.9]
+(family(Anna,Anna))					[0.0]
+(family(Bob,Bob))					[0.0]
+(sport(Chris))						[0.0]
+(family(Chris,Chris))					[0.0]
 
 
 

@@ -32,10 +32,10 @@ Angestrebte Ausgabe:
 Anfrage: (cold(X)|contact(X,Y) * cold(Y))
 
 Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
-(cold(bob)|contact(bob,carl) * cold(carl))	[0.60000]
 (cold(carl)|contact(carl,carl) * cold(carl))	[1.0]
 (cold(bob)|contact(bob,bob) * cold(bob))	[1.0]
 (cold(anna)|contact(anna,anna) * cold(anna))	[1.0]
+(cold(bob)|contact(bob,carl) * cold(carl))	[0.60000]
 (cold(carl)|contact(carl,bob) * cold(bob))	[0.60000]
 (cold(anna)|contact(anna,carl) * cold(carl))	[0.60000]
 (cold(anna)|contact(anna,bob) * cold(bob))	[0.60000]
@@ -51,7 +51,6 @@ Angestrebte Ausgabe:
 Anfrage: (contact(X,Y) * cold(Y))
 
 Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
-(contact(carl,carl) * cold(carl))	[0.00000]
 (contact(carl,bob) * cold(bob))		[0.01831]
 (contact(bob,carl) * cold(carl))	[0.01831]
 (contact(anna,bob) * cold(bob))		[0.01831]
@@ -60,6 +59,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (contact(anna,carl) * cold(carl))	[0.01831]
 (contact(bob,bob) * cold(bob))		[0.00000]
 (contact(anna,anna) * cold(anna))	[0.00000]
+(contact(carl,carl) * cold(carl))	[0.00000]
 
 Angestrebte Ausgabe:
 (contact(X,Y) * cold(Y))[0.01831]<X != Y>
@@ -70,12 +70,12 @@ Angestrebte Ausgabe:
 Anfrage: (contact(X,Y))
 
 Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
-(contact(bob,carl))	[0.48313]
-(contact(carl,anna))	[0.48313]
 (contact(carl,carl))	[0.00000]
 (contact(anna,anna))	[0.00000]
-(contact(anna,carl))	[0.48313]
 (contact(bob,bob))	[0.00000]
+(contact(anna,carl))	[0.48313]
+(contact(bob,carl))	[0.48313]
+(contact(carl,anna))	[0.48313]
 (contact(carl,bob))	[0.48313]
 (contact(bob,anna))	[0.48313]
 (contact(anna,bob))	[0.48313]
@@ -143,15 +143,15 @@ Angestrebte Ausgabe:
 Anfrage: (cold(X)|susceptible(Y))
 
 Berechnung der Wahrscheinlichkeiten der Grundkonditionale: 
+(cold(carl)|susceptible(carl))	[0.10000]
+(cold(anna)|susceptible(anna))	[0.10000]
+(cold(bob)|susceptible(bob))	[0.10000]
 (cold(bob)|susceptible(carl))	[0.06187]
 (cold(carl)|susceptible(bob))	[0.06187]
-(cold(carl)|susceptible(carl))	[0.10000]
 (cold(carl)|susceptible(anna))	[0.06187]
-(cold(anna)|susceptible(anna))	[0.10000]
 (cold(anna)|susceptible(carl))	[0.06187]
 (cold(anna)|susceptible(bob))	[0.06187]
 (cold(bob)|susceptible(anna))	[0.06187]
-(cold(bob)|susceptible(bob))	[0.10000]
 
 Angestrebte Ausgabe:
 (cold(X)|susceptible(Y))[0.10000]<X = Y>

@@ -68,8 +68,8 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (cold(anna)|contact(anna,anna) * cold(anna))	[1.0]
 
 Angestrebte Ausgabe: 
-(cold(X)|contact(X,Y) * cold(Y))			[0.60000]
-(cold(X)|contact(X,Y) * cold(Y))			[1.0]<X = Y>
+(cold(X)|contact(X,Y) * cold(Y))			[0.60000]<X!=Y>
+(cold(X)|contact(X,Y) * cold(Y))			[1.0]<X=Y>
 
 
 
@@ -87,8 +87,8 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (contact(anna,anna) * cold(anna))			[0.00000]
 
 Angestrebte Ausgabe:
-(contact(X,Y) * cold(Y))[0.021]<X != Y>
-(contact(X,Y) * cold(Y))[0.0]<X = Y> (Spezialfall reflexives Wissen)
+(contact(X,Y) * cold(Y))[0.021]<X!=Y>
+(contact(X,Y) * cold(Y))[0.0]<X=Y> (Spezialfall reflexives Wissen)
 
 
 
@@ -107,8 +107,8 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 
 			
 Angestrebte Ausgabe:
-(contact(X,Y))[0.487]
-(contact(X,X))[0.0]<X = Y> (Spezialfall reflexives Wissen)
+(contact(X,Y))[0.487]<X!=Y>
+(contact(X,Y))[0.0]<X=Y> (Spezialfall reflexives Wissen)
 
 
 
@@ -132,7 +132,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (contact(bob,bob))						[0.0000]
 
 Angestrebte Ausgabe:
-(contact(X,X))[0.0]<X = Y> (Spezialfall reflexives Wissen)
+(contact(X,X))[0.0]<X=Y> (Spezialfall reflexives Wissen)
 
 
 

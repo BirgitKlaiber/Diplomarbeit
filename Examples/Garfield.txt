@@ -60,8 +60,8 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (moreIntelligent(Garfield,Odie))		[0.75000
 
 Angestrebte Ausgabe:
-(moreIntelligent(X, Y))[0.796]<((X = Garfield + X = Nermal)* Y = Butcher)>
-(moreIntelligent(X, Y))[0.750]<((X = Garfield + X = Nermal)* Y = Odie)>
+(moreIntelligent(X, Y))[0.796]<((X=Garfield + X=Nermal)* Y=Butcher)>
+(moreIntelligent(X, Y))[0.750]<((X=Garfield + X=Nermal)* Y=Odie)>
 
 
 
@@ -85,8 +85,8 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (isStupid(Butcher)|moreIntelligent(Garfield,Butcher))	[0.56545]
 
 Angestrebte Ausgabe:
-(isStupid(Y)|moreIntelligent(X, Y))[1.0]<((X = Garfield + X = Nermal)* Y = Odie)>
-(isStupid(Y)|moreIntelligent(X, Y)[0.565]<((X = Garfield + X = Nermal)* Y = Butcher)>
+(isStupid(Y)|moreIntelligent(X, Y))[1.0]<((X=Garfield + X=Nermal)* Y=Odie)>
+(isStupid(Y)|moreIntelligent(X, Y)[0.565]<((X=Garfield + X=Nermal)* Y=Butcher)>
 
 
 

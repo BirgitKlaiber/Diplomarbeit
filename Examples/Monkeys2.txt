@@ -113,11 +113,11 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (feeds(charly,charly)|!hungry(charly))	[0.74840]
 
 Angestrebte Ausgabe:
-(feeds(X, Y)|!hungry(X))[0.0]<((X = Y )* X != charly)>
-(feeds(X, Y)|!hungry(X))[0.99687]<((X != Y)* Y = charly)>
-(feeds(X, Y)|!hungry(X))[0.98210]<((X != Y ) * X = charly)>
-(feeds(X, Y)|!hungry(X))[0.70560]<(((X != Y) * X != charly) * Y != charly)>
-(feeds(X, Y)|!hungry(X))[0.74840]<((X = charly) * Y = charly> 
+(feeds(X, Y)|!hungry(X))[0.0]<((X=Y )* X!=charly)>
+(feeds(X, Y)|!hungry(X))[0.99687]<((X!=Y)* Y=charly)>
+(feeds(X, Y)|!hungry(X))[0.98210]<((X!=Y) * X=charly)>
+(feeds(X, Y)|!hungry(X))[0.70560]<(((X!=Y) * X!=charly) * Y!=charly)>
+(feeds(X, Y)|!hungry(X))[0.74840]<((X=charly) * Y=charly> 
 
 
 
@@ -135,7 +135,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 
 
 Angestrebte Ausgabe:
-(!feeds(X,Y)|!hungry(X) * !hungry(Y))[0.00000]< ((X != charly) * Y = charly)>
-(!feeds(X,Y)|!hungry(X) * !hungry(Y))[1.00000]<((X != charly) * Y != charly)>
-(!feeds(X,Y)|!hungry(X) * !hungry(Y))[0.25164]<((X = charly) * Y = charly)>
-(!feeds(X,Y)|!hungry(X) * !hungry(Y))[0.98912]<((X != Y) * X = charly + y = charly)>
+(!feeds(X,Y)|!hungry(X) * !hungry(Y))[0.00000]< ((X!=charly) * Y=charly)>
+(!feeds(X,Y)|!hungry(X) * !hungry(Y))[1.00000]<((X!=charly) * Y!=charly)>
+(!feeds(X,Y)|!hungry(X) * !hungry(Y))[0.25164]<((X=charly) * Y=charly)>
+(!feeds(X,Y)|!hungry(X) * !hungry(Y))[0.98912]<((X!=Y) * X=charly + y=charly)>

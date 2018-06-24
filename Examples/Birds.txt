@@ -8,7 +8,7 @@ signature
 
 conditionals
 	kb{
-	    (flies(X) | isBird(X))[0.90]<X != Tweety>	    
+	    (flies(X) | isBird(X))[0.90]<X!=Tweety>	    
 	    ( flies(Tweety))[0]
 	    ( isBird(Tweety))[1]
 	    }
@@ -46,7 +46,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (isBird(Tweety))				[1.00000]
 
 Angestrebte Ausgabe:
-(isBird(X))[0.40901]<X != Tweety>
+(isBird(X))[0.40901]<X!=Tweety>
 (isBird(Tweety))[1.0]
 
 
@@ -63,7 +63,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 
 Angestrebte Ausgabe: 
 (flies(Tweety)|isBird(Tweety))[0.00000]
-(flies(X)|isBird(X))[0.90000]<X != Tweety>
+(flies(X)|isBird(X))[0.90000]<X!=Tweety>
 
 
 
@@ -78,5 +78,5 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 
 Angestrebte Ausgabe: 
 (isBird(Tweety)|flies(Tweety))[1.00000]
-(isBird(X)|flies(X))[0.55471]<X != Tweety>
+(isBird(X)|flies(X))[0.55471]<X!=Tweety>
 

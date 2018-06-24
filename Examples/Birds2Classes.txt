@@ -8,7 +8,7 @@ signature
 
 conditionals
 	kb{
-	     ( flies(X) | isBird(X))[0.90]<X != Tweety>	 
+	     ( flies(X) | isBird(X))[0.90]<X!=Tweety>	 
              ( flies(Tweety))[0]
 	     ( isBird(Tweety))[1]
 	    	}
@@ -30,5 +30,5 @@ Berechnung der Wahrscheinlichkeiten der Gundkonditionale:
 (flies(Tweety))			[0.00000]
 
 Angestrebte Ausgabe :
-(flies(X))[0.66360]<X != Tweety>
+(flies(X))[0.66360]<X!=Tweety>
 (flies(Tweety))[0.00000]

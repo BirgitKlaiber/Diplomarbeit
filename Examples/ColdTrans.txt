@@ -9,7 +9,7 @@ signature
 
 conditionals
 	kb{( cold(X) | contact(X, Y), cold(Y) ) [0.6] <X!=Y>
-	( cold(Z) | contact(X, Y), contact(Y, Z), cold(X) ) [0.3] <X!=Y, Y != Z, X!= Z>
+	( cold(Z) | contact(X, Y), contact(Y, Z), cold(X) ) [0.3] <X!=Y, Y!= Z, X!= Z>
 	( cold(X) | susceptible(X) )[0.1]
 	( cold(X) )[0.05] 
 	( contact(X,Y) | contact(Y,X) )[1.00] <X!=Y>
@@ -43,8 +43,8 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (cold(carl)|contact(carl,anna) * cold(anna))	[0.60000]
 
 Angestrebte Ausgabe:
-(cold(X)|contact(X,Y) * cold(Y))[1.0]<X = Y>
-(cold(X)|contact(X,Y) * cold(Y))[0.6000]<X != Y>
+(cold(X)|contact(X,Y) * cold(Y))[1.0]<X=Y>
+(cold(X)|contact(X,Y) * cold(Y))[0.6000]<X!=Y>
 
 
 
@@ -62,8 +62,8 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (contact(carl,carl) * cold(carl))	[0.00000]
 
 Angestrebte Ausgabe:
-(contact(X,Y) * cold(Y))[0.01831]<X != Y>
-(contact(X,Y) * cold(Y))[0.0]<X = Y>
+(contact(X,Y) * cold(Y))[0.01831]<X!=Y>
+(contact(X,Y) * cold(Y))[0.0]<X=Y>
 
 
 
@@ -81,8 +81,8 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (contact(anna,bob))	[0.48313]
 
 Angestrebte Ausgabe:
-(contact(X,Y))[0.0]<X = Y>
-(contact(X,Y))[0.4831]<X != Y>
+(contact(X,Y))[0.0]<X=Y>
+(contact(X,Y))[0.4831]<X!=Y>
 
 
 
@@ -154,8 +154,8 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (cold(bob)|susceptible(anna))	[0.06187]
 
 Angestrebte Ausgabe:
-(cold(X)|susceptible(Y))[0.10000]<X = Y>
-(cold(X)|susceptible(Y))[0.06187]<X != Y>
+(cold(X)|susceptible(Y))[0.10000]<X=Y>
+(cold(X)|susceptible(Y))[0.06187]<X!=Y>
 
 
 
@@ -194,10 +194,10 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (cold(anna)|contact(anna,anna) * cold(anna))	[1.0]
 
 Angestrebte Ausgabe:
-(cold(Z)|contact(X,Y) * cold(X))[0.26837]<((X != Y) * X != Z)>
-(cold(Z)|contact(X,Y) * cold(X))[0.27550]<X = Y>
-(cold(Z)|contact(X,Y) * cold(X))[0.60000]<Y = Z>
-(cold(Z)|contact(X,Y) * cold(X))[1.0]<X = Z>
+(cold(Z)|contact(X,Y) * cold(X))[0.26837]<((X!=Y) * X!=Z)>
+(cold(Z)|contact(X,Y) * cold(X))[0.27550]<X=Y>
+(cold(Z)|contact(X,Y) * cold(X))[0.60000]<Y=Z>
+(cold(Z)|contact(X,Y) * cold(X))[1.0]<X=Z>
 
 
 
@@ -271,9 +271,9 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (cold(anna)|(contact(anna,anna) * contact(anna,anna) * cold(anna)))	[1.0]
 
 Angestrebte Ausgabe:
-(cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Y)))[0.60000]<(((X = Z ) + Y = Z) * X != Y>
-(cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Y)))[0.55775]<(((X != Z ) * Y != Z) * X != Y)>
-(cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Y)))[1.0]<X = Y>
+(cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Y)))[0.60000]<(((X=Z) + Y=Z) * X!=Y>
+(cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Y)))[0.55775]<(((X!=Z) * Y!=Z) * X!=Y)>
+(cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Y)))[1.0]<X=Y>
 
 
 
@@ -311,6 +311,6 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (cold(carl)|(contact(carl,anna) * contact(anna,bob) * cold(bob)))	[0.30000]
 
 Angestrebte Ausgabe:
-(cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Z)))[0.30000]<((X != Y) * X != Z)>
-(cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Z)))[0.60000]<((X = Y) + Y = Z)>
-(cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Z)))[1.00000]<X = Z>
+(cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Z)))[0.30000]<((X!=Y) * X!=Z)>
+(cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Z)))[0.60000]<((X=Y) + Y=Z)>
+(cold(X)|(contact(X,Y) * contact(Y,Z) * cold(Z)))[1.00000]<X=Z>

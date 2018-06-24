@@ -4,6 +4,7 @@
 
 
 
+
  
 
 
@@ -1964,7 +1965,7 @@ Und um ein Beispiel mit zweistelligen Prädikaten zu betrachten:
 \label{PositiveGeneralisierung}
 \index{Generalisierung ! positiv}
 
-Eine Möglichkeit, eine Klasse zu generalisieren, d. h. die Konditionale der Klasse zu einem Konditional zusammen zu fassen, ist die positive Generalisierung. Bei der positiven Generalisierung wird zu dem unbedingten Konditional die durch die Komponente berechnete Wahrscheinlichkeit sowie ein Constraint hinzugefügt, der die je Klasse die Belegungen der Variablen mit Konstanten kanonisch aufzählt. 
+Eine Möglichkeit, eine Klasse zu generalisieren, d. h. die Konditionale der Klasse zu einem möglichst allgemeinen Konditional zusammen zu fassen, ist die positive Generalisierung. Bei der positiven Generalisierung wird zu dem qualitativen  Konditional die durch die Komponente berechnete Wahrscheinlichkeit der Äquivalenzklasse\footnote{hier der Durchschnitt der berechneten Wahrscheinlichkeiten der Konditionale der Äquivalenzklasse} sowie ein Constraint hinzugefügt. Bei diesem Constraint werden je Klasse die Belegungen der Variablen mit den in der Klasse vorkommenden Konstanten kanonisch aufgezählt, wenn es sich nicht um reflexives Wissen\footnote{Reflexives Wissen beinhalten Konditionale mit mehrstelligen Prädikaten, bei denen die Variablen mit den gleichen Konstanten belegt wurden} handelt. Bei reflexivem Wissen besteht der Constraint aus einem Constraint der Ungleichheit.
 Das sieht für die o.g. Beispiele wie folgt aus:
 
 
@@ -1977,7 +1978,7 @@ Das sieht für die o.g. Beispiele wie folgt aus:
 	
 	\noindent
 	Generalisiertes Konditional für Äquivalenzklasse 1: $\{(flies(Tweety))[0.0]\}$\\
-	Generalisiertes Konditional für Äquivalenzklasse 2: $\{(flies(X))[0.66]\} <((X = Bully \lor X = Sylvester) \lor X = Kirby)>$
+	Generalisiertes Konditional für Äquivalenzklasse 2: $\{(flies(X))[0.66]\} <((X=Bully \lor X=Sylvester) \lor X=Kirby)>$
 \end{Bsp}
 \begin{Bsp}[Positive Generalisierung am Beispiel "{}Misanthrope"{}, s. \ref{Ausgabe_Misanthrope} und \ref{Misanthrope}]
 	\index{Generalisierung ! positiv}
@@ -1985,13 +1986,13 @@ Das sieht für die o.g. Beispiele wie folgt aus:
 	
 	\noindent
 	Äquivalenzklasse 1: $ \{(likes(c,b))[0.578], (likes(b,c))[0.587]\} $\\
-	Äquivalenzklasse 2: $ \{(likes(a,a))[0.0], (likes(b,b))[0.0], (likes(c,c))[0.0]\} $\\
+	Äquivalenzklasse 2: $ \{(likes(a,a))[0.0], (likes(b,b))[0.0], (likes(c,c))[0.0]\} $ (reflexives Wissen)\\
 	Äquivalenzklasse 3: $ \{(likes(a,c))[0.050], (likes(a,b))[0.050], (likes(b,a))[0.050], (likes(c,a))[0.050]\} $\\
 
 	\noindent
-	Generalisiertes Konditional für Äquivalenzklasse 1: $ \{(likes(U,V))[0.578] <((U = c \land V = b) \lor (U = b \land V = c)>\} $\\
-	Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(likes(U,V))[0.0] <(((U = a \land V = a) \lor (U = b \land V = b)) \lor (U = c \land V = c)) >\} $\\
-	Generalisiertes Konditional für Äquivalenzklasse 3: $ \{(likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
+	Generalisiertes Konditional für Äquivalenzklasse 1: $ \{((likes(U,V))[0.578] <((U=c \land V=b) \lor (U=b \land V=c) \land (U!=V))>\} $\\
+	Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(likes(U,V))[0.0] <U=V>\} $ (reflexives Wissen)\\
+	Generalisiertes Konditional für Äquivalenzklasse 3: $ \{(likes(U,V))[0.05] <((( U=a \land V=c)) \lor (U=a \land V=b)) \lor (U=b \land V=a)) \lor (U=c \land V=a) \land (U!=V))>\} $\\
 \end{Bsp}
 Wie man unschwer erkennen kann, sind die Konditionale der Klasse zu einem einzigen allgemeinen Konditional zusammengefasst, die erzeugten Constraints erschließen sich nicht unbedingt ohne weitere Überlegung. Das ist bereits bei kleinen und einfachen Beispielen der Fall.
 \\
@@ -2005,7 +2006,8 @@ Der Vorteil der positiven Generalisierung liegt darin, dass sie einfach zu reali
 \section{Idee: Negative Generalisierung}
 \label{NegativeGeneralisierung}
 \index{Generalisierung ! negativ}
-Unter einer negativen Generalisierung soll eine Generalisierung verstanden werden, bei der der Constraint aus Ausnahmen der Klasse generiert wird. Die Klassen sollen der Größe nach, in diesem Fall der Anzahl der Konditionale, verglichen werden. Aus den kleineren Klassen soll, wenn sie in der Summe weniger Elemente enthalten ein Constraint für die größte Klasse gebildet werden. Die anderen Klassen sollen positiv generalisiert werden, s. \ref{PositiveGeneralisierung}.\\
+Unter einer negativen Generalisierung soll eine Generalisierung verstanden werden, bei der der Constraint aus Ausnahmen der Klasse generiert wird. Für den Fall zweier Äquivalenzklassen sollen die Klassen der Größe nach, in diesem Fall der Anzahl der Konditionale, verglichen werden. Aus der kleineren Klassen soll, wenn sie in der Summe weniger Elemente enthalten ein Constraint für die größte Klasse gebildet werden, wenn es sich nicht um reflexives Wissen handelt. Die anderen Klasse soll positiv generalisiert werden, s. \ref{PositiveGeneralisierung}, auch hier gilt das nur für den Fall, dass es sich nicht um reflexives Wissen handelt. Reflexives Wissen soll entsprechend der positiven Generalisierung verarbeitet werden. Die Klasse, die das nicht reflexive Wissen enthält wird um einen Constraint der Ungleichheit für die Variablen ergänzt.\\
+Für den Fall, dass es mehr als zwei Klassen gibt, gestaltet sich das schon komplizierter. Wie bei den Beobachtung festgestellt wurde, führen die spezifischen Konstanten \ref{Konstanten spezifisch} im Regelfall, dazu dass Klassen mit spezifischen Konditionalen \ref{Konstanten spezifisch} andere Wahrscheinlichkeiten haben als die anderen Klassen. Bei der negativen Generalisierung mehrerer Klassen wird daher zunächst das reflexive Wissen entsprechend der positiven Generalisierung verarbeitet. Die verbleibenden Klassen werden auf spezifische Konstanten untersucht. Enthält die Klasse spezifische Konstanten, so wird untersucht, ob einzelne Variablen gleich belegt sind und wie das in Interaktion zu den spezifischen Konstanten steht. Danach sollen die Klassen unterschieden werden. Weitere Erläuterungen finden sich auch im Kapitel Idee Konditionale Generalisierung \ref{Konditionale Generalisierung}. \\
 Zum besseren Verständnis der Vorgehensweise soll diese an Beispielen demonstriert werden:
 \begin{Bsp}[Negative Generalisierung am Beispiel "{}Birds"{}, s. \ref{Ausgabe_Birds}]
 	\label{Bsp:Neg_Gen_Birds} Für die Anfrage $ (flies(X)) $ ergibt sich: \\
@@ -2023,14 +2025,15 @@ Generalisiertes Konditional für Äquivalenzklasse 2: $\{(flies(X))[0.66]\} <X \
 	\index{Generalisierung ! negativ} Negative Generalisierung für die Anfrage  $ (likes(U,V))$ :\\
 	
 	\noindent
-	Äquivalenzklasse 1: $ \{ likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]\} $\\
+	Äquivalenzklasse 1: $ \{likes(a,c)[0.05], likes(a,b)[0.05], likes(b,a)[0.05], likes(c,a)[0.05]\} $\\
 	Äquivalenzklasse 2: $ \{likes(c,b)[0.578], likes(b,c)[0.578]\} $\\
-	Äquivalenzklasse 3: $ \{likes(a,c)[0.05], likes(a,b)[0.05], likes(b,a)[0.05], likes(c,a)[0.05]\} $\\
+	Äquivalenzklasse 3: $ \{ likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]\} $
+	
 	
 	\noindent
-	Generalisiertes Konditional für Äquivalenzklasse 1: $ \{(likes(U,V))[0.0] <(((U = a \land V = a) \lor (U = b \land V = b)) \lor (U = c \land V = c)) >\} $\\
-	Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(likes(U,V))[0.578] <((U = c \land V = b) \lor (U = b \land V = c)>\} $\\	
-	Generalisiertes Konditional für Äquivalenzklasse 3: $ \{(likes(U,V))[0.05] <((U = a \land V = c)) \lor (U = a \land V = b)) \lor (U = b \land V = a)) \lor (U = c \land V = a))>\} $\\
+		Generalisiertes Konditional für Äquivalenzklasse 1: $ \{(likes(U,V))[0.05] <((U = a \lor V = a) \land U \neq V )>\} $\\
+		Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(likes(U,V))[0.578] <((U \neq a \land V \neq a) \land U \neq V)>\} $\\	
+		Generalisiertes Konditional für Äquivalenzklasse 3: $ \{(likes(U,V))[0.0] <U=V>\} $\\
 	\end{Bsp}
 Wie man unschwer erkennen kann, ergibt sich beim Beispiel "{}Misanthrope"{} für die Anfrage $ (likes(U,V))$  keine Veränderung gegenüber der positiven Generalisierung. Das liegt daran, dass die kleineren Klassen in der Summe mehr Elemente enthalten als die größte Klasse.\\ 
 Anders verhält es sich beim Beispiel "{}cold"{} für die Anfrage contact(X,Y):
@@ -2039,18 +2042,21 @@ Anders verhält es sich beim Beispiel "{}cold"{} für die Anfrage contact(X,Y):
 	Für die Anfrage contact(X,Y) ergibt sich:\\
 	
 	\noindent
-	Äquivalenzklasse 1: $ \{(contact(anna,anna))[0.0], (contact(bob,bob))[0.0],(contact(carl, carl))[0.0]\} $\\
-	Äquivalenzklasse 2: $ \{(contact(anna,bob)[0.486], contact(bob,anna)[0.486], contact(carl,bob)[0.486], contact(bob,carl)[0.486], contact(anna,carl)[0.486],contact(carl,anna)[0.486],\} $\\
-	
+		Äquivalenzklasse 1: $ \{(contact(anna,bob)[0.486], contact(bob,anna)[0.486], contact(carl,bob)[0.486], contact(bob,carl)[0.486], contact(anna,carl)[0.486],contact(carl,anna)[0.486],\} $\\
+	Äquivalenzklasse 2: $ \{(contact(anna,anna))[0.0], (contact(bob,bob))[0.0],(contact(carl, carl))[0.0]\} $
+
 	\noindent
-	Generalisiertes Konditional für Äquivalenzklasse 1: $ \{(contact(X,Y))[0.0]<(((X = anna \land Y = anna) \lor (X = bob \land Y = bob)) \lor (X = carl \land Y = carl))>\} $\\
-	Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(contact(X,Y))[0.486]<(((X \neq anna \land Y \neq anna) \land (X \neq bob \land Y \neq bob)) \land (X \neq carl \land Y \neq carl))>\} $\\
+		Generalisiertes Konditional für Äquivalenzklasse 1: $ \{(contact(X,Y))[0.486]<X!=Y>\} $\\
+	Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(contact(X,Y))[0.0]<X=Y>\} $\\
+
 \end{Bsp}
+
+TODO Beispiel ColdTransSpez Negative Generalisierung
 
 \textbf{{\large Fazit zur negativen Generalisierung:}}\index{Generalisierung ! negativ} \label{Fazit neg Gen} 
 
 \noindent
-Obwohl die negative Generalisierung für den Fall einstelliger Prädikate zum gewünschten Ergebnis kam und auch wie für die positive Generalisierung gilt, dass sie in jedem Fall zuverlässig und richtig arbeitet, für den Fall zweistelliger Prädikate kommt es zu keinem übersichtlicheren Ergebnis als bei der positiven Generalisierung. Es ist also nach Alternativen zu forschen.
+Die negative Generalisierung kommt für den Fall einstelliger Prädikate zum gewünschten Ergebnis. Im Fall zweistelliger Prädikate und mehrerer Klassen kommt sie grundsätzlich zu einem übersichtlicheren Ergebnis. Kompliziert wird es allerdings für den Fall mehrerer Klassen (insbesondere mehrerer Variablen und spezifischem Wissen in der Wissensbasis, sh. Beispiel \ref{ColdTransSpez}).
 
 
 	\section{Idee: Modifikation des Versionenraum-Lernverfahrens} \label{Verwendbar VRL} \index{Versionenraum-Lernverfahren}
@@ -2483,11 +2489,12 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 
 
 
-\section{Idee: Konditionale Generalisierung}
+\section{Idee: Konditionale Generalisierung} \label{Konditionale Generalisierung}
 \index{Generalisierung ! konditional}
 \subsection{Vorüberlegungen}
 An dieser Stelle sollen Regeln gefunden werden, wie man die Interaktionen zwischen Fakten, die in der Anfrage verwendet werden für Aussagen, die in der Wissensbasis mit einer bestimmten Wahrscheinlichkeit vorbelegt wurden; wenn es denn solche gibt, die für alle Fälle gelten. Ebenso sollten die anderen Fälle betrachtet werden, die zu unterschiedlichen Wahrscheinlichkeiten führen. Auf den ersten Blick sind solche Regeln nicht erkennbar, da unzählige Interaktionen vorkommen können.\\
 In den folgenden Kapiteln werden die Regeln erstellt nach denen die Konditionale für die jeweiligen Klassen in Abhängigkeit der Art der Anfrage gebildet werden können.\\
+Die konditionale Generalisierung soll die Vorteile der positiven und der negativen Generalisierung vereinigen. Es soll der kürzere, logisch optimierte Constraint gefunden werden. 
 \newpage
 
 
@@ -2559,8 +2566,9 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Atom_mehrKlassen}.\\
 		Äquivalenzklasse 3: $ \{flies(Bully)[0.3]\} $\\
 		\\
 		Das generalisierte Konditional für Äquivalenzklasse 1: $ flies(X)[0.664]<(X = Sylvester \lor  X = Kirby)>$\\
-		Das generalisierte Konditional für Äquivalenzklasse 2: $ flies(Tweety)[0] $\\
-		Das generalisierte Konditional für Äquivalenzklasse 3: $ flies(Bully)[0.3] $
+		Das generalisierte Konditional für Äquivalenzklasse 2: $ flies(Bully)[0.3] $
+		Das generalisierte Konditional für Äquivalenzklasse 3: $ flies(Tweety)[0] $\\
+	
 		\end{Bsp}
 		\item zweistelliges Prädikat:\\ 
 		Dieser Fall ist nicht zu betrachten, da die Klassen bei zweistelligen Prädikaten jeweils mindestens zwei Elemente enthalten.
@@ -2575,26 +2583,28 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Atom_mehrKlassen}.\\
 			\begin{Bsp}[Konditionale Generalisierung für mehrere Klassen am Beispiel "{}Misanthrope"{}, \ref{Misanthrope}] \index{Generalisierung ! konditional}Die konditionale Generalisierung kommt für die Anfrage $ likes(X,Y) $ zum folgenden Ergebnis:\\
 				
 				\noindent
-				Äquivalenzklasse 1: $ \{ likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]\} $\\
+			
+				Äquivalenzklasse 1: $ \{likes(a,c)[0.050], likes(a,b)[0.050], likes(b,a)[0.050], likes(c,a)[0.050]\} $\\
 				Äquivalenzklasse 2: $ \{likes(c,b)[0.578], likes(b,c)[0.578]\} $\\
-				Äquivalenzklasse 3: $ \{likes(a,c)[0.050], likes(a,b)[0.050], likes(b,a)[0.050], likes(c,a)[0.050]\} $\\
+				Äquivalenzklasse 3: $ \{ likes(a,a)[0.0], likes(b,b)[0.0], likes(c,c)[0.0]\} $\\
 				
 				\noindent
-				Generalisiertes Konditional für Klasse 1: $ \{(likes(U,V))[0.0] <U = V>\} $\\
+				Generalisiertes Konditional für Klasse 1: $ \{(likes(U,V))[0.050] <((U = a \lor V = a)\land U \neq V)>\} $\\
 				Generalisiertes Konditional für Klasse 2: $ \{(likes(U,V))[0.578] <((U \neq a \land V \neq a) \land U \neq V)>\} $\\
-				Konditional für Klasse 3: $ \{(likes(U,V))[0.050] <((U = a \lor V = a)\land U \neq V)>\} $\\
+				Generalisiertes Konditional für Klasse 3: $ \{(likes(U,V))[0.0] <U = V>\} $\\
 			\end{Bsp} 
 			\begin{Bsp}[Konditionale Generalisierung für mehrere Klassen am Beispiel "{}ColdSpez"{}, \ref{ColdSpez}] \index{Generalisierung ! konditional}Die konditionale Generalisierung kommt für die Anfrage $ contact(X,Y) $ zum folgenden Ergebnis:\\
 				\\
-			Äquivalenzklasse 1: $ \{ contact(anna,anna), contact(bob,bob), contact(carl,carl)[0.0]\} $\\
-			Äquivalenzklasse 2: $ \{contact(carl,bob)[0.486], contact(bob,carl)[0.486]\} $\\
-			Äquivalenzklasse 3: $ \{contact(bob,anna)[0.068], contact(anna, carl)[0.068], contact(anna, bob)[0.068], contact(carl, anna)[0.068]\} $\\
 		
+			Äquivalenzklasse 1: $ \{contact(carl,bob)[0.486], contact(bob,carl)[0.486]\} $\\
+			Äquivalenzklasse 2: $ \{contact(bob,anna)[0.068], contact(anna, carl)[0.068], contact(anna, bob)[0.068], contact(carl, anna)[0.068]\} $\\
+			Äquivalenzklasse 3: $ \{ contact(anna,anna), contact(bob,bob), contact(carl,carl)[0.0]\} $\\
 		
 			\noindent
-			Generalisiertes Konditional für Äquivalenzklasse 1: $ \{(contact(X,Y))[0.0] <X = Y>\} $\\
-			Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(contact(X,Y))[0.486] <((X \neq anna \land Y \neq anna) \land X \neq Y)>\} $\\
-			Generalisiertes Konditional für Äquivalenzklasse 3: $ \{(contact(X,Y))[0.068] <((X = anna \lor Y = anna)\land X \neq Y)>\} $\\
+		
+			Generalisiertes Konditional für Äquivalenzklasse 1: $ \{(contact(X,Y))[0.486] <((X \neq anna \land Y \neq anna) \land X \neq Y)>\} $\\
+			Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(contact(X,Y))[0.068] <((X = anna \lor Y = anna)\land X \neq Y)>\} $\\
+			Generalisiertes Konditional für Äquivalenzklasse 3: $ \{(contact(X,Y))[0.0] <X = Y>\} $\\
 		\end{Bsp} 
 	\textcolor{blue}{
 			\item mehr als eine spezifische Konstante:\\
@@ -2640,11 +2650,11 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_zweiKlassen}.
 		\begin{Bsp}[Konditionale Generalisierung bei zwei Klassen am Beispiel Cold, \ref{Cold}]
 			Für die Anfrage $ (contact(X,Y) \land cold(Y) $ ergibt die konditionale Generalisierung:\\
 			\\
-		Äquivalenzklasse 1: $ \{ (contact(anna,anna) \land cold(anna))[0.0], (contact(bob,bob) \land cold(bob)[0.0]), (contact(carl,carl)\land cold(carl))[0.0]\} $\\
-		Äquivalenzklasse 2: $ \{(contact(anna,bob) \land cold(bob))[0.021] , (contact(carl, bob) \land cold(bob))[0.021] , (contact(bob, anna) \land cold(anna))[0.021], (contact(anna, carl)\land cold(carl)) [0.021], (contact(bob, carl)\land cold(carl)) [0.021], (contact(carl, anna) \land cold(anna))[0.021] \} $\\
+		Äquivalenzklasse 1: $ \{(contact(anna,bob) \land cold(bob))[0.021] , (contact(carl, bob) \land cold(bob))[0.021] , (contact(bob, anna) \land cold(anna))[0.021], (contact(anna, carl)\land cold(carl)) [0.021], (contact(bob, carl)\land cold(carl)) [0.021], (contact(carl, anna) \land cold(anna))[0.021] \} $\\
+		Äquivalenzklasse 2: $ \{ (contact(anna,anna) \land cold(anna))[0.0], (contact(bob,bob) \land cold(bob)[0.0]), (contact(carl,carl)\land cold(carl))[0.0]\} $\\
 		\\
-		Generalisiertes Konditional für Äquivalenzklasse 1: $ (contact(X,Y) \land cold(Y))[0.0] <X = Y> $\\
 		Generalisiertes Konditional für Äquivalenzklasse 2: $ (contact(X,Y))[0.021] <X \neq Y> $\\
+		Generalisiertes Konditional für Äquivalenzklasse 1: $ (contact(X,Y) \land cold(Y))[0.0] <X = Y> $\\
 		\end{Bsp}
 	\end{itemize}
 \end{itemize}
@@ -2661,13 +2671,14 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_mehrKlassen}.
 			Für die Anfrage $ flies(X) $ in "{}Birds3Classes"{} ergeben sich folgende Klassen:\\
 			\\
 			Äquivalenzklasse 1: $ \{flies(Sylvester)[0.664], flies(Kirby)[0.664]\}  $\\
-			Äquivalenzklasse 2: $ \{flies(Tweety)[0]\} $\\
-			Äquivalenzklasse 3: $ \{flies(Bully)[0.3]\} $\\
+			Äquivalenzklasse 2: $ \{flies(Bully)[0.3]\} $\\
+			Äquivalenzklasse 3: $ \{flies(Tweety)[0]\} $\\
 			\\
 			\noindent
-			Das generalisierte Konditional für Äquivalenzklasse 1: $ flies(X)[0.664]<(X = Sylvester \lor  X = Kirby)>$\\
-			Das generalisierte Konditional für Äquivalenzklasse 2: $ flies(Tweety)[0] $\\
-			Das generalisierte  Konditional für Äquivalenzklasse 3: $ flies(Bully)[0.3] $
+			Generalisiertes Konditional für Äquivalenzklasse 1: $ flies(X)[0.664]<(X = Sylvester \lor  X = Kirby)>$\\
+			Generalisiertes  Konditional für Äquivalenzklasse 2: $ flies(Bully)[0.3] $
+			Generalisiertes Konditional für Äquivalenzklasse 3: $ flies(Tweety)[0] $\\
+		
 		\end{Bsp}
 		\item zweistelliges Prädikat:\\	
 		Dieser Fall kommt nicht vor, da die Klassen bei zweistelligen Prädikaten mindestens zwei Element enthalten.	
@@ -2705,8 +2716,8 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_mehrKlassen}.
 			\\
 			\noindent
 			Generalisiertes Konditional für Äquivalenzklasse 1: $ \{(contact(X,Y) \land cold(Y)) [0.0] <X = Y>\} $\\
-			Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(contact(X,Y) \land cold(Y)) [0.578] <((X \neq anna \land Y \neq anna) \land X \neq Y)>\} $\\
-			Generalisiertes Konditional für Äquivalenzklasse 3: $ \{(contact(X,Y) \land cold(Y)) [0.050] <((X = anna \lor Y = anna)\land X \neq Y)>\} $	
+			Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(contact(X,Y) \land cold(Y)) [0.021] <((X \neq anna \land Y \neq anna) \land X \neq Y)>\} $\\
+			Generalisiertes Konditional für Äquivalenzklasse 3: $ \{(contact(X,Y) \land cold(Y)) [0.036] <((X = anna \lor Y = anna)\land X \neq Y)>\} $	
 		\end{Bsp}
 	
 \end{itemize}

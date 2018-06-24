@@ -75,5 +75,5 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (feeds(c3,c2))[0.45608]
 
 Angestrebte Ausgabe:
-(feeds(X,Y))0.0]<X = Y>
-(feeds(X,Y))[0.4560836467989637]<X != Y>
+(feeds(X,Y))0.0]<X=Y>
+(feeds(X,Y))[0.4560836467989637]<X!=Y>

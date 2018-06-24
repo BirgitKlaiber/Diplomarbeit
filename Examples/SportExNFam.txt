@@ -53,9 +53,9 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (sport(Chris)|family(Chris,Anna))	[0.00000]
 
 Angestrebte Ausgabe:
-(sport(X)|family(X,Y))[0.26708]<((X != Y * X != Chris) * Y != Chris)>
-(sport(X)|family(X,Y))[0.17652]<(X = Y * X != Chris)>
-(sport(X)|family(X,Y))[0.00000]<(X = Chris + Y = Chris)>
+(sport(X)|family(X,Y))[0.26708]<((X!=Y * X!=Chris) * Y!=Chris)>
+(sport(X)|family(X,Y))[0.17652]<(X=Y * X!=Chris)>
+(sport(X)|family(X,Y))[0.00000]<(X=Chris + Y=Chris)>
 
 
 
@@ -73,9 +73,9 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (normalWeight(Chris)|family(Chris,Anna))	[0.50000]
 
 Angestrebte Ausgabe:
-(normalWeight(X)|family(X,Y))[0.58012]<((X != Y * X != Chris) * Y != Chris)>
-(normalWeight(X)|family(X,Y))[0.55295]<(X = Y * X != Chris)>
-(normalWeight(X)|family(X,Y))[0.50000]<X = Chris + Y = Chris>
+(normalWeight(X)|family(X,Y))[0.58012]<((X!=Y * X!=Chris) * Y!=Chris)>
+(normalWeight(X)|family(X,Y))[0.55295]<(X=Y * X!=Chris)>
+(normalWeight(X)|family(X,Y))[0.50000]<X=Chris + Y=Chris>
 
 
 
@@ -93,9 +93,9 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (sport(Bob)|normalWeight(Bob) * family(Bob,Bob))		[0.25538]
 
 Angestrebte Ausgabe:
-(sport(X)|normalWeight(X) * family(X,Y))[0.25538]<(X = Y * X != Chris)>
-(sport(X)|normalWeight(X) * family(X,Y))[0.36830]<((X != Y * X != Chris) * Y != Chris)>
-(sport(X)|normalWeight(X) * family(X,Y))[0.00000]<X = Chris + Y = Chris>
+(sport(X)|normalWeight(X) * family(X,Y))[0.25538]<(X=Y * X!=Chris)>
+(sport(X)|normalWeight(X) * family(X,Y))[0.36830]<((X!=Y * X!=Chris) * Y!=Chris)>
+(sport(X)|normalWeight(X) * family(X,Y))[0.00000]<X=Chris + Y=Chris>
 
 
 
@@ -113,7 +113,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (normalWeight(Bob)|sport(Bob) * family(Bob,Chris))		[0.80000]
 
 Angestrebte Ausgabe:
-(normalWeight(X)|sport(X) * family(X,Y))[0.80000]<X != Chris>
+(normalWeight(X)|sport(X) * family(X,Y))[0.80000]<X!=Chris>
 (normalWeight(Chris)|sport(Chris) * family(Chris,Y))[0.93530]
 
 
@@ -132,7 +132,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (normalWeight(Bob)|(sport(Bob) * balancedDiet(Bob) * family(Bob,Anna)))		[0.90000]
 
 Angestrebte Ausgabe:
-(normalWeight(X)|(sport(X) * balancedDiet(X) * family(X,Y)))[0.90000]<X != Chris>
+(normalWeight(X)|(sport(X) * balancedDiet(X) * family(X,Y)))[0.90000]<X!=Chris>
 (normalWeight(Chris)|(sport(Chris) * balancedDiet(Chris) * family(Chris,Y)))[0.97846]
 
 
@@ -151,9 +151,9 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (normalWeight(Bob)|balancedDiet(Bob) * family(Bob,Bob))		[0.56748]
 
 Angestrebte Ausgabe:
-(normalWeight(X)|balancedDiet(X) * family(X,Y))[0.50000]<(X = Chris + Y = Chris)>
-(normalWeight(X)|balancedDiet(X) * family(X,Y))[0.60259]<(X != Y * X != Chris * Y != Chris)>
-(normalWeight(X)|balancedDiet(X) * family(X,Y))[0.56748]<(X = Y * X != Chris)>
+(normalWeight(X)|balancedDiet(X) * family(X,Y))[0.50000]<(X=Chris + Y=Chris)>
+(normalWeight(X)|balancedDiet(X) * family(X,Y))[0.60259]<(X!=Y * X!=Chris * Y!=Chris)>
+(normalWeight(X)|balancedDiet(X) * family(X,Y))[0.56748]<(X=Y * X!=Chris)>
 
 
 Anfrage: (balancedDiet(X)|(sport(X) * normalWeight(X) * family(X,Y)))
@@ -171,7 +171,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 
 Angestrebte Ausgabe:
 (balancedDiet(Chris)|(sport(Chris) * normalWeight(Chris) * family(Chris,Y)))[0.54337]
-(balancedDiet(X)|(sport(X) * normalWeight(X) * family(X,Y)))[0.53248]<X != Chris>
+(balancedDiet(X)|(sport(X) * normalWeight(X) * family(X,Y)))[0.53248]<X!=Chris>
 
 
 
@@ -189,9 +189,9 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (sport(Chris)|(balancedDiet(Chris) * normalWeight(Chris) * family(Chris,Bob)))	[0.00000]
 
 Angestrebte Ausgabe:
-(sport(X)|(balancedDiet(X) * normalWeight(X) * family(X,Y)))[0.38306]<(X != Y * X != Chris * Y != Chris)>
-(sport(X)|(balancedDiet(X) * normalWeight(X) * family(X,Y)))[0.26753]<(X = Y * X != Chris)>
-(sport(X)|(balancedDiet(X) * normalWeight(X) * family(X,Y)))[0.00000]<(X = Chris + Y = Chris)>
+(sport(X)|(balancedDiet(X) * normalWeight(X) * family(X,Y)))[0.38306]<(X!=Y * X!=Chris * Y!=Chris)>
+(sport(X)|(balancedDiet(X) * normalWeight(X) * family(X,Y)))[0.26753]<(X=Y * X!=Chris)>
+(sport(X)|(balancedDiet(X) * normalWeight(X) * family(X,Y)))[0.00000]<(X=Chris + Y=Chris)>
 
 
 
@@ -209,9 +209,9 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (sport(Bob)|balancedDiet(Bob) * family(Bob,Bob))		[0.16869]
 
 Angestrebte Ausgabe:
-(sport(X)|balancedDiet(X) * family(X,Y))[0.25648]<(X != Y * X != Chris * Y != Chris)>
-(sport(X)|balancedDiet(X) * family(X,Y))[0.16869]<(X = Y * X != Chris)>
-(sport(X)|balancedDiet(X) * family(X,Y))[0.00000]<(X = Chris + Y = Chris)>
+(sport(X)|balancedDiet(X) * family(X,Y))[0.25648]<(X!=Y * X!=Chris * Y!=Chris)>
+(sport(X)|balancedDiet(X) * family(X,Y))[0.16869]<(X=Y * X!=Chris)>
+(sport(X)|balancedDiet(X) * family(X,Y))[0.00000]<(X=Chris + Y=Chris)>
 
 
 

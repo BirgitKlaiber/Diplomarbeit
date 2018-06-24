@@ -37,9 +37,9 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (likes(a,a))[0.00000]
 
 Angestrebte Ausgabe:
-(likes(U,V))[0.587]<((U != a * V != a) * U!= V)>
-(likes(U,V))[0.05]<((U = a + V = a) * U != V)>
-(likes(U,V))[0.0]<U = V>
+(likes(U,V))[0.587]<((U!=a * V!=a) * U!=V)>
+(likes(U,V))[0.05]<((U=a + V=a) * U!=V)>
+(likes(U,V))[0.0]<U=V>
 
 
 
@@ -51,8 +51,8 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (likes(a,a))[0.00000]
 
 Angestrebte Ausgabe:
-(likes(a,V))[0.05]<V != a>
-(likes(a,V))[0.0]<V = a>
+(likes(a,V))[0.05]<V!=a>
+(likes(a,V))[0.0]<V=a>
 
 
 
@@ -70,5 +70,5 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (likes(b,b)|likes(b,b))[1.00000]
 
 Angestrebte Ausgabe:
-(likes(c,a)|likes(a,c))[0.90000]<U != V>
-(likes(a,a)|likes(a,a))[1.0]<U = V>
+(likes(c,a)|likes(a,c))[0.90000]<U!=V>
+(likes(a,a)|likes(a,a))[1.0]<U=V>

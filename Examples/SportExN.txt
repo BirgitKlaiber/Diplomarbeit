@@ -32,7 +32,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (sport(Chris))	[0.00000]
 
 Angestrebte Ausgabe:
-(sport(X)[0.444]<X != Chris>
+(sport(X)[0.444]<X!= Chris>
 (sport(Chris))[0.0]
 
 
@@ -45,7 +45,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (normalWeight(Chris))	[0.50000]
 
 Angestrebte Ausgabe:
-(normalWeight(X))[0.633]<X != Chris>
+(normalWeight(X))[0.633]<X!=Chris>
 (normalWeight(Chris))[0.5]
 
 
@@ -59,7 +59,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 
 Angestrebte Ausgabe:
 
-(sport(X)|normalWeight(X))[0.56129]<X != Chris>
+(sport(X)|normalWeight(X))[0.56129]<X!=Chris>
 (sport(Chris)|normalWeight(Chris))[0.0]
 
 
@@ -72,7 +72,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (normalWeight(Chris)|sport(Chris))	[0.87985]
 
 Angestrebte Ausgabe:
-(normalWeight(X)|sport(X))[0.80000]<X != Chris>
+(normalWeight(X)|sport(X))[0.80000]<X!=Chris>
 (normalWeight(Chris)|sport(Chris))[0.87985]
 
 
@@ -85,7 +85,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (normalWeight(Chris)|sport(Chris) * balancedDiet(Chris))	[0.94214]
 
 Angestrebte Ausgabe:
-(normalWeight(X)|sport(X) * balancedDiet(X))[0.9]<X != Chris>
+(normalWeight(X)|sport(X) * balancedDiet(X))[0.9]<X!=Chris>
 (normalWeight(Chris)|sport(Chris) * balancedDiet(Chris))[0.942]
 
 
@@ -97,7 +97,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (normalWeight(Chris)|balancedDiet(Chris))[0.5]
 
 Angestrebte Ausgabe:
-(normalWeight(X)|balancedDiet(X))		[0.67233]<X != Chris>
+(normalWeight(X)|balancedDiet(X))		[0.67233]<X!=Chris>
 (normalWeight(Chris)|balancedDiet(Chris))	[0.50000]
 
 
@@ -110,7 +110,7 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (balancedDiet(Chris)|sport(Chris) * normalWeight(Chris))	[0.53209]
 
 Angestrebte Ausgabe:
-(balancedDiet(X)|sport(X) * normalWeight(X))[0.532249]<X != Chris>
+(balancedDiet(X)|sport(X) * normalWeight(X))[0.532249]<X!=Chris>
 (balancedDiet(Chris)|sport(Chris) * normalWeight(Chris))[0.532209]
 
 
@@ -123,5 +123,5 @@ Berechnung der Wahrscheinlichkeiten der Grundkonditionale:
 (sport(Chris)|balancedDiet(Chris) * normalWeight(Chris))	[0.00000]
 
 Angestrebte Ausgabe:
-(sport(X)|balancedDiet(X) * normalWeight(X))[0.577]<X != Chris>
+(sport(X)|balancedDiet(X) * normalWeight(X))[0.577]<X!=Chris>
 (sport(Chris)|balancedDiet(Chris) * normalWeight(Chris))[0.0]

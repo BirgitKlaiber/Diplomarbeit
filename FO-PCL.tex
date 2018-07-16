@@ -120,7 +120,7 @@
 \end{center}
 
 \begin{center}
-\textcolor{blue}{Version 20180705}
+\textcolor{blue}{Version 20180716}
 	
 \large{Kleingartach, 2018}
 \end{center}
@@ -1576,7 +1576,26 @@ Es wird erwartet, dass alle generische Grundinstanzen ein und des selben Konditi
 Es ist aufgefallen, dass bei der Methode queryProbability() aus Log4KR bei der Berechnung der Wahrscheinlichkeiten Unstimmigkeiten bei der Rundung auftreten. Das ist schon bei kleinen Beispielen der Fall. Es hat sich herausgestellt, dass das an der Feineinstellung der Rundung in Log4KR liegt. Diese kann bei Bedarf modifiziert werden.\\
 Eine der Schwierigkeiten bestand darin, ein Kriterium für die Gleichheit der Wahrscheinlichkeit anzugeben. Da die Wahrscheinlichkeiten das Ergebnis einer Annäherungsberechnung sind, ist es nicht möglich, ein Kriterium für die absolute Gleichheit anzugeben. Die Beurteilung der Gleichheit kann daher nur das Ergebnis einer Heuristik sein.\\
 Die einfachste Heuristik beruht letztlich auf Rundung. Die Schwierigkeit dabei besteht darin, eine geeignete Einstellung für die Rundung zu finden. Rundet man zu früh, könnten Konditionale zusammengefasst werden, die in verschiedene Klassen gehören, rundet man zu großzügig, könnten mehr Klassen geschaffen werden als notwendig bzw. sinnvoll.\\
-An dieser Stelle ist auch aufgefallen, dass es notwendig ist, einen Test durchzuführen, ob alle generischen Klassen auch tatsächlich die gleiche Wahrscheinlichkeit haben. 
+An dieser Stelle ist auch aufgefallen, dass es sinnvoll sein könnte, einen Test durchzuführen, ob alle generischen Klassen auch tatsächlich die gleiche Wahrscheinlichkeit haben. 
+
+
+\subsection{Berechnung der Wahrscheinlichkeiten}
+Bei der Berechnung der Modelle bzw. bei der Selektion des Modells mit der maximalen Entropie traten wie bereits oben erwähnt, \ref{Gleichheit} immer wieder Unstimmigkeiten bei der Rundung auf. Diese Probleme führen insbesondere im Zusammenhang mit unterschiedlichen Laufzeitumgebungen zu erheblichen Problemen. Im Beispiel Cold, \ref{Cold}, führt das je nach Laufzeitumgebung zur Bildung von zwei Klassen, was richtig wäre, oder drei Klassen, was definitiv falsch ist. Das hat zur Folge, dass ein und der selbe Test in der JUnit Testumgebung falsch, \ref{Cold_1} und in der Debug Umgebung richtig ist.
+
+\includegraphics[scale = 0.6]{Graphics/Cold_1}
+\begin{figure}[h]
+	\caption{Ergebnis in der JUnit Testumgebung}
+	\label{Cold_1}
+\end{figure}
+
+\includegraphics[scale = 0.6]{Graphics/Cold_2}
+\begin{figure}[h]
+	\caption{Ergebnis in der Debug Umgebung}
+	\label{Cold_2}
+\end{figure}
+
+Das Problem hängt zum einen mit der Feineinstellung der Rundung bei Log4KR zusammen, zum anderen mit der Klasse Fraction und der fehlerhaften Behandlung des Überlaufs, vgl. auch \ref{Korrektur_Fraction}, zum anderen der Laufzeitumgebung von Java. Das führt dazu, dass die Ergebnisse der Komponente nicht verlässlich reproduzierbar sind.
+
 
 \subsection{Bildung des Constraints}
 Die Aufgabenstellung verlangt die Bildung eines möglichst allgemeinen Konditionals für Grundinstanzen des angefragten Konditionals. Was darunter zu verstehen ist, wurde nicht definiert. Es waren eingehende Überlegungen notwendig, wie dieser Begriff zu interpretieren ist. Das Ergebnis war, dass ein möglichst allgemeines Konditional im Sinne dieser Arbeit ein Konditional mit einem möglichst kurzen, logisch minimierten Constraint ist.
@@ -1585,8 +1604,6 @@ Die Aufgabenstellung verlangt die Bildung eines möglichst allgemeinen Kondition
 \subsection{Unausführbare Beispiele} \label{Beispiele unausfuehrbar} 
 Beispiele, die mehr als eine spezifische Konstante enthielten, sh. \ref{examplesdep}, konnte Log4KR nicht verarbeiten, daher konnten leider keine Forschungen in diese Richtung unternommen werden, obwohl dies sehr interessant im Hinblick auf Interaktionen gewesen wäre. 
 
-
-\section{Interaktionen}
 
 \section{Betrachtung des angefragten Konditionals}
 Grundsätzlich ist zu unterscheiden, ob es sich bei dem angefragten Konditional um ein Konditional mit Tautologie als Prämisse, vgl. \ref{T als Prämisse} oder einer sonstigen Prämisse, vgl. \ref{Fo-PCL Konditional} handelt.\\
@@ -3523,7 +3540,7 @@ nun \\
 \end{figure}
 
 
-\section{Korrekturen in Fraction}
+\section{Korrekturen in Fraction} \label{Korrektur_Fraction}
 Bei der Addition von zwei Objekten vom Typ Fraction kam es zu einem Überlauf.\\
 In der Methode Fraction.addition wird das kleinste gemeinste Vielfache (least common multiple) benötigt. 
 In der Methode Fraction.addition im Paket package edu.cs.ai.log4KR.math.types wird das kleinste gemeinste Vielfache (least common multiple) benötigt. 

@@ -3275,16 +3275,17 @@ Es wird erwartet, dass alle generische Grundinstanzen ein und des selben Konditi
 Ein Test, der verifiziert, dass die generischen und spezifischen Grundinstanzen eines Konditionals jeweils die gleiche Wahrscheinlichkeit haben, wäre wünschenswert gewesen. Ein solcher Test hat sich leider nicht realisieren lassen, wie in \ref{Berechnung_Wahrscheinlichkeiten} noch ausführlich erläutert wird.
 
 
-\section{Merkmal der Gleichheit} \label{Gleichheit}
+\section{Merkmal der Gleichheit und Gleichheit von Konditionalen} \label{Gleichheit}
 Es ist aufgefallen, dass bei der Methode queryProbability() aus Log4KR bei der Berechnung der Wahrscheinlichkeiten Unstimmigkeiten bei der Rundung auftreten. Das ist schon bei kleinen Beispielen der Fall. Es hat sich herausgestellt, dass das an der Feineinstellung der Rundung in Log4KR liegt. Diese kann bei Bedarf modifiziert werden.\\
 Eine der Schwierigkeiten bestand darin, ein Kriterium für die Gleichheit der Wahrscheinlichkeit anzugeben. Da die Wahrscheinlichkeiten das Ergebnis einer Annäherungsberechnung sind, ist es nicht möglich, ein Kriterium für die absolute Gleichheit anzugeben. Die Beurteilung der Gleichheit kann daher nur das Ergebnis einer Heuristik sein.\\
 Die einfachste Heuristik beruht letztlich auf Rundung. Die Schwierigkeit dabei besteht darin, eine geeignete Einstellung für die Rundung zu finden. Rundet man zu früh, könnten Konditionale zusammengefasst werden, die in verschiedene Klassen gehören, rundet man zu großzügig, könnten mehr Klassen geschaffen werden als notwendig bzw. sinnvoll.\\
 An dieser Stelle ist auch aufgefallen, dass es sinnvoll sein könnte, einen Test durchzuführen, ob alle generischen Klassen auch tatsächlich die gleiche Wahrscheinlichkeit haben. 
 
-\section{Gleichheit von Konditionalen} 
 Gemäß Aufgabenstellung waren Konditionale, die die gleiche Wahrscheinlichkeit liefern zu einem allgemeinen Konditional zusammenzufassen. Zum Thema Äquivalenz von Konditionalen vgl.\ref{Äquivalenz in FO-PCL}.
 
 Das erwies sich mit Hilfe der Bibliothek Log4KR als schwierig. Dabei ist eine Korrektur der Bibliothek notwendig geworden, s. \ref{sec:Korrektur1} "{}Korrektur in ConstraintBasedGroundingOperator"{} und weitere Korrekturen in der Klasse Fraction, \ref{Korrektur_Fraction}.
+
+
 
 \section{Berechnung der Wahrscheinlichkeiten} \label{Berechnung_Wahrscheinlichkeiten}
 Bei der Berechnung der Modelle bzw. bei der Selektion des Modells mit der maximalen Entropie traten wie bereits oben erwähnt, \ref{Gleichheit} immer wieder Unstimmigkeiten bei der Rundung auf. Diese Probleme führen insbesondere im Zusammenhang mit unterschiedlichen Laufzeitumgebungen zu erheblichen Problemen. Im Beispiel"{}Cold"{}, \ref{Cold}, führt das je nach Laufzeitumgebung zur Bildung von zwei Klassen, was richtig wäre, oder drei Klassen, was definitiv falsch ist. Das hat zur Folge, dass ein und der selbe Test in der JUnit Testumgebung falsch, \ref{Cold_1} und in der Debug Umgebung richtig ist.
@@ -3334,8 +3335,14 @@ Beispiele, die mehr als eine spezifische Konstante enthielten, sh. \ref{examples
 
 
 
-\chapter{Evaluation}\label{eval} TODO
+\chapter{Evaluation}\label{eval} 
+\section{Vorüberlegungen}
+An dieser Stelle soll die Korrektheit der Inferenzkomponete lediglich im Hinblick auf ihre Funktionalität, d.h. die Frage, ob sie die erwartete Ausgabe liefert, betrachtet werden. 
 
+Es werden die einzelnen Kategorien von Fällen betrachtet zusammen mit den Ergebnissen, die die Komponente liefert. 
+
+\section{Einstelliges Prädikat und die Anfrage ist ein Atom}
+\lstinputlisting{Erg/BirdsTestErg.txt}
 
 \chapter{Ergebnisse und Ausblick}\label{Erg}
 Wenn man das reflexive Wissen ausnimmt, ergeben sich unterschiedliche Wahrscheinlichkeiten für Grundinstanzen des gleichen Konditionals im Grunde genommen nur durch spezifische Konstanten der Wissensbasis. Die Logik der Komponente berücksichtigt dies. Log4KR stellt zur Berechnung der Wahrscheinlichkeiten zwar umfangreiche Methoden zur Verfügung, die aber leider nicht immer korrekt arbeiten und sollte daher in diesem Bereich überarbeitet werden. Im Übrigen können beliebige Anfragen an die Komponente gestellt werden. Die erwarteten Ausgaben entsprechen den tatsächlichen Ausgaben und können nachvollzogen werden. 

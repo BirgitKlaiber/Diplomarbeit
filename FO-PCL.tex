@@ -120,7 +120,7 @@
 \end{center}
 
 \begin{center}
-\textcolor{blue}{Version 20180719}
+\textcolor{blue}{Version 20180721}
 	
 \large{Kleingartach, 2018}
 \end{center}
@@ -1075,7 +1075,7 @@ Die Idee dabei ist, parametrische Äquivalenz zwischen je zwei Formeln entsprech
 Parametrische Uniformität ist besonders nützlich, da algorithmische Ausgestaltungen existieren, die mittels Vervielfachung einiger Konditionale und Modifikation der dazugehörigen constraint Formeln eine ursprünglich nicht uniforme FO-PCL Wissensbasis in eine uniforme Wissensbasis überführt. Weiterführende Literatur dazu findet sich in \cite[Kap. 5, S.71ff]{BJ11} und \cite{BK15}.
 
 \chapter{Inferenz in FO-PCL}\label{Inferenz}
-\section{Vorüberlegungen}
+\textbf{Vorüberlegungen}
 In dieser Arbeit und in \cite{Fis12} wird Inferenz auf propositionaler Basis betrieben. Lifted-Inference in FO-PCL ist ein Thema für weitere Forschungsarbeiten, vgl. \cite[Kap.8, S. 194]{Fis12}.
 
 Der Inferenzprozess in FO-PCL als einer probabilistischen, konditionalen Umgebung unter maximaler Entropie erlaubt den Erwerb von Grundlagenwissen, dessen spontane Anreicherung um ggf. unsicheres Wissen und die Beantwortung von Anfragen, vgl. auch \cite{RRK06}.
@@ -1245,7 +1245,7 @@ $ \{(flies(Tweety))[0.0], (flies(X))[0.66] <X \neq Tweety>\}$
 
 	
 \chapter{Experimentelle Forschungen und Auswertung der experimentellen Ergebnisse} \label{Experim. Forschungen}
-\section{Vorüberlegungen und erste Ergebnisse}
+\textbf{Vorüberlegungen und erste Ergebnisse}
 Ausgangsbasis für den experimentellen Teil der Arbeit war der Java-Quellcode der Bibliothek Log4KR, der Teil des KReator Projektes der FernUniversität Hagen ist.
 
 Log4KR enthält viele Quellcode-Beispiele für die einzelnen Klassen und die mögliche Verwendung. Dadurch kann man sich sehr schnell zurechtfinden und bekommt einen Überblick, welche Klassen notwendig oder nützlich für die Erfüllung der Aufgabe sind.
@@ -1878,7 +1878,7 @@ Dies ist ein einfacher Fall und führt zur Ausgabe aller Grundkonditionale mit j
 
 
 \chapter{Ideen für Algorithmen} \label{Ideen Alg.}
-\section{Vorüberlegungen}
+\textbf{Vorüberlegungen}
 Alle denkbaren Algorithmen haben die ersten Schritte gemeinsam. Das ist ein Erfordernis des Inferenzprozesses in FO-PCL, der in dieser Arbeit auf propositionaler Basis betrieben wird. Lifted Inference ist ein Thema für weitergehende Forschungen und soll nicht Gegenstand der Arbeit sein. 
 Voraussetzung ist in jedem Fall eine konsistente Wissensbasis, vgl. auch Definition \ref{KB}. Die Wissensbasis sollte ein oder mehrere Konditionale enthalten, die korrekt im Sinne der FO-PCL Syntax sind. Zur Formulierung der Wissensbasis wird eine Signatur benötigt, s. auch Definition  \ref{Signatur}. Unter einer Signatur versteht man eine Menge die ein- oder mehrsortig sein, aber nicht leer sein darf. Weitere Bestandteile sind eine Menge von Konstantensymbolen und von Prädikatensymbolen. Den Prädikaten sowie den Konstanten müssen Sorten zugeordnet sein. Die Wissensbasis sollte ein oder mehrere Konditionale enthalten, die korrekt im Sinne der FO-PCL Syntax sind. Im Übrigen soll sich in dieser Arbeit die Entwicklung eines Algorithmus auf ein- und zweistellige Prädikate beschränken.
 
@@ -2697,7 +2697,7 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_mehrKlassen}.
 
 \chapter{Algorithmus} \label{Alg}
 
-\section{Vorüberlegungen}
+\textbf{Vorüberlegungen}
 Aufgabe der Inferenzkomponente ist, bei einer gegebenen Wissensbasis eine Anfrage in Form eines qualitativen Konditionals, d.h. eines Konditionals ohne Wahrscheinlichkeit entgegenzunehmen und für die daraus generierten Grundkonditionale für die die gleiche Wahrscheinlichkeit berechnet wurde, ein möglichst allgemeines Konditional zurückzugeben.
 
 Dafür müssen die Wissensbasis und das Konditional zunächst grundiert werden. Wie bereits erläutert (vgl. auch Proposition \ref{Grundsubstitution}) geschieht dies, indem alle Konditionale mit allen zulässigen Konstanten instantiiert werden.
@@ -3102,12 +3102,14 @@ Unzulässige Anfragen sollten nicht an die Komponente gestellt werden. Das sind 
 Ebenso sollte die verwendete Wissensbasis durch geeignete Constraints konsistent sein. Das beinhaltet auch die Behandlung des reflexiven Wissens.\\
 
 
-\section{Algorithmus in Pseudocode}
-
+\section{Programmflussplan}
+TODO
 \begin{figure}[h]
-(TODO)
-\caption{Klassendiagramm (TODO)}\
+	
+	\caption{Programmflussplan (TODO)}
 \end{figure}
+
+
 \section{Verarbeitung einer Anfrage durch die Komponente}
 Da die Hauptmethode der neuen Inferenzkomponente gemäß Aufgabenstellung eine Methode der Art public Collection<Relational Conditional> queryConditional(RelationalConditional) bereitstellen sollte, wurde diese zuerst  implementiert. Beim Methodenaufruf ist der Komponente das unbedingte (relationale) Konditional zu übergeben.
 Die Methode ground(RelationalConditional) ruft in der Bibliothek Log4KR über groundConditional(RelationalConditional, Collection<Constant>) auf, die wiederum auf dem Grundierungsoperator ausgeführt wird und dient dazu, die Anfrage zu grundieren. Man erhält als Ergebnis des Methodenaufrufs ground(RelationalConditional) die grundierte Anfrage.
@@ -3129,10 +3131,6 @@ Danach wird ein Comperator erzeugt und auf diesem die Methode compare aufgerufen
 Die so ermittelte Generalisierung ist der Rückgabewert der Komponente für die Anfrage und in Form einer Menge von qualitativen Konditionalen, jeweils mit oder ohne Constraint.
 
 
-\begin{figure}[h]
-	
-	\caption{Programmflussplan (TODO)}
-\end{figure}
 
 
 
@@ -3324,6 +3322,7 @@ Dafür mussten die einzelnen Objekte angelegt werden, die im Rahmen der Klassifi
 \end{figure}
 
 
+
 \section{Bildung des Constraints}
 Die Aufgabenstellung verlangt die Bildung eines möglichst allgemeinen Konditionals für Grundinstanzen des angefragten Konditionals. Was darunter zu verstehen ist, wurde nicht definiert. Es waren eingehende Überlegungen notwendig, wie dieser Begriff zu interpretieren ist. Das Ergebnis war, dass unter einen möglichst allgemeinen Konditional im Sinne dieser Arbeit ein Konditional mit einem möglichst kurzen, logisch minimierten Constraint zu verstehen ist. Das führte zur Entwicklung der Idee der logischen Generalisierungsoptimierung, \ref{Logische Genopt}, die leider nicht zielführend war. 
 
@@ -3333,16 +3332,47 @@ Der Gedanke wurde bei der Idee der konditionalen Generalisierung, \ref{Kondition
 \section{Unausführbare Beispiele} \label{Beispiele unausfuehrbar} 
 Beispiele, die mehr als eine spezifische Konstante enthielten, sh. \ref{examplesdep}, konnte Log4KR nicht verarbeiten, daher konnten leider keine Forschungen in diese Richtung unternommen werden, obwohl dies sehr interessant im Hinblick auf Interaktionen gewesen wäre. 
 
+\section{Sonstiges}
+Die oben geschilderten Probleme führten dazu, dass nicht nur ein beträchtlicher Zeitaufwand in die Suche nach den möglichen Ursachen gesteckt werden musste, d.h. handelt es sich um einen Fehler in der Inferenzkomponente, in Log4Kr oder woher stammt der Fehler ansonsten, sondern auch in der Suche nach Lösungen, um die Schwierigkeiten, die auftraten und nicht aus der Inferenzkomponente stammten zu behandeln oder zu umgehen, um dennoch zu vernünftigen und nachvollziehbaren Ergebnissen kommen zu können. 
+Auch ist festzuhalten, dass aufgrund dieser Umgebungsprobleme Anfragen, die an die Komponente gestellt werden möglicherweise nicht zu einem erwünschten oder erwarteten Ergebnis führen könnten, obwohl die Komponente richtig funktioniert. Das ist im Ergebnis ziemlich unbefriedigend. 
+
+Was hingegen sehr erfreulich ist, ist die Erkenntnis, dass erarbeiteten Ideen in einer funktionierenden Umgebung durchaus praktisch umsetzbar und einsetzbar wären und zufrieden stellende Ergebnisse liefern würden.
 
 
 \chapter{Evaluation}\label{eval} 
-\section{Vorüberlegungen}
+\textbf{Vorüberlegungen}
 An dieser Stelle soll die Korrektheit der Inferenzkomponete lediglich im Hinblick auf ihre Funktionalität, d.h. die Frage, ob sie die erwartete Ausgabe liefert, betrachtet werden. 
 
 Es werden die einzelnen Kategorien von Fällen betrachtet zusammen mit den Ergebnissen, die die Komponente liefert. 
+TODO
+\begin{itemize}
+	\item Einstelliges Prädikat und die Anfrage ist ein Atom\\
+	hier enthält die Wissensbasis eine spezifische Konstante \footnote{siehe Definition \ref{Konstanten spezifisch}}\\
+	Für das Beispiel "{}Birds"{}, \ref{Birds}, ergibt sich als Ausgabe der Komponente:.
+	\lstinputlisting{Erg/BirdsTestErg.txt}
+	\item Zweistelliges Prädikat und die Anfrage ist ein Atom
+	\begin{itemize}
+		\item ohne spezifische Konstante\\
+			Für das Beispiel "{}Friendship"{}, \ref{Friendship}, ergibt sich als Ausgabe der Komponente:
+				\lstinputlisting{Erg/FriendshipTestErg.txt}
+		\item mit spezifischer Konstante
+			Für das Beispiel "{}Misanthrope"{}, \ref{Misanthrope}, ergibt sich als Ausgabe der Komponente:
+				\lstinputlisting{Erg/MisanthropeTestErg.txt}
+	\end{itemize}
+	\item Zweistelliges Prädikat und die Anfrage ist eine zusammengesetzte Formel
+\begin{itemize}
+	\item ohne spezifische Konstante\\
+		Für das Beispiel "{}Cold"{}, \ref{Cold}, ergibt sich als Ausgabe der Komponente:
+			\lstinputlisting{Erg/ColdTestErg.txt}
+	\item mit spezifischer Konstante\\
+		Für das Beispiel "{}ColdSpez"{}, \ref{ColdSpez}, ergibt sich als Ausgabe der Komponente:
+\end{itemize}
 
-\section{Einstelliges Prädikat und die Anfrage ist ein Atom}
-\lstinputlisting{Erg/BirdsTestErg.txt}
+	
+\end{itemize}
+
+
+
 
 \chapter{Ergebnisse und Ausblick}\label{Erg}
 Wenn man das reflexive Wissen ausnimmt, ergeben sich unterschiedliche Wahrscheinlichkeiten für Grundinstanzen des gleichen Konditionals im Grunde genommen nur durch spezifische Konstanten der Wissensbasis. Die Logik der Komponente berücksichtigt dies. Log4KR stellt zur Berechnung der Wahrscheinlichkeiten zwar umfangreiche Methoden zur Verfügung, die aber leider nicht immer korrekt arbeiten und sollte daher in diesem Bereich überarbeitet werden. Im Übrigen können beliebige Anfragen an die Komponente gestellt werden. Die erwarteten Ausgaben entsprechen den tatsächlichen Ausgaben und können nachvollzogen werden. 

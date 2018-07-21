@@ -1957,6 +1957,23 @@ Das sieht für die o.g. Beispiele wie folgt aus:
 	Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(likes(U,V))[0.0] <U=V>\} $ (reflexives Wissen)\\
 	Generalisiertes Konditional für Äquivalenzklasse 3: $ \{(likes(U,V))[0.05] <((( U=a \land V=c)) \lor (U=a \land V=b)) \lor (U=b \land V=a)) \lor (U=c \land V=a) \land (U!=V))>\} $\\
 \end{Bsp}
+
+Die Erwähnung der positiven Generalisierung am Beispiel "{}ColdSpez"{} dient hier nur dem Zweck, später den Unterschied zwischen positiver und negativer Generalisierung in Abhängigkeit der Anfrage bzw. der Wissesnbasis deutlich machen zu können. 
+\begin{Bsp}[Positive Generalisierung am Beispiel "{}ColdSpez{}, s. \ref{ColdSpez}]\label{PosGen_ColdSpez}
+	Für die Anfrage (contact(X,Y) * cold(Y)) ergibt sich:\\
+
+\noindent
+Äquivalenzklasse 1: $  \{(contact(bob,bon) * cold(bob))[0.0], (contact(anna,anna) * cold(anna)[0.0], (contact(carl,carl) * cold(carl))[0.0] \} $
+Äquivalenzklasse 2: $ \{(contact(bob,carl) * cold(carl))[0.02068], (contact(carl,bob) * cold(bob))[0.02068] \}$
+Äquivalenzklasse 3:  $ \{(contact(carl,anna) * cold(anna))[0.03588], (contact(anna, carl) * cold(carl))[0.03588], (contact(anna,bob) * cold(bob))[0.03588], (contact(bob,anna) * cold(anna))[0.03588]\}$
+
+\noindent
+Generalisiertes Konditional für Äquivalenzklasse 1: $ \{ (contact(X,Y) * cold(Y))[0.0]<X=Y>\} $\\
+Generalisiertes Konditional für Äquivalenzklasse 2: $ \{ (contact(X,Y) * cold(Y))[0.02068]<(X=bob * Y=carl + X=carl * Y=bob)>\} $\\
+Generalisiertes Konditional für Äquivalenzklasse 3: $ \{ (contact(X,Y) * cold(Y))[0.03588]<((((X=carl * Y=anna) + X=anna* Y=carl) + X=anna * Y=bob) + X=bob * Y=anna) >\} $\\
+
+\end{Bsp}
+
 Wie man unschwer erkennen kann, sind die Konditionale der Klasse zu einem einzigen allgemeinen Konditional zusammengefasst, die erzeugten Constraints erschließen sich nicht unbedingt ohne weitere Überlegung. Das ist bereits bei kleinen und einfachen Beispielen der Fall.
 \\
 
@@ -2021,15 +2038,15 @@ Generalisiertes Konditional für Äquivalenzklasse 2: $\{(flies(X))[0.66]\} <X \
 		Generalisiertes Konditional für Äquivalenzklasse 2: $ \{(likes(U,V))[0.578] <((U \neq a \land V \neq a) \land U \neq V)>\} $\\	
 		Generalisiertes Konditional für Äquivalenzklasse 3: $ \{(likes(U,V))[0.0] <U=V>\} $\\
 	\end{Bsp}
-Wie man unschwer erkennen kann, ergibt sich beim Beispiel "{}Misanthrope"{} für die Anfrage $ (likes(U,V))$  keine Veränderung gegenüber der positiven Generalisierung. Das liegt daran, dass die kleineren Klassen in der Summe mehr Elemente enthalten als die größte Klasse.\\ 
-Anders verhält es sich beim Beispiel "{}cold"{} für die Anfrage contact(X,Y):
-\begin{Bsp}[Negative Generalisierung am Beispiel "{}Cold"{}, s. \ref{Cold} ]:
+Wie man unschwer erkennen kann, ergibt sich beim Beispiel "{}Misanthrope"{} für die Anfrage $ (likes(U,V))$  keine Veränderung gegenüber der positiven Generalisierung. Das liegt daran, dass die Klassen, die nicht reflexiv sind sich darin unterscheiden, dass eine Klasse spezifische Konditionale enthält und die andere generische.\footnote{sh. \ref{Konstanten spezifisch}} \\ 
+Anders verhält es sich beim Beispiel "{}cold"{} für die Anfrage contact(X,Y). Die Wissensbasis keine spezifischen Konditionale. Die Grundsubstitution liefert nur generische Grundkonditionale. Daher ergeben sich bei der Klassifizierung auch nur zwei Klassen, eine Klasse, die das spezifische Wissen enthält und eine die es nicht enthält.  
+\begin{Bsp}[Negative Generalisierung am Beispiel "{}Cold"{}, s. \ref{Cold} ]
 	\index{Generalisierung ! negativ}
 	Für die Anfrage contact(X,Y) ergibt sich:\\
 	
 	\noindent
 		Äquivalenzklasse 1: $ \{(contact(anna,bob)[0.486], contact(bob,anna)[0.486], contact(carl,bob)[0.486], contact(bob,carl)[0.486], contact(anna,carl)[0.486],contact(carl,anna)[0.486],\} $\\
-	Äquivalenzklasse 2: $ \{(contact(anna,anna))[0.0], (contact(bob,bob))[0.0],(contact(carl, carl))[0.0]\} $
+		Äquivalenzklasse 2: $ \{(contact(anna,anna))[0.0], (contact(bob,bob))[0.0],(contact(carl, carl))[0.0]\} $
 
 	\noindent
 		Generalisiertes Konditional für Äquivalenzklasse 1: $ \{(contact(X,Y))[0.486]<X!=Y>\} $\\
@@ -2037,7 +2054,22 @@ Anders verhält es sich beim Beispiel "{}cold"{} für die Anfrage contact(X,Y):
 
 \end{Bsp}
 
-TODO ??? Beispiel ColdTransSpez Negative Generalisierung
+Hier soll demonstriert werden, dass die negative Generalisierung bei Wissensbasen mit spezifischen Konditionalen und Anfragen in Form einer nicht atomaren Formel deutliche Vorteile gegenüber der positiven Generalisierung hat. Die positive Generalisierung für folgendes Beispiel finden sie unter \ref{PosGen_ColdSpez}. 
+\begin{Bsp}[Negative Generalisierung am Beispiel ColdSpez, s. \ref{ColdSpez}]
+	Für die Anfrage (contact(X,Y) * cold(Y)) ergibt sich:\\
+	
+	\noindent
+	Äquivalenzklasse 1: $  \{(contact(bob,bon) * cold(bob))[0.0], (contact(anna,anna) * cold(anna)[0.0], (contact(carl,carl) * cold(carl))[0.0] \} $
+	Äquivalenzklasse 2: $ \{(contact(bob,carl) * cold(carl))[0.02068], (contact(carl,bob) * cold(bob))[0.02068] \}$
+	Äquivalenzklasse 3:  $ \{(contact(carl,anna) * cold(anna))[0.03588], (contact(anna, carl) * cold(carl))[0.03588], (contact(anna,bob) * cold(bob))[0.03588], (contact(bob,anna) * cold(anna))[0.03588]\}$
+	
+	\noindent
+		Generalisiertes Konditional für Äquivalenzklasse 1: $ \{ (contact(X,Y) * cold(Y))[0.0]<X=Y>\} $\\
+	Generalisiertes Konditional für Äquivalenzklasse 2: $ \{ (contact(X,Y) * cold(Y))[0.02068]<(X!=anna * Y!=anna * X!=Y)>\} $\\
+		Generalisiertes Konditional für Äquivalenzklasse 3: $ \{ (contact(X,Y) * cold(Y))[0.03588]<(X=anna + Y=anna) * X!=Y>\} $\\
+	
+	
+\end{Bsp}
 
 \textbf{{\large Fazit zur negativen Generalisierung:}}\index{Generalisierung ! negativ} \label{Fazit neg Gen} 
 

@@ -13,9 +13,9 @@
 
  
 
-\documentclass[draft]{scrreprt} 
+%\documentclass[draft]{scrreprt} 
 
-%\documentclass[a4paper, 11pt]{book}
+\documentclass[a4paper, 11pt]{book}
 
 
 
@@ -88,7 +88,6 @@
 \newlength{\currentLongTableWidth} %jeweils lokal anpassen
 %\setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
 %\addtolength{\currentLongTableWidth}{-6\tabcolsep} %subtrahiere -8\cdot textbreite von asdf, 2 Abstände pro Zelle * Anzahl der Spalte
-
 
 
 \begin{document}
@@ -3250,6 +3249,7 @@ Die so ermittelte Generalisierung ist der Rückgabewert der Komponente für die 
 	\item ClassifyTest
 	\item ConditionalToStringTest
 	\item GenerlizeColdTest
+	\item GeneralizeColdSpezTest
 	\item GeneralizeNegative1Test
 	\item GeneralizeNegative2ClassesTest
 	\item GeneralizeNegative3ClassesTest
@@ -3297,152 +3297,12 @@ Achtung: aufgrund der Berechnungen mit Gleitkommazahlen kann es zu unterschiedli
 	\item in der Wissensbasis muss das reflexive Wissen ausgeschlossen werden (d.h. mit einer Wahrscheinlichkeit von 0 vorbelegt werden. 
 \end{itemize}
 
-\chapter{Herausforderungen bei der praktischen Umsetzung} \label{Herausforderungen}
-\section{Generische und spezifische Grundinstanzen}
-Die Berechnung der Wahrscheinlichkeiten für jedes Grundkonditional ist das Ergebnis einer Annäherungsberechnung.
-
-Man unterscheidet im allgemeinen zwischen spezifischen und generischen Grundinstanzen einer Formel, \index{Grundinstanz ! generisch} \index{Grundinstanz ! spezifisch} und \ref{Grundinstanz spezifisch}.
-Bei spezifischen Grundinstanzen von Konditionalen handelt es sich um solche, die bereits in der Wissensbasis enthalten sind, vgl. \ref{Grundinstanz generisch}. 
-
-\label{Bsp:Spez Grundinstanz} 
-\begin{Bsp}[Spezifische Grundinstanz eines Konditionals]
-	Vgl. das Beispiel \\ \ref{Bsp:Birds}"{}Birds"{}
-	\begin{quote}
-		$ T_{1}  :  (flies(Tweety)) $,\\
-	\end{quote}
-\end{Bsp}
-
-Generische Grundinstanzen sind solche, die nicht in der Wissensbasis enthalten sind, sondern erst durch Grundierung erzeugt werden. 
-Es wird erwartet, dass alle generische Grundinstanzen ein und des selben Konditionals die gleiche Wahrscheinlichkeit haben.
-
-\label{Bsp:Gen Grundinstanz} 
-\begin{Bsp}[Generische Grundinstanz eines Konditionals]
-	Vgl. das Beispiel \\ \ref{Bsp:Birds}"{}Birds"{}
-	\begin{quote}
-		Das Ergebnis der Grundierung von $ (flies(X)) $ sind die spezifischen Grundinstanzen:\\
-		$ (flies(Kirby)) $,\\
-		$ (flies(Bully)) $,\\
-		$ (flies(Sylvester)) $\\
-		
-	\end{quote}
-\end{Bsp}
-
-Ein Test, der verifiziert, dass die generischen und spezifischen Grundinstanzen eines Konditionals jeweils die gleiche Wahrscheinlichkeit haben, wäre wünschenswert gewesen. Ein solcher Test hat sich leider nicht realisieren lassen, wie in \ref{Berechnung_Wahrscheinlichkeiten} noch ausführlich erläutert wird.
-
-
-\section{Merkmal der Gleichheit und Gleichheit von Konditionalen} \label{Gleichheit}
-Es ist aufgefallen, dass bei der Methode queryProbability() aus Log4KR bei der Berechnung der Wahrscheinlichkeiten Unstimmigkeiten bei der Rundung auftreten. Das ist schon bei kleinen Beispielen der Fall. Es hat sich herausgestellt, dass das an der Feineinstellung der Rundung in Log4KR liegt. Diese kann bei Bedarf modifiziert werden.\\
-Eine der Schwierigkeiten bestand darin, ein Kriterium für die Gleichheit der Wahrscheinlichkeit anzugeben. Da die Wahrscheinlichkeiten das Ergebnis einer Annäherungsberechnung sind, ist es nicht möglich, ein Kriterium für die absolute Gleichheit anzugeben. Die Beurteilung der Gleichheit kann daher nur das Ergebnis einer Heuristik sein.\\
-Die einfachste Heuristik beruht letztlich auf Rundung. Die Schwierigkeit dabei besteht darin, eine geeignete Einstellung für die Rundung zu finden. Rundet man zu früh, könnten Konditionale zusammengefasst werden, die in verschiedene Klassen gehören, rundet man zu großzügig, könnten mehr Klassen geschaffen werden als notwendig bzw. sinnvoll.\\
-An dieser Stelle ist auch aufgefallen, dass es sinnvoll sein könnte, einen Test durchzuführen, ob alle generischen Klassen auch tatsächlich die gleiche Wahrscheinlichkeit haben. 
-
-Gemäß Aufgabenstellung waren Konditionale, die die gleiche Wahrscheinlichkeit liefern zu einem allgemeinen Konditional zusammenzufassen. Zum Thema Äquivalenz von Konditionalen vgl.\ref{Äquivalenz in FO-PCL}.
-
-Das erwies sich mit Hilfe der Bibliothek Log4KR als schwierig. Dabei ist eine Korrektur der Bibliothek notwendig geworden, s. \ref{sec:Korrektur1} "{}Korrektur in ConstraintBasedGroundingOperator"{} und weitere Korrekturen in der Klasse Fraction, \ref{Korrektur_Fraction}.
-
-
-
-\section{Berechnung der Wahrscheinlichkeiten} \label{Berechnung_Wahrscheinlichkeiten}
-Bei der Berechnung der Modelle bzw. bei der Selektion des Modells mit der maximalen Entropie traten wie bereits oben erwähnt, \ref{Gleichheit} immer wieder Unstimmigkeiten bei der Rundung auf. Diese Probleme führen insbesondere im Zusammenhang mit unterschiedlichen Laufzeitumgebungen zu erheblichen Problemen. Im Beispiel"{}Cold"{}, \ref{Cold}, führt das je nach Laufzeitumgebung zur Bildung von zwei Klassen, was richtig wäre, oder drei Klassen, was definitiv falsch ist. Das hat zur Folge, dass ein und der selbe Test in der JUnit Testumgebung falsch, \ref{Cold_1} und in der Debug Umgebung richtig ist.
-
-\includegraphics[scale = 0.6]{Graphics/Cold_1}
-\begin{figure}[h]
-	\caption{Ergebnis in der JUnit Testumgebung}
-	\label{Cold_1}
-\end{figure}
-
-\includegraphics[scale = 0.7]{Graphics/Cold_2}
-\begin{figure}[h]
-	\caption{Ergebnis in der Debug Umgebung}
-	\label{Cold_2}
-\end{figure}
-
-Das Problem hängt zum einen mit der Feineinstellung der Rundung bei Log4KR zusammen, zum anderen mit der Klasse Fraction und der fehlerhaften Behandlung des Überlaufs, vgl. auch \ref{Korrektur_Fraction}, zum anderen der Laufzeitumgebung von Java. 
-Ein weiteres Problem ist, dass die berechneten Wahrscheinlichkeiten für jedes einzelne Konditional mehrfach im Datentyp umgewandelt bzw. verarbeitet werden. Für die Berechnung der Wahrscheinlichkeiten wird in der Komponente bei der Klassifizierung eine Methode aufgerufen(compute), die eine Methode in Log4KR zur Berechnung der Wahrscheinlichkeit des Konditionals aufruft (queryConditionalProbability). Diese ruft wiederum eine andere Methode auf, die die Ergebnisse aus dem epistemischen Status liefert, die durch einen Optimierungsprozess zustande kommen. Der gelieferte Double wird dabei durch Division zweier optimierter Werte berechnet. Die so berechneten Wahrscheinlichkeiten werden benötigt, um ein probabilistisches Konditional zu erzeugen. Der Konstruktor lässt aber für Wahrscheinlichkeiten nur einen Wert vom Datentyp Fraction zu. Hier gibt es die oben beschriebenen Probleme mit dem Überlauf (insbesondere bei sehr kleinen Zahlenwerten, d.h. Zahlenwerten nahe 0). Der so gewonnene Wert wird überdies vereinfacht (durch Kürzung). Die Klassifizierung erfolgt mit gerundeten Werten (mit dem SimpleRoundingClassifier der Komponente). Dabei werden erneut aus den von Log4KR gelieferten Werten (vom Typ Fraction) nach Rundung neue Objekte vom Typ Fraction erzeugt.
-
-Diese Schwierigkeiten führen insgesamt dazu, dass die Ergebnisse der Komponente nicht verlässlich reproduzierbar sind.
-
-Das führte soweit, dass sich bei der Berechnung der Wahrscheinlichkeiten für das Beispiel"{}ColdSpez"{} \ref{ColdSpez} negative Wahrscheinlichkeiten in der JUnit Testumgebung ergaben:
-
-\includegraphics[scale = 0.8]{Graphics/Fehler_ColdSpez}
-\begin{figure}[h]
-	\caption{Ergebnis für ColdSpez in der JUnit Umgebung}
-\end{figure}
-
-Dagegen ergab sich der Fehler in der Debug Umgebung lediglich beim Vergleich. Diesen unerwünschten und überraschenden Ergebnisse führten schließlich einen erheblichen Aufwand bei der Suche nach der Ursache. Was zunächst als Fehler im Programm erschien, stellte sich dann als eine Kombination von Problemen aus Log4KR und der Behandlung von Gleitkommazahlen durch Java in unterschiedlichen Laufzeitumgebungen heraus. Diese Probleme waren zwar unabhängig von der Komponente, machten aber Tests schwierig.
-
-
-Das führte beispielsweise dazu, dass Tests für die Generalisierung einzelner Beispiele (wie für das Beispiel"{}Cold"{} \ref{Cold}) nur auf Ebene der Generalisierung getestet werden konnten. 
-Dafür mussten die einzelnen Objekte angelegt werden, die im Rahmen der Klassifizierung der Komponente erzeugt worden wären. Das machte die Tests wesentlich aufwändiger. 
-
-
-\includegraphics[scale = 0.8]{Graphics/Fehler_ColdSpez_D4} \label{Fehler_ColdSpez_D4}
-\begin{figure}[h]
-	\caption{Ergebnis für ColdSpez in der Debug Umgebung}
-	
-\end{figure}
-
-
-
-\section{Bildung des Constraints}
-Die Aufgabenstellung verlangt die Bildung eines möglichst allgemeinen Konditionals für Grundinstanzen des angefragten Konditionals. Was darunter zu verstehen ist, wurde nicht definiert. Es waren eingehende Überlegungen notwendig, wie dieser Begriff zu interpretieren ist. Das Ergebnis war, dass unter einen möglichst allgemeinen Konditional im Sinne dieser Arbeit ein Konditional mit einem möglichst kurzen, logisch minimierten Constraint zu verstehen ist. Das führte zur Entwicklung der Idee der logischen Generalisierungsoptimierung, \ref{Logische Genopt}, die leider nicht zielführend war. 
-
-Der Gedanke wurde bei der Idee der konditionalen Generalisierung, \ref{Konditionale Generalisierung}, wieder aufgegriffen und im Sinne einer logischen Optimierung des Constraints entwickelt. Logische Optimierung beschränkt sich hier auf die Anwendung des Distributivgesetzes. Die praktische Umsetzung erwies sich als nicht umsetzbar, da keine Gleichheit von EqualityConstraints definiert ist. Auch wenn es für den Betrachter so wirkt, als ob die Constraints gleich ist, Gleichheit ließ sich noch nicht einmal auf Basis der Repräsentation als String realisieren, vgl. \ref{Fehler_ColdSpez_D4}. Das Ergebnis ist somit grundsätzlich nicht falsch, enthält aber redundante Informationen.\\
-Eine Lösung, um bei der Bildung von Constraints redundante Informationen zu eliminieren  konnte über den Umweg der Gleichheit von AtomicConstraints gefunden werden. Das mag umständlich und wenig professionell erscheinen, ist letztlich aber zweckdienlich. 
-
-\begin{Bsp}[Bildung von Constraints am Beispiel ColdSpez]
-	Für das \\ Beispiel ColdSpez, \ref{ColdSpez} ergeben sich für die Anfrage $ contact(X,Y) \land cold(X) $ folgende Grundkonditionale: \\
-$  	(contact(bob,bob) * cold(bob))		[0.00000]\\
-	(contact(anna,anna) * cold(anna))	[0.00000]\\
-	(contact(carl,carl) * cold(carl))	[0.00000]\\
-	(contact(bob,carl) * cold(carl))	[0.02068]\\
-	(contact(carl,bob) * cold(bob))		[0.02068]\\
-	(contact(carl,anna) * cold(anna))	[0.03588]\\
-	(contact(anna,carl) * cold(carl))	[0.03588]\\
-	(contact(anna,bob) * cold(bob))		[0.03588]\\
-	(contact(bob,anna) * cold(anna))	[0.03588]$ \\
-	\\
-	 Mit den Äquivalenzklassen:\\
-	 Äquivalenzklasse 1:\\
-	 $  \{	(contact(bob,bob) * cold(bob))		[0.00000]\\
-	 (contact(anna,anna) * cold(anna))	[0.00000]\\
-	 (contact(carl,carl) * cold(carl))	[0.00000]\}$ \\
-	 \\
-	   Äquivalenzklasse 2:\\
-	  $ \{	(contact(bob,carl) * cold(carl))	[0.02068]\\
-	  (contact(carl,bob) * cold(bob))		[0.02068]\}\\
-	    $\\
-	  Äquivalenzklasse 3:\\
-	  $ \{ (contact(carl,anna) * cold(anna))	[0.03588]\\
-	  (contact(anna,carl) * cold(carl))	[0.03588]\\
-	  (contact(anna,bob) * cold(bob))		[0.03588]\\
-	  (contact(bob,anna) * cold(anna))	[0.03588] \} $\\
-	  
-	  Das generalisierte Konditional für die Äquivalenzklasse 2 wurde im Falle der positiven Generalisierung zunächst gebildet zu:\\
-	   $ contact(X,Y) * cold(X) <X=bob * Y=carl * Y=carl + X=carl * Y=bob * Y=bob>$\\
-	   was nach einiger Überlegung und Anstrengung schließlich zum angestrebten Ergebnis führte:\\
-	     $ contact(X,Y) * cold(X) <X=bob * Y=carl + X=carl * Y=bob >$\\
-	  
-\end{Bsp}
-
-
-
-\section{Unausführbare Beispiele} \label{Beispiele unausfuehrbar} 
-Beispiele, die mehr als eine spezifische Konstante enthielten, sh. \ref{examplesdep}, konnte Log4KR nicht verarbeiten, daher konnten leider keine Forschungen in diese Richtung unternommen werden, obwohl dies sehr interessant im Hinblick auf Interaktionen gewesen wäre. 
-
-\section{Sonstiges}
-Die oben geschilderten Probleme führten dazu, dass nicht nur ein beträchtlicher Zeitaufwand in die Suche nach den möglichen Ursachen gesteckt werden musste, d.h. handelt es sich um einen Fehler in der Inferenzkomponente, in Log4Kr oder woher stammt der Fehler ansonsten, sondern auch in der Suche nach Lösungen, um die Schwierigkeiten, die auftraten und nicht aus der Inferenzkomponente stammten zu behandeln oder zu umgehen, um dennoch zu vernünftigen und nachvollziehbaren Ergebnissen kommen zu können. 
-Es musste daher ein erheblicher Aufwand betrieben werden, um zu dem Ergebnis kommen zu können, dass die erarbeiteten Ideen theoretisch sehr wohl und daher praktisch unter optimalen Bedingungen umsetzbar wären.
-
-Auch ist festzuhalten, dass aufgrund dieser Umgebungsprobleme Anfragen, die an die Komponente gestellt werden möglicherweise nicht zu einem erwünschten oder erwarteten Ergebnis führen könnten, obwohl die Komponente richtig funktioniert. Das ist im Ergebnis ziemlich unbefriedigend. 
-
-Was hingegen sehr erfreulich ist, ist die Erkenntnis, dass erarbeiteten Ideen in einer funktionierenden Umgebung durchaus praktisch umsetzbar und einsetzbar wären und zufrieden stellende Ergebnisse liefern würden.
-
 
 \chapter{Evaluation}\label{eval} 
 \textbf{Vorüberlegungen}
 An dieser Stelle soll die Korrektheit der Inferenzkomponete lediglich im Hinblick auf ihre Funktionalität, d.h. die Frage, ob sie die erwartete Ausgabe liefert, betrachtet werden. 
 
+\section{Korrektheit} \label{Korrektheit}
 Es werden die einzelnen Kategorien von Fällen betrachtet zusammen mit den Ergebnissen, die die Komponente liefert. 
 
 \begin{itemize}
@@ -3465,13 +3325,208 @@ Es werden die einzelnen Kategorien von Fällen betrachtet zusammen mit den Ergeb
 		Für das Beispiel "{}Cold"{}, \ref{Cold}, ergibt sich als Ausgabe der Komponente:
 			\lstinputlisting{Erg/ColdTestErg.txt}
 	\item mit spezifischer Konstante\\
-		Für das Beispiel "{}ColdSpez"{}, \ref{ColdSpez}, ergibt sich als Ausgabe der Komponente:
+		Für das Beispiel "{}ColdSpez"{}, \ref{ColdSpez}, ergibt sich als Ausgabe der Komponente im Falle der positiven Generalisierung:
+			\lstinputlisting{Erg/ColdSpezTestErg.txt}
+			Das erfüllt die Aufgabenstellung insoweit, dass es ein allgemeines Konditional gibt. Besser lesbar und verständlich, wäre es, wenn die angestrebte Ausgabe erfüllt werden könnte. Dazu wäre ein zusätzlicher Programmieraufwand nötig geworden. Auf die Implementierung dieser Lösung wurde zugunsten der theoretischen Ausarbeit an dieser Stelle verzichtet. Grund dafür waren unter anderem die Probleme, die sich bei der Berechnung der Wahrscheinlichkeiten ergeben haben und die Umsetzung unverhältnismäßig erschwert haben. Insgesamt darf aber davon ausgegangen werden, dass auch diese Lösung realisierbar ist. 
 \end{itemize}
+
 
 	
 \end{itemize}
 
+\section{Herausforderungen bei der praktischen Umsetzung} \label{Herausforderungen}
+\subsection{Generische und spezifische Grundinstanzen}
+Die Berechnung der Wahrscheinlichkeiten für jedes Grundkonditional ist das Ergebnis einer Annäherungsberechnung.
 
+Man unterscheidet im allgemeinen zwischen spezifischen und generischen Grundinstanzen einer Formel, \index{Grundinstanz ! generisch} \index{Grundinstanz ! spezifisch} und \ref{Grundinstanz spezifisch}.
+Bei spezifischen Grundinstanzen von Konditionalen handelt es sich um solche, die bereits in der Wissensbasis enthalten sind, vgl. \ref{Grundinstanz generisch}. 
+
+\label{Bsp:Spez Grundinstanz} 
+\begin{Bsp}[Spezifische Grundinstanz eines Konditionals]
+	Vgl. das Beispiel \\ \ref{Bsp:Birds}"{}Birds"{}
+	\begin{quote}
+		$ T_{1}  :  (flies(Tweety)) $\\
+	\end{quote}
+\end{Bsp}
+
+Generische Grundinstanzen sind solche, die nicht in der Wissensbasis enthalten sind, sondern erst durch Grundierung erzeugt werden. 
+Es wird erwartet, dass alle generische Grundinstanzen ein und des selben Konditionals die gleiche Wahrscheinlichkeit haben.
+
+\label{Bsp:Gen Grundinstanz} 
+\begin{Bsp}[Generische Grundinstanz eines Konditionals]
+	Vgl. das Beispiel \\ \ref{Bsp:Birds}"{}Birds"{}
+	\begin{quote}
+		Das Ergebnis der Grundierung von $ (flies(X)) $ sind die spezifischen Grundinstanzen:\\
+		$ (flies(Kirby)) $,\\
+		$ (flies(Bully)) $,\\
+		$ (flies(Sylvester)) $\\
+		
+	\end{quote}
+\end{Bsp}
+
+Ein Test, der verifiziert, dass die generischen und spezifischen Grundinstanzen eines Konditionals jeweils die gleiche Wahrscheinlichkeit haben, wäre wünschenswert gewesen. Ein solcher Test hat sich leider nicht realisieren lassen, wie in \ref{Berechnung_Wahrscheinlichkeiten} noch ausführlich erläutert wird.
+
+
+\subsection{Berechnung der Wahrscheinlichkeiten} \label{Berechnung_Wahrscheinlichkeiten}
+Bei der Berechnung der Modelle bzw. bei der Selektion des Modells mit der maximalen Entropie traten wie bereits oben erwähnt, \ref{Gleichheit} immer wieder Unstimmigkeiten bei der Rundung auf. Diese Probleme führen insbesondere im Zusammenhang mit unterschiedlichen Laufzeitumgebungen zu erheblichen Problemen. Im Beispiel"{}Cold"{}, \ref{Cold}, führt das je nach Laufzeitumgebung zur Bildung von zwei Klassen, was richtig wäre, oder drei Klassen, was definitiv falsch ist. Das hat zur Folge, dass ein und der selbe Test in der JUnit Testumgebung falsch, \ref{Cold_1} und in der Debug Umgebung richtig ist.
+
+\includegraphics[scale = 0.6]{Graphics/Cold_1}
+\begin{figure}[h]
+	\caption{Ergebnis in der JUnit Testumgebung}
+	\label{Cold_1}
+\end{figure}
+
+\includegraphics[scale = 0.7]{Graphics/Cold_2}
+\begin{figure}[h]
+	\caption{Ergebnis in der Debug Umgebung}
+	\label{Cold_2}
+\end{figure}
+
+Das Problem hängt zum einen mit der Feineinstellung der Rundung bei Log4KR zusammen, zum anderen mit der Klasse Fraction und der fehlerhaften Behandlung des Überlaufs, vgl. auch \ref{Korrektur_Fraction}, zum anderen der Laufzeitumgebung von Java. 
+Ein weiteres Problem ist, dass die berechneten Wahrscheinlichkeiten für jedes einzelne Konditional mehrfach im Datentyp umgewandelt bzw. verarbeitet werden. Für die Berechnung der Wahrscheinlichkeiten wird in der Komponente bei der Klassifizierung eine Methode aufgerufen(compute), die eine Methode in Log4KR zur Berechnung der Wahrscheinlichkeit des Konditionals aufruft (queryConditionalProbability). Diese ruft wiederum eine andere Methode auf, die die Ergebnisse aus dem epistemischen Status liefert, die durch einen Optimierungsprozess zustande kommen. Der gelieferte Double wird dabei durch Division zweier optimierter Werte berechnet. Die so berechneten Wahrscheinlichkeiten werden benötigt, um ein probabilistisches Konditional zu erzeugen. Der Konstruktor lässt aber für Wahrscheinlichkeiten nur einen Wert vom Datentyp Fraction zu. Hier gibt es die oben beschriebenen Probleme mit dem Überlauf (insbesondere bei sehr kleinen Zahlenwerten, d.h. Zahlenwerten nahe 0). Der so gewonnene Wert wird überdies vereinfacht (durch Kürzung). Die Klassifizierung erfolgt mit gerundeten Werten (mit dem SimpleRoundingClassifier der Komponente). Dabei werden erneut aus den von Log4KR gelieferten Werten (vom Typ Fraction) nach Rundung neue Objekte vom Typ Fraction erzeugt.
+
+Diese Schwierigkeiten führen insgesamt dazu, dass die Ergebnisse der Komponente nicht verlässlich reproduzierbar sind.
+
+Das führte soweit, dass sich bei der Berechnung der Wahrscheinlichkeiten für das Beispiel"{}ColdSpez"{} \ref{ColdSpez} negative Wahrscheinlichkeiten in der JUnit Testumgebung ergaben:
+
+\includegraphics[scale = 0.7]{Graphics/Fehler_ColdSpez}
+\begin{figure}[h]
+	\caption{Ergebnis für ColdSpez in der JUnit Umgebung}
+\end{figure}
+
+Dagegen ergab sich der Fehler in der Debug Umgebung lediglich beim Vergleich. Diesen unerwünschten und überraschenden Ergebnisse führten schließlich einen erheblichen Aufwand bei der Suche nach der Ursache. Was zunächst als Fehler im Programm erschien, stellte sich dann als eine Kombination von Problemen aus Log4KR und der Behandlung von Gleitkommazahlen durch Java in unterschiedlichen Laufzeitumgebungen heraus. Diese Probleme waren zwar unabhängig von der Komponente, machten aber Tests schwierig.
+
+
+Das führte beispielsweise dazu, dass Tests für die Generalisierung einzelner Beispiele (wie für das Beispiel"{}Cold"{} \ref{Cold}) nur auf Ebene der Generalisierung getestet werden konnten. 
+Dafür mussten die einzelnen Objekte angelegt werden, die im Rahmen der Klassifizierung der Komponente erzeugt worden wären. Das machte die Tests wesentlich aufwändiger. 
+
+
+\includegraphics[scale = 0.8]{Graphics/Fehler_ColdSpez_D4} \label{Fehler_ColdSpez_D4}
+\begin{figure}[h]
+	\caption{Ergebnis für ColdSpez in der Debug Umgebung}
+	
+\end{figure}
+
+
+
+
+\subsection{Merkmal der Gleichheit und Gleichheit von Konditionalen} \label{Gleichheit}
+Es ist aufgefallen, dass bei der Methode queryProbability() aus Log4KR bei der Berechnung der Wahrscheinlichkeiten Unstimmigkeiten bei der Rundung auftreten. Das ist schon bei kleinen Beispielen der Fall. Es hat sich herausgestellt, dass das an der Feineinstellung der Rundung in Log4KR liegt. Diese kann bei Bedarf modifiziert werden.\\
+Eine der Schwierigkeiten bestand darin, ein Kriterium für die Gleichheit der Wahrscheinlichkeit anzugeben. Da die Wahrscheinlichkeiten das Ergebnis einer Annäherungsberechnung sind, ist es nicht möglich, ein Kriterium für die absolute Gleichheit anzugeben. Die Beurteilung der Gleichheit kann daher nur das Ergebnis einer Heuristik sein.\\
+Die einfachste Heuristik beruht letztlich auf Rundung. Die Schwierigkeit dabei besteht darin, eine geeignete Einstellung für die Rundung zu finden. Rundet man zu früh, könnten Konditionale zusammengefasst werden, die in verschiedene Klassen gehören, rundet man zu großzügig, könnten mehr Klassen geschaffen werden als notwendig bzw. sinnvoll.\\
+An dieser Stelle ist auch aufgefallen, dass es sinnvoll sein könnte, einen Test durchzuführen, ob alle generischen Klassen auch tatsächlich die gleiche Wahrscheinlichkeit haben. 
+
+Gemäß Aufgabenstellung waren Konditionale, die die gleiche Wahrscheinlichkeit liefern zu einem allgemeinen Konditional zusammenzufassen. Zum Thema Äquivalenz von Konditionalen vgl.\ref{Äquivalenz in FO-PCL}.
+
+Das erwies sich mit Hilfe der Bibliothek Log4KR als schwierig. Dabei ist eine Korrektur der Bibliothek notwendig geworden, s. \ref{sec:Korrektur1} "{}Korrektur in ConstraintBasedGroundingOperator"{} und weitere Korrekturen in der Klasse Fraction, \ref{Korrektur_Fraction}.
+
+
+\subsection{Definition des Begriffes "{}möglichst allgemeines Konditional"{} }
+Der Begriff  "{}möglichst allgemeines Konditional"{} musste zunächst definiert werden. Was im Sinne dieser Arbeit darunter zu verstehen ist, findet man unter dem Begriff "{}generalisiertes Konditional"{}, \ref{Generalisierung}. Ausgangsbasis war zur Definition dieses Begriffs war zunächst die Überlegung, was ein durchschnittlicher Betrachter unter einem möglichst allgemeinen Konditional verstehen würde, wenn er sich die Äquivalenzklassen betrachtet. Das führte in den Beispielen in Anhang \ref{examples}. 
+
+\subsection{Bildung des Constraints}
+Die Aufgabenstellung verlangt die Bildung eines möglichst allgemeinen Konditionals für Grundinstanzen des angefragten Konditionals. Was darunter zu verstehen ist, wurde nicht definiert. Es waren eingehende Überlegungen notwendig, wie dieser Begriff zu interpretieren ist. Das Ergebnis war, dass unter einen möglichst allgemeinen Konditional im Sinne dieser Arbeit ein Konditional mit einem möglichst kurzen, logisch minimierten Constraint zu verstehen ist. Das führte zur Entwicklung der Idee der logischen Generalisierungsoptimierung, \ref{Logische Genopt}, die leider nicht zielführend war. 
+
+Der Gedanke wurde bei der Idee der konditionalen Generalisierung, \ref{Konditionale Generalisierung}, wieder aufgegriffen und im Sinne einer logischen Optimierung des Constraints entwickelt. Logische Optimierung beschränkt sich hier auf die Anwendung des Distributivgesetzes. Die praktische Umsetzung erwies sich als nicht umsetzbar, da keine Gleichheit von EqualityConstraints definiert ist. Auch wenn es für den Betrachter so wirkt, als ob die Constraints gleich ist, Gleichheit ließ sich noch nicht einmal auf Basis der Repräsentation als String realisieren, vgl. \ref{Fehler_ColdSpez_D4}. Das Ergebnis ist somit grundsätzlich nicht falsch, enthält aber redundante Informationen.\\
+Eine Lösung, um bei der Bildung von Constraints redundante Informationen zu eliminieren  konnte über den Umweg der Gleichheit von AtomicConstraints gefunden werden. Das mag umständlich und wenig professionell erscheinen, ist letztlich aber zweckdienlich. 
+
+\begin{Bsp}[Bildung von Constraints am Beispiel ColdSpez]
+	Für das \\ Beispiel ColdSpez, \ref{ColdSpez} ergeben sich für die Anfrage $ contact(X,Y) \land cold(X) $ folgende Grundkonditionale: \\
+	$  	(contact(bob,bob) * cold(bob))		[0.00000]\\
+	(contact(anna,anna) * cold(anna))	[0.00000]\\
+	(contact(carl,carl) * cold(carl))	[0.00000]\\
+	(contact(bob,carl) * cold(carl))	[0.02068]\\
+	(contact(carl,bob) * cold(bob))		[0.02068]\\
+	(contact(carl,anna) * cold(anna))	[0.03588]\\
+	(contact(anna,carl) * cold(carl))	[0.03588]\\
+	(contact(anna,bob) * cold(bob))		[0.03588]\\
+	(contact(bob,anna) * cold(anna))	[0.03588]$ \\
+	\\
+	Mit den Äquivalenzklassen:\\
+	Äquivalenzklasse 1:\\
+	$  \{	(contact(bob,bob) * cold(bob))		[0.00000]\\
+	(contact(anna,anna) * cold(anna))	[0.00000]\\
+	(contact(carl,carl) * cold(carl))	[0.00000]\}$ \\
+	\\
+	Äquivalenzklasse 2:\\
+	$ \{	(contact(bob,carl) * cold(carl))	[0.02068]\\
+	(contact(carl,bob) * cold(bob))		[0.02068]\}\\
+	$\\
+	Äquivalenzklasse 3:\\
+	$ \{ (contact(carl,anna) * cold(anna))	[0.03588]\\
+	(contact(anna,carl) * cold(carl))	[0.03588]\\
+	(contact(anna,bob) * cold(bob))		[0.03588]\\
+	(contact(bob,anna) * cold(anna))	[0.03588] \} $\\
+	
+	Das generalisierte Konditional für die Äquivalenzklasse 2 wurde im Falle der positiven Generalisierung zunächst gebildet zu:\\
+	$ contact(X,Y) * cold(X) <X=bob * Y=carl * Y=carl + X=carl * Y=bob * Y=bob>$\\
+	was nach einiger Überlegung und Anstrengung schließlich zum angestrebten Ergebnis führte:\\
+	$ contact(X,Y) * cold(X) <X=bob * Y=carl + X=carl * Y=bob >$\\
+	
+\end{Bsp}
+
+
+
+\subsection{Unausführbare Beispiele} \label{Beispiele unausfuehrbar} 
+Beispiele, die mehr als eine spezifische Konstante enthielten, sh. \ref{examplesdep}, konnte Log4KR nicht verarbeiten, daher konnten leider keine Forschungen in diese Richtung unternommen werden, obwohl dies sehr interessant im Hinblick auf Interaktionen gewesen wäre. 
+
+\subsection{Sonstiges}
+Die oben geschilderten Probleme führten dazu, dass nicht nur ein beträchtlicher Zeitaufwand in die Suche nach den möglichen Ursachen gesteckt werden musste, d.h. handelt es sich um einen Fehler in der Inferenzkomponente, in Log4Kr oder woher stammt der Fehler ansonsten, sondern auch in der Suche nach Lösungen, um die Schwierigkeiten, die auftraten und nicht aus der Inferenzkomponente stammten zu behandeln oder zu umgehen, um dennoch zu vernünftigen und nachvollziehbaren Ergebnissen kommen zu können. 
+Es musste daher ein erheblicher Aufwand betrieben werden, um zu dem Ergebnis kommen zu können, dass die erarbeiteten Ideen theoretisch sehr wohl und daher praktisch unter optimalen Bedingungen umsetzbar wären.
+
+Auch ist festzuhalten, dass aufgrund dieser Umgebungsprobleme Anfragen, die an die Komponente gestellt werden möglicherweise nicht zu einem erwünschten oder erwarteten Ergebnis führen könnten, obwohl die Komponente richtig funktioniert. Das ist im Ergebnis ziemlich unbefriedigend. 
+
+Was hingegen sehr erfreulich ist, ist die Erkenntnis, dass erarbeiteten Ideen in einer funktionierenden Umgebung durchaus praktisch umsetzbar und einsetzbar wären und zufrieden stellende Ergebnisse liefern würden.
+
+\section{Diskussion zur Aufgabenerfüllung}
+Gegenstand dieser Diplomarbeit war der Entwurf und die Implementierung einer Inferenzkompontente für FO-PCL unter Verwendung bereits vorhandener Komponenten der Bibliothek Log4KR. 
+Dabei sollte die Inferenzkomponente qualitative Konditionale entgegennehmen und mit einer zugeordneten Wahrscheinlichkeit zurückliefern. Es sollten Äquivalenzklassen aus den Grundinstanzen des angefragten Konditionals gebildet werden, die die Grundkonditionale mit gleichem Parameterwert zu möglichst allgemeinen Konditionalen zusammen fassen.
+
+\subsection{Betrachtung des Entwurfs}
+
+\subsection{Betrachtung der Funktionalität der Komponente}
+
+Wie man \ref{Berechnung_Wahrscheinlichkeiten} entnehmen kann, gab es schon Schwierigkeiten bei der Zuordnung der Wahrscheinlichkeiten; hier bei der Berechnung der zuzuordnenden Wahrscheinlichkeiten. Zum einen ergaben sich diese bei der Feineinstellung der Rundung in Log4KR im Zusammenhang mit der Berechnung des Modells bedingt durch Optimierungsprozess, vgl. \ref{Fo-PCL-MaxEnt}, zum anderen bei Laufzeitumgebung im Zusammenhang mit der Verwendung von Java. Dennoch ist es, eine korrekter Berechnung von Wahrscheinlichkeiten vorausgesetzt, möglich die Aufgabe gemäß Aufgabenstellung zu erfüllen.
+
+Die Umsetzung des Entwurfs der Komponente war mit einigen Herausforderungen wie oben beschrieben belastet, konnten dennoch zu weiten Teilen wie gewünscht und entworfen realisiert werden.
+
+ Bei der Implementierung finden sich im Ordner des Quellcodes zu den Tests, im Paket Inference mehrere Klassen, die die Funktionalität der einzelnen Bestandteile der Komponente testen. 
+ Beispielsweise finden sich Tests für die Klassifizierung der Komponente, vgl. \ref{Grundinstanz} in:
+ \begin{itemize}
+ 	\item ClassifierTest
+ 	\item Classify
+ 	\item Classify2
+ \end{itemize}
+  Die Generalisierung für Klassen mit reflexivem Wissen und für den Fall zweier Klassen mit nicht reflexivem Wissen, welche sowohl bei der negativen, \ref{NegativeGeneralisierung} als auch bei der positiven Generalisierung, \ref{PositiveGeneralisierung} Verwendung finden werden getestet mit:
+  \begin{itemize}
+  	\item ReflexiveTest
+  	\item ReflexiveNegativeTest
+  \end{itemize}
+
+	Die Klassen zum Test der negativen Generalisierung sind:
+	\begin{itemize}
+		\item GeneralizeNegative1 für das Beispiel "{}Birds"{}, \ref{Birds}
+		\item GeneralizeNegative2Classes für das Beispiel "{}Friendship"{}  \ref{Friendship}
+		\item GeneralizeNegative3Classes für das Beispiel "{}Misanthrope"{} \ref{Misanthrope}
+	\end{itemize}
+	 
+	 Die positive Generalisierung wurde in diesem Zusammenhang nur für das Beispiel "{}Birds"{},  \ref{Birds}, in der Klasse GeneralizePositiveTest getestet.
+	
+	Weitere Tests führten insgesamt zu dem Ergebnis, dass die Grundfunktionalitäten der Komponente dem entsprechen, was bei der Ideenfindung als zielführend erachtet wurde. 
+	
+	Wie bereits unter dem Abschnitt Korrektheit \ref{Korrektheit} erwähnt, funktioniert die Komponente für Beispiele mit einstelligen und zweistelligen Prädikaten und Anfragen in Form eines Atoms wie erwartet (d.h. wie in den Beispielen in \ref{examples} als erwartete Ausgabe beschrieben). 
+	
+	Die Funktionalität der Komponente für zweistellige Prädikate und der Anfrage in Form einer zusammengesetzten Formel, hier das Beispiel "{}Cold"{} , \ref{Cold}, mit einer Wissensbasis ohne spezifische Konstante, \ref{Konstanten spezifisch} und "{}ColdSpez"{},  \ref{ColdSpez} bei einer Wissensbasis mit spezifischer Konstante lies sich wegen der unüberwindbaren Schwierigkeiten bei der Berechnung der Wahrscheinlichkeiten nicht testen. Daher mussten die Tests auf Ebene der Generalisierung von Äquivalenzklassen bei denen die zugeordnete Wahrscheinlichkeit vorgegeben war, erfolgen und finden sich in:
+	\begin{itemize}
+		\item GeneralizeColdTest
+		\item GeneralizeColdSpezTest
+	\end{itemize}
+Diese Test erforderten ein umständliches Anlegen vo Objekten für die Äquivalenzklassen und deren Inhalte führten aber zu dem erfreulichen Ergebnis, dass die Komponente im Fall des Beispiels "{}Cold"{} für die konditionale Generalisierung korrekt arbeitet. \\
+Für zweistellige Prädikate und Anfragen in Form einer zusammengesetzten Formel wie im Beispiel "{}ColdSpez"{} wurde nur die positive Generalisierung implementiert, welche auch funktioniert und ein allgemeines Konditional, d.h., ein generalisiertes Konditional im Sinne der Arbeit liefert. Die negative Generalisierung könnte als Erweiterung der Komponente implementiert werden. Darauf wurde hier verzichtet, das die zu keinem weiteren Erkenntnisgewinn geführt hätte.
+
+Als eigenes Beispiel wurde das Beispiel "{}Sport"{}, \ref{Sport} mit den Erweiterungen\\ "{}SportEx"{}, \ref{SportEx},  "{}SportExN"{}, \ref{SportExN}, und "{}SportExNFam"{} \ref{SportExNFam} erarbeitet. Eine weitere Beschäftigung mit diesen Beispielen war nicht wünschenswert, da bereits alle denkbaren Fälle mit bekannten Beispielen und deren Erweiterungen abgedeckt waren und dies daher zu keinem höheren Erkenntnisgewinn geführt hätte. 
+
+Insgesamt kann bemerkt werden, dass die Ideen die erarbeitet werden konnten brauchbare Ergebnisse liefern könnten und dass es gelungen ist, aus dem Ideenpool die sinnvollste Alternative auszuwählen. Ein Entwurf, der nicht nur in sich stimmig ist, sondern sich zudem auch praktisch umsetzen und implementieren ließ und auch erweitert werden kann. 
 
 
 \chapter{Ergebnisse und Ausblick}\label{Erg}
@@ -3958,8 +4013,10 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 \addcontentsline{toc}{chapter}{Abkürzungs- und Symbolverzeichnis}
 \newpage
 
+
 \listoftheorems
 \addcontentsline{toc}{chapter}{Liste der Sätze, Definitionen und Beispiele}
+
 \newpage
 
 \listoftables
@@ -3968,6 +4025,7 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 
 \listoffigures
 \addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+
 \newpage
 
 

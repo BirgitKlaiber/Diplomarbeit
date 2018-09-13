@@ -11,6 +11,8 @@
 
 
 
+
+
  
 
 %\documentclass[draft]{scrreprt} 
@@ -69,6 +71,11 @@
 \usepackage{lmodern}
 
 
+\usepackage{tocstyle}
+\usetocstyle{KOMAlike}
+
+\usepackage{tocloft}
+
 
 
 \usepackage[numbers]{natbib}
@@ -88,6 +95,10 @@
 \newlength{\currentLongTableWidth} %jeweils lokal anpassen
 %\setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
 %\addtolength{\currentLongTableWidth}{-6\tabcolsep} %subtrahiere -8\cdot textbreite von asdf, 2 Abstände pro Zelle * Anzahl der Spalte
+
+
+
+
 
 
 \begin{document}
@@ -124,7 +135,7 @@
 \begin{center}
 \textcolor{blue}{Version 20180907}
 	
-\large{Kleingartach, 2018}
+\large{Kleingartach, September 2018}
 \end{center}
 
 \end{titlepage}
@@ -2232,6 +2243,7 @@ Auch wenn es auf den ersten Blick so scheinen mag, als ob es für das Problem de
 
 
 \section{Idee: Logische Generalisierungsoptimierung} \index{Logische Generalisierungsoptimierung}
+\label{Logische Generalisierung}
 
 
 	Die logische Generalisierungsoptimierung kann kein eigenständiges Verfahren zur Generalisierung sein. Sie kann lediglich andere Verfahren unterstützen, um zu einem aussagekräftigen und kurzen Konditional führen.
@@ -2893,11 +2905,7 @@ Eine Zusammenfassung der gewonnen Ergebnisse und Erkenntnisse und ein Ausblick a
 \section{Funktionsweise des Algorithmus}
 \includegraphics[scale = 0.7]{Graphics/Ablauf_Algorithmus}
 \begin{figure}[h]
-	
-	
-	
-	\caption{Der Algorithmus }
-	
+		\caption{Der Algorithmus }
 \end{figure}
 
 \newpage
@@ -3482,7 +3490,46 @@ Was hingegen sehr erfreulich ist, ist die Erkenntnis, dass erarbeiteten Ideen in
 Gegenstand dieser Diplomarbeit war der Entwurf und die Implementierung einer Inferenzkompontente für FO-PCL unter Verwendung bereits vorhandener Komponenten der Bibliothek Log4KR. 
 Dabei sollte die Inferenzkomponente qualitative Konditionale entgegennehmen und mit einer zugeordneten Wahrscheinlichkeit zurückliefern. Es sollten Äquivalenzklassen aus den Grundinstanzen des angefragten Konditionals gebildet werden, die die Grundkonditionale mit gleichem Parameterwert zu möglichst allgemeinen Konditionalen zusammen fassen.
 
-\subsection{Betrachtung des Entwurfs}
+\subsection{Betrachtung der Entwicklung des Entwurfs}
+Zunächst war zu bedenken, wie sich Inferenz in FO-PCL konzeptuell in einer Komponente umsetzen lassen könnte, ausführlich beschrieben in \ref{Inferenz}. Unproblematisch war es, Wissensbasis und Anfrage zu grundieren und theoretisch ist die Berechnung der Wahrscheinlichkeiten für die Grundkonditionale auf Basis des ME-Modells kein Problem, die Schwierigkeiten dazu wurden in \ref{Berechnung_Wahrscheinlichkeiten} beschrieben. Klassifizierung, \ref{Grundinstanz}, d.h. die Zusammenfassung von parametrisch äquivalenten FO-PCL Konditionalen war bereits definiert und daher unproblematisch; hier können nur Unstimmigkeiten oder Ungenauigkeiten auf Basis der Rundung auftreten. Die eigentliche Herausforderung bei der Ausarbeitung des Entwurfs lag in der Generalisierung, dem Prozess der Generierung eines möglichst allgemeinen Konditionals. Darauf bauten die aus den experimentellen Forschungen und Auswertungen, \ref{Experim. Forschungen} gezogenen Erkenntnisse auf. Verschiedene Ideen zur Generalisierung wurden unter \ref{Ideen Alg.} entwickelt, diskutiert:
+
+\begin{itemize}
+	\item Achtung: Reflexives Wissen, d.h. Wissen, bei dem alle Variablen mit der gleichen Konstante belegt werden, werden für alle Ideen gleich behandelt (da dieses Wissen gemäß Übereinkunft ausgeschlossen und mit der Wahrscheinlichkeit von Null vorbelegt wurde). Der Constraint wird als Constraint der Gleichheit über alle Variablen erzeugt
+	\item Positive Generalisierung \ref{PositiveGeneralisierung}: \\
+	es werden im Constraint je Klasse die Belegungen der Variablen in der Klasse vorkommenden Konstanten kanonisch aufgezählt (wenn es sich nicht um reflexives Wissen handelt).\\
+	\begin{itemize}
+		\item Vorteil: funktioniert in jedem Fall
+		\item Nachteil: nicht unbedingt übersichtlich und aussagekräftig 
+	\end{itemize}
+	\item Negative Generalisierung \ref{NegativeGeneralisierung}:\\
+	Hier wird der Constraint aus Ausnahmen der Klasse gebildet
+	\begin{itemize}
+		\item Vorteil: funktioniert im Fall einstelliger Prädikate
+		\item Nachteil: führt im Fall zweistelliger Prädikate zu einem unübersichtlichen Ergebnis 
+	\end{itemize}
+	\item Modifikation des Versionenraum-Lernverfahrens:\\
+	ausführlich \ref{Verwendbar VRL}
+	\begin{itemize}
+		\item Vorteil: funktioniert vermutlich
+		\item Nachteil: bringt keine Verbesserung gegenüber der positiven Generalisierung oder negativen Generalisierung bzw. baut darauf auf
+	\end{itemize}
+	\item Logische Generalisierungsoptimierung \ref{Logische Genopt}:\\
+	hier handelt es sich um ein unterstützendes Verfahren, um den Constraint logisch zu optimieren 
+		\begin{itemize}
+		\item Vorteil: marginale Verbesserung, denn logische Ausdrücke sind bereits davor minimal
+		\item Nachteil: keine Verbesserung
+	\end{itemize}
+	\item Konditionale Generalisierung \ref{Konditionale Generalisierung}:\\
+	Synthese aller Ideen zur Erreichung des optimalen Ergebniss
+	\begin{itemize}
+	\item Vorteile: Synthese aller Ideen, funktioniert
+	\item Nachteil: keine Nachteile gefunden
+\end{itemize}
+
+\end{itemize}
+
+
+ Die Ideen der positiven Generalisierung und der negativen Generalisierung flossen in die Idee der konditionalen Generalisierung, \ref{Konditionale Generalisierung}, ein, die favorisiert und als umsetzbar bewertet wurde. Wie sich herausgestellt hat, ließ sich diese Idee auch praktisch mit verhältnismäßigem Aufwand realisieren. Andere viel versprechende Ideen wie die logische Generalisierung, \ref{Logische Generalisierung} und das modifizierte Versionenraum-Verfahren, \ref{Verwendbar VRL} mussten verworfen werden. 
 
 \subsection{Betrachtung der Funktionalität der Komponente}
 
@@ -3755,27 +3802,39 @@ Das Versionenraum-Lernverfahren ist ein inkrementelles Lernverfahren. Zu Beginn 
 \chapter{Modifikation, Korrektur der Bibliothek Log4KR} \label{Modifikaiton Log4KR}
 \section{Korrektur in ConstraintBasedGroundingOperator}
 \label{sec:Korrektur1}
-Die Klasse ConstraintBasedGroundingOperator im Paketn\\ edu.cs.ai.log4KR.relational.classicalLogic.grounding in Log4KR musste geändert werden. Die Methode createAllAdmissibleGroundSubstitutions(Collection<Variable> vars,
+Die Klasse ConstraintBasedGroundingOperator im Paket\\ edu.cs.ai.log4KR.relational.classicalLogic.grounding in Log4KR musste geändert werden. Die Methode createAllAdmissibleGroundSubstitutions(Collection<Variable> vars,
 Collection<Constant> consts, Formula<AtomicConstraint> constraint) wurde so korrigiert, dass die Abfrage statt\\
  "{}if (c.getType() == v.getType())"{} 
 nun \\
-"{}if (c.getType().equals(v.getType()))"{} lautet.\\
-\includegraphics[scale = 0.95]{Graphics/Aenderung_1}
-\begin{figure}[h]
-	\caption{ConstraintBasedGroundingOperator}
-\end{figure}
-
+"{}if (c.getType().equals(v.getType()))"{} lautet.
+%\includegraphics[scale = 0.95]{Graphics/Aenderung_1}
+%\includegraphics[scale = 0.95]{Graphics/Aenderung_1a}
+%\begin{figure}[h]
+%	\caption{ConstraintBasedGroundingOperator}
+%\end{figure}
 
 \section{Korrekturen in Fraction} \label{Korrektur_Fraction}
 Bei der Addition von zwei Objekten vom Typ Fraction kam es zu einem Überlauf.\\
 In der Methode Fraction.addition wird das kleinste gemeinste Vielfache (least common multiple) benötigt. 
 In der Methode Fraction.addition im Paket package \\edu.cs.ai.log4KR.math.types wird das kleinste gemeinste Vielfache (least common multiple) benötigt. 
 Die Methode Fraction.lcm wurde ergänzt:\\
-\\
-\includegraphics[scale = 0.95]{Graphics/Aenderung_221}
+
+%\includegraphics[scale = 0.95]{Graphics/Aenderung_221a}
+%\begin{figure}[h]
+%	\caption{Fraction.lcm}
+%\end{figure}
+
+\includegraphics[scale = 0.95]{Graphics/Aenderung_31a}\label{Abb lcm}
 \begin{figure}[h]
-	\caption{Fraction.lcd}
+	\caption{Fraction.lcm -alt-}
 \end{figure}
+
+
+\includegraphics[scale = 0.95]{Graphics/Aenderung_221a}
+\begin{figure}[h]
+	\caption{Fraction.lcm -neu-}
+\end{figure}
+
 
 Und die Methode Fraction.gcd wurde geändert von:\\
 \\
@@ -3784,31 +3843,23 @@ Und die Methode Fraction.gcd wurde geändert von:\\
 	\caption{Fraction.gcd -alt-}
 \end{figure}
 \\
+\\
+
 auf:\\
 \\
-\includegraphics[scale = 0.95]{Graphics/Aenderung_212}
+\includegraphics[scale = 0.95]{Graphics/Aenderung_212a}
 \begin{figure}[h]
 	\caption{Fraction.gcd -neu-}
 \end{figure}
 
-Bei der Bildung des kleinsten gemeinsamen Vielfachen trat das gleiche Problem des Überlaufs aus. Das wurde nur mit einem provisorischen Lösung behoben. Es wird dringend empfohlen, die Korrektur korrekt zu implementieren. 
+Bei der Bildung des kleinsten gemeinsamen Vielfachen trat das gleiche Problem des Überlaufs au, vgl. \ref{Abb lcm}. Das wurde nur mit einem provisorischen Lösung behoben. Es wird dringend empfohlen, die Korrektur korrekt zu implementieren.
 
-\includegraphics[scale = 0.95]{Graphics/Aenderung_31}
-\begin{figure}[h]
-	\caption{Fraction.lcm -alt-}
-\end{figure}
-
-
-\includegraphics[scale = 1.0]{Graphics/Aenderung_32}
-\begin{figure}[h]
-	\caption{Fraction.lcm -neu-}
-\end{figure}
 
 \section{Modifikation von EqualityConstraint}
 In der Klasse EqualityConstraint war nur die Methode EqualityConstraint.equals(Variable var, Term t) enthalten die einen Konstruktor aufruft statt Objekte zu vergleichen und der damit nicht in der in Collections üblicherweise vorgesehenen Weise agiert. Der Methodennamen erschient unglücklich gewählt.\\
 Es wurde eine equals-Methode ergänzt, die die gewünschte Funktionalität zur Verfügung stellt.\\
 \\
-\includegraphics[scale = 0.95]{Graphics/Aenderung_3}
+\includegraphics[scale = 0.9]{Graphics/Aenderung_3}
 \begin{figure}[h]
 	\caption{EqualityConstraint.equals(Object obj)}
 \end{figure}
@@ -3818,7 +3869,7 @@ Es wurde eine equals-Methode ergänzt, die die gewünschte Funktionalität zur V
 Die Klasse InequalityConstraint enthielt keine equals-Methode.
 Diese wurde ergänzt.\\
 \\
-\includegraphics[scale = 0.95]{Graphics/Aenderung_4}
+\includegraphics[scale = 0.9]{Graphics/Aenderung_4a}
 \begin{figure}[h]
 	\caption{InequalityConstraint.equals(Object obj)}
 \end{figure}
@@ -4009,12 +4060,16 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 \renewcommand{\nomname}{Abkürzungs- und Symbolverzeichnis}
 \thispagestyle{myheadings}
 \markboth{}{ABKÜRZUNGS- UND SYMBOLVERZEICHNIS}
+
 \printnomenclature
 \addcontentsline{toc}{chapter}{Abkürzungs- und Symbolverzeichnis}
 \newpage
 
 
+
+
 \listoftheorems
+
 \addcontentsline{toc}{chapter}{Liste der Sätze, Definitionen und Beispiele}
 
 \newpage

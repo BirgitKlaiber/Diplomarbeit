@@ -14,6 +14,7 @@
 
 
 
+
  
 
 %\documentclass[draft]{scrreprt} 
@@ -144,7 +145,7 @@
 \end{center}
 
 \begin{center}
-\textcolor{blue}{Version 20180907}
+\textcolor{blue}{Version 20180914}
 	
 \large{Kleingartach, September 2018}
 \end{center}
@@ -3544,8 +3545,15 @@ Zunächst war zu bedenken, wie sich Inferenz in FO-PCL konzeptuell in einer Komp
 \end{itemize}
 
 
- Die Ideen der positiven Generalisierung und der negativen Generalisierung flossen in die Idee der konditionalen Generalisierung, \ref{Konditionale Generalisierung}, ein, die favorisiert und als umsetzbar bewertet wurde. 
-Aus den Ideen konnte ein Algorithmus entwickelt werden, \ref{Alg}.
+
+
+Die Ideen der positiven Generalisierung und der negativen Generalisierung flossen in die Idee der konditionalen Generalisierung, \ref{Konditionale Generalisierung}, ein, die favorisiert und als umsetzbar bewertet wurde und zusammen mit der logischen Generalisierungsoptimierung zur Entwicklung des Algorithmus führten, ausführlich hierzu \ref{Alg}. 
+
+Mit der Implementierung, \ref{Inf},  wurde der Algorithmus in die Inferenzkomponente umgesetzt. Die dabei aufgetreten Herausforderungen wurden bereits oben unter \ref{Herausforderungen}  beschrieben. Mit Ausnahme dieser praktischen Schwierigkeiten gab es keine wesentlichen Probleme, die konzeptueller Natur waren. Der Entwurf erwies sich als stimmig und bis auf marginale Modifikationen auch genauso umsetzbar. 
+
+Wenn man das reflexive Wissen ausnimmt, ergeben sich unterschiedliche Wahrscheinlichkeiten für Grundinstanzen des gleichen Konditionals im Grunde genommen nur durch spezifische Konstanten der Wissensbasis. Die Logik der Komponente berücksichtigt dies. Log4KR stellt zur Berechnung der Wahrscheinlichkeiten zwar umfangreiche Methoden zur Verfügung, die aber leider nicht immer korrekt arbeiten und sollte daher in diesem Bereich überarbeitet werden. Im Übrigen können beliebige Anfragen an die Komponente gestellt werden. Die erwarteten Ausgaben entsprechen den tatsächlichen Ausgaben und können nachvollzogen werden. 
+
+Leider hat Fo-PCL mit dem Modell der maximalen Entropie den ganz erheblichen Nachteil, dass das Universum der Wissensbasis eine Größe von drei Elementen nicht überschreiten darf, da sonst eine praktische Berechenbarkeit nicht mehr gegeben ist. Das schränkt meines Erachtens die praktische Anwendbarkeit fast vollständig ein. Theoretisch betrachtet können allerdings beliebige Anfragen gestellt werden.
 
 
 \subsection{Betrachtung der Funktionalität der Komponente}
@@ -3594,12 +3602,11 @@ Insgesamt kann bemerkt werden, dass die Ideen die erarbeitet werden konnten brau
 
 
 \chapter{Ergebnisse und Ausblick}\label{Erg}
-Wenn man das reflexive Wissen ausnimmt, ergeben sich unterschiedliche Wahrscheinlichkeiten für Grundinstanzen des gleichen Konditionals im Grunde genommen nur durch spezifische Konstanten der Wissensbasis. Die Logik der Komponente berücksichtigt dies. Log4KR stellt zur Berechnung der Wahrscheinlichkeiten zwar umfangreiche Methoden zur Verfügung, die aber leider nicht immer korrekt arbeiten und sollte daher in diesem Bereich überarbeitet werden. Im Übrigen können beliebige Anfragen an die Komponente gestellt werden. Die erwarteten Ausgaben entsprechen den tatsächlichen Ausgaben und können nachvollzogen werden. 
-
-Wie sich herausgestellt hat, ließ sich diese Idee auch praktisch mit verhältnismäßigem Aufwand realisieren. Andere viel versprechende Ideen wie die logische Generalisierung, \ref{Logische Generalisierung} und das modifizierte Versionenraum-Verfahren, \ref{Verwendbar VRL} mussten verworfen werden. 
 
 
-Leider hat Fo-PCL mit dem Modell der maximalen Entropie den ganz erheblichen Nachteil, dass das Universum der Wissensbasis eine Größe von drei Elementen nicht überschreiten darf, da sonst eine praktische Berechenbarkeit nicht mehr gegeben ist. Das schränkt meines Erachtens die praktische Anwendbarkeit fast vollständig ein. Theoretisch betrachtet können allerdings beliebige Anfragen gestellt werden.
+
+Wie sich herausgestellt hat, ließen sich die favorisierte Idee der konditionalen Generalisierung in einen Entwurf umsetzen und auch praktisch mit verhältnismäßigem Aufwand realisieren, d.h. implementieren. Andere viel versprechende Ideen wie die logische Generalisierung, \ref{Logische Generalisierung} und das modifizierte Versionenraum-Verfahren, \ref{Verwendbar VRL} mussten verworfen werden. 
+
 
 Komplexere Anfragen und Randfälle wurden im Rahmen der Arbeit nicht betrachtet, könnten aber Gegenstand weiterer Forschungen sein. Grundsätzlich sollte auch darüber nachgedacht werden, ob nicht Inferenz besser oder sogar einfacher auf Basis von Lifted Inferenz betrieben werden sollte.\\
 Das könnte ein weiterer umfangreicher, dennoch vielversprechender Forschungsbereich sein. 

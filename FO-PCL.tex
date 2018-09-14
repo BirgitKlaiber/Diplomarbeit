@@ -13,6 +13,7 @@
 
 
 
+
  
 
 %\documentclass[draft]{scrreprt} 
@@ -1257,7 +1258,7 @@ $ T_{3} : \langle (isBird(Tweety) [1], \top \rangle$\\
 Generalisiertes Konditional für Äquivalenzklasse 1: $\{(flies(Tweety))[0.0]\}$\\
 Generalisiertes Konditional für Äquivalenzklasse 2: $\{(flies(X))[0.664] \\ <X\neq Tweety>\}$\\
 \\
-Wie man unschwer erkennen kann, entspricht das generalisierte Konditional der Äquivalenzklasse 1 genau dem (einzigen) Konditional, das sich in der Äquivalenzklasse 1 befindet.\\
+Wie man unschwer erkennen kann, entspricht das generalisierte Konditional der Äquivalenzklasse 1 genau dem (einzigen) Konditional, das sich in der Äquivalenzklasse 1 befindet.
 Aus dem generalisierten Konditional für die Äquivalenzklasse 2 lassen sich durch Grundsubstitution genau die Konditionale der Äquivalenzklasse bilden.
 \end{Bsp}
 
@@ -1887,7 +1888,7 @@ Dies ist ein einfacher Fall und führt zur Ausgabe aller Grundkonditionale mit j
 	
 \end{itemize}
 
-
+\newpage
 \section{Fazit}
 \begin{itemize}
 	\item Unterschiedliche Wahrscheinlichkeiten resultieren aus
@@ -2538,7 +2539,7 @@ Das Verfahren soll hier an einem Beispiel erläutert werden.
 
 Die konditionale Generalisierung soll die Vorteile der positiven und der negativen Generalisierung vereinigen. Es soll der kürzere der beiden, logisch optimierten Constraints gefunden werden. 
 Diese Idee baut auf der positiven und der negativen Generalisierung auf. Es werden beide Generalisierungen ausgeführt und der generierte Constraint in jeder der beiden Alternativen logisch optimiert. Die beiden Ausdrücke werden im einfachsten Fall über die Länge des Constraints verglichen und der kürzere gewählt.
-\newpage
+
 
 \subsection{Einzelne Schritte}
 \begin{itemize}
@@ -2548,33 +2549,37 @@ Diese Idee baut auf der positiven und der negativen Generalisierung auf. Es werd
 	\item Generalisierungsvergleich \ref{Gen_Vergleich}
 \end{itemize}
 
-\includegraphics[scale = 0.7]{Graphics/Lo}
+
+\includegraphics[scale = 0.8]{Graphics/Lo}
 \begin{figure}[h]
 	\caption{Konditionale Generalisierung }
 	\label{Abb_Log_Gen}
 \end{figure}
 
 
-\includegraphics[scale = 0.7]{Graphics/Flussplan_Generalisierung_kond}
-\begin{figure}[h]
-	\caption{Übersicht logische Generalisierungsoptimierung}
+
+\newpage
+\includegraphics[scale = 0.6]{Graphics/Flussplan_Generalisierung_kond}
+\begin{figure}[h!]
+	\caption[h!]{Übersicht logische Generalisierungsoptimierung}
 	\label{Fig_Log_Genopt}
 \end{figure}
+
 
 
 \subsection{Erzeugung der Konditionale für die Klassen}
 Die folgenden Flussdiagramme sollen den jeweiligen Inferenzprozess visualisieren.
 
 \includegraphics[scale = 0.7]{Graphics/Flussplan_Generalisierung_nichtatomar}
-\begin{figure}[h]
-	\caption{Übersicht Generalisierung}
+\begin{figure}[h!]
+	\caption[b]{Übersicht Generalisierung}
 	\label{Fig_General}
 \end{figure}
 \newpage
 Die folgende Abbildung illustriert die Generalisierung bei zwei Äquivalenzklassen.
 \includegraphics[scale = 0.8]{Graphics/Flussplan_Generalisierung_zweiKlassen}
-\begin{figure}[h]
-	\caption{Übersicht Generalisierung für zwei Äquivalenzklasse}
+\begin{figure}[h!]
+	\caption[b]{Übersicht Generalisierung für zwei Äquivalenzklasse}
 	\label{Fig_ZweiKlassen}
 \end{figure}
 
@@ -3505,31 +3510,31 @@ Zunächst war zu bedenken, wie sich Inferenz in FO-PCL konzeptuell in einer Komp
 
 \begin{itemize}
 	\item Achtung: Reflexives Wissen, d.h. Wissen, bei dem alle Variablen mit der gleichen Konstante belegt werden, werden für alle Ideen gleich behandelt (da dieses Wissen gemäß Übereinkunft ausgeschlossen und mit der Wahrscheinlichkeit von Null vorbelegt wurde). Der Constraint wird als Constraint der Gleichheit über alle Variablen erzeugt
-	\item Positive Generalisierung \ref{PositiveGeneralisierung}: \\
+	\item\textit{Positive Generalisierung} \ref{PositiveGeneralisierung}: \\
 	es werden im Constraint je Klasse die Belegungen der Variablen in der Klasse vorkommenden Konstanten kanonisch aufgezählt (wenn es sich nicht um reflexives Wissen handelt).\\
 	\begin{itemize}
 		\item Vorteil: funktioniert in jedem Fall
 		\item Nachteil: nicht unbedingt übersichtlich und aussagekräftig 
 	\end{itemize}
-	\item Negative Generalisierung \ref{NegativeGeneralisierung}:\\
+	\item \textit{Negative Generalisierung} \ref{NegativeGeneralisierung}:\\
 	Hier wird der Constraint aus Ausnahmen der Klasse gebildet
 	\begin{itemize}
 		\item Vorteil: funktioniert im Fall einstelliger Prädikate
 		\item Nachteil: führt im Fall zweistelliger Prädikate zu einem unübersichtlichen Ergebnis 
 	\end{itemize}
-	\item Modifikation des Versionenraum-Lernverfahrens:\\
+	\item \textit{Modifikation des Versionenraum-Lernverfahrens}:\\
 	ausführlich \ref{Verwendbar VRL}
 	\begin{itemize}
 		\item Vorteil: funktioniert vermutlich
 		\item Nachteil: bringt keine Verbesserung gegenüber der positiven Generalisierung oder negativen Generalisierung bzw. baut darauf auf
 	\end{itemize}
-	\item Logische Generalisierungsoptimierung \ref{Logische Genopt}:\\
+	\item \textit{Logische Generalisierungsoptimierung} \ref{Logische Genopt}:\\
 	hier handelt es sich um ein unterstützendes Verfahren, um den Constraint logisch zu optimieren 
 		\begin{itemize}
 		\item Vorteil: marginale Verbesserung, denn logische Ausdrücke sind bereits davor minimal
 		\item Nachteil: keine Verbesserung
 	\end{itemize}
-	\item Konditionale Generalisierung \ref{Konditionale Generalisierung}:\\
+	\item \textit{Konditionale Generalisierung} \ref{Konditionale Generalisierung}:\\
 	Synthese aller Ideen zur Erreichung des optimalen Ergebniss
 	\begin{itemize}
 	\item Vorteile: Synthese aller Ideen, funktioniert
@@ -3539,7 +3544,9 @@ Zunächst war zu bedenken, wie sich Inferenz in FO-PCL konzeptuell in einer Komp
 \end{itemize}
 
 
- Die Ideen der positiven Generalisierung und der negativen Generalisierung flossen in die Idee der konditionalen Generalisierung, \ref{Konditionale Generalisierung}, ein, die favorisiert und als umsetzbar bewertet wurde. Wie sich herausgestellt hat, ließ sich diese Idee auch praktisch mit verhältnismäßigem Aufwand realisieren. Andere viel versprechende Ideen wie die logische Generalisierung, \ref{Logische Generalisierung} und das modifizierte Versionenraum-Verfahren, \ref{Verwendbar VRL} mussten verworfen werden. 
+ Die Ideen der positiven Generalisierung und der negativen Generalisierung flossen in die Idee der konditionalen Generalisierung, \ref{Konditionale Generalisierung}, ein, die favorisiert und als umsetzbar bewertet wurde. 
+Aus den Ideen konnte ein Algorithmus entwickelt werden, \ref{Alg}.
+
 
 \subsection{Betrachtung der Funktionalität der Komponente}
 
@@ -3588,6 +3595,9 @@ Insgesamt kann bemerkt werden, dass die Ideen die erarbeitet werden konnten brau
 
 \chapter{Ergebnisse und Ausblick}\label{Erg}
 Wenn man das reflexive Wissen ausnimmt, ergeben sich unterschiedliche Wahrscheinlichkeiten für Grundinstanzen des gleichen Konditionals im Grunde genommen nur durch spezifische Konstanten der Wissensbasis. Die Logik der Komponente berücksichtigt dies. Log4KR stellt zur Berechnung der Wahrscheinlichkeiten zwar umfangreiche Methoden zur Verfügung, die aber leider nicht immer korrekt arbeiten und sollte daher in diesem Bereich überarbeitet werden. Im Übrigen können beliebige Anfragen an die Komponente gestellt werden. Die erwarteten Ausgaben entsprechen den tatsächlichen Ausgaben und können nachvollzogen werden. 
+
+Wie sich herausgestellt hat, ließ sich diese Idee auch praktisch mit verhältnismäßigem Aufwand realisieren. Andere viel versprechende Ideen wie die logische Generalisierung, \ref{Logische Generalisierung} und das modifizierte Versionenraum-Verfahren, \ref{Verwendbar VRL} mussten verworfen werden. 
+
 
 Leider hat Fo-PCL mit dem Modell der maximalen Entropie den ganz erheblichen Nachteil, dass das Universum der Wissensbasis eine Größe von drei Elementen nicht überschreiten darf, da sonst eine praktische Berechenbarkeit nicht mehr gegeben ist. Das schränkt meines Erachtens die praktische Anwendbarkeit fast vollständig ein. Theoretisch betrachtet können allerdings beliebige Anfragen gestellt werden.
 

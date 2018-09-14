@@ -71,10 +71,17 @@
 \usepackage{lmodern}
 
 
-\usepackage{tocstyle}
-\usetocstyle{KOMAlike}
+%\usepackage{tocstyle}
+%\usetocstyle{classic}
 
 \usepackage{tocloft}
+
+
+
+\usepackage[tocfullflat]{tocstyle}
+\usetocstyle{classic}
+
+
 
 
 
@@ -84,6 +91,9 @@
 \usepackage[citecolor=green,urlcolor=black,linkcolor=red]{hyperref}
 \hypersetup{colorlinks=true}
 \lstset{ language={java}, basicstyle=\ttfamily\footnotesize, breaklines=true, numbers=left, stepnumber=5, numberstyle=\tiny\color{gray}, mathescape=true, showstringspaces=false, inputencoding=utf8}
+
+
+
 
 \newtheorem{Def}{Definition }[section]
 \newtheorem{Pro}{Proposition}[section]
@@ -4061,35 +4071,39 @@ Die hier aufgeführten Beispiele konnten leider nicht getestet werden, da Log4KR
 \thispagestyle{myheadings}
 \markboth{}{ABKÜRZUNGS- UND SYMBOLVERZEICHNIS}
 
-\printnomenclature
+
+\printnomenclature 
 \addcontentsline{toc}{chapter}{Abkürzungs- und Symbolverzeichnis}
-\newpage
+%\newpage
 
 
 
-
+\cleardoublepage
+\phantomsection
 \listoftheorems
-
 \addcontentsline{toc}{chapter}{Liste der Sätze, Definitionen und Beispiele}
-
 \newpage
 
+%\cleardoublepage
+\phantomsection
 \listoftables
 \addcontentsline{toc}{chapter}{Tabellenverzeichnis}
 \newpage
 
+%\cleardoublepage
+\phantomsection
 \listoffigures
 \addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
 
-\newpage
+%\newpage
 
-
+%\cleardoublepage
+\phantomsection
 \addcontentsline{toc}{chapter}{Index}
 \printindex
 \thispagestyle{myheadings}
 \markboth{}{INDEX}
-\newpage
-
+%\newpage
 
 
 

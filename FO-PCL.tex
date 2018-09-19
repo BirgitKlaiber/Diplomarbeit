@@ -15,6 +15,8 @@
 
 
 
+
+
  
 
 %\documentclass[draft]{scrreprt} 
@@ -73,8 +75,6 @@
 \usepackage{lmodern}
 
 
-%\usepackage{tocstyle}
-%\usetocstyle{classic}
 
 \usepackage{tocloft}
 
@@ -145,7 +145,7 @@
 \end{center}
 
 \begin{center}
-\textcolor{blue}{Version 20180914}
+\textcolor{blue}{Version 20180919}
 	
 \large{Kleingartach, September 2018}
 \end{center}
@@ -2920,7 +2920,7 @@ Eine Zusammenfassung der gewonnen Ergebnisse und Erkenntnisse und ein Ausblick a
 
 \section{Funktionsweise des Algorithmus}
 \includegraphics[scale = 0.7]{Graphics/Ablauf_Algorithmus}
-\begin{figure}[h]
+\begin{figure}[h]\label{Algorithmus}
 		\caption{Der Algorithmus }
 \end{figure}
 
@@ -3324,7 +3324,7 @@ Achtung: aufgrund der Berechnungen mit Gleitkommazahlen kann es zu unterschiedli
 
 \chapter{Evaluation}\label{eval} 
 \textbf{Vorüberlegungen}
-An dieser Stelle soll die Korrektheit der Inferenzkomponete lediglich im Hinblick auf ihre Funktionalität, d.h. die Frage, ob sie die erwartete Ausgabe liefert, betrachtet werden. 
+An dieser Stelle soll die Korrektheit der Inferenzkomponente lediglich im Hinblick auf ihre Funktionalität, d.h. die Frage, ob sie die erwartete Ausgabe liefert, betrachtet werden. 
 
 \section{Korrektheit} \label{Korrektheit}
 Es werden die einzelnen Kategorien von Fällen betrachtet zusammen mit den Ergebnissen, die die Komponente liefert. 
@@ -3351,9 +3351,10 @@ Es werden die einzelnen Kategorien von Fällen betrachtet zusammen mit den Ergeb
 	\item mit spezifischer Konstante\\
 		Für das Beispiel "{}ColdSpez"{}, \ref{ColdSpez}, ergibt sich als Ausgabe der Komponente im Falle der positiven Generalisierung:
 			\lstinputlisting{Erg/ColdSpezTestErg.txt}
-			Das erfüllt die Aufgabenstellung insoweit, dass es ein allgemeines Konditional gibt. Besser lesbar und verständlich, wäre es, wenn die angestrebte Ausgabe erfüllt werden könnte. Dazu wäre ein zusätzlicher Programmieraufwand nötig geworden. Auf die Implementierung dieser Lösung wurde zugunsten der theoretischen Ausarbeit an dieser Stelle verzichtet. Grund dafür waren unter anderem die Probleme, die sich bei der Berechnung der Wahrscheinlichkeiten ergeben haben und die Umsetzung unverhältnismäßig erschwert haben. Insgesamt darf aber davon ausgegangen werden, dass auch diese Lösung realisierbar ist. 
+			Dieses Beispiel erfüllt die Aufgabenstellung insoweit, dass es ein allgemeines Konditional gibt. Besser lesbar und verständlich, wäre es, wenn die angestrebte Ausgabe erfüllt werden könnte. Dazu wäre ein zusätzlicher Programmieraufwand nötig geworden. Auf die Implementierung dieser Lösung wurde zugunsten der theoretischen Ausarbeit an dieser Stelle verzichtet. Grund dafür waren unter anderem die Probleme, die sich bei der Berechnung der Wahrscheinlichkeiten ergeben haben und die Umsetzung unverhältnismäßig erschwert haben. Insgesamt darf aber davon ausgegangen werden, dass auch diese Lösung realisierbar ist. 
 \end{itemize}
 
+Wie man den Beispielen entnehmen kann, wurde die Aufgabe korrekt gelöst. 
 
 	
 \end{itemize}
@@ -3362,7 +3363,7 @@ Es werden die einzelnen Kategorien von Fällen betrachtet zusammen mit den Ergeb
 \subsection{Generische und spezifische Grundinstanzen}
 Die Berechnung der Wahrscheinlichkeiten für jedes Grundkonditional ist das Ergebnis einer Annäherungsberechnung.
 
-Man unterscheidet im allgemeinen zwischen spezifischen und generischen Grundinstanzen einer Formel, \index{Grundinstanz ! generisch} \index{Grundinstanz ! spezifisch} und \ref{Grundinstanz spezifisch}.
+Man unterscheidet im allgemeinen zwischen spezifischen und generischen Grundinstanzen einer Formel, \index{Grundinstanz ! generisch} \index{Grundinstanz ! spezifisch} \ref{Grundinstanz spezifisch}.
 Bei spezifischen Grundinstanzen von Konditionalen handelt es sich um solche, die bereits in der Wissensbasis enthalten sind, vgl. \ref{Grundinstanz generisch}. 
 
 \label{Bsp:Spez Grundinstanz} 
@@ -3392,7 +3393,7 @@ Ein Test, der verifiziert, dass die generischen und spezifischen Grundinstanzen 
 
 
 \subsection{Berechnung der Wahrscheinlichkeiten} \label{Berechnung_Wahrscheinlichkeiten}
-Bei der Berechnung der Modelle bzw. bei der Selektion des Modells mit der maximalen Entropie traten wie bereits oben erwähnt, \ref{Gleichheit} immer wieder Unstimmigkeiten bei der Rundung auf. Diese Probleme führen insbesondere im Zusammenhang mit unterschiedlichen Laufzeitumgebungen zu erheblichen Problemen. Im Beispiel"{}Cold"{}, \ref{Cold}, führt das je nach Laufzeitumgebung zur Bildung von zwei Klassen, was richtig wäre, oder drei Klassen, was definitiv falsch ist. Das hat zur Folge, dass ein und der selbe Test in der JUnit Testumgebung falsch, \ref{Cold_1} und in der Debug Umgebung richtig ist.
+Bei der Berechnung der Modelle bzw. bei der Selektion des Modells mit der maximalen Entropie traten wie immer wieder Unstimmigkeiten bei der Rundung auf, mehr dazu auch unter \ref{Gleichheit}. Diese Probleme führen insbesondere im Zusammenhang mit unterschiedlichen Laufzeitumgebungen zu erheblichen Problemen. Im Beispiel"{}Cold"{}, \ref{Cold}, führt das je nach Laufzeitumgebung zur Bildung von zwei Klassen, was richtig wäre, oder drei Klassen, was definitiv falsch ist. Das hat zur Folge, dass ein und der selbe Test in der JUnit Testumgebung falsch, \ref{Cold_1} und in der Debug Umgebung richtig ist.
 
 \includegraphics[scale = 0.6]{Graphics/Cold_1}
 \begin{figure}[h]
@@ -3526,7 +3527,7 @@ Zunächst war zu bedenken, wie sich Inferenz in FO-PCL konzeptuell in einer Komp
 	\item \textit{Modifikation des Versionenraum-Lernverfahrens}:\\
 	ausführlich \ref{Verwendbar VRL}
 	\begin{itemize}
-		\item Vorteil: funktioniert vermutlich
+		\item Vorteil: funktioniert 
 		\item Nachteil: bringt keine Verbesserung gegenüber der positiven Generalisierung oder negativen Generalisierung bzw. baut darauf auf
 	\end{itemize}
 	\item \textit{Logische Generalisierungsoptimierung} \ref{Logische Genopt}:\\
@@ -3553,7 +3554,7 @@ Mit der Implementierung, \ref{Inf},  wurde der Algorithmus in die Inferenzkompon
 
 Wenn man das reflexive Wissen ausnimmt, ergeben sich unterschiedliche Wahrscheinlichkeiten für Grundinstanzen des gleichen Konditionals im Grunde genommen nur durch spezifische Konstanten der Wissensbasis. Die Logik der Komponente berücksichtigt dies. Log4KR stellt zur Berechnung der Wahrscheinlichkeiten zwar umfangreiche Methoden zur Verfügung, die aber leider nicht immer korrekt arbeiten und sollte daher in diesem Bereich überarbeitet werden. Im Übrigen können beliebige Anfragen an die Komponente gestellt werden. Die erwarteten Ausgaben entsprechen den tatsächlichen Ausgaben und können nachvollzogen werden. 
 
-Leider hat Fo-PCL mit dem Modell der maximalen Entropie den ganz erheblichen Nachteil, dass das Universum der Wissensbasis eine Größe von drei Elementen nicht überschreiten darf, da sonst eine praktische Berechenbarkeit nicht mehr gegeben ist. Das schränkt meines Erachtens die praktische Anwendbarkeit fast vollständig ein. Theoretisch betrachtet können allerdings beliebige Anfragen gestellt werden.
+Leider hat FO-PCL mit dem Modell der maximalen Entropie bei der Verarbeitung mit Log4KR den ganz erheblichen Nachteil, dass das Universum der Wissensbasis eine Größe von drei Elementen nicht überschreiten darf, da sonst eine praktische Berechenbarkeit nicht mehr gegeben ist. Das schränkt meines Erachtens die praktische Anwendbarkeit fast vollständig ein. Theoretisch betrachtet können allerdings beliebige Anfragen gestellt werden.
 
 
 \subsection{Betrachtung der Funktionalität der Komponente}
@@ -3603,9 +3604,19 @@ Insgesamt kann bemerkt werden, dass die Ideen die erarbeitet werden konnten brau
 
 \chapter{Ergebnisse und Ausblick}\label{Erg}
 
+In dieser Arbeit sollte mit Hilfe vorhandener Komponenten eine neue Inferenzkomponente entworfen und implementiert werden. Zunächst sollte die entropie-optimale Wahrscheinlichkeitsfunktion berechnet werden. Die Inferenzkomponente sollte dann qualitative Konditionale als Anfrage entgegen nehmen und diese mit Wahrscheinlichkeit zurückliefern. Dabei sollte ein Rückgabemenge berechnet und zurückgeliefert werden. Hierfür sollte zunächst für jede Grundinstanz des angefragten Konditionals die Wahrscheinlichkeit berechnet und alle Grundinstanzen, die die gleiche bedingten Wahrscheinlichkeit liefern, zu einem möglichst allgemeinen Konditional zusammengefasst werden. 
 
+Die Implementierung sollte schrittweise verfeinert werden. Beginnend mit der Zurücklieferung aller Grundinstanzen, worauf zunehmend komplizierte Mengen von Grundinstanzen zu einem möglichst allgemeinen Konditional zusammengefasst werden sollten. 
 
-Wie sich herausgestellt hat, ließen sich die favorisierte Idee der konditionalen Generalisierung in einen Entwurf umsetzen und auch praktisch mit verhältnismäßigem Aufwand realisieren, d.h. implementieren. Andere viel versprechende Ideen wie die logische Generalisierung, \ref{Logische Generalisierung} und das modifizierte Versionenraum-Verfahren, \ref{Verwendbar VRL} mussten verworfen werden. 
+Als Ausgangsbasis für den Entwurf der Inferenzkomponente dienten experimentelle Forschungen, die sich unter \ref{Experim. Forschungen} finden. Es wurden die möglichen Fallkonstellationen anhand von Beispielen betrachtet und ausgewertet. Dabei wurden sowohl das anfragte Konditional und die gebildeten Äquivalenzklassen, d.h.  die Klassen mit der gleichen Wahrscheinlichkeit, näher betrachtet. Die Beobachtungen wurden dokumentiert. 
+
+Diese Forschungen führten zu einer Sammlung von Ideen, siehe Kapitel \ref{Ideen Alg.} aus denen in Kapitel \ref{Alg} ein Algorithmus entwickelt werden konnte. Es wurden verschiedene Ideen betrachtet, gegenübergestellt bewertet und teilweise verworfen, wie die Idee der Modifikation des Versionenraum-Lernverfahrens \ref{Verwendbar VRL}. Die Ideen der positiven, \ref{PositiveGeneralisierung} und der negativen Generalisierung, \ref{NegativeGeneralisierung} fanden zusammen mit der logischen Generalisierungsoptimierung, \ref{Logische Generalisierung} Einzug in die Idee der konditionalen Generalisierung, \ref{Konditionale Generalisierung}; eine Diskussion darüber findet sich in \ref{eval}.
+
+Der Algorithmus orientiert sich am Inferenzprozess in FO-PCL und teilt sich in die Phasen Grundierung der Anfrage, Berechnung der möglichen Welten, Selektion des Modells mit der maximalen Entropie, Berechnung der Wahrscheinlichkeiten für jedes Konditional, Klassifizierung der Grundkonditionale und deren Generalisierung und Rückgabe der Mengen der generalisierten Konditionale auf, anschaulich \ref{Algorithmus}.
+
+Dieser Entwurf wurde in der Implementation, \ref{Inf} umgesetzt. Die Ergebnisse der Umsetzung und die dabei aufgetretenen Herausforderungen, gemeisterten Schwierigkeiten und gefundenen Lösungen wurden in \ref{eval} diskutiert und dokumentiert. 
+
+Insgesamt entspricht das Ergebnis den gestellten Anforderungen. 
 
 
 Komplexere Anfragen und Randfälle wurden im Rahmen der Arbeit nicht betrachtet, könnten aber Gegenstand weiterer Forschungen sein. Grundsätzlich sollte auch darüber nachgedacht werden, ob nicht Inferenz besser oder sogar einfacher auf Basis von Lifted Inferenz betrieben werden sollte.\\
@@ -3879,7 +3890,7 @@ auf:\\
 	\caption{Fraction.gcd -neu-}
 \end{figure}
 
-Bei der Bildung des kleinsten gemeinsamen Vielfachen trat das gleiche Problem des Überlaufs au, vgl. \ref{Abb lcm}. Das wurde nur mit einem provisorischen Lösung behoben. Es wird dringend empfohlen, die Korrektur korrekt zu implementieren.
+Bei der Bildung des kleinsten gemeinsamen Vielfachen trat das gleiche Problem des Überlaufs auf, vgl. \ref{Abb lcm}. Das wurde nur mit einem provisorischen Lösung behoben. Es wird dringend empfohlen, die Modifikation korrekt zu implementieren.
 
 
 \section{Modifikation von EqualityConstraint}

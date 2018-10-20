@@ -17,6 +17,9 @@
 
 
 
+
+
+
  
 
 %\documentclass[draft]{scrreprt} 
@@ -108,7 +111,11 @@
 %\setlength{\currentLongTableWidth}{\textwidth} %setze neue länge auf textbreite
 %\addtolength{\currentLongTableWidth}{-6\tabcolsep} %subtrahiere -8\cdot textbreite von asdf, 2 Abstände pro Zelle * Anzahl der Spalte
 
-
+\makeatletter
+\renewcommand\l@Def{\@dottedtocline{1}{7.5em}{3.3em}}
+\renewcommand\l@Pro{\@dottedtocline{1}{2.5em}{3.3em}}
+\renewcommand\l@Bsp{\@dottedtocline{1}{2.5em}{3.3em}}
+\makeatother
 
 
 
@@ -145,9 +152,9 @@
 \end{center}
 
 \begin{center}
-\textcolor{blue}{Version 20180919}
+
 	
-\large{Kleingartach, September 2018}
+\large{Kleingartach, Oktober 2018}
 \end{center}
 
 \end{titlepage}
@@ -191,9 +198,8 @@ Gegenstand dieser Arbeit ist die Entwicklung und Implementierung einer neuartige
 
 \section{Motivation und Problemstellung}
 
-Eine gute Methode Unsicherheit quantitativ darzustellen, ist die Wahrscheinlichkeitstheorie. Ein Problem dabei ist, dass probabilistische Logik im Gegensatz zur klassischen Logik nicht wahrheitsfunktional ist, sich der Wahrheitswert einer Formel nur bei Unabhängigkeit  eindeutig aus den Wahrheitswerten der Teilformeln bestimmt. Daher ist es notwendig, um wahrheitsgemäß schließen zu können, ausreichende Informationen zu besitzen. Dieses Wissen zu ermitteln ist nicht immer einfach und oft sehr aufwendig.
-\\
- Man suchte daher Methoden, probabilistisches Wissen möglichst informationsgetreu durch verfügbares Wissen anzureichern. 
+Eine gute Methode Unsicherheit quantitativ darzustellen, ist die Wahrscheinlichkeitstheorie. Ein Problem dabei ist, dass probabilistische Logik im Gegensatz zur klassischen Logik nicht wahrheitsfunktional ist, sich der Wahrheitswert einer Formel nur bei Unabhängigkeit  eindeutig aus den Wahrheitswerten der Teilformeln bestimmt. Daher ist es notwendig, um wahrheitsgemäß schließen zu können, ausreichende Informationen zu besitzen. Dieses Wissen zu ermitteln ist nicht immer einfach und oft sehr aufwendig.\\
+Man suchte daher Methoden, probabilistisches Wissen möglichst informationsgetreu durch verfügbares Wissen anzureichern. 
 
 Wissensrepräsentationen der realen Welt erfordern es nicht nur, unsicheres Wissen über ein bestimmtes Objekt darzustellen, sondern über eine Vielzahl verschiedener Objekte und deren ggf. unsichere Beziehungen, vgl. \cite[S. 19]{Fis09}
 Beschränkt man sich auf aussagenlogisches konditionales Wissen und dessen Verarbeitung, lassen sich manche Zusammenhänge der realen Welt gar nicht oder schwer darstellen oder nur durch redundante und gegebenenfalls unnötige Berechnungen. Die (propositionale) probabilistische Konditionallogik Probitional Conditional Logic (PCL) \index{PCL} ist ein Beispiel für eine Logik, die die Gegebenheiten der realen Welt abbilden kann und das auf relativ unkomplizierte Weise. Ausführliche Anmerkungen zu PCL finden sich in \cite{RKI96} und in \cite[Kap. 2.4]{Fis10}. 
@@ -257,7 +263,7 @@ $ MI_2 : \langle (likes(a, V))[0,05], V \neq a \rangle$\\
 
 \end{Bsp}
 \newpage
-FO-PCL\index{FO-PCL} wird in \cite[Kap. 6]{Fis10} präsentiert und eröffnet eine Möglichkeit, den Zweck der Verbindung von Wissensrepräsentation und (Prädikaten-)Logik erster Stufe zu erfüllen und gleichzeitig Nachteile anderer bekannter Ansätze, die im folgenden noch erwähnt werden, zu kompensieren.     
+FO-PCL\index{FO-PCL} wird in \cite[Kap. 6]{Fis10} präsentiert und eröffnet eine Möglichkeit, den Zweck der Verbindung von Wissensrepräsentation und (Prädikaten-)Logik erster Stufe zu erfüllen und gleichzeitig Nachteile anderer bekannter Ansätze, die im Folgenden noch erwähnt werden, zu kompensieren.     
 
                             
 Wie in \cite[S. 19]{Fis09} erläutert wird, stellen probabilistische graphische Modelle in Verbindung mit einer Teilmenge der (Prädikaten-)Logik den geläufigsten Formalismus dar, um Wissensrepräsentation und Logik zu verbinden; einen Überblick darüber kann man sich \cite{SBAR08} und in \cite[Kap. 10]{GT07} verschaffen. Bekannteste Vertreter der probabilistischen graphischen Modelle sind Markov Logic Networks (MLNs), Bayes Logic Programs (BLPs) und Probabilistisch Relationale Modelle (PRMs). Sie finden erfolgreich in verschiedenen Bereichen praktische Anwendung.
@@ -266,16 +272,15 @@ Nähere Informationen zu den Konzepten und ihrer Anwendung entnehmen sie bitte d
 Dabei ist die bedingte Unabhängigkeit das fundamentale und entscheidende Prinzip probabilistischer Netze. Mit einem Bayes- oder Markov-Netz modelliert man in erster Linie Unabhängigkeiten, s. auch \cite[Kap. 12.1 und 12.2]{BKI08}. Um ein entsprechendes Netz aufbauen zu können, ist es notwendig, die Zusammenhänge zu betrachten. Allerdings ist die Beurteilung von Abhängigkeiten und Unabhängigkeiten der einzelnen Variablen so schwierig, dass selbst Experten unter Umständen zunächst keine eindeutige Aussage machen können, wie sich die Variablen zueinander verhalten. Zur Ermittlung der Zusammenhänge ist daher unter Umständen ein erheblicher statistischer Aufwand nötig, vgl. \cite[12.6, S. 402 /403]{BKI08}.
  Ein weiteres Problem ist, dass MLNs, da sie ungerichtete Graphen mit Prädikatenlogik kombinieren und dabei gewichtete Formeln nutzen, schwer verständlich und schwer zu spezifizieren sind. Nähere Ausführungen zu MLNs können \cite{DR06} entnommen werden. 
  
- BLPs dagegen nutzen gerichtete Graphen in Kombination mit Logikprogrammen. Bayes Netze können kausale Abhängigkeiten darstellen, die Modellierung eines Bayesschen Netzes erfordert einige Mühe und bringt ein sehr effektives, aber auch starres probabilistisches Gerüst hervor. Durch die Struktur des Netzes und die angegebenen Wahrscheinlichkeiten wird die Verteilung vollständig bestimmt. Bayessche Netze können keine allgemeinen Abhängigkeiten, das sind Abhängigkeiten, die nicht notwendig kausal bzw. bedingte Unabhängigkeiten sind, darstellen. Sie können keine zyklischen Wirkungen repräsentieren. Kausale Abhängigkeiten sind aber in bestimmten Einsatzbereichen \footnote {wie zum Beispiel der Auswertung sozialer Beziehungen}, welche eher durch Korrelation gekennzeichnet sind, nicht gegeben.
- 
-Einen kurzen Überblick über MLNs und BLPs liefert \cite[Kap. 2.1 und 2.2]{FLT09}.
+ BLPs dagegen nutzen gerichtete Graphen in Kombination mit Logikprogrammen. Bayes Netze können kausale Abhängigkeiten darstellen, die Modellierung eines Bayesschen Netzes erfordert einige Mühe und bringt ein sehr effektives, aber auch starres probabilistisches Gerüst hervor. Durch die Struktur des Netzes und die angegebenen Wahrscheinlichkeiten wird die Verteilung vollständig bestimmt. Bayessche Netze können keine allgemeinen Abhängigkeiten, das sind Abhängigkeiten, die nicht notwendig kausal bzw. bedingte Unabhängigkeiten sind, darstellen. Sie können keine zyklischen Wirkungen repräsentieren. Kausale Abhängigkeiten sind aber in bestimmten Einsatzbereichen\footnote {wie zum Beispiel der Auswertung sozialer Beziehungen}, welche eher durch Korrelation gekennzeichnet sind, nicht gegeben.
+ Einen kurzen Überblick über MLNs und BLPs liefert \cite[Kap. 2.1 und 2.2]{FLT09}.
 Ausführlichere Anmerkungen dazu finden sich auch in \cite[Kap. 2]{KIBFT11}.
 
-Die probabilistische Konditionallogik PCL \index{PCL} \nomenclature{PCL}{Probabilistische Konditionallogik} erlaubt eine Repräsentation unsicheren Wissens, in dem sie ermöglicht,  unsichere Fakten und unsichere wenn-dann Regeln, so genannte Konditionale, welche je mit einem bedingten Wahrscheinlichkeitswert parametrisiert sind, darzustellen. 
+Die probabilistische Konditionallogik PCL \index{PCL} \nomenclature{PCL}{Probabilistische Konditionallogik}erlaubt eine Repräsentation unsicheren Wissens, in dem sie ermöglicht,  unsichere Fakten und unsichere wenn-dann Regeln, so genannte Konditionale, welche je mit einem bedingten Wahrscheinlichkeitswert parametrisiert sind, darzustellen. 
 
 Da sie aber auf Aussagenlogik beruht, beschränkt man sich in der Mächtigkeit der Ausdrucksfähigkeit (s. auch obiges Beispiel \ref{sec:Bsp1}) "{}Grippe"{}. Die Erweiterung von PCL auf den Fall einer Vielzahl von Objekten und deren allgemeiner Beziehungen, also um die Prädikatenlogik erster Stufe, führte zu FO-PCL.
 
-Die Nachteile probabilistisch graphischer Modelle lassen es somit sinnvoll erscheinen, einen anderen Formalismus zu betrachten, der den Anforderungen der realen Welt  gerecht wird, indem er unsicheres Wissen quantifiziert, gleichzeitig aber die genannten Nachteile möglichst vermeidet. Um die reale Welt repräsentieren zu können, muss man mit Unsicherheit umgehen können. Man muss mit vielen (verschiedenen) Objekten und deren möglichen, eventuell auch unsicheren,  Beziehungen zueinander umgehen und sie verarbeiten können.
+Die Nachteile probabilistisch graphischer Modelle lassen es somit sinnvoll erscheinen, einen anderen Formalismus zu betrachten, der den Anforderungen der realen Welt  gerecht wird, indem er unsicheres Wissen quantifiziert, gleichzeitig aber die genannten Nachteile möglichst vermeidet. Um die reale Welt repräsentieren zu können, muss man mit Unsicherheit umgehen können. Man muss mit vielen (verschiedenen) Objekten und deren möglichen, eventuell auch unsicheren, Beziehungen zueinander umgehen und sie verarbeiten können.
 
 FO-PCL ist es im Gegensatz zu den probabilistischen Netzwerken wie BLPs, und MLNs möglich, allgemeine Abhängigkeiten (nicht notwendig kausale Abhängigkeiten bzw. bedingte Unabhängigkeiten, vgl. auch obiger Abschnitt) darzustellen. Sie ermöglicht Wissensrepräsentation und Inferenz auf der Basis des verfügbaren, auch unvollständigen probabilistischen Wissens. 
 
@@ -284,14 +289,12 @@ FO-PCL ist es im Gegensatz zu den probabilistischen Netzwerken wie BLPs, und MLN
 Um unsicheres Wissen adäquat darstellen und verarbeiten zu können, bieten sich aussagenlogische Konditionale \index{Konditional} an, welche bedingte Abhängigkeiten darstellen. Eine Erweiterung von aussagenlogischen, probabilistischen Konditionalen auf Basis der Prädikatenlogik erster Stufe wird in \cite[Kap. 6]{Fis10} beschrieben.
 
  Die Semantik von FO-PCL basiert auf dem Konzept der maximalen Entropie und ist mittels der Menge aller Grundinstanzen\footnote{sh. Definition \ref{Grundinstanz}} eines Konditionals definiert. Ein Constraint, der einem Konditional zugeordnet wird, schränkt dabei die zulässigen Grundinstanzen eines Konditionals ein, um Inkonsistenzen in der Menge aller Grundinstanzen zu vermeiden.
- 
-Inferenz erfolgt auf aussagenlogischer Ebene, d.h. um neues Wissen abzuleiten, betrachtet man die Grundinstanzen der Konditionale.
+ Inferenz erfolgt auf aussagenlogischer Ebene, d.h. um neues Wissen abzuleiten, betrachtet man die Grundinstanzen der Konditionale.
 
 
 Die Aufgabenstellung dieser Diplomarbeit beinhaltet den Entwurf und die Implementierung einer Inferenzkomponente für FO-PCL unter Verwendung bereits vorhandener Komponenten der Bibliothek Log4KR, eines Projektes der FernUniversität Hagen. Dabei soll die Inferenzkomponente qualitative Konditionale, das sind Konditionale ohne Wahrscheinlichkeit, als Anfrage entgegennehmen und diese mit einer zugeordneten Wahrscheinlichkeit zurückliefern. Es sollen Äquivalenzklassen   aus den Grundinstanzen\footnote{sh. Definition \ref{Grundinstanz}}  des angefragten Konditionals gebildet werden, die die Grundkonditionale\footnote{sh. Definition \ref{Generalisierung}} mit gleichem Parameterwert zu möglichst allgemeinen Konditionalen zusammenfassen \footnote{Eine Definition des Begriffes und nähere Erläuterungen finden sich in \ref{Äquivalenzklassen}}. Dabei wird darauf geachtet werden, so wenig Äquivalenzklassen wie möglich zu bilden, sich gleichzeitig aber nicht in der Ausdrucksfähigkeit der Informationen der Wissensbasis zu beschränken.
 
-Die wesentliche Aufgabe dieser neuen Inferenzkomponente ist es, das vorhandenes Wissen zu nutzen, auszuwerten und Schlüsse zu ziehen.\\
-Sie erlaubt die indirekte Kommunikation mit dem Anwender über eine Schnittstelle, nimmt Anfragen entgegen, bereitet sie gemäß der Semantik von FO-PCL auf, zieht die notwendigen logischen Schlüsse und nimmt unter Verwendung von bereits in Log4KR vorhandenen Komponenten die erforderlichen Berechnungen.
+Die wesentliche Aufgabe dieser neuen Inferenzkomponente ist es, das vorhandenes Wissen zu nutzen, auszuwerten und Schlüsse zu ziehen. Sie erlaubt die indirekte Kommunikation mit dem Anwender über eine Schnittstelle, nimmt Anfragen entgegen, bereitet sie gemäß der Semantik von FO-PCL auf, zieht die notwendigen logischen Schlüsse und nimmt unter Verwendung von bereits in Log4KR vorhandenen Komponenten die erforderlichen Berechnungen.
 \\
 \\
 \\ 
@@ -311,14 +314,12 @@ Zunächst nimmt die Inferenzkomponente dafür ein qualitatives Konditional entge
 \newpage
 
 Mit den bisher vorhandenen Komponenten aus Log4KR ist es nur möglich, die Wahrscheinlichkeit zu einem qualitativen Grundkonditional zu erhalten. Das ist zwar hilfreich, wenn man ein Grundkonditional hat, wenn das Konditional jedoch Variablen enthält, kann man seither keine Wahrscheinlichkeit berechnen und ausgeben lassen.
-Wenn man eine Menge von speziellen Konditionalen, die gemeinsame Eigenschaften besitzen erhalten kann, lässt sich das neu gewonnene Wissen viel besser erschließen. \\
-Eine Einordnung des Themas kann der Abbildung 1 \ref{Eingangsgrafik} entnommen werden.
+Wenn man eine Menge von speziellen Konditionalen, die gemeinsame Eigenschaften besitzen erhalten kann, lässt sich das neu gewonnene Wissen viel besser erschließen. Eine Einordnung des Themas kann der Abbildung 1 \ref{Eingangsgrafik} entnommen werden.
 
 
 Zunächst wird in Kapitel \ref{FO-PCL} auf FO-PCL selbst eingegangen und diese ausführlich erläutert. Kapitel \ref{Inferenz} beschreibt den Inferenzprozess in FO-PCL. Die experimentellen Forschungen werden in Kapitel \ref{Experim. Forschungen} erläutert und ausgewertet. Ideen für Algorithmen werden in Kapitel \ref{Ideen Alg.} ausgeführt und diskutiert. Der entworfene Algorithmus und der Entwicklungsprozess werden in Kapitel \ref{Alg}  beschrieben. Die Implementation der Inferenzkomponente und der Inferenzprozess  und seine Erläuterung anhand von Beispielen ist Inhalt von Kapitel \ref{Inf}. 
-Welche Herausforderungen sich bei der Entwicklung der Inferenzkomponente gestellt haben, wird in Kapitel \ref{Herausforderungen} beschrieben.
-
- Die Korrektheit und Vollständigkeit des Algorithmus wird in Kapitel \ref{eval} empirisch belegt. Ergebnisse und Ausblick beschließen diese Arbeit in Kapitel \ref{Erg}. Im Anhang befinden sich die Erläuterungen verschiedener theoretischer Grundlagen.
+ Die Korrektheit und Vollständigkeit des Algorithmus wird in Kapitel \ref{eval} empirisch belegt, insbesondere welche Herausforderungen sich bei der Entwicklung der Inferenzkomponente gestellt haben, wird in Kapitel \ref{Herausforderungen} genauer betrachtet und beschrieben.
+  Ergebnisse und Ausblick beschließen diese Arbeit in Kapitel \ref{Erg}. Im Anhang befinden sich die Erläuterungen verschiedener theoretischer Grundlagen.
 
 
 
@@ -414,7 +415,6 @@ $ Term^{(s)}_{Gr}  = \{Anna, Bob, X, Y\} $, Menge der Terme als Vereinigung der 
 
 
 FO-PCL verwendet zwei Arten von Formeln: logische Formeln und Constraints\index{Constraint}. Beide nutzen die vordefinierten Prädikatensymbole der Tautologie bzw. der Kontradiktion, unterscheiden sich aber in den für atomare Formeln zulässigen Prädikatensymbolen. Bei atomaren Constraints ist nur das Prädikatensymbol für die Gleichheit von Termen, bzw. Ungleichheit von Termen, d.h die negierte Gleichheit von Termen zulässig, bei atomaren logischen Formeln beliebige andere Prädikatensymbole ohne das Prädikatensymbol für die Gleichheit. Logische Formeln in FO-PCL sind entsprechend den logischen Formeln der Prädikatenlogik erster Stufe definiert, allerdings ohne Quantoren. Dabei ist es wichtig zur Kenntnis zu nehmen, dass Formeln in FO-PCL implizit allquantifiziert sind. Besonderes Wissen über einzelne Objekte muss man in einer eigenen Formel formulieren. 
-
 Eine logische Formel oder ein Constraint ohne Variablen wird Grundformel \index{Formeln ! Grundformel} genannt.
 
 
@@ -452,8 +452,6 @@ D.h. die Menge $ Form_\Sigma $ der logischen FO-PCL-Formeln über $ \Sigma $ ent
 \paragraph{Constraint}\index{Constraint} \nomenclature{ $ C $}{Constraint} \label{constraint}
 
 Die Constraints  sind Formeln mit Nebenbedingungen, hier Formeln, die Relationen zwischen semantischen Objekten darstellen. Sie sind notwendig, da eine direkte Instanziierung eines FO-PCL-Konditionals \index{FO-PCL Konditional} leicht zu Inkonsistenzen führen kann. Um dies zu vermeiden, werden die Constraints eingesetzt, die die Menge der zulässigen Substitutionen eines probabilistischen Konditionals \index{Konditional ! probabilistisches} einzuschränken, vgl. Beispiel \ref{sec:Bsp1} "{}Grippe"{}  und Beispiel \ref{sec:BspSmp} "{}Sympathie"{} . Man verwendet sie auch, um besonderes Wissen über bestimmte Objekte des Universums auszudrücken, vgl. das Beispiel \ref{Bsp:Birds} "{}Birds"{}.
-
-\noindent
 Constraints beschreiben im Wesentlichen die Gleichheit bzw. Ungleichheit von Termen.
 
 \begin{Def}[Constraint $ \Sigma $-Formeln oder Constraints]\cite[Kap. 6.2, S. 126/127 vgl. Def. 6.2.4]{Fis10} \label{Def:Constraint}
@@ -468,8 +466,6 @@ Sei $ \Sigma = (S, {\cal D}, Pred) $ eine mehrsortige Signatur.
 \end{enumerate}
 \end{Def}
 Ein negierter Constraint der Gleichheit kann auch geschrieben werden als $ t_1 \not=^{(s)} t_2 $ (Constraint der Ungleichheit).\nomenclature{$ t_1 \not=^{(s)} t_2 $}{Constraint der Ungleichheit} 
-
-\noindent
 Die Menge der Constraints wird als $ Cons_{\Sigma} $ \nomenclature{$ Cons_{\Sigma} $}{Menge der Constraints} bezeichnet.
 
 
@@ -485,7 +481,7 @@ Die Menge der Constraints wird als $ Cons_{\Sigma} $ \nomenclature{$ Cons_{\Sigm
 \begin{Def}[Variablen]\cite[Kap. 6.2, S.127 vgl. Def. 6.2.5]{Fis10} \index{Variablen}
 	
 \noindent
-Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur, $ \cal V $ die Menge aller Variablen. Sei  $ Cons_{\Sigma} $ die Menge der Constraints über  $ \Sigma $ und  $ Form_{\Sigma} $ die Menge aller logischen FO-PCL Formelen über  $ \Sigma $.
+Sei $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur, $ \cal V $ die Menge aller Variablen. Sei  $ Cons_{\Sigma} $ die Menge der Constraints über  $ \Sigma $ und  $ Form_{\Sigma} $ die Menge aller logischen FO-PCL Formeln über  $ \Sigma $.
 
 Die Funktion $ vars: (Form_\Sigma \cup Cons_\Sigma) \rightarrow 2^{\cal V} $ ist definiert als
 
@@ -508,7 +504,7 @@ $ vars(\bot) $  &  $ := \emptyset $ , & $  $\\
 $ vars(\alpha \vee \beta) $ &  $ := vars(\alpha) \cup vars(\beta) $,  & \hspace{3 pt} falls $ (\alpha \vee \beta) \in Form_\Sigma,  $\\
 $ vars(\alpha \wedge \beta) $ &  $ := vars(\alpha) \cup vars(\beta) $,  & \hspace{3 pt} falls $ (\alpha \wedge \beta) \in Form_\Sigma.  $\\
 \end{tabular}
-\vspace{3cm}
+\vspace{1cm}
 
 \end{Def}
 Der probabilistische Teil von FO-PCL wird mittels probabilistischer Konditionale definiert:
@@ -670,7 +666,7 @@ Atome$(  \langle (\varphi \mid \psi)[\xi], C \rangle) $ & $ :=   $ Atome $ (\var
 Die Atome für das Beispiel \ref{sec:Bsp1} "{}Grippe"{}  sind:\\
 $ Atome(Gr_{21}) = $  \{ $Gr(X) $\}, $ Atome(GR_{22}) = $\{$Gr(X), An(X)$\},  $Atome(Gr_{23}) = $\{ $Gr(X), \\ Kon(X, Y) $\}. \\
 
-Die Atome für das Beispiel \ref{sec:Misanthrop} "{}Misanthrope"{} wären:\\
+Die Atome für das Beispiel \ref{sec:Misanthrop} "{}Misanthrope"{} sind:\\
 $ Atome(MI_{1}) = $  \{ $likes(U, V) $, $likes(V, U) $\}, $Atome(MI_{2}) = $\{ $likes(a, V)  $\}. \\
 \\
 \end{Bsp}
@@ -969,9 +965,9 @@ $
 \subsubsection{Probabilistische Semantik}  \index{Semantik ! probabilistisch}
 Die Menge $ gnd(R) $ \nomenclature{$ gnd(R) $}{Menge der Grundsubstitutionen} der Grundsubstitutionen eines Konditionals $  R =$ \\ $ \langle (\varphi \mid \psi)[\xi], C \rangle $ beschreibt eine Menge $ X(R) $ binärer Zufallsvariablen, was wiederum der Menge syntaktisch verschiedener Grundatome der Grundinstanzen \index{Grundinstanz} der Menge der Grundsubstitutionen entspricht. Damit stellt $ gnd(R) $ auch eine Herbrandbasis $ {\cal H} (R) := X(R)$ für alle möglichen Belegungen der Terme mit Konstanten und deren Wahrheitswerten dar, s. Definition \ref{FO-Herb} (Herbrandbasis).
 
-\begin{Def}[FO-PCL Interpretation] \index{FO-PCL Interpretation}\cite[Kap. 6.3.2, Def. 6.3.5]{Fis12}\\
+\begin{Def}[FO-PCL Interpretation] \index{FO-PCL Interpretation}\cite[Kap. 6.3.2, Def. 6.3.5]{Fis12}
 \label{mod}
-Sei $ \Sigma = (S, {\cal D},Präd) $ eine mehrsortige Signatur und sei $  \langle (\varphi \mid \psi)[\xi], C \rangle $ ein probabilistisches $ \Sigma- $Konditional $ ( $erster Stufe $ ) $.
+Sei $ \Sigma = (S, {\cal D},Präd) $ eine mehrsortige Signatur und sei $  \langle (\varphi \mid \psi)[\xi], C \rangle $ ein \\ $ \Sigma- $Konditional $ ( $erster Stufe $ ) $.
 Eine FO-PCL Interpretation $ P_X(R) $ von $ R $ ist eine gemeinsame Wahrscheinlichkeitsverteilung der Zufallsvariablen $ X(R) := {\cal H}. $
 Dabei entspricht jeder diskreten Zufallsvariablen $ x_i  \in X(R)$ ein Grundatom der Herbrandbasis $ {\cal H} $ und hat den Definitionsbereich $ X_i := \{wahr,$  $ falsch \}$.
 \end{Def}
@@ -1087,7 +1083,6 @@ Für jede Grundinstanz müssen folglich die entropieoptimalen Parameterwerte sol
 Die folgenden Ausführungen sind \cite[Kap. 7.1, S. 148ff]{Fis10} entnommen.
 
 Voraussetzung für parametrische Gemeinsamkeit ist paarweise parametrische Äquivalenz. \index{Äquivalenz ! parametrische} Bei der parametrischen Äquivalenz \index{Äquivalenz ! parametrische} handelt es sich um eine Äquivalenzrelation. Sie liegt vor, wenn zwei Grundinstanzen eines Konditionals den gleichen Parameterwert\footnote{Unter einem gleichen Parameterwert versteht man die gleiche Wahrscheinlichkeit} haben. In einer Menge von Grundinstanzen liegt parametrische Gemeinsamkeit dann vor, wenn alle Grundkonditionale, \ref{Grundkonditional},  paarweise parametrisch äquivalent sind. Ist dies bei allen Grundinstanzen der Fall, so handelt es sich um parametrische Uniformität, s. Definition unten.
-
 Die Grundinstanzen mit gleichen Parameterwerten kann man in Äquivalenzklassen zusammenfassen. 
 
 Es wäre hilfreich, Äquivalenzklassen bilden zu können, bevor man die entropieoptimalen Parameterwerte berechnet. Das würde die Repräsentation und Berechnung eines entropieoptimalen Modells einer FO-PCL Wissensbasis erheblich vereinfachen.
@@ -1095,7 +1090,6 @@ Es wäre hilfreich, Äquivalenzklassen bilden zu können, bevor man die entropie
 Um ein vereinfachtes Optimierungsproblem zu erhalten, sollte man möglichst wenig Äquivalenzklassen bilden, gleichzeitig muss man beachten, ausreichend viele Äquivalenzklassen zu generieren, um das Wissen bezüglich der unterschiedlichen Grundinstanzen adäquat zu repräsentieren.
 
 Bedauerlicherweise ist parametrische Äquivalenz \index{Äquivalenz ! parametrische} ein semantisches Konzept und man kann sie erst nach der Berechnung der entropieoptimalen Parameterwerte feststellen.
-
 Man sucht daher nach syntaktischen Bedingungen für parametrische Äquivalenz \index{Äquivalenz ! parametrische}. Ausführliche Erläuterungen zum Thema parametrische Äquivalenz können \cite[Kap. 7.1, S. 148ff]{Fis10} entnommen werden.
 
 \subsubsection{Bedeutung der parametrischen Uniformität} \index{parametrische Uniformität}
@@ -1205,10 +1199,7 @@ Das Ergebnis  "{}0"{} erhält man unter anderem für reflexives Wissen, da dies 
 
 	\begin{Def}[Qualitatives Konditional, quantifiziertes Konditional]\label{qualitatives_Konditional} \index{Konditional ! qualitatives}
 		Sei \\ $ \Sigma = (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \cal{R}  $ eine FO-PCL Wissensbasis, gemäß Definition \ref{KB}.	
-		Unter einem qualitativen Konditional im Sinne dieser Arbeit versteht man ein Konditional ohne zugeordnete Wahrscheinlichkeit, d.h. ein nicht quantifiziertes Konditional. \label{quantifiziertes_Konditional} \index{Konditional ! quantifiziertes}
-		
-		
-		Dagegen ist unter einem quantifizierten Konditional ein Konditional mit zugeordneter Wahrscheinlichkeit zu verstehen.
+		Unter einem qualitativen Konditional im Sinne dieser Arbeit versteht man ein Konditional ohne zugeordnete Wahrscheinlichkeit, d.h. ein nicht quantifiziertes Konditional. \label{quantifiziertes_Konditional} \index{Konditional ! quantifiziertes}Dagegen ist unter einem quantifizierten Konditional ein Konditional mit zugeordneter Wahrscheinlichkeit zu verstehen.
 	\end{Def}
 
 
@@ -1233,9 +1224,7 @@ Sei $ \Sigma = \\ (S, {\cal D}, Präd) $ eine mehrsortige Signatur und sei $ \ca
 
 	Eine Generalisierung ist eine Abbildung, die jeder Äquivalenzklasse $ E_i \in \cal{E} $  $ mit$  $ i \in \{1, ..., t\} $ jeweils genau ein einziges quantifiziertes Konditional $R_{gen} $, d.h. ein Konditional mit der für das Modell berechneten Wahrscheinlichkeit der Äquivalenzklasse, zuordnet.  $R_{gen} $ wird im Folgenden auch generalisiertes Konditional genannt. \index{Konditional ! generalisiertes} 
 	
-	 $R_{gen} $ muss der Signatur folgen und darf in Prämisse und Konklusion nur Variablen enthalten, wenn die Äquivalenzklasse mehr als ein Konditional enthält. Aus  $R_{gen} $ müssen jeweils alle Konditionale der zugehörigen Äquivalenzklasse mit den Konstanten in $ \cal{D} $ und unter Beachtung des Constraints durch Grundsubstitution, vgl. \ref{Grundsubstitution} gebildet werden können.
-	
-	 Für Äquivalenzklassen mit einem Konditional entspricht  $R_{gen} $ genau diesem Konditional.  Bei $R_{gen} $ handelt es sich für diesen Fall folglich um ein Grundkonditional mit zugeordneter Wahrscheinlichkeit. 	
+	 $R_{gen} $ muss der Signatur folgen und darf in Prämisse und Konklusion nur Variablen enthalten, wenn die Äquivalenzklasse mehr als ein Konditional enthält. Aus  $R_{gen} $ müssen jeweils alle Konditionale der zugehörigen Äquivalenzklasse mit den Konstanten in $ \cal{D} $ und unter Beachtung des Constraints durch Grundsubstitution, vgl. \ref{Grundsubstitution} gebildet werden können. Für Äquivalenzklassen mit einem Konditional entspricht  $R_{gen} $ genau diesem Konditional.  Bei $R_{gen} $ handelt es sich für diesen Fall folglich um ein Grundkonditional mit zugeordneter Wahrscheinlichkeit. 	
 \end{Def}
 D. h. in der Phase der Generalisierung werden die Konditionale, die sich aufgrund der gleichen Wahrscheinlichkeit in einer Äquivalenzklasse befinden, zu einem möglichst allgemeinen Konditional zusammengefasst.
 
@@ -1284,33 +1273,30 @@ Log4KR enthält viele Quellcode-Beispiele für die einzelnen Klassen und die mö
 
 Erste Beispiele für Wissensbasen konnten Log4KR entnommen werden. Bei diesen Beispielen wurde zunächst lediglich betrachtet, welche Ergebnisse die Grundierung der Wissensbasis, die Selektion des Modells nach dem Prinzip der maximalen Entropie und verschiedene Anfragen lieferten.
 
-Zunächst wurden für die Erarbeitung eines Algorithmus verschiedene Beispiele betrachtet. Der Großteil der Beispiele ist der Bibliothek Log4KR entnommen. Es wurden verschiedene Anfragen an die Wissensbasis gestellt, um ermitteln zu können, welche Ergebnisse die Anfragen liefern. Das diente dazu, Vermutungen zu bestätigen bzw. erste Erkenntnisse zu erhalten.\\
-Unzulässige Anfragen sollten nicht an die Wissensbasis gestellt werden. Das sind solche, deren Prämisse die Wahrscheinlichkeit Null besitzt und die sonst zu einer Division durch Null führen würde.\\
+Zunächst wurden für die Erarbeitung eines Algorithmus verschiedene Beispiele betrachtet. Der Großteil der Beispiele ist der Bibliothek Log4KR entnommen. Es wurden verschiedene Anfragen an die Wissensbasis gestellt, um ermitteln zu können, welche Ergebnisse die Anfragen liefern. Das diente dazu, Vermutungen zu bestätigen bzw. erste Erkenntnisse zu erhalten. Unzulässige Anfragen sollten nicht an die Wissensbasis gestellt werden. Das sind solche, deren Prämisse die Wahrscheinlichkeit Null besitzt und die sonst zu einer Division durch Null führen würde.
 Eine detaillierte Beschreibung der Beispiele in Fo-PCL Syntax, aufbereitet zur Verarbeitung in Log4KR findet sich im Anhang \ref{examples}.
 
 Die Primärliteratur aus der Aufgabenstellung \cite{Fis10} führte schnell zu umfangreicher Sekundärliteratur, die dem Literaturverzeichnis entnommen werden kann.
-
-Es war notwendig, FO-PCL mit Syntax und Semantik näher kennenzulernen, was aus \cite{Fis10} und \cite{Fis12} erarbeitet wurde. Ein näheres Verständnis des Konzeptes der maximalen Entropie der Selektion von Modellen ist dabei unerlässlich, vgl. \cite{RKI97}, \cite{BKI08} und \cite{TFLKIB10}.
+Es war notwendig, FO-PCL mit Syntax und Semantik näher kennenzulernen, was aus \cite{Fis10} und \cite{Fis12} erarbeitet wurde. Ein näheres Verständnis des Konzeptes der maximalen Entropie der Selektion von Modellen ist dabei unerlässlich, vgl. \cite{RKI97}, \cite{BKI08} und \cite{TFLKIB10}.\\
 \\
-
-
 Bei den Beispielen findet sich der Begriff "{}angestrebte Ausgabe"{}.\index{angestrebte Ausgabe}
 
 \noindent
 \textbf{Angestrebte Ausgabe}
 \label{angestrebte Ausgabe}
-\emph{Unter der angestrebten Ausgabe im Sinne dieser Arbeit ist das Ergebnis eines Prozesses der Betrachtung und des Vergleichs der Klassen zu verstehen. Dieser Prozess endet mit der Generierung eines möglichst allgemeinen Konditionals. Die angestrebten Ausgabe ist somit das Resultat einer manuellen Betrachtung. Dabei ist es das Ziel, dass der Constraint jedes erzeugten Konditionals möglichst kurz ist, d.h., er soll möglichst wenig Junktoren und Terme enthalten. Es soll im Wege des Inferenzprozesses eine Menge von Konditionalen erzeugt werden, die identisch oder zumindest logisch äquivalent (im Sinne boolescher Algebra) mit der angestrebten Ausgabe sind.  Die generierten Konditionale sollten dabei intersubjektiv als möglichst allgemein akzeptiert werden.\\
+\emph{Unter der angestrebten Ausgabe im Sinne dieser Arbeit ist das Ergebnis eines Prozesses der Betrachtung und des Vergleichs der Klassen zu verstehen. Dieser Prozess endet mit der Generierung eines möglichst allgemeinen Konditionals. Die angestrebten Ausgabe ist somit das Resultat einer manuellen Betrachtung. Dabei ist es das Ziel, dass der Constraint jedes erzeugten Konditionals möglichst kurz ist, d.h., er soll möglichst wenig Junktoren und Terme enthalten. Es soll im Wege des Inferenzprozesses eine Menge von Konditionalen erzeugt werden, die identisch oder zumindest logisch äquivalent (im Sinne boolescher Algebra) mit der angestrebten Ausgabe sind.  Die generierten Konditionale sollten dabei intersubjektiv als möglichst allgemein akzeptiert werden.
 Ob das algorithmisch so umsetzbar ist, werden die weiteren Forschungen ergeben.}
 
 
 \section{Chronologisches Vorgehen}
 Nach dem Erarbeiten der Grundlagen in Fo-PCL und der Sichtung und Bearbeitung verschiedener Quellen der Sekundärliteratur zu den Grundzügen probabilistischer Logik und Inferenz, wie sie sich beispielsweise in \cite{Fis09}, \cite{Fis10},  \cite{FLT09}, \cite{KIBFT11} und \cite{RKI97} finden, ergaben sich differenzierte Überlegungen, wie die Aufgabe in Quellcode umzusetzen sein könnte.
 
-Ein erster Ansatz begann damit, das angefragte Konditional zu betrachten: ob es sich um eine atomare oder nicht atomare logische Formel handelt, s. dazu \ref{sec: Syntax}.\\
-Um die Grundkonditionale, für die unterschiedliche Wahrscheinlichkeiten berechnet wurden untereinander vergleichen zu können, ist es hilfreich, Grundkonditionale mit gleichen Wahrscheinlichkeiten in Äquivalenzklassen \index{Äquivalenzklassen} zusammenzufassen.\\
-Es wurde die Anzahl der Elemente der Äquivalenzklassen \index{Äquivalenzklassen} betrachtet. Ausgehend davon war zu betrachten, welche Unterscheidungskriterien zwischen den einzelnen Klassen bestanden.\\
-Der Ansatz, die Klassen bezüglich der in der Konklusion oder und Prämisse verwendeten Konstanten zu schneiden, wies sich nur als erfolgreich für ganz einfache Beispiele und wenig Klassen. Dieser Ansatz wurde daraufhin nicht weiter verfolgt.\\
-Das führte zu der Überlegung, die Bibliothek von Log4KR noch einmal näher zu betrachten und zu erforschen, welche Gestaltungsmöglichkeiten sie in Hinblick auf die zu bildenden Konditionale bot.\\
+Ein erster Ansatz begann damit, das angefragte Konditional zu betrachten: ob es sich um eine atomare oder nicht atomare logische Formel handelt, s. dazu \ref{sec: Syntax}.
+Um die Grundkonditionale, für die unterschiedliche Wahrscheinlichkeiten berechnet wurden untereinander vergleichen zu können, ist es hilfreich, Grundkonditionale mit gleichen Wahrscheinlichkeiten in Äquivalenzklassen \index{Äquivalenzklassen} zusammenzufassen.
+Es wurde die Anzahl der Elemente der Äquivalenzklassen \index{Äquivalenzklassen} betrachtet. Ausgehend davon war zu betrachten, welche Unterscheidungskriterien zwischen den einzelnen Klassen bestanden.
+
+Der Ansatz, die Klassen bezüglich der in der Konklusion oder und Prämisse verwendeten Konstanten zu schneiden, wies sich nur als erfolgreich für ganz einfache Beispiele und wenig Klassen. Dieser Ansatz wurde daraufhin nicht weiter verfolgt. Das führte zu der Überlegung, die Bibliothek von Log4KR noch einmal näher zu betrachten und zu erforschen, welche Gestaltungsmöglichkeiten sie in Hinblick auf die zu bildenden Konditionale bot.
+
 Als Ausgabe der Inferenzkomponente wird ein einziges quantifiziertes relationales Konditional mit Constraint pro Äquivalenzklasse erwartet, nähere Erläuterungen zu den erarbeiteten Ergebnissen folgen in einem späteren Kapitel \ref{Eine Äquivalenzklasse}.
 
 
@@ -1543,8 +1529,7 @@ Dieses Beispiel ist die Erweiterung des Beispiels "{}ColdTrans"{} um spezifische
 
 
 \section{Betrachtung des angefragten Konditionals}
-Grundsätzlich ist zu unterscheiden, ob es sich bei dem angefragten Konditional um ein Konditional mit Tautologie als Prämisse, vgl. \ref{T als Prämisse} oder einer sonstigen Prämisse, vgl. \ref{Fo-PCL Konditional} handelt.\\
-Bei einer Tautologie ist nur die Konklusion bei der Bildung des Constraints zu betrachten, ansonsten die Prämisse des angefragten Konditionals und die der Konditionale in den Äquivalenzklassen.
+Grundsätzlich ist zu unterscheiden, ob es sich bei dem angefragten Konditional um ein Konditional mit Tautologie als Prämisse, vgl. \ref{T als Prämisse} oder einer sonstigen Prämisse, vgl. \ref{Fo-PCL Konditional} handelt. Bei einer Tautologie ist nur die Konklusion bei der Bildung des Constraints zu betrachten, ansonsten die Prämisse des angefragten Konditionals und die der Konditionale in den Äquivalenzklassen.
 
 
 \section{Betrachtung der Äquivalenzklassen}
@@ -1552,7 +1537,8 @@ Bei einer Tautologie ist nur die Konklusion bei der Bildung des Constraints zu b
 An dieser Stelle sollen die einzelnen Äquivalenzklassen betrachtet werden. Die Klassen sollen kategorisiert werden. Es soll herausgefunden werden, wie die einzelnen Äquivalenzklassen in Relation zueinander aussehen und worin sie sich unterscheiden. Dies dient dazu herauszufinden, ob es eine Systematik gibt, die dazu führen können, einen regelbasierten Algorithmus zu entwickeln. 
 \label{Eine Äquivalenzklasse}
 \subsection{Eine Äquivalenzklasse}
-Im einfachsten Fall haben alle Grundkonditionale die gleiche Wahrscheinlichkeit. Dann ist nur das bedingte Konditional auszugeben, d.h. das relationale Konditional mit der berechneten Wahrscheinlichkeit(ohne Constraint)\\
+Im einfachsten Fall haben alle Grundkonditionale die gleiche Wahrscheinlichkeit. Dann ist nur das bedingte Konditional auszugeben, d.h. das relationale Konditional mit der berechneten Wahrscheinlichkeit(ohne Constraint).
+
 Das wäre der Fall, wenn die Wissensbasis aus Beispiel \ref{Bsp:Birds} nur das Konditional $ T_3 $ in diesem Fall ohne Constraint enthielte. Das Beispiel dazu findet man unter BirdsEqual, s. \ref{BirdsEqual}. Hierbei sollte die angestrebte Ausgabe \index{angestrebte Ausgabe} in Form des Konditionals der Eingabe ergänzt um die berechnete Wahrscheinlichkeit sein, in diesem Fall $ (flies(X)) [0.66]$ (ein Constraint ist nicht notwendig, da ja alles Konditionale die gleiche Wahrscheinlichkeit haben und daher keine Einschränkung der Klasse notwendig ist).\\
 In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welche Anfragen sich eine Äquivalenzklasse ergibt. 
 
@@ -1636,8 +1622,9 @@ In der unten stehenden Tabelle kann man sehen, bei welchen Beispielen für welch
 
 \subsubsection {Zwei Äquivalenzklassen und die Anfrage ist ein Atom} \label{Atom_zweiKlassen}
 
-	Zwei Äquivalenzklassen ergeben sich bei einstelligen Prädikaten wenn bei der Grundierung Variablen mit spezifischen Konstanten belegt werden. \\
-	Bei zweistelligen Prädikaten kommt es zu zwei Klassen, wenn keine spezifischen Konstanten im Grundkonditional vorkommen, aber beide Variablen mit der gleichen Konstante belegt werden.\\
+	Zwei Äquivalenzklassen ergeben sich bei einstelligen Prädikaten wenn bei der Grundierung Variablen mit spezifischen Konstanten belegt werden. 
+	
+	Bei zweistelligen Prädikaten kommt es zu zwei Klassen, wenn keine spezifischen Konstanten im Grundkonditional vorkommen, aber beide Variablen mit der gleichen Konstante belegt werden.
 	Die unten stehenden Tabellen listen für die jeweiligen Beispiele die Anfragen auf, bei der es zu zwei Äquivalenzklassen kommt.
 
 
@@ -1875,14 +1862,14 @@ Dies ist ein einfacher Fall und führt zur Ausgabe aller Grundkonditionale mit j
 \begin{itemize}
 	\item 	Generische Grundinstanzen \index{Grundinstanz ! generisch} sind unabhängig von der Wissensbasis und der gestellten Anfrage gleich.
 	\item Die Verwendung spezifischer Konstanten  \index{Konstante ! spezifisch} führen in der Regel zu anderen Wahrscheinlichkeiten als die Verwendung nicht spezifischer Konstanten.
-	\item Wenn mehrere spezifische Konstanten verwendet wurden, würde man erwarten, dass es eine Klasse gibt für jede spezifische Konstante, eine Klasse für reflexives Wissen und mehrere Klassen mit Kombinationen aus spezifischen Konstanten. Dazu kann leider keine Aussage getroffen werden, da Log4KR keine Berechungsmöglichkeiten dafür zur Verfügung stellt, vgl.  \ref{Misanthrope2Spez}.
-	\item Wenn eine spezifische Konstante in einer Formel verwendet wurde, die in der Konklusion vorkommt, dann führt das zu einer anderen Wahrscheinlichkeit, unabhängig davon, ob auch die anderen Konditionale spezifisches Wissen enthalten. Die anderen Grundinstanzen haben die gleiche Wahrscheinlichkeit s. \ref{BirdsDiffer} für die Anfrage $ (flies(X) \mid isBird(X))$. Das hängt in diesem Fall daran, dass die Wissensbasis bereits ein spezifisches Konditional enthält, was der Konklusion der Anfrage für Tweety entspricht ($ flies(Tweety))[0] $. Ansonsten enthält die Wissensbasis im Übrigen nur unsicheres Wissen zu den anderen Konstanten für die Konklusion.
+	\item Wenn mehrere spezifische Konstanten verwendet wurden, würde man erwarten, dass es eine Klasse gibt für jede spezifische Konstante, eine Klasse für reflexives Wissen und mehrere Klassen mit Kombinationen aus spezifischen Konstanten. Dazu kann leider keine Aussage getroffen werden, da Log4KR keine Berechnungsmöglichkeiten dafür zur Verfügung stellt, vgl.  \ref{Misanthrope2Spez}.
+	\item Wenn eine spezifische Konstante in einer Formel verwendet wurde, die in der Konklusion vorkommt, dann führt das zu einer anderen Wahrscheinlichkeit, unabhängig davon, ob auch die anderen Konditionale spezifisches Wissen enthalten. Die anderen Grundinstanzen haben die gleiche Wahrscheinlichkeit s. \ref{BirdsDiffer} für die Anfrage $ (flies(X) \mid isBird(X))$. Das hängt in diesem Fall daran, dass die Wissensbasis bereits ein spezifisches Konditional enthält, was der Konklusion der Anfrage für "{}Tweety"{} entspricht ($ flies(Tweety))[0] $. Ansonsten enthält die Wissensbasis im Übrigen nur unsicheres Wissen zu den anderen Konstanten für die Konklusion.
 	\item Enthält die Prämisse der Anfrage sicheres Wissen (d.h. Wissen mit einer $ 100 \%  $ igen Wahrscheinlichkeit ), das auch in der Konklusion vorkommt, so ist auch die Konklusion sicher (vgl. \ref{ColdTrans}:$(cold(carl) \mid ((contact(carl,anna)  \land cold(carl)) $). 
 	\item Unterschiedliche Wahrscheinlichkeiten können sich aus den verschiedensten Gründen ergeben
 	\item Unterschiedliche Wahrscheinlichkeiten ergeben sich bei spezifischem Wissen über (eine) bestimmte Konstante des Universums, vgl. \ref{Birds} beispielsweise für die Anfrage $ (flies(X)) $, wo sich für die spezifische Instanz des Konditionals eine andere Wahrscheinlichkeit als für die generischen ergibt (die ja die gleiche Wahrscheinlichkeit besitzen): $ (flies(Tweety))[0.0] $ und $ (flies(X))[0.663]<X \neq Tweety> $
 	\item Spezifisches Wissen und die Belegung unterschiedlicher Variablen mit gleichen Konstanten stehen in Interaktion.
 	\item Bei zweistelligen Prädikaten führt die Belegung unterschiedlicher Variablen mit gleichen Konstanten immer zu einer gleichen Klasse, in der sich die Terme der Konditionale nur durch Umbenennung unterscheiden. Zum Beispiel führt die Anfrage $ (contact(X,Y)) $ im Beispiel "{}Cold"{} s. \ref{Cold} für reflexives Wissen zu der Klasse $ (contact(anna,anna))[0.0], (contact(bob,bob))[0.0] , (contact(carl,carl))[0.0]  $.
-	\item Interaktionen sind nicht trivial und nicht auf den ersten Blick erkennbar. Deutlich wird das am Beispiel "{}ColdSpez"{}, s. \ref{ColdSpez} bereits bei der trivialen Anfrage $ (contact(X,Y)) $, wo das spezifische Wissen über eine Konstante (hier: anna) mit dem reflexiven Wissen (also der Belegung unterschiedlicher Variablen mit den gleichen Konstanten des Universums) zu Interaktionen führt. Ähnliches gilt beim Beispiel "{}BirdsWithoutNull"{} für die Anfrage $ (flies(X) | isBird(X)) $, wo das spezifische Wissen über Tweety nicht zu einer anderen Wahrscheinlichkeit führt als bei den generischen Instanzen. Das lässt sich allerdings einfach aus der Struktur der Anfrage erklären, da die Wissensbasis mit $ (isBird(Tweety))[1.0] $ einen Fakt enthält, der die Prämisse erfüllt. Es wird daran deutlich, dass auch der Inhalt der Wissensbasis die Anzahl der Klassen beeinflussen kann, das aber wiederum in Abhängigkeit der Gestalt der Anfrage. Besonders kompliziert wird beispielsweise die (komplexe) Anfrage $ (cold(Z)|contact(X,Y) * cold(X)) $ im Beispiel "{}ColdTransSpez"{}, s. \ref{ColdTransSpez}, bei der die Kombination aus spezifischem und reflexiven Wissen zu vielen Klassen führt.
+	\item Interaktionen sind nicht trivial und nicht auf den ersten Blick erkennbar. Deutlich wird das am Beispiel "{}ColdSpez"{}, s. \ref{ColdSpez} bereits bei der trivialen Anfrage $ (contact(X,Y)) $, wo das spezifische Wissen über eine Konstante (hier: anna) mit dem reflexiven Wissen (also der Belegung unterschiedlicher Variablen mit den gleichen Konstanten des Universums) zu Interaktionen führt. Ähnliches gilt beim Beispiel "{}BirdsWithoutNull"{} für die Anfrage $ (flies(X) | isBird(X)) $, wo das spezifische Wissen über "{}Tweety"{} nicht zu einer anderen Wahrscheinlichkeit führt als bei den generischen Instanzen. Das lässt sich allerdings einfach aus der Struktur der Anfrage erklären, da die Wissensbasis mit $ (isBird(Tweety))[1.0] $ einen Fakt enthält, der die Prämisse erfüllt. Es wird daran deutlich, dass auch der Inhalt der Wissensbasis die Anzahl der Klassen beeinflussen kann, das aber wiederum in Abhängigkeit der Gestalt der Anfrage. Besonders kompliziert wird beispielsweise die (komplexe) Anfrage $ (cold(Z)|contact(X,Y) * cold(X)) $ im Beispiel "{}ColdTransSpez"{}, s. \ref{ColdTransSpez}, bei der die Kombination aus spezifischem und reflexiven Wissen zu vielen Klassen führt.
 	\item Die Anzahl der Sorten scheint auf den ersten Blick keinen Unterschied für die Anzahl der Klassen zu machen; wesentlicher ist das Vorhandensein von spezifischen Konstanten gleich welcher Sorte. Daher wird darauf kein weiterer Fokus gesetzt. Allerdings wird der generierte Constraint komplexer, s. Anfrage \\ $ (isStupid(Y)|moreIntelligent(X,Y)) $ im Beispiel "{}Garfield"{}, \ref{Garfield}
 	\item Die Komplexität der Anfrage hat einen Einfluss darauf, wie viele Klassen gebildet werden bzw. auf die Komplexität des Constraints. 	
 	\item Werden Anfragen an die Wissensbasis gestellt, die reflexives Wissen enthalten, so wird das reflexive Wissen mit der vorbelegten Wahrscheinlichkeit von Null verarbeitet. Bei einer zusammengesetzten Formel kann es daher trotzdem zu Ergebnissen kommen, in diesem Fall wird aufgrund der Wahrscheinlichkeit der Prämisse (die bei 0 \% liegt), die Wahrscheinlichkeit der Konklusion zu 100 \%. Ob das sinnvoll ist, kann an dieser Stelle nicht beantwortet werden, vgl. \ref{ColdTransSpez}. Am sinnvollsten wäre es, Anfragen zu vermeiden, die aus Formeln bestehen, die reflexives Wissen beinhalten könnten oder dieses bereits in der Anfrage auszuschließen. 
@@ -1910,9 +1897,7 @@ Dies ist ein einfacher Fall und führt zur Ausgabe aller Grundkonditionale mit j
 Alle denkbaren Algorithmen haben die ersten Schritte gemeinsam. Das ist ein Erfordernis des Inferenzprozesses in FO-PCL, der in dieser Arbeit auf propositionaler Basis betrieben wird. Lifted Inference ist ein Thema für weitergehende Forschungen und soll nicht Gegenstand der Arbeit sein. 
 Voraussetzung ist in jedem Fall eine konsistente Wissensbasis, vgl. auch Definition \ref{KB}. Die Wissensbasis sollte ein oder mehrere Konditionale enthalten, die korrekt im Sinne der FO-PCL Syntax sind. Zur Formulierung der Wissensbasis wird eine Signatur benötigt, s. auch Definition  \ref{Signatur}. Unter einer Signatur versteht man eine Menge die ein- oder mehrsortig sein, aber nicht leer sein darf. Weitere Bestandteile sind eine Menge von Konstantensymbolen und von Prädikatensymbolen. Den Prädikaten sowie den Konstanten müssen Sorten zugeordnet sein. Die Wissensbasis sollte ein oder mehrere Konditionale enthalten, die korrekt im Sinne der FO-PCL Syntax sind. Im Übrigen soll sich in dieser Arbeit die Entwicklung eines Algorithmus auf ein- und zweistellige Prädikate beschränken.
 
-Unabhängig vom Algorithmus müssen die folgenden Schritte ausgeführt werden. Die Eingabe erfolgt in Form eines qualitativen Konditionals. Wissensbasis und das Konditional müssen grundiert werden. Die Modelle für die Wissensbasis müssen berechnet werden und das Modell, das die relative Entropie maximiert muss gewählt werden. Für jedes Grundkonditional aus der Grundierung der Anfrage muss die Wahrscheinlichkeit berechnet werden. Konditionale mit gleichen Wahrscheinlichkeiten müssen zusammengefasst werden. 
-
-Der darauf folgende Prozess, die Konditionale mit gleichen Wahrscheinlichkeiten zu einem möglichst allgemeinen Konditional zusammen zu fassen ist abhängig vom gewählten Algorithmus.
+Unabhängig vom Algorithmus müssen die folgenden Schritte ausgeführt werden. Die Eingabe erfolgt in Form eines qualitativen Konditionals. Wissensbasis und das Konditional müssen grundiert werden. Die Modelle für die Wissensbasis müssen berechnet werden und das Modell, das die relative Entropie maximiert muss gewählt werden. Für jedes Grundkonditional aus der Grundierung der Anfrage muss die Wahrscheinlichkeit berechnet werden. Konditionale mit gleichen Wahrscheinlichkeiten müssen zusammengefasst werden. Der darauf folgende Prozess, die Konditionale mit gleichen Wahrscheinlichkeiten zu einem möglichst allgemeinen Konditional zusammen zu fassen ist abhängig vom gewählten Algorithmus.
 
 \section{Zielbeschreibung} \label{Zielbeschreibung}                                                                                                                                                                   
 Das Ziel des Algorithmus ist die Generierung einer Rückgabemenge von quantifizierten Konditionalen. Jedes dieser Konditionale sollte die jeweilige Menge der Grundkonditionale, \ref{Grundkonditional}, mit gleicher Wahrscheinlichkeit beschreiben und möglichst allgemein sein. Unter einem allgemeinen Konditional im Sinne dieser Arbeit versteht man ein möglichst kurzes Konditional. Ein Konditional ist möglichst kurz, wenn der logische Constraint eine möglichst einfache Formel ist, also nur so viele atomare Ausdrücke und Junktoren wie unbedingt nötig enthält.
@@ -2019,11 +2004,12 @@ Der Vorteil der positiven Generalisierung liegt darin, dass sie einfach zu reali
 \section{Idee: Negative Generalisierung}
 \label{NegativeGeneralisierung}
 \index{Generalisierung ! negativ}
-Unter einer negativen Generalisierung soll eine Generalisierung verstanden werden, bei der der Constraint aus Ausnahmen der Klasse generiert wird. Die Klassen werden auf spezifische Konstanten untersucht, wenn sich nicht um reflexives Wissen handelt. Bei reflexiven Klassen wird entsprechend der positiven Generalisierung verfahren; das gilt insbesondere bei zwei Klassen (was bei zweistelligen Prädikaten nur dasnn der Fall ist, wenn die Wissensbasis keine spezifischen enthält). Die Klasse, die das nicht reflexive Wissen enthält wird daher entsprechend der positiven Generalisierung \ref{PositiveGeneralisierung} um einen Constraint der Ungleichheit für die Variablen ergänzt.
+Unter einer negativen Generalisierung soll eine Generalisierung verstanden werden, bei der der Constraint aus Ausnahmen der Klasse generiert wird. Die Klassen werden auf spezifische Konstanten untersucht, wenn sich nicht um reflexives Wissen handelt. Bei reflexiven Klassen wird entsprechend der positiven Generalisierung verfahren; das gilt insbesondere bei zwei Klassen (was bei zweistelligen Prädikaten nur dann der Fall ist, wenn die Wissensbasis keine spezifischen enthält). Die Klasse, die das nicht reflexive Wissen enthält wird daher entsprechend der positiven Generalisierung \ref{PositiveGeneralisierung} um einen Constraint der Ungleichheit für die Variablen ergänzt.
 
 
-Für den Fall, dass es mehr als zwei Klassen gibt, gestaltet sich das schon komplizierter. Wie bei den Beobachtung festgestellt wurde, führen die spezifischen Konstanten \ref{Konstanten spezifisch} im Regelfall, dazu dass Klassen mit spezifischen Konditionalen \ref{Konstanten spezifisch} andere Wahrscheinlichkeiten haben als die anderen Klassen. Bei der negativen Generalisierung mehrerer Klassen wird daher zunächst das reflexive Wissen entsprechend der positiven Generalisierung verarbeitet. Die verbleibenden Klassen werden auf spezifische Konstanten untersucht. Enthält die Klasse spezifische Konstanten, so wird untersucht, ob einzelne Variablen gleich belegt sind und wie das in Interaktion zu den spezifischen Konstanten steht. Danach sollen die Klassen unterschieden werden. Weitere Erläuterungen finden sich auch im Kapitel Idee Konditionale Generalisierung \ref{Konditionale Generalisierung}. \\
+Für den Fall, dass es mehr als zwei Klassen gibt, gestaltet sich das schon komplizierter. Wie bei den Beobachtung festgestellt wurde, führen die spezifischen Konstanten \ref{Konstanten spezifisch} im Regelfall, dazu dass Klassen mit spezifischen Konditionalen \ref{Konstanten spezifisch} andere Wahrscheinlichkeiten haben als die anderen Klassen. Bei der negativen Generalisierung mehrerer Klassen wird daher zunächst das reflexive Wissen entsprechend der positiven Generalisierung verarbeitet. Die verbleibenden Klassen werden auf spezifische Konstanten untersucht. Enthält die Klasse spezifische Konstanten, so wird untersucht, ob einzelne Variablen gleich belegt sind und wie das in Interaktion zu den spezifischen Konstanten steht. Danach sollen die Klassen unterschieden werden. Weitere Erläuterungen finden sich auch im Kapitel Idee Konditionale Generalisierung \ref{Konditionale Generalisierung}. 
 
+\noindent
 	\textbf{Exkurs: Ermittlung spezifischer Konstanten} \label{Ermittlung spezifischer Konstanten} \index{Vergleich von Konditionalen} \index{Konditional}\\
 Sei $ \cal E $ eine Menge von Äquivalenzklassen (von FO-PCL Grundkonditionalen). Um herauszufinden, welche der Klassen das  spezifische Wissen enthält, entfernt man zunächst die Menge mit dem reflexiven Wissen. Jetzt kann man die Konstanten der Terme mit den spezifischen Konstanten der Wissensbasis vergleichen. Die spezifischen Konstanten der Wissensbasis erhält man, indem man testet, ob Konditionale der Wissensbasis spezifische Konstanten enthalten, \ref{Konstanten spezifisch}; das ist dann der Fall, wenn Konditionale der Wissensbasis in Prämisse, Konklusion oder Constraint eine Konstante enthalten (statt einer Variablen).
 \begin{Bsp}[Ermittlung spezifischer Konstanten]
@@ -2072,8 +2058,9 @@ Generalisiertes Konditional für Äquivalenzklasse 2:\\ $\{(flies(X))[0.66]\} <X
 		Generalisiertes Konditional für Äquivalenzklasse 2: \\$ \{(likes(U,V))[0.578] <((U \neq a \land V \neq a) \land U \neq V)>\} $\\	
 		Generalisiertes Konditional für Äquivalenzklasse 3:\\ $ \{(likes(U,V))[0.0] <U=V>\} $\\
 	\end{Bsp}
-Wie man unschwer erkennen kann, ergibt sich beim Beispiel "{}Misanthrope"{} für die Anfrage $ (likes(U,V))$  keine Veränderung gegenüber der positiven Generalisierung. Das liegt daran, dass die Klassen, die nicht reflexiv sind sich darin unterscheiden, dass eine Klasse spezifische Konditionale enthält und die andere generische.\footnote{sh. \ref{Konstanten spezifisch}} \\ 
-Anders verhält es sich beim Beispiel "{}cold"{} für die Anfrage (contact(X,Y)). Die Wissensbasis keine spezifischen Konditionale. Die Grundsubstitution liefert nur generische Grundkonditionale. Daher ergeben sich bei der Klassifizierung auch nur zwei Klassen, eine Klasse, die das spezifische Wissen enthält und eine die es nicht enthält.  
+Wie man unschwer erkennen kann, ergibt sich beim Beispiel "{}Misanthrope"{} für die Anfrage $ (likes(U,V))$  keine Veränderung gegenüber der positiven Generalisierung. Das liegt daran, dass die Klassen, die nicht reflexiv sind sich darin unterscheiden, dass eine Klasse spezifische Konditionale enthält und die andere generische.\footnote{sh. \ref{Konstanten spezifisch}} 
+
+Anders verhält es sich beim Beispiel "{}Cold"{} für die Anfrage (contact(X,Y)). Die Wissensbasis keine spezifischen Konditionale. Die Grundsubstitution liefert nur generische Grundkonditionale. Daher ergeben sich bei der Klassifizierung auch nur zwei Klassen, eine Klasse, die das spezifische Wissen enthält und eine die es nicht enthält.  
 \begin{Bsp}[Negative Generalisierung am Beispiel "{}Cold"{}]
 	S. \ref{Cold}.\\ 
 	\index{Generalisierung ! negativ}
@@ -2784,9 +2771,7 @@ Eine Auflistung der Beispiele hierzu findet man unter \ref{Formel_mehrKlassen}.
 Aufgabe der Inferenzkomponente ist, bei einer gegebenen Wissensbasis eine Anfrage in Form eines qualitativen Konditionals, d.h. eines Konditionals ohne Wahrscheinlichkeit entgegenzunehmen und für die durch Substitution daraus generierten Grundkonditionale, für die die gleiche Wahrscheinlichkeit berechnet wurde, ein möglichst allgemeines Konditional zurückzugeben.
 
 Dafür müssen die Wissensbasis und das Konditional zunächst grundiert werden. Wie bereits erläutert (vgl. auch Proposition \ref{Grundsubstitution}) geschieht dies, indem alle Konditionale mit allen zulässigen Konstanten instantiiert werden.
-
 Für jede Grundinstanz des angefragten Konditionals soll anschließend die (bedingte) Wahrscheinlichkeit berechnet werden.
-
 Dazu nutzt man das Wissen der Wissensbasis und betreibt Inferenz, d.h. man leitet neues Wissen ab,  in diesem Fall die Berechnung der bedingten Wahrscheinlichkeit für jedes Grundkonditional des angefragten Konditionals.
 
 Ausgangsbasis dafür ist ein Modell der Wissensbasis. Es eignet sich jedoch nicht jedes beliebige Modell. Aus allen Modellen muss zunächst das bestmögliche ausgewählt werden.
@@ -2800,11 +2785,8 @@ Eine Schwierigkeit besteht darin, das Wissen, das die jeweiligen Klassen bereits
 Eine weitere große Schwierigkeit ergab sich in der Beurteilung dessen, wie Gleichheit zu definieren ist. Eine absolute Gleichheit in der Wahrscheinlichkeit lässt sich praktisch nicht realisieren, weil alle berechneten Wahrscheinlichkeiten das Ergebnis eines Optimierungsprozesses und nur Annäherungen sind; man kann theoretisch den Algorithmus beliebig genau einstellen, praktisch ist das nicht realisierbar. Zunächst war als einfachste Variante die Gleichheit nach Rundung das Kriterium zum Zusammenfassen.
 
 Nach dem Klassifizieren der Grundkonditionale müssen die Klassen generalisiert werden. Was hierunter zu verstehen ist, wird in \ref{general} erläutert. 
-Der erste Ansatz war, dies kanonisch zu tun.\\
-Eine Überlegung bestand darin, das auch kanonisch negativ zu tun und beide Generalisierungen zu vergleichen.
-
-Als Unterscheidungskriterium bot sich die Größe des Konditionals, die in diesem Fall lediglich von der Größe des Constraints abhing, zu unterscheiden.
-
+Der erste Ansatz war, dies kanonisch zu tun.
+Eine Überlegung bestand darin, das auch kanonisch negativ zu tun und beide Generalisierungen zu vergleichen. Als Unterscheidungskriterium bot sich die Größe des Konditionals, die in diesem Fall lediglich von der Größe des Constraints abhing, zu unterscheiden.
 Was sich zunächst als große Schwierigkeit repräsentierte, war die Behandlung des reflexiven Wissens. Wie sich herausstellte, war das tatsächlich keine große Herausforderung. 
 
 
@@ -2818,14 +2800,12 @@ Was sich zunächst als große Schwierigkeit repräsentierte, war die Behandlung 
 Teil der Aufgabenstellung ist es, einen Algorithmus der Bibliothek Log4KR des \\ KReator-Projekts\footnote{Das KReator-Projekt ist erhältlich unter \href{http://sourceforge.net/projects/kreator-ide}{http://sourceforge.net/projects/kreator-ide}} zu verwenden.
 
 KReator\footnote{Das "{}KR"{} in KReator steht für "{}Knowledge Representation"{} und der Name KReator weist auf die Verwendung als Entwicklungsumgebung für Wissensingenieure hin aus:\cite{FLT09}} ist eine integrierte Entwicklungsumgebung für relationale probabilistische Logik, vgl. \cite{BHM14}. Das KReator System soll ein gemeinsames Interface für die verschiedenen Ansätze des probabilistischen relationalen Lernens bereitstellen und bei der Verwendung von Wissensbasen unterstützen. Eine weitere Anforderung war dieses insbesondere möglichst einfach und unkompliziert für den Anwender zu erfüllen. KReator wurde in Java programmiert auf Basis der objektorientierten Programmierung. Eine nähere Beschreibung zu KReator findet sich in \cite{TFLKIB10}, \cite{KIBFT11} und \cite{FLT09}.
-
 Mit Hilfe von Log4KR können Anfragen in FO-PCL beantwortet werden, d.h. es kann Inferenz betrieben werden.  
 
 Log4KR wurde in dieser Arbeit verwendet, um Wissenbasen in FO-PCL Syntax einzugeben, den Inferenzprozess mit Grundierung der Wissensbasis und der Anfrage und die Berechnung des Modells der Wissensbasis mit maximaler Entropie durchzuführen. Des Weiteren wurde es genutzt, um die Wahrscheinlichkeit des angefragten Konditionals auf einfache und effiziente Weise zu berechnen.
 
 
-Aus \cite{P15}: Log4KR ist eine Java Bibliothek, die lineare Logik implementiert. Einer der Hauptbestandteile von Log4KR ist eine Konditionalsprache $ (\cal L $$ \mid $  $ \cal L )$ über $ \cal L, $ \\
-Für diese Aufgabe handelt es sich bei der Konditionalsprache $ \cal L $ um FO-PCL zusammen mit einer Wahrscheinlichkeitsfunktion über $ \Omega $ und linearer Semantik. 
+Aus \cite{P15}: Log4KR ist eine Java Bibliothek, die lineare Logik implementiert. Einer der Hauptbestandteile von Log4KR ist eine Konditionalsprache $ (\cal L $$ \mid $  $ \cal L )$ über $ \cal L $. Für diese Aufgabe handelt es sich bei der Konditionalsprache $ \cal L $ um FO-PCL zusammen mit einer Wahrscheinlichkeitsfunktion über $ \Omega $ und linearer Semantik. 
 
 Bei der Verwendung von Log4KR ist zu beachten, dass verschiedene Änderungen, vor allem im Bereich der Klasse Fraction vorgenommen wurde, um sie verwenden zu können. Um welche Modifikationen es sich handelt ist dem Anhang \ref{Modifikaiton Log4KR} zu entnehmen.
 
@@ -2879,7 +2859,7 @@ Zur Bearbeitung der Aufgabe war es notwendig, sich intensiv mit der Aufgabenstel
 	\item Auswertung der Beispiele
 	\item Entwicklung von Ideen für Algorithmen
 	\item Entwicklung des eigentlichen Algorithmus
-	\item Entwicklung der Test für den Algorithmus 
+	\item Entwicklung der Tests für den Algorithmus 
 	\item Implementierung des Algorithmus
 	\item Implementierung von Beispielen 
 	\item Verifikation des Algorithmus anhand der Beispiele
@@ -2889,26 +2869,16 @@ Zur Bearbeitung der Aufgabe war es notwendig, sich intensiv mit der Aufgabenstel
 
 \subsection{Beschreibung der einzelnen Phasen}
 Die Aufgabenstellung war klar formuliert und enthielt bereits erste Beispiele zur Funktionsweise der Inferenzkomponente. Anhand eines Programmierbeispiels werden die Klassen von Log4KR erläutert, die zur Bearbeitung der Aufgabe notwendig oder hilfreich sind. Log4KR stellt auch einen Algorithmus zur Verfügung um die entropieoptimale Wahrscheinlichkeitsfunktion zu berechnen.
-
 Um die Aufgabenstellung verstehen und die Aufgabe bearbeiten zu können, ist ein tieferes Verständnis von FO-PCL notwendig. Dieses kann man sich durch die Lektüre von \cite{Fis10} erarbeiten. Ausgangspunkt ist ein Grundverständnis von probabilistischer Logik und Herbrand-Theorie, wie man sie dem Anhang und \cite{BK15} entnehmen kann.
 
-
 Um den experimentellen Teil der Aufgabe lösen zu können, bietet Log4KR große Unterstützung.
-Die Bibliothek Log4KR enthält neben vielen nützlichen Klassen, um Beispiele in FO-PCL repräsentieren bzw. implementieren zu können auch die Möglichkeit, Wissensbasen aus Dateien einzulesen. Das macht die maschinelle Verarbeitung von Beispielen einfach und bequem. Die Beispiele der Bibliothek sind selbsterklärend, so dass man problemlos eigene Wissensbasen erstellen und in einer Datei speichern kann, ohne mühevoll jedes einzelne Objekt anlegen zu müssen.
-
-Log4KR stellt darüber hinaus auch einen Algorithmus zur Verfügung, um entropieoptimale Wahrscheinlichkeitsfunktionen für FO-PCL Wissensbasen zu berechnen und beliebige Anfragen zu beantworten, die in Form eines qualitativen grundierten Konditionals gestellt werden. 
-
+Die Bibliothek Log4KR enthält neben vielen nützlichen Klassen, um Beispiele in FO-PCL repräsentieren bzw. implementieren zu können auch die Möglichkeit, Wissensbasen aus Dateien einzulesen. Das macht die maschinelle Verarbeitung von Beispielen einfach und bequem. Die Beispiele der Bibliothek sind selbsterklärend, so dass man problemlos eigene Wissensbasen erstellen und in einer Datei speichern kann, ohne mühevoll jedes einzelne Objekt anlegen zu müssen. Log4KR stellt darüber hinaus auch einen Algorithmus zur Verfügung, um entropieoptimale Wahrscheinlichkeitsfunktionen für FO-PCL Wissensbasen zu berechnen und beliebige Anfragen zu beantworten, die in Form eines qualitativen grundierten Konditionals gestellt werden. 
 Mit diesem Algorithmus lässt sich für das (konsistente) Wissen der Wissensbasis, welches in Form von FO-PCL Konditionalen vorliegt und Aussagen über die verwendeten Variablen und ggf. Konstanten des Universums macht, ein epistemischer Status ermitteln.
-
 Der Algorithmus kann des Weiteren verwendet werden, um die Wahrscheinlichkeit der Grundinstanzen des qualitativen Konditionals der Anfrage zu berechnen. Auch hier gilt, dass der entropieoptimale Parameterwert durch fortlaufende Anpassung bis zur Konvergenz gegen einen Grenzwert berechnet wird. 
 
-Ausgangsbasis für den neu entwickelten Algorithmus unter Verwendung von Log4KR stellt der limited-memory Broyden-Fletcher-Goldfarb-Shanno Algorithmus (LBFGS) und seine Implementierung in verschiedenen Klassen der Bibliothek dar. 
+Ausgangsbasis für den neu entwickelten Algorithmus unter Verwendung von Log4KR stellt der limited-memory Broyden-Fletcher-Goldfarb-Shanno Algorithmus (LBFGS) und seine Implementierung in verschiedenen Klassen der Bibliothek dar. Leider gab es bei der Berechnung der Fließkommazahlen. An dieser Stelle möchte ich betonen, dass die Berechnungsmethoden von Log4KR dringend überarbeitet werden müssen, damit die Inferenzkomponente richtig funktionieren kann.
 
-Leider gab es bei der Berechnung der Fließkommazahlen. An dieser Stelle möchte ich betonen, dass die Berechnungsmethoden von Log4KR dringend überarbeitet werden müssen, damit die Inferenzkomponente richtig funktionieren kann.
-
-Das Einarbeiten in FO-PCL gelingt mühelos, wenn man bereits über Vorkenntnisse in Aussagenlogik, Umgang mit unsicherem Wissen, Probabilistik  und das Konzept der (maximalen) Entropie verfügt. Für den Erwerb der Grundkenntnisse empfiehlt sich \cite{BKI08} und \cite{KK06}.
-
-Zum Konzept der maximalen Entropie als Selektionskriterium für ein Modell finden sich zahlreiche Schriften, vgl. beispielsweise \cite{BHM14}, \cite{BK15}, \cite{Fis10}, \cite{RKI97} und \cite{TFLKIB10}, mit welchen man sich ein tieferes Verständnis erarbeiten kann.
+Das Einarbeiten in FO-PCL gelingt mühelos, wenn man bereits über Vorkenntnisse in Aussagenlogik, Umgang mit unsicherem Wissen, Probabilistik  und das Konzept der (maximalen) Entropie verfügt. Für den Erwerb der Grundkenntnisse empfiehlt sich \cite{BKI08} und \cite{KK06}. Zum Konzept der maximalen Entropie als Selektionskriterium für ein Modell finden sich zahlreiche Schriften, vgl. beispielsweise \cite{BHM14}, \cite{BK15}, \cite{Fis10}, \cite{RKI97} und \cite{TFLKIB10}, mit welchen man sich ein tieferes Verständnis erarbeiten kann.
 
 Um in FO-PCL neues Wissen ableiten,  Inferenz betreiben zu können, muss man Anfragen an die Wissensbasis stellen. Dies geschieht in Form eines qualitativen Konditionals. Wissen kann man unter anderem durch Marginalisieren ableiten. Das heißt, man bildet Randverteilungen über Teilmengen der Signatur der Sprache. Dabei erhält man durch Aufsummieren elementarer Wahrscheinlichkeiten Verteilungen über Teilmengen, aus: \cite[Anhang A.2]{BKI08}
 
@@ -2940,9 +2910,9 @@ $ R_k =  \langle(\varphi_k \mid \psi_k)[\xi_k], C_k \rangle , 1 \leq k \leq  $ u
 	\item Klassifizierung:Zusammenfassung der Grundkonditionale mit der gleichen Wahrscheinlichkeit zu Äquivalenzklassen. 
 
 	\item Generalisierung der Äquivalenzklassen \index{Äquivalenzklassen}
-	Dieser Schritt beinhaltet die eigentliche Logik der Inferenzkomponente.\\
+	Dieser Schritt beinhaltet die eigentliche Logik der Inferenzkomponente.
 	Es erfolgt eine negative und eine positive Generalisierung. Die jeweilige Generalisierung wird logisch optimiert. Im Anschluss werden die Generaliserungen verglichen und die bessere gewählt und ausgegeben. Was unter dem Prozess zu verstehen ist, wird im Folgenden erläutert, s. \ref{general}. 
-	Es wird zunächst ein negativer und ein positiver Constraint erzeugt. Die Constraints werden logisch optimiert. Beide werden der Größe nach verglichen und der kürzere wird gewählt. Eine detaillierte Beschreibung dieses Prozesses erfolgt in einem der unten stehenden Kapitel.\\
+	Es wird zunächst ein negativer und ein positiver Constraint erzeugt. Die Constraints werden logisch optimiert. Beide werden der Größe nach verglichen und der kürzere wird gewählt. Eine detaillierte Beschreibung dieses Prozesses erfolgt in einem der unten stehenden Kapitel.
 	Unter Verwendung des erzeugten Constraints und der berechneten Wahrscheinlichkeit wird für jede Äquivalenzklasse ein quantifiziertes relationales Konditional erzeugt.
 	
 	\item Ausgabe: eine nichtleere Menge qualitativer Konditionale für jede Äquivalenzklasse zur Anfrage $ q $ , wie sie im Laufe des Algorithmus als Ausgabe der Komponente, \ref{Ausgabe der Komponente} generiert wurden.
@@ -2980,7 +2950,7 @@ Sei $ C $ ein Constraint. Hier sollen die Regeln erläutert werden, nach denen d
 Klassen vom Konditionalen werden positiv generalisiert (sh. \ref{Generalisierung}) indem zur Erzeugung des Constraints für alle Variablen der Anfrage mit den jeweiligen dazugehörigen Konstanten des Konditionals ein Constraint der Gleichheit erzeugt wird und diese konjunktiv verknüpft werden. Diese so erzeugten Constraints werden wiederum zu einer disjunktiven Constraint Formel der Klasse verknüpft.{ Bei zweistelligen Prädikaten wird das reflexive Wissen mit einem Constraint der Ungleichheit mit dem bisher erzeugten Constraint konjunktiv verknüpft. Ausführlich dazu \ref{PositiveGeneralisierung}.
 \subsubsection{Negative Generalisierung} \index{Generalisierung ! negativ} \label{Funktion negativ}
 Im Falle der negativen Generalisierung verhält sich alles etwas komplizierter, ausführlich dazu \ref{NegativeGeneralisierung}. 
-Im Prinzip beruht die negative Generalisierung auf Ausnahmen. Die Ausnahmen ergeben sich dadurch, dass die betroffenen Grundkonditionale spezifische Konstanten, \ref{Konstanten spezifisch} enthalten. Für mehrstellige Prädikate wird zunächst die Klasse mit dem reflexiven Wissen behandelt und mit einem Constraint der Ungleichheit, entsprechend wie bei der positiven Generalisierung, versehen. Bei den anderen Klassen hängt es davon ab, ob sie reflexives Wissen enthalten oder nicht. Es wird entweder für jedes Atom ein atomarer Constraint der Ungleichheit für die betroffenen Variablen und die spezifische Konstante der Wissensbasis gebildet, wenn sie keine spezifische Konstante enthalten. Diese atomaren Constraints werden konjunktiv verknüpft. Wenn sie eine spezifische Konstante enthalten wird ein atomarer Constraint der Gleichheit für die betroffenen Variablen und die spezifische Konstante gebildet. Diese Cosntraints werden dann disjunktiv verknüpft. Die so generierten jeweiligen Constraints werden konjunktiv mit einem Constraint der Ungleichheit für das reflexive Wissen verknüpft.
+Im Prinzip beruht die negative Generalisierung auf Ausnahmen. Die Ausnahmen ergeben sich dadurch, dass die betroffenen Grundkonditionale spezifische Konstanten, \ref{Konstanten spezifisch} enthalten. Für mehrstellige Prädikate wird zunächst die Klasse mit dem reflexiven Wissen behandelt und mit einem Constraint der Ungleichheit, entsprechend wie bei der positiven Generalisierung, versehen. Bei den anderen Klassen hängt es davon ab, ob sie reflexives Wissen enthalten oder nicht. Es wird entweder für jedes Atom ein atomarer Constraint der Ungleichheit für die betroffenen Variablen und die spezifische Konstante der Wissensbasis gebildet, wenn sie keine spezifische Konstante enthalten. Diese atomaren Constraints werden konjunktiv verknüpft. Wenn sie eine spezifische Konstante enthalten wird ein atomarer Constraint der Gleichheit für die betroffenen Variablen und die spezifische Konstante gebildet. Diese Constraints werden dann disjunktiv verknüpft. Die so generierten jeweiligen Constraints werden konjunktiv mit einem Constraint der Ungleichheit für das reflexive Wissen verknüpft.
 \subsubsection{Logische Optimierung}
 Die durch die jeweilige Generalisierung erhaltenen Konditionale werden logisch optimiert, s. \ref{Logische Genopt}, dabei wird der Constraint möglichst kurz. 
 \subsubsection{Generalisierungsvergleich}
@@ -2989,9 +2959,7 @@ Die logisch optimierten Generalisierungen werden verglichen. Dabei sind verschie
 \section{Beschreibung des Algorithmus}
 Voraussetzung ist das Vorliegen einer FO-PCL Wissensbasis  s. Definition \ref{KB} und einer Anfrage in Form eines qualitativen relationalen Konditionals oder eines qualitativen Grundkonditionals, d.h. eines (relationalen) Konditionals ohne Wahrscheinlichkeit.
 
-Zunächst wird die Wissensbasis gemäß der Syntax von FO-PCL grundiert, vgl. Definition \ref{sub}  und bei einem relationalen Konditional auch jenes. Sollte das Konditional bereits grundiert sein, entfällt dieser Schritt.
-
-Da es sich bei der Semantik von FO-PCL um eine mögliche Welten Semantik, vgl. \cite{GT07}, handelt, werden die möglichen Welten, die Interpretationen ermittelt. Mit Hilfe des Prinzips der maximalen Entropie, s. \ref{MaxEnt},  wird aus den Modellen, also den Interpretationen, die die Wissensbasis erfüllen, diejenige mit der maximalen Entropie ausgewählt, d.h. diejenige, die die Wissensbasis erfüllt und ansonsten so wenig Wissen wie möglich hinzufügt.
+Zunächst wird die Wissensbasis gemäß der Syntax von FO-PCL grundiert, vgl. Definition \ref{sub}  und bei einem relationalen Konditional auch jenes. Sollte das Konditional bereits grundiert sein, entfällt dieser Schritt. Da es sich bei der Semantik von FO-PCL um eine mögliche Welten Semantik, vgl. \cite{GT07}, handelt, werden die möglichen Welten, die Interpretationen ermittelt. Mit Hilfe des Prinzips der maximalen Entropie, s. \ref{MaxEnt},  wird aus den Modellen, also den Interpretationen, die die Wissensbasis erfüllen, diejenige mit der maximalen Entropie ausgewählt, d.h. diejenige, die die Wissensbasis erfüllt und ansonsten so wenig Wissen wie möglich hinzufügt.
 Aus diesem Modell lassen sich jetzt die Wahrscheinlichkeiten für jedes Grundkonditional berechnen.
 
 
@@ -3002,26 +2970,17 @@ Bei der positiven Generalisierung  erzeugt man für alle Variablen der Anfrage u
 
 Bei der negativen Generalisierung behandelt man die Klassen danach, ob sie spezifische Konditionale enthalten oder nicht. Nähere Erläuterungen finden sich in \ref{Funktion negativ}.
 Das eventuell vorhandene reflexive Wissen wird in Form eines Constraints der Ungleichheit konjunktiv mit dem erzeugten Constraint verknüpft.
-
-Im Anschluss sind die Constraints noch logisch zu minimieren bzw. zu optimieren.\\
+Im Anschluss sind die Constraints noch logisch zu minimieren bzw. zu optimieren.
 Ein darauffolgender Vergleich liefert das bestmöglichste Konditional.
-
-
 Es wird im Zuge der Generalisierung die Anzahl der Klassen betrachtet. Handelt es sich um eine einzige Klasse, d.h. die dazugehörende Wahrscheinlichkeit ist gleich für alle Grundkonditionale, wird das relationale Konditional mit der berechneten Wahrscheinlichkeit ausgegeben.
-
 Gibt es zwei Klassen, so ist zu betrachten, wie viele Elemente sich in der jeweiligen Klasse befinden. Enthält jede Klasse nur je ein Grundkonditional wird dieses für die Klasse mit seiner berechneten Wahrscheinlichkeit ausgegeben.
-
 Wenn eine der beiden Klassen ein Grundkonditional enthält und alle anderen Grundkonditionale in der anderen Klasse enthalten sind, so handelt es sich bei der Klasse mit einem Element um eine Ausnahme bei einstelligen Prädikaten. Bei zweistelligen Prädikaten gibt es zwei Äquivalenzklassen genau dann, wenn die Wissensbasis keine spezifischen Konstanten enthält. Eine Klasse enthält das reflexive Wissen, die andere alle anderen Konditionale.
 
 Die Ausgabe besteht in dem einen Grundkonditional mit berechneter Wahrscheinlichkeit für die Klasse mit einem Element und einem relationalen Konditional mit berechneter Wahrscheinlichkeit und einem Constraint der Ungleichheit. In diesem Constraint sind die im Konditional vorkommen Variablen ungleich der Konstanten des anderen Konditionals. 
-
 Enthalten beide Klassen mehr als ein Element, so ist entsprechend dem Fall vorzugehen, als handle sich um mehr als zwei Klassen mit jeweils mehr als einem Element.
-
 Bei mehreren Klassen mit je mehr als einem Element werden die Unterscheidungen zunehmend komplexer.
 
-Zunächst werden die berechnete Wahrscheinlichkeit betrachtet. Wenn die Wahrscheinlichkeit für die Konklusion Null ist, was im Fall reflexiven Wissens oder eines entsprechenden Fakts sein kann, wird die entsprechende Klasse mit einem Grundkonditional mit der Wahrscheinlichkeit Null ausgegeben.
-
-Hat die Prämisse die Wahrscheinlichkeit Null, so würde die Berechnung des bedingten Konditionals zu einer Division durch Null führen. Diese Fälle sind auszuschließen. Als Ausgabe erfolgt die Warnung, dass dieser Fall nicht angefragt werden kann.
+Zunächst werden die berechnete Wahrscheinlichkeit betrachtet. Wenn die Wahrscheinlichkeit für die Konklusion Null ist, was im Fall reflexiven Wissens oder eines entsprechenden Fakts sein kann, wird die entsprechende Klasse mit einem Grundkonditional mit der Wahrscheinlichkeit Null ausgegeben. Hat die Prämisse die Wahrscheinlichkeit Null, so würde die Berechnung des bedingten Konditionals zu einer Division durch Null führen. Diese Fälle sind auszuschließen. Als Ausgabe erfolgt die Warnung, dass dieser Fall nicht angefragt werden kann.
 
 Wenn es mehr als zwei Äquivalenzklassen gibt, dann dadurch, dass spezifisches Wissen in der Wissensbasis enthalten ist und durch die Belegung von verschiedenen Variablen mit gleichen Konstanten. Abhängig davon, an welcher Stelle bzw. in welchen Kombinationen die spezifischen Konstanten vorkommen, wird dann das Konditional gebildet. Was darunter konkret zu verstehen ist, wird offensichtlich, wenn man ein konkretes Beispiel betrachtet.
 
@@ -3193,23 +3152,26 @@ Ebenso sollte die verwendete Wissensbasis durch geeignete Constraints konsistent
 
 
 \section{Verarbeitung einer Anfrage durch die Komponente}
-Da die Hauptmethode der neuen Inferenzkomponente gemäß Aufgabenstellung eine Methode der Art public Collection<Relational Conditional> queryConditional(\\RelationalConditional) bereitstellen sollte, wurde diese zuerst  implementiert. Beim Methodenaufruf ist der Komponente das qualitative (relationale) Konditional zu übergeben.
-Die Methode ground(RelationalConditional) ruft in der Bibliothek Log4KR über groundConditional(RelationalConditional, Collection<Constant>) auf, die wiederum auf dem Grundierungsoperator ausgeführt wird und dient dazu, die Anfrage zu grundieren. Man erhält als Ergebnis des Methodenaufrufs ground(RelationalConditional) die grundierte Anfrage.
+Da die Hauptmethode der neuen Inferenzkomponente gemäß Aufgabenstellung eine Methode der Art \texttt{Collection<Relational Conditional> queryConditional(\\RelationalConditional)} bereitstellen sollte, wurde diese zuerst  implementiert. Beim Methodenaufruf ist der Komponente das qualitative (relationale) Konditional zu übergeben.
+Die Methode \texttt{ ground(RelationalConditional)} ruft in der Bibliothek Log4KR über \texttt{groundConditional(RelationalConditional, Collection<Constant>)} auf, die wiederum auf dem Grundierungsoperator ausgeführt wird und dient dazu, die Anfrage zu grundieren. Man erhält als Ergebnis des Methodenaufrufs \texttt{ground(RelationalConditional)} die grundierte Anfrage.
 
-Als nächstes wird die Methode classify(RelationalConditional,\\ Collection<RelationalConditional>) aufgerufen, die die Klassifizierungsoperation ausführt.
-
+Als nächstes wird die Methode \texttt{ classify(RelationalConditional,\\ Collection<RelationalConditional>)} aufgerufen, die die Klassifizierungsoperation ausführt.
 Dazu wird ihr das relationale Konditional und die Grundinstanzen der Anfrage übergeben.
 
-Über die Methode compute(Collection<RelationalConditional>), der die Grundinstanzen des angefragten Konditionals übergeben werden, wird die Methode queryProbability(Formula<RelationalAtom>, Formula<RelationalAtom>) aus Log4KR aufgerufen, um die Wahrscheinlichkeit jeden Konditionals zu berechnen. Als Ergebnis erhält man die Grundinstanzen des angefragten Konditionals zusammen mit der berechneten Wahrscheinlichkeit.
+Über die Methode \texttt{compute(Collection<RelationalConditional>)}, der die Grundinstanzen des angefragten Konditionals übergeben werden, wird die Methode\\ \texttt{queryProbability(Formula<RelationalAtom>, Formula<RelationalAtom>)} aus Log4KR aufgerufen, um die Wahrscheinlichkeit jeden Konditionals zu berechnen. Als Ergebnis erhält man die Grundinstanzen des angefragten Konditionals zusammen mit der berechneten Wahrscheinlichkeit.
 
-Nun wird die Generalisierungsmethode generalize (RelationalConditional, \\ Collection<Collection<RelationalConditional>>)auf dem  Generalisierungsoperator aufgerufen, der die Konditionale mit der gleichen Wahrscheinlichkeit in eine Klasse zusammenfasst und ein generalisiertes Konditional pro Klasse erzeugt.\\
-Ein erster Ansatz erzeugt eine positive oder negative Generalisierung abhängig von der Anzahl der Grundkonditionale. Da dabei die Behandlung reflexiven Wissens ein Problem darstellt, soll eine Lösung gesucht werden, bei der zunächst das reflexive Wissen verarbeitet werden könnte und dann negativ und positiv generalisiert wird, die Constraints der Generalisierungen optimiert werden und dann die bessere Lösung gewählt wird. \\
-Bei der ersten praktischen Realisierung wurde aber das reflexive Wissen im Zuge der jeweiligen Generalisierung betrachtet. Das Ergebnis beider Generalisierungen ist für zwei Klassen von denen eine reflexiv ist und die andere nicht.\\
-Die Generalaisierungsmethode generalize(RelationalConditional,\\ Collection<Collection<RelationalConditional>>) ruft zunächst generalizePositive(\\RelationalConditional,
-Collection<Collection<RelationalConditional>>) und anschießend generalizeNegative(RelationalConditional,
-Collection<Collection<RelationalConditional>>,
-Collection<RelationalConditional> ) auf.\\
-Danach wird ein Comperator erzeugt und auf diesem die Methode compare aufgerufen, die dem Vergleich der beiden Generalisierungen dient. Bisher wurde nur ein Vergleich über die Länge der Constraints erzeugt.\\
+Nun wird die Generalisierungsmethode \texttt{generalize (RelationalConditional, \\ Collection<Collection<RelationalConditional>>)} auf dem  Generalisierungsoperator aufgerufen, der die Konditionale mit der gleichen Wahrscheinlichkeit in eine Klasse zusammenfasst und ein generalisiertes Konditional pro Klasse erzeugt.
+
+Ein erster Ansatz erzeugt eine positive oder negative Generalisierung abhängig von der Anzahl der Grundkonditionale. Da dabei die Behandlung reflexiven Wissens ein Problem darstellt, soll eine Lösung gesucht werden, bei der zunächst das reflexive Wissen verarbeitet werden könnte und dann negativ und positiv generalisiert wird, die Constraints der Generalisierungen optimiert werden und dann die bessere Lösung gewählt wird. 
+
+Bei der ersten praktischen Realisierung wurde aber das reflexive Wissen im Zuge der jeweiligen Generalisierung betrachtet. Das Ergebnis beider Generalisierungen ist für zwei Klassen von denen eine reflexiv ist und die andere nicht.
+
+Die Generalaisierungsmethode \texttt{generalize(RelationalConditional,\\ Collection<Collection<RelationalConditional>>)} ruft zunächst \texttt{generalizePositive(\\RelationalConditional,
+Collection<Collection<RelationalConditional>>)} und anschießend \texttt{generalizeNegative(RelationalConditional,\\
+Collection<Collection<RelationalConditional>>,\\
+Collection<RelationalConditional>)} auf.
+
+Danach wird ein Comperator erzeugt und auf diesem die Methode \texttt{compare} aufgerufen, die dem Vergleich der beiden Generalisierungen dient. Bisher wurde nur ein Vergleich über die Länge der Constraints erzeugt.
 Die so ermittelte Generalisierung ist der Rückgabewert der Komponente für die Anfrage und in Form einer Menge von qualitativen Konditionalen, jeweils mit oder ohne Constraint.
 
 
@@ -3407,11 +3369,10 @@ Bei der Berechnung der Modelle bzw. bei der Selektion des Modells mit der maxima
 	\label{Cold_2}
 \end{figure}
 
-Das Problem hängt zum einen mit der Feineinstellung der Rundung bei Log4KR zusammen, zum anderen mit der Klasse Fraction und der fehlerhaften Behandlung des Überlaufs, vgl. auch \ref{Korrektur_Fraction}, zum anderen der Laufzeitumgebung von Java. 
-Ein weiteres Problem ist, dass die berechneten Wahrscheinlichkeiten für jedes einzelne Konditional mehrfach im Datentyp umgewandelt bzw. verarbeitet werden. Für die Berechnung der Wahrscheinlichkeiten wird in der Komponente bei der Klassifizierung eine Methode aufgerufen(compute), die eine Methode in Log4KR zur Berechnung der Wahrscheinlichkeit des Konditionals aufruft (queryConditionalProbability). Diese ruft wiederum eine andere Methode auf, die die Ergebnisse aus dem epistemischen Status liefert, die durch einen Optimierungsprozess zustande kommen. Der gelieferte Double wird dabei durch Division zweier optimierter Werte berechnet. Die so berechneten Wahrscheinlichkeiten werden benötigt, um ein probabilistisches Konditional zu erzeugen. Der Konstruktor lässt aber für Wahrscheinlichkeiten nur einen Wert vom Datentyp Fraction zu. Hier gibt es die oben beschriebenen Probleme mit dem Überlauf (insbesondere bei sehr kleinen Zahlenwerten, d.h. Zahlenwerten nahe 0). Der so gewonnene Wert wird überdies vereinfacht (durch Kürzung). Die Klassifizierung erfolgt mit gerundeten Werten (mit dem SimpleRoundingClassifier der Komponente). Dabei werden erneut aus den von Log4KR gelieferten Werten (vom Typ Fraction) nach Rundung neue Objekte vom Typ Fraction erzeugt.
+Das Problem hängt zum einen mit der Feineinstellung der Rundung bei Log4KR zusammen, zum anderen mit der Klasse \texttt{Fractio}n und der fehlerhaften Behandlung des Überlaufs, vgl. auch \ref{Korrektur_Fraction}, zum anderen der Laufzeitumgebung von Java. 
+Ein weiteres Problem ist, dass die berechneten Wahrscheinlichkeiten für jedes einzelne Konditional mehrfach im Datentyp umgewandelt bzw. verarbeitet werden. Für die Berechnung der Wahrscheinlichkeiten wird in der Komponente bei der Klassifizierung eine Methode aufgerufen(\texttt{compute}), die eine Methode in Log4KR zur Berechnung der Wahrscheinlichkeit des Konditionals aufruft (\texttt{queryConditionalProbability}). Diese ruft wiederum eine andere Methode auf, die die Ergebnisse aus dem epistemischen Status liefert, die durch einen Optimierungsprozess zustande kommen. Der gelieferte \texttt{Double} wird dabei durch Division zweier optimierter Werte berechnet. Die so berechneten Wahrscheinlichkeiten werden benötigt, um ein probabilistisches Konditional zu erzeugen. Der Konstruktor lässt aber für Wahrscheinlichkeiten nur einen Wert vom Datentyp\texttt{ Fraction} zu. Hier gibt es die oben beschriebenen Probleme mit dem Überlauf (insbesondere bei sehr kleinen Zahlenwerten, d.h. Zahlenwerten nahe 0). Der so gewonnene Wert wird überdies vereinfacht (durch Kürzung). Die Klassifizierung erfolgt mit gerundeten Werten (mit dem \texttt{SimpleRoundingClassifier} der Komponente). Dabei werden erneut aus den von Log4KR gelieferten Werten (vom Typ\texttt{ Fraction}) nach Rundung neue Objekte vom Typ Fraction erzeugt.
 
 Diese Schwierigkeiten führen insgesamt dazu, dass die Ergebnisse der Komponente nicht verlässlich reproduzierbar sind.
-
 Das führte soweit, dass sich bei der Berechnung der Wahrscheinlichkeiten für das Beispiel"{}ColdSpez"{} \ref{ColdSpez} negative Wahrscheinlichkeiten in der JUnit Testumgebung ergaben:
 
 \includegraphics[scale = 0.7]{Graphics/Fehler_ColdSpez}
@@ -3436,14 +3397,15 @@ Dafür mussten die einzelnen Objekte angelegt werden, die im Rahmen der Klassifi
 
 
 \subsection{Merkmal der Gleichheit und Gleichheit von Konditionalen} \label{Gleichheit}
-Es ist aufgefallen, dass bei der Methode queryProbability() aus Log4KR bei der Berechnung der Wahrscheinlichkeiten Unstimmigkeiten bei der Rundung auftreten. Das ist schon bei kleinen Beispielen der Fall. Es hat sich herausgestellt, dass das an der Feineinstellung der Rundung in Log4KR liegt. Diese kann bei Bedarf modifiziert werden.\\
-Eine der Schwierigkeiten bestand darin, ein Kriterium für die Gleichheit der Wahrscheinlichkeit anzugeben. Da die Wahrscheinlichkeiten das Ergebnis einer Annäherungsberechnung sind, ist es nicht möglich, ein Kriterium für die absolute Gleichheit anzugeben. Die Beurteilung der Gleichheit kann daher nur das Ergebnis einer Heuristik sein.\\
-Die einfachste Heuristik beruht letztlich auf Rundung. Die Schwierigkeit dabei besteht darin, eine geeignete Einstellung für die Rundung zu finden. Rundet man zu früh, könnten Konditionale zusammengefasst werden, die in verschiedene Klassen gehören, rundet man zu großzügig, könnten mehr Klassen geschaffen werden als notwendig bzw. sinnvoll.\\
+Es ist aufgefallen, dass bei der Methode \texttt{queryProbability()} aus Log4KR bei der Berechnung der Wahrscheinlichkeiten Unstimmigkeiten bei der Rundung auftreten. Das ist schon bei kleinen Beispielen der Fall. Es hat sich herausgestellt, dass das an der Feineinstellung der Rundung in Log4KR liegt. Diese kann bei Bedarf modifiziert werden.
+
+Eine der Schwierigkeiten bestand darin, ein Kriterium für die Gleichheit der Wahrscheinlichkeit anzugeben. Da die Wahrscheinlichkeiten das Ergebnis einer Annäherungsberechnung sind, ist es nicht möglich, ein Kriterium für die absolute Gleichheit anzugeben. Die Beurteilung der Gleichheit kann daher nur das Ergebnis einer Heuristik sein.
+
+Die einfachste Heuristik beruht letztlich auf Rundung. Die Schwierigkeit dabei besteht darin, eine geeignete Einstellung für die Rundung zu finden. Rundet man zu früh, könnten Konditionale zusammengefasst werden, die in verschiedene Klassen gehören, rundet man zu großzügig, könnten mehr Klassen geschaffen werden als notwendig bzw. sinnvoll.
 An dieser Stelle ist auch aufgefallen, dass es sinnvoll sein könnte, einen Test durchzuführen, ob alle generischen Klassen auch tatsächlich die gleiche Wahrscheinlichkeit haben. 
 
 Gemäß Aufgabenstellung waren Konditionale, die die gleiche Wahrscheinlichkeit liefern zu einem allgemeinen Konditional zusammenzufassen. Zum Thema Äquivalenz von Konditionalen vgl.\ref{Äquivalenz in FO-PCL}.
-
-Das erwies sich mit Hilfe der Bibliothek Log4KR als schwierig. Dabei ist eine Korrektur der Bibliothek notwendig geworden, s. \ref{sec:Korrektur1} "{}Korrektur in ConstraintBasedGroundingOperator"{} und weitere Korrekturen in der Klasse Fraction, \ref{Korrektur_Fraction}.
+Das erwies sich mit Hilfe der Bibliothek Log4KR als schwierig. Dabei ist eine Korrektur der Bibliothek notwendig geworden, s. \ref{sec:Korrektur1} "{}Korrektur in ConstraintBasedGroundingOperator"{} und weitere Korrekturen in der Klasse \texttt{Fraction}, \ref{Korrektur_Fraction}.
 
 
 \subsection{Definition des Begriffes "{}möglichst allgemeines Konditional"{} }
@@ -3452,7 +3414,7 @@ Der Begriff  "{}möglichst allgemeines Konditional"{} musste zunächst definiert
 \subsection{Bildung des Constraints}
 Die Aufgabenstellung verlangt die Bildung eines möglichst allgemeinen Konditionals für Grundinstanzen des angefragten Konditionals. Was darunter zu verstehen ist, wurde nicht definiert. Es waren eingehende Überlegungen notwendig, wie dieser Begriff zu interpretieren ist. Das Ergebnis war, dass unter einen möglichst allgemeinen Konditional im Sinne dieser Arbeit ein Konditional mit einem möglichst kurzen, logisch minimierten Constraint zu verstehen ist. Das führte zur Entwicklung der Idee der logischen Generalisierungsoptimierung, \ref{Logische Genopt}, die leider nicht zielführend war. 
 
-Der Gedanke wurde bei der Idee der konditionalen Generalisierung, \ref{Konditionale Generalisierung}, wieder aufgegriffen und im Sinne einer logischen Optimierung des Constraints entwickelt. Logische Optimierung beschränkt sich hier auf die Anwendung des Distributivgesetzes. Die praktische Umsetzung erwies sich als nicht umsetzbar, da keine Gleichheit von EqualityConstraints definiert ist. Auch wenn es für den Betrachter so wirkt, als ob die Constraints gleich ist, Gleichheit ließ sich noch nicht einmal auf Basis der Repräsentation als String realisieren, vgl. \ref{Fehler_ColdSpez_D4}. Das Ergebnis ist somit grundsätzlich nicht falsch, enthält aber redundante Informationen.\\
+Der Gedanke wurde bei der Idee der konditionalen Generalisierung, \ref{Konditionale Generalisierung}, wieder aufgegriffen und im Sinne einer logischen Optimierung des Constraints entwickelt. Logische Optimierung beschränkt sich hier auf die Anwendung des Distributivgesetzes. Die praktische Umsetzung erwies sich als nicht umsetzbar, da keine Gleichheit von EqualityConstraints definiert ist. Auch wenn es für den Betrachter so wirkt, als ob die Constraints gleich ist, Gleichheit ließ sich noch nicht einmal auf Basis der Repräsentation als String realisieren, vgl. \ref{Fehler_ColdSpez_D4}. Das Ergebnis ist somit grundsätzlich nicht falsch, enthält aber redundante Informationen.
 Eine Lösung, um bei der Bildung von Constraints redundante Informationen zu eliminieren  konnte über den Umweg der Gleichheit von AtomicConstraints gefunden werden. Das mag umständlich und wenig professionell erscheinen, ist letztlich aber zweckdienlich. 
 
 \begin{Bsp}[Bildung von Constraints am Beispiel ColdSpez]
@@ -3496,7 +3458,7 @@ Eine Lösung, um bei der Bildung von Constraints redundante Informationen zu eli
 Beispiele, die mehr als eine spezifische Konstante enthielten, sh. \ref{examplesdep}, konnte Log4KR nicht verarbeiten, daher konnten leider keine Forschungen in diese Richtung unternommen werden, obwohl dies sehr interessant im Hinblick auf Interaktionen gewesen wäre. 
 
 \subsection{Sonstiges}
-Die oben geschilderten Probleme führten dazu, dass nicht nur ein beträchtlicher Zeitaufwand in die Suche nach den möglichen Ursachen gesteckt werden musste, d.h. handelt es sich um einen Fehler in der Inferenzkomponente, in Log4Kr oder woher stammt der Fehler ansonsten, sondern auch in der Suche nach Lösungen, um die Schwierigkeiten, die auftraten und nicht aus der Inferenzkomponente stammten zu behandeln oder zu umgehen, um dennoch zu vernünftigen und nachvollziehbaren Ergebnissen kommen zu können. 
+Die oben geschilderten Probleme führten dazu, dass nicht nur ein beträchtlicher Zeitaufwand in die Suche nach den möglichen Ursachen gesteckt werden musste, d.h. handelt es sich um einen Fehler in der Inferenzkomponente, in Log4KR oder woher stammt der Fehler ansonsten, sondern auch in der Suche nach Lösungen, um die Schwierigkeiten, die auftraten und nicht aus der Inferenzkomponente stammten zu behandeln oder zu umgehen, um dennoch zu vernünftigen und nachvollziehbaren Ergebnissen kommen zu können. 
 Es musste daher ein erheblicher Aufwand betrieben werden, um zu dem Ergebnis kommen zu können, dass die erarbeiteten Ideen theoretisch sehr wohl und daher praktisch unter optimalen Bedingungen umsetzbar wären.
 
 Auch ist festzuhalten, dass aufgrund dieser Umgebungsprobleme Anfragen, die an die Komponente gestellt werden möglicherweise nicht zu einem erwünschten oder erwarteten Ergebnis führen könnten, obwohl die Komponente richtig funktioniert. Das ist im Ergebnis ziemlich unbefriedigend. 
@@ -3537,7 +3499,7 @@ Zunächst war zu bedenken, wie sich Inferenz in FO-PCL konzeptuell in einer Komp
 		\item Nachteil: keine Verbesserung
 	\end{itemize}
 	\item \textit{Konditionale Generalisierung} \ref{Konditionale Generalisierung}:\\
-	Synthese aller Ideen zur Erreichung des optimalen Ergebniss
+	Synthese aller Ideen zur Erreichung des optimalen Ergebnis
 	\begin{itemize}
 	\item Vorteile: Synthese aller Ideen, funktioniert
 	\item Nachteil: keine Nachteile gefunden
@@ -3584,7 +3546,6 @@ Die Umsetzung des Entwurfs der Komponente war mit einigen Herausforderungen wie 
 	\end{itemize}
 	 
 	 Die positive Generalisierung wurde in diesem Zusammenhang nur für das Beispiel "{}Birds"{},  \ref{Birds}, in der Klasse GeneralizePositiveTest getestet.
-	
 	Weitere Tests führten insgesamt zu dem Ergebnis, dass die Grundfunktionalitäten der Komponente dem entsprechen, was bei der Ideenfindung als zielführend erachtet wurde. 
 	
 	Wie bereits unter dem Abschnitt Korrektheit \ref{Korrektheit} erwähnt, funktioniert die Komponente für Beispiele mit einstelligen und zweistelligen Prädikaten und Anfragen in Form eines Atoms wie erwartet (d.h. wie in den Beispielen in \ref{examples} als erwartete Ausgabe beschrieben). 
@@ -3594,7 +3555,8 @@ Die Umsetzung des Entwurfs der Komponente war mit einigen Herausforderungen wie 
 		\item GeneralizeColdTest
 		\item GeneralizeColdSpezTest
 	\end{itemize}
-Diese Test erforderten ein umständliches Anlegen vo Objekten für die Äquivalenzklassen und deren Inhalte führten aber zu dem erfreulichen Ergebnis, dass die Komponente im Fall des Beispiels "{}Cold"{} für die konditionale Generalisierung korrekt arbeitet. \\
+Diese Test erforderten ein umständliches Anlegen von Objekten für die Äquivalenzklassen und deren Inhalte führten aber zu der erfreulichen Feststellung, dass die Komponente im Fall des Beispiels "{}Cold"{} für die konditionale Generalisierung korrekt arbeitet. 
+
 Für zweistellige Prädikate und Anfragen in Form einer zusammengesetzten Formel wie im Beispiel "{}ColdSpez"{} wurde nur die positive Generalisierung implementiert, welche auch funktioniert und ein allgemeines Konditional, d.h., ein generalisiertes Konditional im Sinne der Arbeit liefert. Die negative Generalisierung könnte als Erweiterung der Komponente implementiert werden. Darauf wurde hier verzichtet, das die zu keinem weiteren Erkenntnisgewinn geführt hätte.
 
 Als eigenes Beispiel wurde das Beispiel "{}Sport"{}, \ref{Sport} mit den Erweiterungen\\ "{}SportEx"{}, \ref{SportEx},  "{}SportExN"{}, \ref{SportExN}, und "{}SportExNFam"{} \ref{SportExNFam} erarbeitet. Eine weitere Beschäftigung mit diesen Beispielen war nicht wünschenswert, da bereits alle denkbaren Fälle mit bekannten Beispielen und deren Erweiterungen abgedeckt waren und dies daher zu keinem höheren Erkenntnisgewinn geführt hätte. 
@@ -3610,16 +3572,15 @@ Die Implementierung sollte schrittweise verfeinert werden. Beginnend mit der Zur
 
 Als Ausgangsbasis für den Entwurf der Inferenzkomponente dienten experimentelle Forschungen, die sich unter \ref{Experim. Forschungen} finden. Es wurden die möglichen Fallkonstellationen anhand von Beispielen betrachtet und ausgewertet. Dabei wurden sowohl das anfragte Konditional und die gebildeten Äquivalenzklassen, d.h.  die Klassen mit der gleichen Wahrscheinlichkeit, näher betrachtet. Die Beobachtungen wurden dokumentiert. 
 
-Diese Forschungen führten zu einer Sammlung von Ideen, siehe Kapitel \ref{Ideen Alg.} aus denen in Kapitel \ref{Alg} ein Algorithmus entwickelt werden konnte. Es wurden verschiedene Ideen betrachtet, gegenübergestellt bewertet und teilweise verworfen, wie die Idee der Modifikation des Versionenraum-Lernverfahrens \ref{Verwendbar VRL}. Die Ideen der positiven, \ref{PositiveGeneralisierung} und der negativen Generalisierung, \ref{NegativeGeneralisierung} fanden zusammen mit der logischen Generalisierungsoptimierung, \ref{Logische Generalisierung} Einzug in die Idee der konditionalen Generalisierung, \ref{Konditionale Generalisierung}; eine Diskussion darüber findet sich in \ref{eval}.
+Diese Forschungen führten zu einer Sammlung von Ideen, siehe Kapitel \ref{Ideen Alg.} aus denen in Kapitel \ref{Alg} ein Algorithmus entwickelt werden konnte. Es wurden verschiedene Ideen betrachtet, gegenübergestellt bewertet und teilweise verworfen, wie die Idee der Modifikation des Versionenraum-Lernverfahrens \ref{Verwendbar VRL}. Die Ideen der positiven, \ref{PositiveGeneralisierung} und der negativen Generalisierung, \ref{NegativeGeneralisierung}, fanden zusammen mit der logischen Generalisierungsoptimierung, \ref{Logische Generalisierung}, Einzug in die Idee der konditionalen Generalisierung, \ref{Konditionale Generalisierung}; eine Diskussion darüber findet sich in Kapitel \ref{eval}.
 
 Der Algorithmus orientiert sich am Inferenzprozess in FO-PCL und teilt sich in die Phasen Grundierung der Anfrage, Berechnung der möglichen Welten, Selektion des Modells mit der maximalen Entropie, Berechnung der Wahrscheinlichkeiten für jedes Konditional, Klassifizierung der Grundkonditionale und deren Generalisierung und Rückgabe der Mengen der generalisierten Konditionale auf, anschaulich \ref{Algorithmus}.
 
-Dieser Entwurf wurde in der Implementation, \ref{Inf} umgesetzt. Die Ergebnisse der Umsetzung und die dabei aufgetretenen Herausforderungen, gemeisterten Schwierigkeiten und gefundenen Lösungen wurden in \ref{eval} diskutiert und dokumentiert. 
-
+Dieser Entwurf wurde in der Implementation, Kapitel \ref{Inf} umgesetzt. Die Ergebnisse der Umsetzung und die dabei aufgetretenen Herausforderungen, gemeisterten Schwierigkeiten und gefundenen Lösungen wurden in Kapitel \ref{eval} diskutiert und dokumentiert. 
 Insgesamt entspricht das Ergebnis den gestellten Anforderungen. 
 
 
-Komplexere Anfragen und Randfälle wurden im Rahmen der Arbeit nicht betrachtet, könnten aber Gegenstand weiterer Forschungen sein. Grundsätzlich sollte auch darüber nachgedacht werden, ob nicht Inferenz besser oder sogar einfacher auf Basis von Lifted Inferenz betrieben werden sollte.\\
+Komplexere Anfragen und Randfälle wurden im Rahmen der Arbeit nicht betrachtet, könnten aber Gegenstand weiterer Forschungen sein. Grundsätzlich sollte auch darüber nachgedacht werden, ob nicht Inferenz besser oder sogar einfacher auf Basis von Lifted Inferenz betrieben werden sollte.
 Das könnte ein weiterer umfangreicher, dennoch vielversprechender Forschungsbereich sein. 
 
 
